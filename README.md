@@ -1,2 +1,2 @@
-# Infinite_Dungeon
- CB Mod
+# Infinite Railway
+ This mod adds a dungeon area with infinite battle spawns of increasing difficulty levels
