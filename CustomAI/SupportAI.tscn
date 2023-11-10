@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://battle/ai/WeightedAI.gd" type="Script" id=1]
+[ext_resource path="res://battle/ai/WeightedAIMovePreference.gd" type="Script" id=2]
+[ext_resource path="res://data/battle_moves/nurse.tres" type="Resource" id=3]
+[ext_resource path="res://data/battle_moves/smack.tres" type="Resource" id=4]
+[ext_resource path="res://data/battle_moves/elemental_wall.tres" type="Resource" id=5]
+
+[node name="SupportAI" type="Node"]
+script = ExtResource( 1 )
+order_repeat_mode = 2
+
+[node name="WeightedAIMovePreference5" type="Node" parent="."]
+script = ExtResource( 2 )
+move = ExtResource( 3 )
+only_if_target_is_ally = true
+only_if_target_hp_percent_below = 65
+score = 100.0
+
+[node name="WeightedAIMovePreference6" type="Node" parent="."]
+script = ExtResource( 2 )
+move = ExtResource( 4 )
+score = 25.0
+
+[node name="WeightedAIMovePreference7" type="Node" parent="."]
+script = ExtResource( 2 )
+move = ExtResource( 5 )
+only_if_target_is_ally = true
+score = 10.0

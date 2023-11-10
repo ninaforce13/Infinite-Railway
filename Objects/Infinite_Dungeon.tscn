@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://world/core/WireFlag.gd" type="Script" id=3]
+[ext_resource path="res://addons/misc_utils/wiring/Wire.gd" type="Script" id=5]
+[ext_resource path="res://addons/misc_utils/wiring/WirePreview.gd" type="Script" id=6]
+[ext_resource path="res://world/behaviors/WiredSecretBehavior.tscn" type="PackedScene" id=7]
+[ext_resource path="res://world/objects/dungeons/Station3.tscn" type="PackedScene" id=8]
+[ext_resource path="res://world/objects/wired/floor_button/FloorButton.tscn" type="PackedScene" id=9]
+
+[sub_resource type="SpatialMaterial" id=13]
+flags_unshaded = true
+params_cull_mode = 2
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=14]
+flags_unshaded = true
+params_cull_mode = 2
+albedo_color = Color( 1, 0, 0, 1 )
+
+[node name="Infinite_Dungeon" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05162, -3.87456, 19.3599 )
+
+[node name="FloorButton" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1394, 7.97765, -27.0728 )
+require_body_group = "player_control"
+
+[node name="Sprite3D" type="Sprite3D" parent="FloorButton"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween" type="Tween" parent="FloorButton"]
+
+[node name="StationUpPosition" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -20 )
+
+[node name="InfiniteRailway" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.711971, -19.6807 )
+target_positions = [ NodePath("../StationUpPosition") ]
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/InfiniDungeonEntrance.tscn"
+
+[node name="WiredSecretBehavior" parent="InfiniteRailway" instance=ExtResource( 7 )]
+oneshot = true
+
+[node name="Wire" type="Spatial" parent="InfiniteRailway/WiredSecretBehavior"]
+script = ExtResource( 5 )
+input_color = Color( 1, 0.0666667, 0.0666667, 1 )
+delay = 1.0
+
+[node name="WireFlag" type="Node" parent="InfiniteRailway/WiredSecretBehavior/Wire"]
+script = ExtResource( 3 )
+flag = "infinite_dungeon"
+
+[node name="Sprite3D" type="Sprite3D" parent="InfiniteRailway/WiredSecretBehavior/Wire"]
+visible = false
+pixel_size = 0.125
+billboard = 1
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="InfiniteRailway/WiredSecretBehavior/Wire"]
+material_override = SubResource( 13 )
+script = ExtResource( 6 )
+
+[node name="CSGBox" type="CSGBox" parent="InfiniteRailway/WiredSecretBehavior/Wire/ImmediateGeometry"]
+width = 0.25
+height = 0.25
+depth = 0.25
+material = SubResource( 14 )
+
+[connection signal="activated" from="FloorButton" to="InfiniteRailway/WiredSecretBehavior/Wire" method="_input_state_changed" binds= [ true ]]

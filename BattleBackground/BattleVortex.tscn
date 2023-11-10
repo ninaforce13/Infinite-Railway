@@ -1,0 +1,1171 @@
+[gd_scene load_steps=59 format=2]
+
+[ext_resource path="res://nodes/misc_shaders/BattleAnalogueHorror.tscn" type="PackedScene" id=1]
+[ext_resource path="res://battle/backgrounds/battle_camera_env_vortex.tres" type="Environment" id=2]
+[ext_resource path="res://models/battle_scenes/battle_vortex/battle_vortex_carriage_1.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://nodes/camera/BattleCamera.gd" type="Script" id=4]
+[ext_resource path="res://battle/backgrounds/BattleBackground.gd" type="Script" id=5]
+[ext_resource path="res://addons/blend_camera/BlendCamera.gd" type="Script" id=6]
+[ext_resource path="res://addons/blend_camera/VCamWave.gd" type="Script" id=7]
+[ext_resource path="res://nodes/environment/ConfigurableEnvironment.gd" type="Script" id=8]
+[ext_resource path="res://nodes/battle_slot/BattleSlot.tscn" type="PackedScene" id=9]
+[ext_resource path="res://addons/blend_camera/VirtualCamera.gd" type="Script" id=10]
+[ext_resource path="res://addons/blend_camera/EditorVCamPreview.gd" type="Script" id=11]
+[ext_resource path="res://cinematics/warp_zone/vortex_palette.png" type="Texture" id=12]
+[ext_resource path="res://battle/backgrounds/battle_station_meshlib.meshlib" type="MeshLibrary" id=13]
+[ext_resource path="res://cinematics/warp_zone/vortex_warp_spatial.shader" type="Shader" id=14]
+[ext_resource path="res://nodes/battle_slot/named_sounds.tres" type="Resource" id=15]
+[ext_resource path="res://sprites/monsters/traffikrab.json" type="PackedScene" id=16]
+[ext_resource path="res://nodes/sprite_container/SpriteContainer.gd" type="Script" id=17]
+[ext_resource path="res://nodes/battle_slot/BattleSlot.gd" type="Script" id=18]
+
+[sub_resource type="SpatialMaterial" id=22]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=23]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=24]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=25]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=26]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=27]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=28]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=29]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=30]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=31]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=32]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=33]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=34]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=35]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=36]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=37]
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="Animation" id=20]
+resource_name = "CameraMoveIntro"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("BattleCamera:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( -5, 0, 0 ), Vector3( -5, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "bob"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.9, 0.9, 0.9 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer:sprite_rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0.25 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "battle_cry" ],
+"method": "play_form_sound"
+} ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer:translation:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -10.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_form_defeat_cry"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "dodge"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer:offset:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 2.0, -2.0, 2.0, -2.0, 2.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -20, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_form_defeat_cry"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer:albedo")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -10, 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_form_defeat_cry"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer:albedo")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "flee_incomplete"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -4.85185, 0, 0 ), Vector3( -5, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer:albedo")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.25098 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.75, 0.75, 0.75 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_form_defeat_cry"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer:albedo")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.501961 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer:offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -0.5, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "hurt", false ],
+"method": "play_sprite_animation"
+} ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "knockdown"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1.25, 0.875, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer:translation:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -10.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_form_defeat_cry"
+} ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.9, 0.9, 0.9 ), Vector3( 1.1, 1.1, 1.1 ), Vector3( 0.9, 0.9, 0.9 ), Vector3( 1.1, 1.1, 1.1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "battle_cry" ],
+"method": "play_form_sound"
+} ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -10, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "battle_cry" ],
+"method": "play_form_sound"
+} ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.5, 0.5, 0.5, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer:wave_amplitude")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.1, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer:wave_v_frequency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 20.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer:static_amount")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=14]
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0.5, 0.5, 0.5, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer:wave_amplitude")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer:wave_v_frequency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 20.0 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "transform_sound" ],
+"method": "play_named_sound"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteContainer:static_amount")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.05, 1.0 ],
+"method": "vibrate"
+} ]
+}
+
+[sub_resource type="AudioStreamRandomPitch" id=15]
+
+[sub_resource type="AudioStreamRandomPitch" id=16]
+
+[sub_resource type="AudioStreamRandomPitch" id=17]
+
+[sub_resource type="BoxShape" id=19]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="CubeMesh" id=38]
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=39]
+shader = ExtResource( 14 )
+shader_param/global_speed = 0.25
+shader_param/movement_amount = 1.0
+shader_param/iterations = 25
+shader_param/threshold = 0.01
+shader_param/background = Color( 0, 0, 0, 1 )
+shader_param/center_offset = Vector2( -8, 0 )
+shader_param/palette = ExtResource( 12 )
+
+[sub_resource type="QuadMesh" id=40]
+material = SubResource( 39 )
+size = Vector2( 300, 300 )
+
+[sub_resource type="Animation" id=21]
+resource_name = "lightloop"
+length = 10.0
+loop = true
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5, 10 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -47, 0, 0 ), Vector3( -57, 0, 0 ), Vector3( -47, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:light_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2, 4, 6, 8, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.698039, 0.67451, 0.776471, 1 ), Color( 0.768627, 0.45098, 0.45098, 1 ), Color( 0.537255, 0.505882, 0.803922, 1 ), Color( 0.560784, 0.796078, 0.564706, 1 ), Color( 0.682353, 0.552941, 0.835294, 1 ), Color( 0.698039, 0.67451, 0.776471, 1 ) ]
+}
+
+[node name="BattleVortex" type="Spatial"]
+script = ExtResource( 5 )
+clouds_enabled = false
+
+[node name="BattleCamera" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0 )
+script = ExtResource( 4 )
+wide_mode_fov_boost = 0.0
+
+[node name="SteadyCamera" type="Camera" parent="BattleCamera"]
+transform = Transform( 0.996195, 0.0368336, -0.07899, 0, 0.906308, 0.422619, 0.0871557, -0.42101, 0.90286, 0, 24, 33 )
+visible = false
+fov = 60.0
+far = 150.0
+script = ExtResource( 6 )
+activation_mask = 1048575
+blend_time = 0.667
+blend_ease_curve = -1.875
+multi_activation_mode = 1
+
+[node name="BlendCamera" type="Camera" parent="BattleCamera"]
+transform = Transform( 0.99548, 0.0375843, -0.0872255, 0.0036306, 0.902644, 0.430374, 0.0949087, -0.428744, 0.898428, -0.123055, 23.8769, 33 )
+current = true
+fov = 60.0
+far = 140.0
+script = ExtResource( 6 )
+activation_mask = 1048575
+blend_time = 0.667
+blend_ease_curve = -1.875
+multi_activation_mode = 1
+
+[node name="VCamWave" type="Node" parent="BattleCamera/BlendCamera"]
+script = ExtResource( 7 )
+position_wave_amplitude = Vector3( 0.125, 0.125, 0 )
+position_wave_frequency = Vector3( 0.4, 0.4, 1 )
+rotation_wave_amplitude = Vector3( 0.5, 0.5, 0 )
+rotation_wave_frequency = Vector3( 0.4, 0.4, 0 )
+
+[node name="neutral" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.996195, 0.0368336, -0.07899, 0, 0.906308, 0.422619, 0.0871557, -0.42101, 0.90286, 0, 24, 33 )
+script = ExtResource( 10 )
+fov = 60.0
+activation = 1
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/neutral"]
+transform = Transform( 1, -3.72529e-09, 7.45058e-09, -3.72529e-09, 1, 2.98023e-08, 7.45058e-09, -2.98023e-08, 1, 0, 0, 0 )
+material_override = SubResource( 22 )
+script = ExtResource( 11 )
+fov = 60.0
+
+[node name="menu_neutral" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.996195, 0.0368336, -0.07899, 0, 0.906308, 0.422618, 0.0871557, -0.42101, 0.902859, 0, 24, 33 )
+script = ExtResource( 10 )
+priority = 1
+fov = 60.0
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/menu_neutral"]
+transform = Transform( 1, -3.72529e-09, 7.45058e-09, 0, 1, 2.98023e-08, 7.45058e-09, 0, 1, 0, 0, 0 )
+material_override = SubResource( 23 )
+script = ExtResource( 11 )
+fov = 60.0
+
+[node name="menu_0" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.99863, -0.0221181, 0.0474325, 0, 0.906308, 0.422619, -0.052336, -0.422039, 0.905066, -1.25, 24, 33 )
+script = ExtResource( 10 )
+priority = 1
+fov = 60.0
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/menu_0"]
+transform = Transform( 1, -1.86265e-09, 3.72529e-09, 0, 1, 0, -3.72529e-09, 0, 1, 0, 0, 0 )
+material_override = SubResource( 24 )
+script = ExtResource( 11 )
+fov = 60.0
+
+[node name="menu_1" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.99863, 0.0221181, -0.0474325, 0, 0.906308, 0.422618, 0.052336, -0.422039, 0.905066, 1.25, 24, 33 )
+script = ExtResource( 10 )
+priority = 1
+fov = 60.0
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/menu_1"]
+transform = Transform( 1, 0, 0, 1.86265e-09, 1, 0, 3.72529e-09, 0, 1, 0, 0, 0 )
+material_override = SubResource( 25 )
+script = ExtResource( 11 )
+fov = 60.0
+
+[node name="team_0" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.99863, -0.0221181, 0.0474325, 0, 0.906308, 0.422619, -0.052336, -0.422039, 0.905067, -1.25, 24, 33 )
+script = ExtResource( 10 )
+priority = 1
+fov = 60.0
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/team_0"]
+transform = Transform( 1, 0, 3.72529e-09, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0 )
+material_override = SubResource( 26 )
+script = ExtResource( 11 )
+fov = 60.0
+
+[node name="portal" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.939693, -0.128123, 0.317116, 0, 0.927184, 0.374607, -0.34202, -0.352015, 0.871269, -1.25, 24, 33 )
+script = ExtResource( 10 )
+priority = 1
+fov = 45.0
+cut_in = true
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/portal"]
+transform = Transform( 1, 0, 0, -1.49012e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
+material_override = SubResource( 27 )
+script = ExtResource( 11 )
+fov = 45.0
+
+[node name="fusion_power_0" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.99863, -0.0221181, 0.0474326, 0, 0.906308, 0.422619, -0.052336, -0.422039, 0.905067, -1.25, 24, 33 )
+script = ExtResource( 10 )
+priority = 1
+fov = 50.0
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/fusion_power_0"]
+transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0 )
+material_override = SubResource( 28 )
+script = ExtResource( 11 )
+fov = 50.0
+
+[node name="damage_0" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.99863, -0.0221181, 0.0474325, 0, 0.906308, 0.422619, -0.052336, -0.422039, 0.905067, -1.25, 24, 33 )
+script = ExtResource( 10 )
+priority = 2
+fov = 45.0
+cut_in = true
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/damage_0"]
+transform = Transform( 1, 0, 3.72529e-09, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0 )
+material_override = SubResource( 29 )
+script = ExtResource( 11 )
+fov = 45.0
+
+[node name="fusion_0" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.999848, -0.00859398, 0.0151898, 0, 0.870356, 0.492424, -0.0174524, -0.492349, 0.870224, -5, 24, 33 )
+script = ExtResource( 10 )
+priority = 1
+fov = 35.0
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/fusion_0"]
+transform = Transform( 1, 0, -9.31323e-10, 9.31323e-10, 1, 2.98023e-08, -9.31323e-10, 0, 1, 0, 0, 0 )
+material_override = SubResource( 30 )
+script = ExtResource( 11 )
+fov = 35.0
+
+[node name="fusion_zoom_0" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.999848, -0.00819341, 0.0154096, 0, 0.882948, 0.469472, -0.0174524, -0.4694, 0.882814, -5, 24, 33 )
+script = ExtResource( 10 )
+priority = 1
+fov = 30.0
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/fusion_zoom_0"]
+transform = Transform( 1, -9.31323e-10, -9.31323e-10, 9.31323e-10, 1, 0, 0, 2.98023e-08, 1, 0, 0, 0 )
+material_override = SubResource( 31 )
+script = ExtResource( 11 )
+fov = 30.0
+
+[node name="team_1" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.99863, 0.0221181, -0.0474325, 0, 0.906308, 0.422618, 0.052336, -0.422039, 0.905066, 1.25, 24, 33 )
+script = ExtResource( 10 )
+priority = 1
+fov = 60.0
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/team_1"]
+transform = Transform( 1, 0, 0, 1.86265e-09, 1, 0, 3.72529e-09, 0, 1, 0, 0, 0 )
+material_override = SubResource( 32 )
+script = ExtResource( 11 )
+fov = 60.0
+
+[node name="fusion_power_1" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.99863, 0.0221181, -0.0474325, 0, 0.906308, 0.422618, 0.052336, -0.422039, 0.905066, 1.25, 24, 33 )
+script = ExtResource( 10 )
+priority = 1
+fov = 50.0
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/fusion_power_1"]
+transform = Transform( 1, 0, 0, 1.86265e-09, 1, 0, 3.72529e-09, 0, 1, 0, 0, 0 )
+material_override = SubResource( 33 )
+script = ExtResource( 11 )
+fov = 50.0
+
+[node name="damage_1" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.99863, 0.0221181, -0.0474325, 0, 0.906308, 0.422618, 0.052336, -0.422039, 0.905066, 1.25, 24, 33 )
+script = ExtResource( 10 )
+priority = 2
+fov = 45.0
+cut_in = true
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/damage_1"]
+transform = Transform( 1, 0, 0, 1.86265e-09, 1, 0, 3.72529e-09, 0, 1, 0, 0, 0 )
+material_override = SubResource( 34 )
+script = ExtResource( 11 )
+fov = 45.0
+
+[node name="fusion_1" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.99863, 0.0221181, -0.0474325, 0, 0.906308, 0.422618, 0.052336, -0.422039, 0.905066, 1.25, 24, 33 )
+script = ExtResource( 10 )
+priority = 1
+fov = 45.0
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/fusion_1"]
+transform = Transform( 1, 0, 0, 1.86265e-09, 1, 0, 3.72529e-09, 0, 1, 0, 0, 0 )
+material_override = SubResource( 35 )
+script = ExtResource( 11 )
+fov = 45.0
+
+[node name="fusion_zoom_1" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.99863, 0.0221181, -0.0474325, 0, 0.906308, 0.422618, 0.052336, -0.422039, 0.905066, 1.25, 24, 33 )
+script = ExtResource( 10 )
+priority = 1
+fov = 37.0
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/fusion_zoom_1"]
+transform = Transform( 1, 0, 0, 1.86265e-09, 1, 0, 3.72529e-09, 0, 1, 0, 0, 0 )
+material_override = SubResource( 36 )
+script = ExtResource( 11 )
+fov = 37.0
+
+[node name="team_wide_1" type="Position3D" parent="BattleCamera"]
+transform = Transform( 0.978148, 0.07111, -0.195373, 0, 0.939693, 0.34202, 0.207912, -0.334546, 0.919158, -2, 24, 33 )
+script = ExtResource( 10 )
+priority = 2
+fov = 60.0
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="BattleCamera/team_wide_1"]
+transform = Transform( 1, 0, 0, -7.45058e-09, 1, -2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )
+material_override = SubResource( 37 )
+script = ExtResource( 11 )
+fov = 60.0
+
+[node name="CameraAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "CameraMoveIntro"
+anims/CameraMoveIntro = SubResource( 20 )
+
+[node name="BattleSlotPlayer1" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.87047, 0, -9.04409 )
+script = ExtResource( 18 )
+named_sounds = ExtResource( 15 )
+focus_neighbour_bottom = NodePath("../BattleSlotPlayer2")
+focus_neighbour_left = NodePath("../BattleSlotPlayer2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BattleSlotPlayer1"]
+anims/bob = SubResource( 18 )
+anims/character_battle_cry = SubResource( 1 )
+anims/death = SubResource( 2 )
+anims/dodge = SubResource( 3 )
+anims/fade_in = SubResource( 4 )
+anims/flee = SubResource( 5 )
+anims/flee_incomplete = SubResource( 6 )
+anims/ghostly_fade = SubResource( 7 )
+anims/hurt = SubResource( 8 )
+anims/knockdown = SubResource( 9 )
+anims/long_death = SubResource( 10 )
+anims/monster_battle_cry = SubResource( 11 )
+anims/spawn = SubResource( 12 )
+anims/transform_in = SubResource( 13 )
+anims/transform_out = SubResource( 14 )
+
+[node name="SpriteContainer" type="Spatial" parent="BattleSlotPlayer1"]
+script = ExtResource( 17 )
+wave_t_frequency = 5.0
+static_offset = 0.667
+
+[node name="Sprite" parent="BattleSlotPlayer1/SpriteContainer" instance=ExtResource( 16 )]
+
+[node name="DecoyContainer" type="Spatial" parent="BattleSlotPlayer1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.25 )
+script = ExtResource( 17 )
+emission = null
+wave_amplitude = null
+wave_t_frequency = null
+wave_v_frequency = null
+static_amount = null
+static_offset = null
+static_speed = null
+sparkle = null
+sprite_rotation = null
+
+[node name="Audio1" type="AudioStreamPlayer3D" parent="BattleSlotPlayer1"]
+stream = SubResource( 15 )
+unit_size = 100.0
+max_distance = 1000.0
+bus = "Battle"
+
+[node name="Audio2" type="AudioStreamPlayer3D" parent="BattleSlotPlayer1"]
+stream = SubResource( 16 )
+unit_size = 100.0
+max_distance = 1000.0
+bus = "Battle"
+
+[node name="Audio3" type="AudioStreamPlayer3D" parent="BattleSlotPlayer1"]
+stream = SubResource( 17 )
+unit_size = 100.0
+max_distance = 1000.0
+bus = "Battle"
+
+[node name="Voice" type="AudioStreamPlayer3D" parent="BattleSlotPlayer1"]
+unit_size = 100.0
+max_distance = 1000.0
+bus = "Voice"
+
+[node name="VCams" type="Spatial" parent="BattleSlotPlayer1"]
+
+[node name="StaticBody" type="StaticBody" parent="BattleSlotPlayer1"]
+transform = Transform( 5, 0, 0, 0, 5.82177, 0.241922, 0, -1.45153, 0.970296, 0, 3, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="BattleSlotPlayer1/StaticBody"]
+shape = SubResource( 19 )
+
+[node name="MeshInstance" type="MeshInstance" parent="BattleSlotPlayer1/StaticBody"]
+visible = false
+mesh = SubResource( 38 )
+
+[node name="BattleSlotPlayer2" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5506, 0, -1.33197 )
+focus_neighbour_bottom = NodePath("../BattleSlotPlayer3")
+focus_neighbour_right = NodePath("../BattleSlotPlayer1")
+focus_neighbour_top = NodePath("../BattleSlotPlayer1")
+
+[node name="BattleSlotPlayer3" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.61252, 0, 7.46042 )
+status_bubble_enabled = false
+target_button_at_top = true
+focus_neighbour_top = NodePath("../BattleSlotPlayer2")
+
+[node name="BattleSlotEnemy1" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5228, 0, -0.556965 )
+direction = -1
+team = 1
+scissor_enabled = false
+focus_neighbour_bottom = NodePath("../BattleSlotEnemy3")
+focus_neighbour_left = NodePath("../BattleSlotPlayer1")
+focus_neighbour_top = NodePath("../BattleSlotEnemy2")
+
+[node name="BattleSlotEnemy2" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.27302, 0, -10.7315 )
+direction = -1
+team = 1
+status_bubble_enabled = false
+focus_neighbour_bottom = NodePath("../BattleSlotEnemy1")
+focus_neighbour_left = NodePath("../BattleSlotPlayer1")
+focus_neighbour_right = NodePath("../BattleSlotEnemy1")
+
+[node name="BattleSlotEnemy3" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3096, 0, 8.31099 )
+direction = -1
+team = 1
+status_bubble_enabled = false
+focus_neighbour_left = NodePath("../BattleSlotPlayer2")
+focus_neighbour_top = NodePath("../BattleSlotEnemy1")
+
+[node name="BattleSlotEnemy4" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.5251, 0, 7.30396 )
+team = 1
+status_bubble_enabled = false
+focus_neighbour_bottom = NodePath("../BattleSlotEnemy3")
+focus_neighbour_top = NodePath("../BattleSlotEnemy2")
+
+[node name="BattleSlotEnemy5" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30.8977, 0, -2.79488 )
+team = 1
+status_bubble_enabled = false
+
+[node name="BattleSlotEnemy6" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.4721, 0, -11.4073 )
+direction = -1
+team = 1
+status_bubble_enabled = false
+
+[node name="BattleSlotEnemy7" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.851, 0, -15.934 )
+team = 1
+status_bubble_enabled = false
+
+[node name="BattleSlotEnemy8" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.4957, 0, 7.79249 )
+direction = -1
+team = 1
+status_bubble_enabled = false
+
+[node name="BattleSlotEnemy9" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9209, 0, -3.62072 )
+direction = -1
+team = 1
+status_bubble_enabled = false
+
+[node name="BattleSlotEnemy10" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.2809, 0, -12.9448 )
+team = 1
+status_bubble_enabled = false
+
+[node name="BattleSlotEnemy11" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.6734, 0, -15.2535 )
+direction = -1
+team = 1
+status_bubble_enabled = false
+
+[node name="Props" type="Spatial" parent="."]
+
+[node name="WarpBackground" type="MeshInstance" parent="Props"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.49061, -42.4382 )
+mesh = SubResource( 40 )
+
+[node name="WarpBackground3" type="MeshInstance" parent="Props"]
+transform = Transform( -5.67828e-09, 1.18676e-08, 1, 0.075, 0.470252, 0, -0.129904, 0.2715, -4.37114e-08, -39.92, 23.65, -33.438 )
+mesh = SubResource( 40 )
+
+[node name="WarpBackground4" type="MeshInstance" parent="Props"]
+transform = Transform( -5.67828e-09, -1.18676e-08, 1, -0.075, 0.470252, 0, -0.129904, -0.2715, -4.37114e-08, -39.92, 23.65, 27.562 )
+mesh = SubResource( 40 )
+
+[node name="WarpBackground5" type="MeshInstance" parent="Props"]
+transform = Transform( 0.291, -1.18676e-08, -5.85621e-09, 6.36001e-09, 0.470252, 0.5, -1.70416e-09, -0.2715, 0.866025, -82, 33.6495, 44.8823 )
+mesh = SubResource( 40 )
+
+[node name="battle_vortex_carriage_1" type="MeshInstance" parent="Props"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -3 )
+mesh = ExtResource( 3 )
+
+[node name="battle_vortex_carriage_2" type="MeshInstance" parent="Props"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 107, 0, -3 )
+mesh = ExtResource( 3 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 2 )
+script = ExtResource( 8 )
+
+[node name="GridMap" type="GridMap" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
+mesh_library = ExtResource( 13 )
+cell_size = Vector3( 4, 4, 4 )
+data = {
+"cells": PoolIntArray( -262179, 0, 14, -262178, 0, 14, -262177, 0, 14, -262176, 0, 14, -262175, 0, 14, -262174, 0, 14, -262173, 0, 14, -262172, 0, 14, -262171, 0, 14, -262170, 0, 14, -262169, 0, 14, -262168, 0, 14, -262167, 0, 14, -262166, 0, 14, -262165, 0, 14, -262164, 0, 14, -262163, 0, 14, -262162, 0, 14, -262161, 0, 14, -262160, 0, 14, -262159, 0, 14, -262158, 0, 14, -262157, 0, 14, -262179, 1, 14, -262178, 1, 14, -262177, 1, 14, -262176, 1, 14, -262175, 1, 14, -262174, 1, 14, -262173, 1, 14, -262172, 1, 14, -262171, 1, 14, -262170, 1, 14, -262169, 1, 14, -262168, 1, 14, -262167, 1, 14, -262166, 1, 14, -262165, 1, 14, -262164, 1, 14, -262163, 1, 14, -262162, 1, 14, -262161, 1, 14, -262160, 1, 14, -262159, 1, 14, -262158, 1, 14, -262157, 1, 14, -262179, 2, 14, -262178, 2, 14, -262177, 2, 14, -262176, 2, 14, -262175, 2, 14, -262174, 2, 14, -262173, 2, 14, -262172, 2, 14, -262171, 2, 14, -262170, 2, 14, -262169, 2, 14, -262168, 2, 14, -262167, 2, 14, -262166, 2, 14, -262165, 2, 14, -262164, 2, 14, -262163, 2, 14, -262162, 2, 14, -262161, 2, 14, -262160, 2, 14, -262159, 2, 14, -262158, 2, 14, -262157, 2, 14, -262179, 3, 14, -262178, 3, 14, -262177, 3, 14, -262176, 3, 14, -262175, 3, 14, -262174, 3, 14, -262173, 3, 14, -262172, 3, 14, -262171, 3, 14, -262170, 3, 14, -262169, 3, 14, -262168, 3, 14, -262167, 3, 14, -262166, 3, 14, -262165, 3, 14, -262164, 3, 14, -262163, 3, 14, -262162, 3, 14, -262161, 3, 14, -262160, 3, 14, -262159, 3, 14, -262158, 3, 14, -262157, 3, 14, -262179, 4, 14, -262178, 4, 14, -262177, 4, 14, -262176, 4, 14, -262175, 4, 14, -262174, 4, 14, -262173, 4, 14, -262172, 4, 14, -262171, 4, 14, -262170, 4, 14, -262169, 4, 14, -262168, 4, 14, -262167, 4, 14, -262166, 4, 14, -262165, 4, 14, -262164, 4, 14, -262163, 4, 14, -262162, 4, 14, -262161, 4, 14, -262160, 4, 14, -262159, 4, 14, -262158, 4, 14, -262157, 4, 14, -262179, 5, 14, -262178, 5, 14, -262177, 5, 14, -262176, 5, 14, -262175, 5, 14, -262174, 5, 14, -262173, 5, 14, -262172, 5, 14, -262171, 5, 14, -262170, 5, 14, -262169, 5, 14, -262168, 5, 14, -262167, 5, 14, -262166, 5, 14, -262165, 5, 14, -262164, 5, 14, -262163, 5, 14, -262162, 5, 14, -262161, 5, 14, -262160, 5, 14, -262159, 5, 14, -262158, 5, 14, -262157, 5, 14, -262179, 6, 14, -262178, 6, 14, -262177, 6, 14, -262176, 6, 14, -262175, 6, 14, -262174, 6, 14, -262173, 6, 14, -262172, 6, 14, -262171, 6, 14, -262170, 6, 14, -262169, 6, 14, -262168, 6, 14, -262167, 6, 14, -262166, 6, 14, -262165, 6, 14, -262164, 6, 14, -262163, 6, 14, -262162, 6, 14, -262161, 6, 14, -262160, 6, 14, -262159, 6, 14, -262158, 6, 14, -262157, 6, 14, 65501, 65526, 4, 65502, 65526, 4, 65503, 65526, 4, 65504, 65526, 4, 65505, 65526, 4, 65506, 65526, 4, 65507, 65526, 4, 65508, 65526, 4, 65509, 65526, 4, 65510, 65526, 4, 65511, 65526, 4, 65512, 65526, 4, 65513, 65526, 4, 65514, 65526, 4, 65515, 65526, 4, 65516, 65526, 4, 65517, 65526, 4, 65518, 65526, 4, 65519, 65526, 4, 65520, 65526, 4, 65521, 65526, 4, 65522, 65526, 4, 65523, 65526, 4, 131037, 65526, 4, 131038, 65526, 4, 131039, 65526, 4, 131040, 65526, 4, 131041, 65526, 4, 131042, 65526, 4, 131043, 65526, 4, 131044, 65526, 4, 131045, 65526, 4, 131046, 65526, 4, 131047, 65526, 4, 131048, 65526, 4, 131049, 65526, 4, 131050, 65526, 4, 131051, 65526, 4, 131052, 65526, 4, 131053, 65526, 4, 131054, 65526, 4, 131055, 65526, 22, 131056, 65526, 4, 131057, 65526, 4, 131058, 65526, 4, 131059, 65526, 4, 196573, 65526, 4, 196574, 65526, 4, 196575, 65526, 4, 196576, 65526, 4, 196577, 65526, 4, 196578, 65526, 4, 196579, 65526, 4, 196580, 65526, 4, 196581, 65526, 4, 196582, 65526, 4, 196583, 65526, 4, 196584, 65526, 4, 196585, 65526, 4, 196586, 65526, 4, 196587, 65526, 4, 196588, 65526, 4, 196589, 65526, 4, 196590, 65526, 4, 196591, 65526, 4, 196592, 65526, 4, 196593, 65526, 4, 196594, 65526, 4, 196595, 65526, 4, 262109, 65526, 4, 262110, 65526, 4, 262111, 65526, 4, 262112, 65526, 4, 262113, 65526, 4, 262114, 65526, 4, 262115, 65526, 4, 262116, 65526, 4, 262117, 65526, 4, 262118, 65526, 4, 262119, 65526, 4, 262120, 65526, 4, 262121, 65526, 4, 262122, 65526, 4, 262123, 65526, 5, 262124, 65526, 4, 262125, 65526, 4, 262126, 65526, 4, 262127, 65526, 4, 262128, 65526, 4, 262129, 65526, 4, 262130, 65526, 4, 262131, 65526, 4, 327645, 65526, 4, 327646, 65526, 4, 327647, 65526, 4, 327648, 65526, 4, 327649, 65526, 4, 327650, 65526, 4, 327651, 65526, 4, 327652, 65526, 4, 327653, 65526, 4, 327654, 65526, 4, 327655, 65526, 4, 327656, 65526, 4, 327657, 65526, 4, 327658, 65526, 4, 327659, 65526, 4, 327660, 65526, 4, 327661, 65526, 4, 327662, 65526, 4, 327663, 65526, 4, 327664, 65526, 4, 327665, 65526, 4, 327666, 65526, 4, 327667, 65526, 4, 393181, 65526, 4, 393182, 65526, 4, 393183, 65526, 4, 393184, 65526, 4, 393185, 65526, 4, 393186, 65526, 4, 393187, 65526, 4, 393188, 65526, 4, 393189, 65526, 4, 393190, 65526, 4, 393191, 65526, 4, 393192, 65526, 4, 393193, 65526, 4, 393194, 65526, 4, 393195, 65526, 4, 393196, 65526, 4, 393197, 65526, 4, 393198, 65526, 4, 393199, 65526, 4, 393200, 65526, 4, 393201, 65526, 4, 393202, 65526, 4, 393203, 65526, 4, 458717, 65526, 4, 458718, 65526, 4, 458719, 65526, 4, 458720, 65526, 4, 458721, 65526, 4, 458722, 65526, 4, 458723, 65526, 4, 458724, 65526, 4, 458725, 65526, 4, 458726, 65526, 4, 458727, 65526, 4, 458728, 65526, 4, 458729, 65526, 4, 458730, 65526, 4, 458731, 65526, 4, 458732, 65526, 4, 458733, 65526, 4, 458734, 65526, 4, 458735, 65526, 4, 458736, 65526, 4, 458737, 65526, 4, 458738, 65526, 4, 458739, 65526, 4, 524253, 65526, 4, 524254, 65526, 4, 524255, 65526, 4, 524256, 65526, 4, 524257, 65526, 4, 524258, 65526, 4, 524259, 65526, 4, 524260, 65526, 4, 524261, 65526, 4, 524262, 65526, 4, 524263, 65526, 4, 524264, 65526, 4, 524265, 65526, 4, 524266, 65526, 4, 524267, 65526, 4, 524268, 65526, 4, 524269, 65526, 22, 524270, 65526, 4, 524271, 65526, 4, 524272, 65526, 4, 524273, 65526, 4, 524274, 65526, 4, 524275, 65526, 4, 589789, 65526, 4, 589790, 65526, 4, 589791, 65526, 4, 589792, 65526, 4, 589793, 65526, 4, 589794, 65526, 4, 589795, 65526, 4, 589796, 65526, 4, 589797, 65526, 4, 589798, 65526, 4, 589799, 65526, 4, 589800, 65526, 4, 589801, 65526, 4, 589802, 65526, 4, 589803, 65526, 4, 589804, 65526, 4, 589805, 65526, 4, 589806, 65526, 4, 589807, 65526, 4, 589808, 65526, 4, 589809, 65526, 4, 589810, 65526, 4, 589811, 65526, 4, 655325, 65526, 4, 655326, 65526, 4, 655327, 65526, 4, 655328, 65526, 4, 655329, 65526, 4, 655330, 65526, 4, 655331, 65526, 4, 655332, 65526, 4, 655333, 65526, 4, 655334, 65526, 4, 655335, 65526, 4, 655336, 65526, 4, 655337, 65526, 4, 655338, 65526, 4, 655339, 65526, 4, 655340, 65526, 4, 655341, 65526, 4, 655342, 65526, 4, 655343, 65526, 4, 655344, 65526, 4, 655345, 65526, 4, 655346, 65526, 4, 655347, 65526, 4, 720861, 65526, 4, 720862, 65526, 4, 720863, 65526, 4, 720864, 65526, 4, 720865, 65526, 4, 720866, 65526, 4, 720867, 65526, 4, 720868, 65526, 4, 720869, 65526, 4, 720870, 65526, 4, 720871, 65526, 4, 720872, 65526, 4, 720873, 65526, 4, 720874, 65526, 4, 720875, 65526, 4, 720876, 65526, 4, 720877, 65526, 4, 720878, 65526, 4, 720879, 65526, 4, 720880, 65526, 4, 720881, 65526, 4, 720882, 65526, 4, 720883, 65526, 4, 786397, 65526, 4, 786398, 65526, 4, 786399, 65526, 4, 786400, 65526, 4, 786401, 65526, 4, 786402, 65526, 4, 786403, 65526, 4, 786404, 65526, 4, 786405, 65526, 4, 786406, 65526, 4, 786407, 65526, 4, 786408, 65526, 4, 786409, 65526, 4, 786410, 65526, 4, 786411, 65526, 4, 786412, 65526, 4, 786413, 65526, 4, 786414, 65526, 4, 786415, 65526, 4, 786416, 65526, 4, 786417, 65526, 4, 786418, 65526, 4, 786419, 65526, 4, 851933, 65526, 4, 851934, 65526, 4, 851935, 65526, 4, 851936, 65526, 4, 851937, 65526, 4, 851938, 65526, 4, 851939, 65526, 4, 851940, 65526, 4, 851941, 65526, 4, 851942, 65526, 4, 851943, 65526, 4, 851944, 65526, 4, 851945, 65526, 4, 851946, 65526, 4, 851947, 65526, 4, 851948, 65526, 4, 851949, 65526, 4, 851950, 65526, 4, 851951, 65526, 4, 851952, 65526, 4, 851953, 65526, 4, 851954, 65526, 4, 851955, 65526, 4, 917469, 65526, 4, 917470, 65526, 4, 917471, 65526, 4, 917472, 65526, 4, 917473, 65526, 4, 917474, 65526, 4, 917475, 65526, 4, 917476, 65526, 4, 917477, 65526, 4, 917478, 65526, 4, 917479, 65526, 4, 917480, 65526, 4, 917481, 65526, 4, 917482, 65526, 4, 917483, 65526, 4, 917484, 65526, 4, 917485, 65526, 4, 917486, 65526, 4, 917487, 65526, 4, 917488, 65526, 4, 917489, 65526, 4, 917490, 65526, 4, 917491, 65526, 4, -262179, 65526, 14, -262178, 65526, 14, -262177, 65526, 14, -262176, 65526, 14, -262175, 65526, 14, -262174, 65526, 14, -262173, 65526, 14, -262172, 65526, 14, -262171, 65526, 14, -262170, 65526, 14, -262169, 65526, 14, -262168, 65526, 14, -262167, 65526, 14, -262166, 65526, 14, -262165, 65526, 14, -262164, 65526, 14, -262163, 65526, 14, -262162, 65526, 14, -262161, 65526, 14, -262160, 65526, 14, -262159, 65526, 14, -262158, 65526, 14, -262157, 65526, 14, -196643, 65526, 2, -196642, 65526, 2, -196641, 65526, 2, -196640, 65526, 2, -196639, 65526, 2, -196638, 65526, 2, -196637, 65526, 2, -196636, 65526, 2, -196635, 65526, 2, -196634, 65526, 2, -196633, 65526, 2, -196632, 65526, 2, -196631, 65526, 2, -196630, 65526, 2, -196629, 65526, 2, -196628, 65526, 2, -196627, 65526, 2, -196626, 65526, 2, -196625, 65526, 2, -196624, 65526, 2, -196623, 65526, 2, -196622, 65526, 2, -196621, 65526, 2, -131107, 65526, 4, -131106, 65526, 4, -131105, 65526, 4, -131104, 65526, 4, -131103, 65526, 4, -131102, 65526, 4, -131101, 65526, 4, -131100, 65526, 4, -131099, 65526, 4, -131098, 65526, 4, -131097, 65526, 4, -131096, 65526, 4, -131095, 65526, 4, -131094, 65526, 4, -131093, 65526, 4, -131092, 65526, 4, -131091, 65526, 4, -131090, 65526, 4, -131089, 65526, 4, -131088, 65526, 4, -131087, 65526, 4, -131086, 65526, 4, -131085, 65526, 4, -65571, 65526, 4, -65570, 65526, 4, -65569, 65526, 4, -65568, 65526, 4, -65567, 65526, 4, -65566, 65526, 4, -65565, 65526, 4, -65564, 65526, 4, -65563, 65526, 4, -65562, 65526, 4, -65561, 65526, 4, -65560, 65526, 4, -65559, 65526, 4, -65558, 65526, 4, -65557, 65526, 4, -65556, 65526, 4, -65555, 65526, 4, -65554, 65526, 4, -65553, 65526, 4, -65552, 65526, 4, -65551, 65526, 4, -65550, 65526, 4, -65549, 65526, 4, -35, 65526, 4, -34, 65526, 4, -33, 65526, 4, -32, 65526, 4, -31, 65526, 4, -30, 65526, 4, -29, 65526, 4, -28, 65526, 4, -27, 65526, 4, -26, 65526, 4, -25, 65526, 4, -24, 65526, 4, -23, 65526, 4, -22, 65526, 4, -21, 65526, 4, -20, 65526, 4, -19, 65526, 4, -18, 65526, 4, -17, 65526, 4, -16, 65526, 5, -15, 65526, 4, -14, 65526, 4, -13, 65526, 4, -262179, 65527, 14, -262178, 65527, 14, -262177, 65527, 14, -262176, 65527, 14, -262175, 65527, 14, -262174, 65527, 14, -262173, 65527, 14, -262172, 65527, 14, -262171, 65527, 14, -262170, 65527, 14, -262169, 65527, 14, -262168, 65527, 14, -262167, 65527, 1441807, -262166, 65527, 14, -262165, 65527, 14, -262164, 65527, 14, -262163, 65527, 14, -262162, 65527, 14, -262161, 65527, 14, -262160, 65527, 14, -262159, 65527, 14, -262158, 65527, 14, -262157, 65527, 14, -262179, 65528, 14, -262178, 65528, 14, -262177, 65528, 14, -262176, 65528, 14, -262175, 65528, 14, -262174, 65528, 14, -262173, 65528, 14, -262172, 65528, 14, -262171, 65528, 14, -262170, 65528, 14, -262169, 65528, 14, -262168, 65528, 14, -262167, 65528, 14, -262166, 65528, 14, -262165, 65528, 14, -262164, 65528, 14, -262163, 65528, 14, -262162, 65528, 14, -262161, 65528, 14, -262160, 65528, 14, -262159, 65528, 14, -262158, 65528, 14, -262157, 65528, 14, -262179, 65529, 14, -262178, 65529, 14, -262177, 65529, 14, -262176, 65529, 14, -262175, 65529, 14, -262174, 65529, 14, -262173, 65529, 14, -262172, 65529, 14, -262171, 65529, 14, -262170, 65529, 14, -262169, 65529, 14, -262168, 65529, 14, -262167, 65529, 14, -262166, 65529, 14, -262165, 65529, 14, -262164, 65529, 14, -262163, 65529, 14, -262162, 65529, 14, -262161, 65529, 14, -262160, 65529, 14, -262159, 65529, 14, -262158, 65529, 14, -262157, 65529, 14, -262179, 65530, 14, -262178, 65530, 14, -262177, 65530, 14, -262176, 65530, 14, -262175, 65530, 14, -262174, 65530, 14, -262173, 65530, 14, -262172, 65530, 14, -262171, 65530, 14, -262170, 65530, 14, -262169, 65530, 14, -262168, 65530, 14, -262167, 65530, 14, -262166, 65530, 14, -262165, 65530, 14, -262164, 65530, 14, -262163, 65530, 14, -262162, 65530, 14, -262161, 65530, 14, -262160, 65530, 14, -262159, 65530, 14, -262158, 65530, 14, -262157, 65530, 14, -262179, 65531, 14, -262178, 65531, 14, -262177, 65531, 14, -262176, 65531, 14, -262175, 65531, 14, -262174, 65531, 14, -262173, 65531, 14, -262172, 65531, 14, -262171, 65531, 14, -262170, 65531, 14, -262169, 65531, 14, -262168, 65531, 14, -262167, 65531, 14, -262166, 65531, 14, -262165, 65531, 14, -262164, 65531, 14, -262163, 65531, 14, -262162, 65531, 15, -262161, 65531, 14, -262160, 65531, 14, -262159, 65531, 14, -262158, 65531, 14, -262157, 65531, 14, -262179, 65532, 14, -262178, 65532, 14, -262177, 65532, 14, -262176, 65532, 14, -262175, 65532, 14, -262174, 65532, 14, -262173, 65532, 14, -262172, 65532, 14, -262171, 65532, 14, -262170, 65532, 14, -262169, 65532, 14, -262168, 65532, 14, -262167, 65532, 14, -262166, 65532, 14, -262165, 65532, 14, -262164, 65532, 14, -262163, 65532, 14, -262162, 65532, 14, -262161, 65532, 14, -262160, 65532, 14, -262159, 65532, 14, -262158, 65532, 14, -262157, 65532, 14, -262179, 65533, 14, -262178, 65533, 14, -262177, 65533, 14, -262176, 65533, 14, -262175, 65533, 14, -262174, 65533, 14, -262173, 65533, 14, -262172, 65533, 14, -262171, 65533, 14, -262170, 65533, 14, -262169, 65533, 14, -262168, 65533, 14, -262167, 65533, 14, -262166, 65533, 14, -262165, 65533, 14, -262164, 65533, 14, -262163, 65533, 14, -262162, 65533, 14, -262161, 65533, 14, -262160, 65533, 14, -262159, 65533, 14, -262158, 65533, 14, -262157, 65533, 14, -262179, 65534, 14, -262178, 65534, 14, -262177, 65534, 14, -262176, 65534, 14, -262175, 65534, 14, -262174, 65534, 14, -262173, 65534, 14, -262172, 65534, 14, -262171, 65534, 14, -262170, 65534, 14, -262169, 65534, 14, -262168, 65534, 14, -262167, 65534, 14, -262166, 65534, 14, -262165, 65534, 14, -262164, 65534, 14, -262163, 65534, 14, -262162, 65534, 14, -262161, 65534, 14, -262160, 65534, 14, -262159, 65534, 14, -262158, 65534, 14, -262157, 65534, 14, -262179, 65535, 14, -262178, 65535, 14, -262177, 65535, 14, -262176, 65535, 14, -262175, 65535, 14, -262174, 65535, 14, -262173, 65535, 14, -262172, 65535, 14, -262171, 65535, 14, -262170, 65535, 14, -262169, 65535, 14, -262168, 65535, 14, -262167, 65535, 14, -262166, 65535, 14, -262165, 65535, 14, -262164, 65535, 14, -262163, 65535, 14, -262162, 65535, 14, -262161, 65535, 14, -262160, 65535, 14, -262159, 65535, 14, -262158, 65535, 14, -262157, 65535, 14 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 5, -3, -10 )
+}
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.660264, 0.751033, 0, -0.751033, 0.660264, 0.05, 6.4, 9.503 )
+light_color = Color( 0.690196, 0.613726, 0.805883, 1 )
+light_bake_mode = 0
+shadow_enabled = true
+shadow_color = Color( 0.239216, 0.235294, 0.372549, 1 )
+directional_shadow_mode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DirectionalLight"]
+autoplay = "lightloop"
+anims/lightloop = SubResource( 21 )
+
+[node name="BattleAnalogueHorror" parent="." instance=ExtResource( 1 )]
+
+[connection signal="input_event" from="BattleSlotPlayer1/StaticBody" to="BattleSlotPlayer1" method="_on_StaticBody_input_event"]
+[connection signal="mouse_entered" from="BattleSlotPlayer1/StaticBody" to="BattleSlotPlayer1" method="_on_StaticBody_mouse_entered"]
+[connection signal="mouse_exited" from="BattleSlotPlayer1/StaticBody" to="BattleSlotPlayer1" method="_on_StaticBody_mouse_exited"]

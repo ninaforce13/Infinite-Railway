@@ -1,0 +1,51 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://data/sticker_attribute_profiles/summon.tres" type="Resource" id=1]
+[ext_resource path="res://mods/Infinite_Dungeon/characters/stage1_summon.tres" type="Resource" id=2]
+[ext_resource path="res://mods/Infinite_Dungeon/Objects/merline_transport.tres" type="Resource" id=3]
+[ext_resource path="res://mods/Infinite_Dungeon/CustomAI/SupportAI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/battle_move_scripts/Summon.gd" type="Script" id=6]
+
+[resource]
+script = ExtResource( 6 )
+name = "House Call"
+category_name = "MOVE_CATEGORY_MISC"
+description = "Summons a support focused monster"
+title_override = ""
+tags = [  ]
+priority = 0
+cost = 2
+is_debug = false
+is_passive_only = false
+power = 0
+physicality = 1
+target_type = 0
+default_target = 0
+elemental_types = [  ]
+accuracy = 100
+unavoidable = false
+crit_rate_numerator = 1
+crit_rate_denominator = 16
+crit_damage_percent = 150
+play_attack_animation = true
+fade_lights_during_attack = false
+windup_animation = "windup"
+attack_animation = "attack"
+windup_sfx_override = [  ]
+attack_vfx = [ ExtResource( 3 ) ]
+play_attack_vfx_against_allies = true
+attack_duration = 0.0
+hit_vfx = [  ]
+hit_delay = 0.0
+disable_melee_movement = false
+can_be_copied = false
+attribute_profile = ExtResource( 1 )
+camera_state_override = ""
+character = ExtResource( 2 )
+ai = ExtResource( 4 )
+status_effects = [  ]
+status_effect_amount = 3
+everlasting_status_effects = [  ]
+randomize_pronouns = true
+monster_form_path = "res://mods/Infinite_Dungeon/Spawn Profile/healers.tres"
+tape_grade = 5

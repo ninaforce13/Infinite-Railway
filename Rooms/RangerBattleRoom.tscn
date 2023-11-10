@@ -1,0 +1,1064 @@
+[gd_scene load_steps=76 format=2]
+
+[ext_resource path="res://sprites/sky_battle_grasslands_night.png" type="Texture" id=1]
+[ext_resource path="res://nodes/encounter_config/EncounterConfig.gd" type="Script" id=2]
+[ext_resource path="res://nodes/actions/IsUndefeatedAction.gd" type="Script" id=3]
+[ext_resource path="res://nodes/encounter_config/CharacterConfig.gd" type="Script" id=4]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/RandomTapeConfig_mod.gd" type="Script" id=5]
+[ext_resource path="res://world/npc/HumanNPC.tscn" type="PackedScene" id=6]
+[ext_resource path="res://mods/Infinite_Dungeon/Spawn Profile/all_mobs.tres" type="Resource" id=7]
+[ext_resource path="res://nodes/weather/dust/BlueDustParticles.tscn" type="PackedScene" id=8]
+[ext_resource path="res://nodes/warp_region/WarpRegion.gd" type="Script" id=9]
+[ext_resource path="res://world/maps/CaveMeshlib.meshlib" type="MeshLibrary" id=10]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/GenerateNewFighter.gd" type="Script" id=11]
+[ext_resource path="res://nodes/camera/LaggingTracker.gd" type="Script" id=12]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/WarpRegion_mod.gd" type="Script" id=13]
+[ext_resource path="res://nodes/warp_region/warp_region.shader" type="Shader" id=14]
+[ext_resource path="res://nodes/warp_region/WarpTarget.gd" type="Script" id=15]
+[ext_resource path="res://world/core/LevelMap.gd" type="Script" id=16]
+[ext_resource path="res://data/map_metadata/deadworld.tres" type="Resource" id=17]
+[ext_resource path="res://mods/Infinite_Dungeon/regions/infinite_railway.tres" type="Resource" id=18]
+[ext_resource path="res://nodes/camera/WorldCamera.tscn" type="PackedScene" id=19]
+[ext_resource path="res://nodes/encounter_config/RogueFusionCharacterConfig.gd" type="Script" id=20]
+[ext_resource path="res://nodes/actions/SetNPCStateAction.gd" type="Script" id=21]
+[ext_resource path="res://nodes/weather/cave_depth_fade/cave_double_depth_fade.shader" type="Shader" id=22]
+[ext_resource path="res://addons/misc_utils/actions/composites/Selector.gd" type="Script" id=23]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/IsUndefeatedActionCustom.gd" type="Script" id=24]
+[ext_resource path="res://nodes/actions/FaceDirectionAction.gd" type="Script" id=25]
+[ext_resource path="res://nodes/actions/values/GetPlayer.gd" type="Script" id=26]
+[ext_resource path="res://mods/Infinite_Dungeon/CustomAI/CustomOrbFusionAI.tscn" type="PackedScene" id=27]
+[ext_resource path="res://addons/misc_utils/actions/values/GetPawn.gd" type="Script" id=28]
+[ext_resource path="res://nodes/actions/FaceTowardsAction.gd" type="Script" id=29]
+[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=30]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=31]
+[ext_resource path="res://nodes/actions/MessageDialogAction.gd" type="Script" id=32]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/BattleNPCBehavior_Modded.gd" type="Script" id=33]
+[ext_resource path="res://world/core/LineOfSightDetector.gd" type="Script" id=34]
+[ext_resource path="res://addons/misc_utils/actions/decorators/Succeeder.gd" type="Script" id=35]
+[ext_resource path="res://addons/misc_utils/actions/composites/Sequence.gd" type="Script" id=36]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_ranger_loot.tres" type="Resource" id=37]
+[ext_resource path="res://nodes/actions/InteractAction.gd" type="Script" id=38]
+[ext_resource path="res://nodes/actions/ChangeTrackerTargetAction.gd" type="Script" id=39]
+[ext_resource path="res://world/core/PlayerDetector.tscn" type="PackedScene" id=40]
+[ext_resource path="res://nodes/actions/FollowAction.gd" type="Script" id=41]
+[ext_resource path="res://nodes/actions/AggroAction.gd" type="Script" id=42]
+[ext_resource path="res://nodes/actions/CheckConditionAction.gd" type="Script" id=43]
+[ext_resource path="res://nodes/actions/SetStatAction.gd" type="Script" id=44]
+[ext_resource path="res://addons/misc_utils/actions/composites/Parallel.gd" type="Script" id=45]
+[ext_resource path="res://nodes/actions/PlayEmoteAction.gd" type="Script" id=46]
+[ext_resource path="res://mods/Infinite_Dungeon/Rooms/BattleAction_InfDung.gd" type="Script" id=47]
+[ext_resource path="res://world/maps/StationMeshlib.meshlib" type="MeshLibrary" id=48]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/StageSelect.gd" type="Script" id=50]
+[ext_resource path="res://menus/boss_title/ArchangelTitleBanner.tscn" type="PackedScene" id=52]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_stage2_loot.tres" type="Resource" id=53]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_stage3_loot.tres" type="Resource" id=54]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_stage4_loot.tres" type="Resource" id=55]
+[ext_resource path="res://music/release/battle_captain_instr.ogg" type="AudioStream" id=56]
+[ext_resource path="res://music/release/battle_captain_vox.ogg" type="AudioStream" id=57]
+[ext_resource path="res://music/release/battle_fusion_instr.ogg" type="AudioStream" id=58]
+[ext_resource path="res://music/demo/battle_archangel_instr.ogg" type="AudioStream" id=59]
+[ext_resource path="res://music/demo/battle_archangel_vox.ogg" type="AudioStream" id=60]
+[ext_resource path="res://music/release/battle_fusion_vox.ogg" type="AudioStream" id=61]
+[ext_resource path="res://mods/Infinite_Dungeon/CustomAI/CustomWeightedAI.tscn" type="PackedScene" id=62]
+
+[sub_resource type="SpatialMaterial" id=17]
+flags_unshaded = true
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="QuadMesh" id=2]
+material = SubResource( 17 )
+size = Vector2( 10, 10 )
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_unshaded = true
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="QuadMesh" id=4]
+material = SubResource( 3 )
+size = Vector2( 10, 20 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 14 )
+shader_param/depth = 2.25
+shader_param/width = 6.0
+
+[sub_resource type="PlaneMesh" id=6]
+material = SubResource( 5 )
+size = Vector2( 6.125, 2.25 )
+
+[sub_resource type="PlaneMesh" id=7]
+material = SubResource( 3 )
+size = Vector2( 2.05, 2.25 )
+
+[sub_resource type="PlaneMesh" id=8]
+material = SubResource( 3 )
+size = Vector2( 8, 8 )
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 18.6013, 1, 19.5704 )
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 5, 10, 1 )
+
+[sub_resource type="BoxShape" id=11]
+extents = Vector3( 5, 10, 1 )
+
+[sub_resource type="PanoramaSky" id=18]
+panorama = ExtResource( 1 )
+
+[sub_resource type="Environment" id=14]
+resource_local_to_scene = true
+background_mode = 3
+background_sky = SubResource( 18 )
+background_sky_custom_fov = 88.0
+background_energy = 0.2
+ambient_light_color = Color( 0.419608, 0.419608, 0.419608, 1 )
+ambient_light_energy = 0.5
+ambient_light_sky_contribution = 0.25
+fog_enabled = true
+fog_color = Color( 0, 0, 0, 1 )
+fog_sun_color = Color( 1, 0.956863, 0.87451, 1 )
+fog_depth_begin = 60.0
+fog_transmit_enabled = true
+ssao_color = Color( 0.2, 0.172549, 0.25098, 1 )
+dof_blur_far_enabled = true
+dof_blur_far_distance = 51.0
+dof_blur_far_transition = 20.0
+dof_blur_far_quality = 2
+dof_blur_near_enabled = true
+dof_blur_near_distance = 37.0
+dof_blur_near_transition = 5.0
+dof_blur_near_quality = 2
+glow_enabled = true
+glow_intensity = 1.0
+adjustment_enabled = true
+adjustment_contrast = 1.16
+adjustment_saturation = 1.16
+
+[sub_resource type="ShaderMaterial" id=12]
+render_priority = 30
+shader = ExtResource( 22 )
+shader_param/draw_distance = 100.0
+shader_param/a_top_y = 4.0
+shader_param/a_bottom_y = 12.0
+shader_param/b_top_y = 0.0
+shader_param/b_bottom_y = -4.0
+shader_param/color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="BoxShape" id=15]
+extents = Vector3( 0.25, 0.5, 0.25 )
+
+[node name="Room" type="Spatial"]
+script = ExtResource( 16 )
+default_warp_target = "CeilingTarget"
+map_metadata = ExtResource( 17 )
+world_time_rate = 1.0
+default_region_settings = ExtResource( 18 )
+
+[node name="HideStuff" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="HideStuff"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -3.25, 10 )
+mesh = SubResource( 2 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="HideStuff"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -3.25, 10 )
+mesh = SubResource( 2 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="HideStuff"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25, -3, 10 )
+mesh = SubResource( 2 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="HideStuff"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.25, -3, 10 )
+mesh = SubResource( 2 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="HideStuff"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 10, 10.125 )
+mesh = SubResource( 4 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="HideStuff"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 10, 10.125 )
+mesh = SubResource( 4 )
+
+[node name="MeshInstance7" type="MeshInstance" parent="HideStuff"]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0.125, 11 )
+mesh = SubResource( 6 )
+
+[node name="MeshInstance8" type="MeshInstance" parent="HideStuff"]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 4, 0.125, 11 )
+mesh = SubResource( 7 )
+
+[node name="MeshInstance10" type="MeshInstance" parent="HideStuff"]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0.125, 15.9 )
+mesh = SubResource( 8 )
+
+[node name="MeshInstance9" type="MeshInstance" parent="HideStuff"]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -4, 0.125, 11 )
+mesh = SubResource( 7 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5, 10.5 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 5, 10.5 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 10.5 )
+shape = SubResource( 11 )
+
+[node name="Tracker" type="Spatial" parent="."]
+script = ExtResource( 12 )
+limits = AABB( 0, 2, -3, 0, 0, 0 )
+limit_x = true
+limit_z = true
+
+[node name="WorldCamera" parent="Tracker" instance=ExtResource( 19 )]
+environment = SubResource( 14 )
+cloud_material_override = SubResource( 12 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.790572, 0.612369, 0, -0.612369, 0.790572, 0, 9.19128, 11.3961 )
+light_color = Color( 0.117647, 0.0823529, 0.447059, 1 )
+light_energy = 1.611
+shadow_enabled = true
+shadow_color = Color( 0.239216, 0.235294, 0.372549, 1 )
+directional_shadow_mode = 0
+
+[node name="WarpS" type="Area" parent="."]
+transform = Transform( -2.05872, 0, -1.29253e-06, 0, 1, 0, 6.27833e-07, 0, -1, 0, 0, 12.1176 )
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 13 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpN"
+fill_black = true
+size = Vector3( 6, 10, 2 )
+force_same_scene_warps = true
+reset_on_enter_tree = true
+trial_paths = [ "res://mods/Infinite_Dungeon/Rooms/TimeTrial1.tscn", "res://mods/Infinite_Dungeon/Rooms/TimeTrial2.tscn", "res://mods/Infinite_Dungeon/Rooms/TimeTrial3.tscn", "res://mods/Infinite_Dungeon/Rooms/TimeTrial4.tscn", "res://mods/Infinite_Dungeon/Rooms/TimeTrial5.tscn", "res://mods/Infinite_Dungeon/Rooms/TimeTrial6.tscn" ]
+
+[node name="PlayerTarget" type="Position3D" parent="WarpS"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 3 )
+
+[node name="PartnerTarget" type="Position3D" parent="WarpS"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 3 )
+
+[node name="WarpN" type="Area" parent="."]
+transform = Transform( 2.08517, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.5 )
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 13 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+size = Vector3( 6, 10, 2 )
+force_same_scene_warps = true
+reset_on_enter_tree = true
+trial_paths = [ "res://mods/Infinite_Dungeon/Rooms/TimeTrial1.tscn", "res://mods/Infinite_Dungeon/Rooms/TimeTrial2.tscn", "res://mods/Infinite_Dungeon/Rooms/TimeTrial3.tscn", "res://mods/Infinite_Dungeon/Rooms/TimeTrial4.tscn", "res://mods/Infinite_Dungeon/Rooms/TimeTrial5.tscn", "res://mods/Infinite_Dungeon/Rooms/TimeTrial6.tscn" ]
+
+[node name="PlayerTarget" type="Position3D" parent="WarpN"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 3 )
+
+[node name="PartnerTarget" type="Position3D" parent="WarpN"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 3 )
+
+[node name="WarpDown" type="Area" parent="."]
+transform = Transform( 0.99778, 0, 0, 0, -1.62559e-07, 0.99778, 0, -0.99778, -1.62559e-07, 0, -10, 11.5 )
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 9 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "CeilingTarget"
+size = Vector3( 24, 24, 2 )
+force_same_scene_warps = true
+temporary_penetration_check = false
+
+[node name="CeilingTarget" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.8597, 4 )
+script = ExtResource( 15 )
+
+[node name="BaseRoomGridMap" type="Spatial" parent="."]
+
+[node name="GridMap2" type="GridMap" parent="BaseRoomGridMap"]
+mesh_library = ExtResource( 48 )
+data = {
+"cells": PoolIntArray( 2, 0, 1048609, 4, 0, 1441798, 65531, 0, 1048583, 65533, 0, 1441826, 65540, 0, 1441804, 131067, 0, 1048589, 131076, 0, 1441804, 196603, 0, 1048590, 196612, 0, 1441817, 262139, 0, 1048601, 262148, 0, 1441804, 327675, 0, 1048588, 327684, 0, 1441804, 393211, 0, 1048588, -65536, 0, 0, -65535, 0, 1048632, -65534, 0, 0, -65533, 0, 655362, -65532, 0, 0, -5, 0, 0, -4, 0, 1441794, -3, 0, 0, -2, 0, 1441848, -1, 0, 0, 2, 1, 1048610, 4, 1, 1441798, 65531, 1, 1048583, 65533, 1, 1441825, 65540, 1, 1441804, 131067, 1, 1048588, 131076, 1, 1441804, 196603, 1, 1048588, 196612, 1, 1441804, 262139, 1, 1048588, 262148, 1, 1441804, 327675, 1, 1048588, 327684, 1, 1441804, 393211, 1, 1048588, -65536, 1, 0, -65535, 1, 1048632, -65534, 1, 0, -65533, 1, 0, -65532, 1, 0, -5, 1, 0, -4, 1, 1441794, -3, 1, 0, -2, 1, 1441848, -1, 1, 0, 2, 2, 1048610, 4, 2, 1441798, 65531, 2, 1048582, 65533, 2, 1441826, 65540, 2, 1441804, 131067, 2, 1048588, 131076, 2, 1441804, 196603, 2, 1048588, 196612, 2, 1441804, 262139, 2, 1048589, 262148, 2, 1441804, 327675, 2, 1048588, 327684, 2, 1441804, 393211, 2, 1048588, -65536, 2, 0, -65535, 2, 1048632, -65534, 2, 0, -65533, 2, 0, -65532, 2, 0, -5, 2, 0, -4, 2, 0, -3, 2, 0, -2, 2, 1441848, -1, 2, 0, 2, 3, 1048611, 4, 3, 1441799, 65531, 3, 1048582, 65533, 3, 1441828, 65540, 3, 1441804, 131067, 3, 1048588, 131076, 3, 1441804, 196603, 3, 1048588, 196612, 3, 1441817, 262139, 3, 1048588, 262148, 3, 1441804, 327675, 3, 1048588, 327684, 3, 1441804, 393211, 3, 1048588, -65536, 3, 0, -65535, 3, 1048632, -65534, 3, 0, -65533, 3, 0, -65532, 3, 2, -5, 3, 0, -4, 3, 0, -3, 3, 0, -2, 3, 1441848, -1, 3, 0, 1, 4, 1441800, 2, 4, 655366, 3, 4, 655366, 4, 4, 1441801, 65531, 4, 655369, 65532, 4, 655367, 65533, 4, 655367, 65534, 4, 655368, 65540, 4, 1441804, 131067, 4, 1048588, 131076, 4, 1441804, 196603, 4, 1048588, 196612, 4, 1441804, 262139, 4, 1048588, 262148, 4, 1441804, 327675, 4, 1048589, 327684, 4, 1441804, 393211, 4, 1048588, -65536, 4, 0, -65535, 4, 1048632, -65534, 4, 0, -65533, 4, 0, -65532, 4, 0, -5, 4, 0, -4, 4, 1441794, -3, 4, 0, -2, 4, 1441848, -1, 4, 0, 1, 5, 1441798, 65534, 5, 1048582, -65536, 5, 0, -65535, 5, 1048632, -2, 5, 0, -1, 5, 0, -65536, 65523, 1441794, -65535, 65523, 1048632, -2, 65523, 1441848, -1, 65523, 1441794, 1, 65524, 1441798, 65537, 65524, 1441804, 131073, 65524, 1441804, -65536, 65524, 1441794, -65535, 65524, 1048632, -2, 65524, 1441848, -1, 65524, 1441794, 1, 65525, 1441798, 65534, 65525, 1048582, 65537, 65525, 1441804, 131070, 65525, 1048588, 131073, 65525, 1441804, 196606, 65525, 1048588, -65536, 65525, 1441794, -65535, 65525, 1048632, -2, 65525, 1441848, -1, 65525, 1441794, 1, 65526, 1441798, 65534, 65526, 1048582, 65537, 65526, 1441804, 131070, 65526, 1048588, 131073, 65526, 1441804, 196606, 65526, 1048588, -65536, 65526, 1441794, -65535, 65526, 1048632, -2, 65526, 1441848, -1, 65526, 1441794, 1, 65527, 1441798, 65534, 65527, 1048582, 65537, 65527, 1441804, 131070, 65527, 1048588, 131073, 65527, 1441804, 196606, 65527, 1048588, -65536, 65527, 1441794, -65535, 65527, 1048632, -2, 65527, 1441848, -1, 65527, 1441794, 1, 65528, 1441798, 65534, 65528, 1048582, 65537, 65528, 1441804, 131070, 65528, 1048588, 131073, 65528, 1441804, 196606, 65528, 1048588, -65536, 65528, 1441794, -65535, 65528, 1048632, -2, 65528, 1441848, -1, 65528, 1441794, 1, 65529, 1441798, 65534, 65529, 1048582, 65537, 65529, 1441804, 131070, 65529, 1048588, 131073, 65529, 1441804, 196606, 65529, 1048588, -65536, 65529, 0, -65535, 65529, 1048632, -2, 65529, 1441848, -1, 65529, 0, 1, 65530, 1441799, 65534, 65530, 1048583, 65537, 65530, 1441804, 131070, 65530, 1048588, 131073, 65530, 1441804, 196606, 65530, 1048588, -65536, 65530, 0, -65535, 65530, 1048632, -2, 65530, 1441848, -1, 65530, 0, 1, 65531, 8, 2, 65531, 6, 3, 65531, 6, 4, 65531, 9, 65531, 65531, 1048585, 65532, 65531, 6, 65533, 65531, 6, 65534, 65531, 1048584, 65537, 65531, 26, 65538, 65531, 12, 65539, 65531, 12, 65540, 65531, 17, 131067, 65531, 1048593, 131068, 65531, 12, 131069, 65531, 12, 131070, 65531, 1048602, 131073, 65531, 26, 131074, 65531, 14, 131075, 65531, 14, 131076, 65531, 17, 196603, 65531, 1048593, 196604, 65531, 12, 196605, 65531, 12, 196606, 65531, 1048602, 196608, 65531, 39, 196609, 65531, 39, 196610, 65531, 12, 196611, 65531, 12, 196612, 65531, 17, 262139, 65531, 1048593, 262140, 65531, 25, 262141, 65531, 13, 262142, 65531, 39, 262143, 65531, 39, 262144, 65531, 12, 262145, 65531, 12, 262146, 65531, 12, 262147, 65531, 12, 262148, 65531, 17, 327675, 65531, 1048593, 327676, 65531, 12, 327677, 65531, 25, 327678, 65531, 12, 327679, 65531, 13, 327680, 65531, 12, 327681, 65531, 13, 327682, 65531, 12, 327683, 65531, 13, 327684, 65531, 17, 393211, 65531, 1048593, 393212, 65531, 12, 393213, 65531, 12, 393214, 65531, 12, 393215, 65531, 12, -65536, 65531, 0, -65535, 65531, 1048632, -65534, 65531, 0, -65533, 65531, 0, -65532, 65531, 0, -5, 65531, 1048578, -4, 65531, 0, -3, 65531, 0, -2, 65531, 1441848, -1, 65531, 0, 2, 65532, 1048617, 4, 65532, 1441799, 65531, 65532, 1048583, 65533, 65532, 1441832, 65540, 65532, 1441804, 131067, 65532, 1048588, 131076, 65532, 1441804, 196603, 65532, 1048588, 196612, 65532, 1441817, 262139, 65532, 1048588, 262148, 65532, 1441804, 327675, 65532, 1048588, 327684, 65532, 1441804, 393211, 65532, 1048588, -65536, 65532, 0, -65535, 65532, 1048632, -65534, 65532, 0, -65533, 65532, 0, -65532, 65532, 655362, -5, 65532, 0, -4, 65532, 0, -3, 65532, 0, -2, 65532, 1441848, -1, 65532, 0, 2, 65533, 1048610, 4, 65533, 1441798, 65531, 65533, 1048582, 65533, 65533, 1441826, 65540, 65533, 1441804, 131067, 65533, 1048588, 131076, 65533, 1441804, 196603, 65533, 1048588, 196612, 65533, 1441804, 262139, 65533, 1048589, 262148, 65533, 1441804, 327675, 65533, 1048588, 327684, 65533, 1441804, 393211, 65533, 1048588, -65536, 65533, 0, -65535, 65533, 1048632, -65534, 65533, 0, -65533, 65533, 0, -65532, 65533, 0, -5, 65533, 655362, -4, 65533, 0, -3, 65533, 0, -2, 65533, 1441848, -1, 65533, 0, 2, 65534, 1048610, 4, 65534, 1441798, 65531, 65534, 1048583, 65533, 65534, 1441825, 65540, 65534, 1441804, 131067, 65534, 1048588, 131076, 65534, 1441804, 196603, 65534, 1048590, 196612, 65534, 1441805, 262139, 65534, 1048601, 262148, 65534, 1441804, 327675, 65534, 1048588, 327684, 65534, 1441804, 393211, 65534, 1048588, -65536, 65534, 0, -65535, 65534, 1048632, -65534, 65534, 0, -65533, 65534, 655362, -65532, 65534, 0, -5, 65534, 0, -4, 65534, 0, -3, 65534, 0, -2, 65534, 1441848, -1, 65534, 0, 2, 65535, 1048609, 4, 65535, 1441798, 65531, 65535, 1048582, 65533, 65535, 1441826, 65540, 65535, 1441804, 131067, 65535, 1048588, 131076, 65535, 1441804, 196603, 65535, 1048590, 196612, 65535, 1441804, 262139, 65535, 1048588, 262148, 65535, 1441804, 327675, 65535, 1048589, 327684, 65535, 1441804, 393211, 65535, 1048588, -65536, 65535, 0, -65535, 65535, 1048632, -65534, 65535, 0, -65533, 65535, 0, -65532, 65535, 0, -5, 65535, 0, -4, 65535, 0, -3, 65535, 0, -2, 65535, 1441848, -1, 65535, 0 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 1, 0 )
+}
+
+[node name="GridMap" type="GridMap" parent="BaseRoomGridMap"]
+mesh_library = ExtResource( 10 )
+data = {
+"cells": PoolIntArray( 0, 0, 30, 65535, 0, 655389, 0, 1, 30, 65535, 1, 655390, 0, 2, 30, 65535, 2, 655389, 0, 3, 30, 65535, 3, 655389, 0, 4, 30, 65535, 4, 655390, 0, 5, 30, 65535, 5, 655389, 0, 6, 30, 65535, 6, 655389, 65535, 7, 655389, 0, 65523, 30, 65535, 65523, 655389, 0, 65524, 30, 65535, 65524, 655389, 0, 65525, 30, 65535, 65525, 655389, 0, 65526, 30, 65535, 65526, 655389, 0, 65527, 30, 65535, 65527, 655389, 0, 65528, 30, 65535, 65528, 655389, 0, 65529, 30, 65535, 65529, 655389, 0, 65530, 30, 65535, 65530, 655389, 0, 65531, 30, 65535, 65531, 655389, 0, 65532, 30, 65535, 65532, 655390, 0, 65533, 30, 65535, 65533, 655389, 0, 65534, 30, 65535, 65534, 655389, 0, 65535, 30, 65535, 65535, 655389 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 1, 0 )
+}
+
+[node name="SpawnFighter" type="Node" parent="."]
+script = ExtResource( 11 )
+
+[node name="MerLine_Attendant" parent="SpawnFighter" instance=ExtResource( 6 )]
+unique_name_in_owner = true
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -3 )
+initial_direction = "up"
+direction = Vector2( 0, -1 )
+npc_name = "Mer-Line Attendant"
+sprite_colors = {
+"body_color_1": 5,
+"body_color_2": 6,
+"eye_color": 4,
+"face_accessory_color": 5,
+"favorite_color": 4,
+"hair_accessory_color": 8,
+"hair_color": 3,
+"legs_color": 4,
+"shoe_color": 3,
+"skin_color": 3
+}
+sprite_part_names = {
+"arms": "jacket",
+"body": "jacket",
+"hair": "quiff",
+"head": "glasses_1",
+"legs": "generic",
+"wings": "generic"
+}
+sprite_body = null
+character = null
+human_colors/body_color_1 = 5
+human_colors/body_color_2 = 6
+human_colors/eye_color = 4
+human_colors/face_accessory_color = 5
+human_colors/favorite_color = 4
+human_colors/hair_accessory_color = 8
+human_colors/hair_color = 3
+human_colors/legs_color = 4
+human_colors/shoe_color = 3
+human_colors/skin_color = 3
+
+[node name="InteractionBehavior" type="Spatial" parent="SpawnFighter/MerLine_Attendant"]
+script = ExtResource( 33 )
+__meta__ = {
+"action_tree": true
+}
+trigger_on_sight = true
+on_defeat = 1
+on_defeat_face_direction = "down"
+stage1_max = 30
+stage2_min = 30
+stage2_max = 45
+stage3_min = 45
+stage3_max = 1000000
+time_trial_chance = 0.6
+
+[node name="Succeeder" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior"]
+script = ExtResource( 35 )
+
+[node name="IsUndefeatedAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Succeeder"]
+script = ExtResource( 3 )
+
+[node name="FaceTowardsAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Succeeder/IsUndefeatedAction"]
+script = ExtResource( 29 )
+__meta__ = {
+"action_tree": true
+}
+
+[node name="GetPawn" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Succeeder/IsUndefeatedAction/FaceTowardsAction"]
+script = ExtResource( 28 )
+
+[node name="GetPlayer" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Succeeder/IsUndefeatedAction/FaceTowardsAction"]
+script = ExtResource( 26 )
+
+[node name="Cutscene" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior"]
+script = ExtResource( 31 )
+
+[node name="Selector" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene"]
+script = ExtResource( 23 )
+
+[node name="StageSelect" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
+script = ExtResource( 50 )
+encounter_range_max = 15
+
+[node name="IsUndefeatedAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect"]
+script = ExtResource( 24 )
+
+[node name="MainDialogue" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect/IsUndefeatedAction"]
+script = ExtResource( 32 )
+title = "{pawn}"
+style = 2
+
+[node name="BattleAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect/IsUndefeatedAction"]
+script = ExtResource( 47 )
+disable_fleeing = true
+railway_shards = ExtResource( 30 )
+
+[node name="StageSelect2" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
+script = ExtResource( 50 )
+encounter_range_min = 15
+encounter_range_max = 30
+
+[node name="IsUndefeatedAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect2"]
+script = ExtResource( 24 )
+
+[node name="MainDialogue" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect2/IsUndefeatedAction"]
+script = ExtResource( 32 )
+title = "{pawn}"
+style = 2
+
+[node name="BattleAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect2/IsUndefeatedAction"]
+script = ExtResource( 47 )
+encounter_name_override = "TripleThreat"
+disable_fleeing = true
+railway_shards = ExtResource( 30 )
+
+[node name="StageSelect3" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
+script = ExtResource( 50 )
+encounter_range_min = 30
+encounter_range_max = 45
+
+[node name="IsUndefeatedAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect3"]
+script = ExtResource( 24 )
+
+[node name="MainDialogue" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect3/IsUndefeatedAction"]
+script = ExtResource( 32 )
+title = "{pawn}"
+style = 2
+
+[node name="BattleAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect3/IsUndefeatedAction"]
+script = ExtResource( 47 )
+encounter_name_override = "FusionStage"
+disable_fleeing = true
+railway_shards = ExtResource( 30 )
+
+[node name="StageSelect4" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
+script = ExtResource( 50 )
+encounter_range_min = 45
+encounter_range_max = 1000000
+
+[node name="IsUndefeatedAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect4"]
+script = ExtResource( 24 )
+
+[node name="MainDialogue" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect4/IsUndefeatedAction"]
+script = ExtResource( 32 )
+title = "{pawn}"
+style = 2
+
+[node name="BattleAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect4/IsUndefeatedAction"]
+script = ExtResource( 47 )
+encounter_name_override = "OrbFusionStage"
+disable_fleeing = true
+railway_shards = ExtResource( 30 )
+
+[node name="Sequence" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
+script = ExtResource( 36 )
+
+[node name="SetNPCStateAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/Sequence"]
+script = ExtResource( 21 )
+state = "Defeated"
+
+[node name="DefeatDialogue" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/Sequence"]
+script = ExtResource( 32 )
+title = "{pawn}"
+style = 3
+
+[node name="FaceDirectionAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/Sequence"]
+script = ExtResource( 25 )
+direction = "up"
+
+[node name="LineOfSightDetector" type="Spatial" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior"]
+script = ExtResource( 34 )
+sneak_immunity = true
+detection_bb_key = "player"
+
+[node name="CheckConditionAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/LineOfSightDetector"]
+script = ExtResource( 43 )
+
+[node name="Parallel" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/LineOfSightDetector/CheckConditionAction"]
+script = ExtResource( 45 )
+
+[node name="PlayEmoteAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/LineOfSightDetector/CheckConditionAction/Parallel"]
+script = ExtResource( 46 )
+emote = "aggro_in"
+
+[node name="Cutscene" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/LineOfSightDetector/CheckConditionAction/Parallel"]
+script = ExtResource( 31 )
+
+[node name="ChangeTrackerTargetAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/LineOfSightDetector/CheckConditionAction/Parallel/Cutscene"]
+script = ExtResource( 39 )
+__meta__ = {
+"action_tree": true
+}
+hide_avatars_if_cutscene = false
+
+[node name="AggroAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/LineOfSightDetector/CheckConditionAction/Parallel/Cutscene/ChangeTrackerTargetAction"]
+script = ExtResource( 42 )
+emote_intro = ""
+wait_for_intro = false
+
+[node name="FollowAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/LineOfSightDetector/CheckConditionAction/Parallel/Cutscene/ChangeTrackerTargetAction/AggroAction"]
+script = ExtResource( 41 )
+__meta__ = {
+"action_tree": true
+}
+always_succeed = true
+can_fly = true
+can_jump = true
+can_fall = true
+can_glide = true
+can_warp = true
+min_distance = 3.0
+hide_avatars_if_cutscene = false
+
+[node name="GetPawn" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/LineOfSightDetector/CheckConditionAction/Parallel/Cutscene/ChangeTrackerTargetAction/AggroAction/FollowAction"]
+script = ExtResource( 28 )
+
+[node name="GetPlayer" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/LineOfSightDetector/CheckConditionAction/Parallel/Cutscene/ChangeTrackerTargetAction/AggroAction/FollowAction"]
+script = ExtResource( 26 )
+
+[node name="InteractAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/LineOfSightDetector/CheckConditionAction/Parallel/Cutscene/ChangeTrackerTargetAction"]
+script = ExtResource( 38 )
+
+[node name="HeadSkipDetector" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/LineOfSightDetector" instance=ExtResource( 40 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0 )
+pawn = NodePath("../../..")
+
+[node name="CollisionShape" type="CollisionShape" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/LineOfSightDetector/HeadSkipDetector"]
+shape = SubResource( 15 )
+
+[node name="SetStatAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/LineOfSightDetector/HeadSkipDetector"]
+script = ExtResource( 44 )
+stat_name = "heads_skipped"
+stat_value = 1
+mode = 1
+
+[node name="EncounterConfig" type="Node" parent="SpawnFighter/MerLine_Attendant"]
+script = ExtResource( 2 )
+unique_id = "infinite_railway_attendant"
+can_flee = false
+enable_ai_fusion = true
+loot_table_override = ExtResource( 37 )
+transition = 4
+
+[node name="CharacterConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/EncounterConfig"]
+script = ExtResource( 4 )
+character_name = "Mer-Line Attendant"
+pronouns = 0
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+copy_human_sprite = NodePath("../..")
+ai = ExtResource( 62 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/EncounterConfig/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="TapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/EncounterConfig/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="TapeConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/EncounterConfig/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="CharacterConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/EncounterConfig"]
+script = ExtResource( 4 )
+character_name = "Mer-Line Attendant"
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+randomize_human_sprite = true
+ai = ExtResource( 62 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/EncounterConfig/CharacterConfig2"]
+script = ExtResource( 5 )
+bootleg_rate = 0.05
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="RandomTapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/EncounterConfig/CharacterConfig2"]
+script = ExtResource( 5 )
+bootleg_rate = 0.05
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="RandomTapeConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/EncounterConfig/CharacterConfig2"]
+script = ExtResource( 5 )
+bootleg_rate = 0.05
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="FusionStage" type="Node" parent="SpawnFighter/MerLine_Attendant"]
+script = ExtResource( 2 )
+unique_id = "infinite_railway_attendant"
+music_override = ExtResource( 58 )
+music_vox_override = ExtResource( 61 )
+can_flee = false
+enable_ai_fusion = true
+loot_table_override = ExtResource( 54 )
+transition = 4
+
+[node name="Boss" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage"]
+script = ExtResource( 20 )
+character_name = "Mer-Line Attendant"
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+character_kind = 1
+randomize_human_sprite = true
+ai = ExtResource( 62 )
+title = "Fusion Battle"
+subtitle = "Mer-Line's Blessing"
+complete_encounter_on_defeat = false
+
+[node name="Bootleg" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/Boss"]
+script = ExtResource( 5 )
+bootleg_rate = 0.02
+spawn_profile = ExtResource( 7 )
+
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/Boss"]
+script = ExtResource( 5 )
+spawn_profile = ExtResource( 7 )
+
+[node name="CharacterConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage"]
+script = ExtResource( 4 )
+character_name = "Mer-Line Attendant"
+pronouns = 0
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+copy_human_sprite = NodePath("../..")
+ai = ExtResource( 62 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="TapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="TapeConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.05
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="OrbFusionStage" type="Node" parent="SpawnFighter/MerLine_Attendant"]
+script = ExtResource( 2 )
+unique_id = "infinite_railway_attendant"
+music_override = ExtResource( 59 )
+music_vox_override = ExtResource( 60 )
+can_flee = false
+enable_ai_fusion = true
+loot_table_override = ExtResource( 55 )
+transition = 4
+
+[node name="Boss" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage"]
+script = ExtResource( 20 )
+character_name = "Mer-Line Attendant"
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+character_kind = 1
+randomize_human_sprite = true
+ai = ExtResource( 27 )
+title = "Mer-Line Attendant"
+subtitle = "Crossing Lines"
+banner_scene = ExtResource( 52 )
+stat_key = "orb"
+complete_encounter_on_defeat = false
+
+[node name="Bootleg" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/Boss"]
+script = ExtResource( 5 )
+bootleg_rate = 0.02
+spawn_profile = ExtResource( 7 )
+
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/Boss"]
+script = ExtResource( 5 )
+spawn_profile = ExtResource( 7 )
+
+[node name="CharacterConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage"]
+script = ExtResource( 4 )
+character_name = "Mer-Line Attendant"
+pronouns = 0
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+copy_human_sprite = NodePath("../..")
+ai = ExtResource( 62 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="TapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="TapeConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="TapeConfig4" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="TripleThreat" type="Node" parent="SpawnFighter/MerLine_Attendant"]
+script = ExtResource( 2 )
+unique_id = "infinite_railway_attendant"
+music_override = ExtResource( 56 )
+music_vox_override = ExtResource( 57 )
+can_flee = false
+enable_ai_fusion = true
+loot_table_override = ExtResource( 53 )
+transition = 4
+
+[node name="CharacterConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat"]
+script = ExtResource( 4 )
+character_name = "Mer-Line Attendant"
+pronouns = 0
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+copy_human_sprite = NodePath("../..")
+ai = ExtResource( 62 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="TapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="TapeConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="CharacterConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat"]
+script = ExtResource( 4 )
+character_name = "Mer-Line Attendant"
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+randomize_human_sprite = true
+ai = ExtResource( 62 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat/CharacterConfig2"]
+script = ExtResource( 5 )
+bootleg_rate = 0.05
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="RandomTapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat/CharacterConfig2"]
+script = ExtResource( 5 )
+bootleg_rate = 0.05
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="RandomTapeConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat/CharacterConfig2"]
+script = ExtResource( 5 )
+bootleg_rate = 0.05
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="CharacterConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat"]
+script = ExtResource( 4 )
+character_name = "Mer-Line Attendant"
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+randomize_human_sprite = true
+ai = ExtResource( 62 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat/CharacterConfig3"]
+script = ExtResource( 5 )
+bootleg_rate = 0.05
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="RandomTapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat/CharacterConfig3"]
+script = ExtResource( 5 )
+bootleg_rate = 0.05
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="RandomTapeConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat/CharacterConfig3"]
+script = ExtResource( 5 )
+bootleg_rate = 0.05
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="DustParticles" parent="." instance=ExtResource( 8 )]
+transform = Transform( -3.99646, 0, -1.55628e-06, 0, 2.02177, 0, 1.2586e-06, 0, -3.23204, 0.415584, 7.87545, 0.0147104 )
+amount = 32
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -7.30275e-08, 1, 0, -1, -7.30275e-08, 0, 5.05137, -2.35433 )
+light_color = Color( 0.945098, 0.94902, 0.333333, 1 )
+light_energy = 4.0
+light_specular = 1.0
+spot_range = 7.318
+spot_angle = 70.0
+
+[connection signal="boss_unlocked" from="SpawnFighter/MerLine_Attendant/InteractionBehavior" to="WarpS" method="open_boss_room"]
+[connection signal="boss_unlocked" from="SpawnFighter/MerLine_Attendant/InteractionBehavior" to="WarpN" method="open_boss_room"]
+[connection signal="change_sprite" from="SpawnFighter/MerLine_Attendant/InteractionBehavior" to="SpawnFighter" method="change_sprite"]
+[connection signal="open_vault" from="SpawnFighter/MerLine_Attendant/InteractionBehavior" to="WarpS" method="open_vault"]
+[connection signal="open_vault" from="SpawnFighter/MerLine_Attendant/InteractionBehavior" to="WarpN" method="open_vault"]
+[connection signal="time_trial" from="SpawnFighter/MerLine_Attendant/InteractionBehavior" to="WarpS" method="open_trial"]
+[connection signal="time_trial" from="SpawnFighter/MerLine_Attendant/InteractionBehavior" to="WarpN" method="open_trial"]

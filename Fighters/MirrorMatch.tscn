@@ -1,0 +1,234 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/BlackShuckInfDung.gd" type="Script" id=1]
+[ext_resource path="res://nodes/actions/IdleBehavior.gd" type="Script" id=2]
+[ext_resource path="res://nodes/actions/ChangeTrackerTargetAction.gd" type="Script" id=3]
+[ext_resource path="res://nodes/encounter_config/EncounterConfig.gd" type="Script" id=4]
+[ext_resource path="res://nodes/encounter_config/CharacterConfig.gd" type="Script" id=5]
+[ext_resource path="res://world/npc/HumanNPC.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world/core/PlayerDetector.tscn" type="PackedScene" id=7]
+[ext_resource path="res://nodes/actions/values/GetPlayer.gd" type="Script" id=8]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Bosses/infinite_dungeon_boss3.tres" type="Resource" id=9]
+[ext_resource path="res://nodes/actions/FaceTowardsAction.gd" type="Script" id=10]
+[ext_resource path="res://addons/misc_utils/actions/values/GetPawn.gd" type="Script" id=11]
+[ext_resource path="res://nodes/actions/AggroAction.gd" type="Script" id=12]
+[ext_resource path="res://nodes/actions/FollowAction.gd" type="Script" id=13]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=14]
+[ext_resource path="res://menus/boss_title/TitleBannerConfig.gd" type="Script" id=15]
+[ext_resource path="res://menus/boss_title/TitleBanner.tscn" type="PackedScene" id=16]
+[ext_resource path="res://world/monsters/BlackShuck.tscn" type="PackedScene" id=17]
+[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=18]
+[ext_resource path="res://mods/Infinite_Dungeon/Rooms/BattleAction_InfDung.gd" type="Script" id=19]
+[ext_resource path="res://nodes/actions/RemoveNodeAction.gd" type="Script" id=20]
+[ext_resource path="res://addons/misc_utils/actions/values/GetNode.gd" type="Script" id=21]
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 15 )
+banner_scene = ExtResource( 16 )
+title = "Mirror Match"
+subtitle = "Reflections"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = true
+
+[sub_resource type="BoxShape" id=18]
+extents = Vector3( 5, 5, 5 )
+
+[node name="MirrorMatch" type="Spatial"]
+script = ExtResource( 1 )
+chase_chance = 1.0
+
+[node name="Monster" parent="." instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7468, 0, 0 )
+
+[node name="IdleBehavior" type="Node" parent="Monster"]
+script = ExtResource( 2 )
+autostart = false
+
+[node name="FollowAction" type="Node" parent="Monster/IdleBehavior"]
+script = ExtResource( 13 )
+__meta__ = {
+"action_tree": true
+}
+can_fly = true
+can_jump = true
+can_fall = true
+can_glide = true
+can_wait = true
+ignore_ending_y = false
+
+[node name="GetPlayer" type="Node" parent="Monster/IdleBehavior/FollowAction"]
+script = ExtResource( 8 )
+which = 3
+
+[node name="EncounterConfig" type="Node" parent="Monster"]
+script = ExtResource( 4 )
+unique_id = "infinite_railway_mirror"
+can_flee = false
+enable_ai_fusion = true
+loot_table_override = ExtResource( 9 )
+transition = 4
+title_banner = SubResource( 17 )
+
+[node name="CharacterConfig" type="Node" parent="Monster/EncounterConfig"]
+script = ExtResource( 5 )
+level_scale_override_key = "monster_miniboss"
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="CharacterConfig2" type="Node" parent="Monster/EncounterConfig"]
+script = ExtResource( 5 )
+level_scale_override_key = "monster_miniboss"
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="InteractionBehavior" type="Node" parent="Monster"]
+script = ExtResource( 14 )
+wait_for_animation = false
+
+[node name="FaceTowardsAction2" type="Node" parent="Monster/InteractionBehavior"]
+script = ExtResource( 10 )
+
+[node name="GetPawn" type="Node" parent="Monster/InteractionBehavior/FaceTowardsAction2"]
+script = ExtResource( 11 )
+
+[node name="GetPlayer" type="Node" parent="Monster/InteractionBehavior/FaceTowardsAction2"]
+script = ExtResource( 8 )
+
+[node name="BattleAction" type="Node" parent="Monster/InteractionBehavior"]
+script = ExtResource( 19 )
+result_on_player_win = 1
+disable_fleeing = true
+railway_shards = ExtResource( 18 )
+
+[node name="RemoveNodeAction2" type="Node" parent="Monster/InteractionBehavior"]
+script = ExtResource( 20 )
+__meta__ = {
+"action_tree": true
+}
+animation = 1
+fade_duration = 1.0
+
+[node name="GetNode" type="Node" parent="Monster/InteractionBehavior/RemoveNodeAction2"]
+script = ExtResource( 21 )
+path = NodePath("../../../../Monster2")
+
+[node name="RemoveNodeAction" type="Node" parent="Monster/InteractionBehavior"]
+script = ExtResource( 20 )
+__meta__ = {
+"action_tree": true
+}
+animation = 1
+fade_duration = 1.0
+
+[node name="Cutscene" type="Node" parent="Monster"]
+script = ExtResource( 14 )
+wait_for_animation = false
+
+[node name="ChangeTrackerTargetAction" type="Node" parent="Monster/Cutscene"]
+script = ExtResource( 3 )
+__meta__ = {
+"action_tree": true
+}
+
+[node name="FaceTowardsAction" type="Node" parent="Monster/Cutscene/ChangeTrackerTargetAction"]
+script = ExtResource( 10 )
+__meta__ = {
+"action_tree": true
+}
+
+[node name="GetPlayer" type="Node" parent="Monster/Cutscene/ChangeTrackerTargetAction/FaceTowardsAction"]
+script = ExtResource( 8 )
+which = 3
+
+[node name="AggroAction" type="Node" parent="Monster/Cutscene/ChangeTrackerTargetAction"]
+script = ExtResource( 12 )
+emote_loop = ""
+wait_for_outro = false
+
+[node name="Monster2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19557, 0, 0 )
+
+[node name="IdleBehavior" type="Node" parent="Monster2"]
+script = ExtResource( 2 )
+autostart = false
+
+[node name="FollowAction" type="Node" parent="Monster2/IdleBehavior"]
+script = ExtResource( 13 )
+__meta__ = {
+"action_tree": true
+}
+can_fly = true
+can_jump = true
+can_fall = true
+can_glide = true
+can_wait = true
+ignore_ending_y = false
+
+[node name="GetNode" type="Node" parent="Monster2/IdleBehavior/FollowAction"]
+script = ExtResource( 21 )
+path = NodePath("../../../../Monster")
+
+[node name="PlayerDetector" parent="." instance=ExtResource( 7 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerDetector"]
+shape = SubResource( 18 )
+
+[connection signal="detected" from="PlayerDetector" to="." method="_on_PlayerDetector_detected"]

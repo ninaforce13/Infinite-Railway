@@ -1,0 +1,245 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=1]
+[ext_resource path="res://nodes/actions/CheckConditionAction.gd" type="Script" id=2]
+[ext_resource path="res://nodes/layered_sprite/WorldHumanSprite3D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://nodes/actions/MessageDialogAction.gd" type="Script" id=4]
+[ext_resource path="res://nodes/actions/StatAdjustMenuAction.gd" type="Script" id=5]
+[ext_resource path="res://nodes/actions/HasItemAction.gd" type="Script" id=6]
+[ext_resource path="res://addons/misc_utils/actions/composites/Selector.gd" type="Script" id=7]
+[ext_resource path="res://addons/misc_utils/actions/decorators/Succeeder.gd" type="Script" id=8]
+[ext_resource path="res://nodes/actions/TransitionAction.gd" type="Script" id=9]
+[ext_resource path="res://nodes/actions/MenuDialogAction.gd" type="Script" id=10]
+[ext_resource path="res://data/quests/story/CaptainQuest1.tscn" type="PackedScene" id=11]
+[ext_resource path="res://nodes/actions/PlayAudioAction.gd" type="Script" id=12]
+[ext_resource path="res://addons/misc_utils/actions/composites/Sequence.gd" type="Script" id=13]
+[ext_resource path="res://addons/misc_utils/actions/decorators/Failer.gd" type="Script" id=14]
+[ext_resource path="res://nodes/sprite_container/SpriteContainer.gd" type="Script" id=15]
+[ext_resource path="res://world/core/Interaction.gd" type="Script" id=16]
+[ext_resource path="res://addons/misc_utils/actions/decorators/Repeater.gd" type="Script" id=17]
+[ext_resource path="res://data/items/ranger_gym_pass.tres" type="Resource" id=18]
+[ext_resource path="res://sfx/voices/male_npc_3/male_npc_3_greeting.wav" type="AudioStream" id=19]
+[ext_resource path="res://sfx/voices/male_npc_3/male_npc_3_decline.wav" type="AudioStream" id=20]
+[ext_resource path="res://sfx/voices/male_npc_3/male_npc_3_farewell.wav" type="AudioStream" id=21]
+[ext_resource path="res://sfx/cutscene/exercise_sounds.wav" type="AudioStream" id=22]
+[ext_resource path="res://sfx/voices/male_npc_3/male_npc_3_sigh_2.wav" type="AudioStream" id=23]
+[ext_resource path="res://mods/Infinite_Dungeon/Body_Builder_Plus/PartnerAdjustMenuAction.gd" type="Script" id=24]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.9
+height = 0.9
+
+[node name="RangerBodyBuilderPlus" type="StaticBody"]
+script = ExtResource( 16 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.325, 0 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Spatial" parent="."]
+script = ExtResource( 15 )
+idle = "idle"
+direction = "down"
+billboard_depth_hack = true
+wave_t_frequency = 5.0
+
+[node name="HumanSprite" parent="Sprite" instance=ExtResource( 3 )]
+part_names = {
+"arms": "vest1",
+"body": "vest1",
+"hair": "bald",
+"head": "generic",
+"legs": "generic",
+"wings": "generic"
+}
+colors = {
+"body_color_1": 14,
+"body_color_2": -1,
+"eye_color": 6,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": 4,
+"shoe_color": 19,
+"skin_color": 19
+}
+
+[node name="Node" type="Node" parent="Sprite"]
+
+[node name="Tween" type="Tween" parent="Sprite/Node"]
+
+[node name="Cutscene" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="MessageDialogAction" type="Node" parent="Cutscene"]
+script = ExtResource( 4 )
+audio = ExtResource( 19 )
+title = "RANGER_BODYBUILDER_NAME"
+messages = [ "RANGER_BODYBUILDER_INTRO" ]
+wait_for_confirm = false
+close_after = false
+
+[node name="Succeeder" type="Node" parent="Cutscene"]
+script = ExtResource( 8 )
+
+[node name="Repeater" type="Node" parent="Cutscene/Succeeder"]
+script = ExtResource( 17 )
+stop_on_failure = true
+
+[node name="MenuDialogAction" type="Node" parent="Cutscene/Succeeder/Repeater"]
+script = ExtResource( 10 )
+menu_options = [ "RANGER_BODYBUILDER_OPTION1", "RANGER_BODYBUILDER_OPTION2", "Train my partner instead", "RANGER_BODYBUILDER_OPTION3" ]
+default_option = 2
+
+[node name="WorkOut" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 13 )
+
+[node name="Failer" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/WorkOut"]
+script = ExtResource( 14 )
+
+[node name="Selector" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/WorkOut/Failer"]
+script = ExtResource( 7 )
+
+[node name="HasItemAction" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/WorkOut/Failer/Selector"]
+script = ExtResource( 6 )
+item = ExtResource( 18 )
+
+[node name="StatAdjustMenuAction" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/WorkOut/Failer/Selector/HasItemAction"]
+script = ExtResource( 5 )
+
+[node name="TransitionAction" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/WorkOut/Failer/Selector/HasItemAction"]
+script = ExtResource( 9 )
+transition_kind = 2
+
+[node name="PlayAudioAction" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/WorkOut/Failer/Selector/HasItemAction"]
+script = ExtResource( 12 )
+stream = ExtResource( 22 )
+random_pitch = 1.0
+mute_music = true
+
+[node name="TransitionAction2" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/WorkOut/Failer/Selector/HasItemAction"]
+script = ExtResource( 9 )
+transition = 1
+transition_kind = 2
+
+[node name="MessageDialogAction2" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/WorkOut/Failer/Selector/HasItemAction"]
+script = ExtResource( 4 )
+audio = ExtResource( 23 )
+title = "RANGER_BODYBUILDER_NAME"
+messages = [ "RANGER_BODYBUILDER_AFTER_WORKOUT" ]
+close_after = false
+
+[node name="Sequence" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/WorkOut/Failer/Selector"]
+script = ExtResource( 13 )
+
+[node name="MessageDialogAction" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/WorkOut/Failer/Selector/Sequence"]
+script = ExtResource( 4 )
+audio = ExtResource( 20 )
+title = "RANGER_BODYBUILDER_NAME"
+messages = [ "RANGER_BODYBUILDER_NO_PASS1" ]
+close_after = false
+
+[node name="Selector" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/WorkOut/Failer/Selector/Sequence"]
+script = ExtResource( 7 )
+
+[node name="CheckConditionAction" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/WorkOut/Failer/Selector/Sequence/Selector"]
+script = ExtResource( 2 )
+require_quest = ExtResource( 11 )
+require_quest_state = 1
+
+[node name="MessageDialogAction2" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/WorkOut/Failer/Selector/Sequence/Selector/CheckConditionAction"]
+script = ExtResource( 4 )
+title = "RANGER_BODYBUILDER_NAME"
+messages = [ "RANGER_BODYBUILDER_NOT_JOINED1", "RANGER_BODYBUILDER_NOT_JOINED2" ]
+close_after = false
+
+[node name="MessageDialogAction3" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/WorkOut/Failer/Selector/Sequence/Selector"]
+script = ExtResource( 4 )
+title = "RANGER_BODYBUILDER_NAME"
+messages = [ "RANGER_BODYBUILDER_NO_PASS2" ]
+close_after = false
+
+[node name="Explanation" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 13 )
+
+[node name="MessageDialogAction" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/Explanation"]
+script = ExtResource( 4 )
+title = "RANGER_BODYBUILDER_NAME"
+messages = [ "RANGER_BODYBUILDER_EXPLANATION1", "RANGER_BODYBUILDER_EXPLANATION2", "RANGER_BODYBUILDER_EXPLANATION3", "RANGER_BODYBUILDER_EXPLANATION4", "RANGER_BODYBUILDER_EXPLANATION5" ]
+wait_for_confirm = false
+close_after = false
+
+[node name="PartnerWorkout" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 13 )
+
+[node name="Failer" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/PartnerWorkout"]
+script = ExtResource( 14 )
+
+[node name="Selector" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/PartnerWorkout/Failer"]
+script = ExtResource( 7 )
+
+[node name="HasItemAction" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/PartnerWorkout/Failer/Selector"]
+script = ExtResource( 6 )
+item = ExtResource( 18 )
+
+[node name="StatAdjustMenuAction" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/PartnerWorkout/Failer/Selector/HasItemAction"]
+script = ExtResource( 24 )
+
+[node name="TransitionAction" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/PartnerWorkout/Failer/Selector/HasItemAction"]
+script = ExtResource( 9 )
+transition_kind = 2
+
+[node name="PlayAudioAction" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/PartnerWorkout/Failer/Selector/HasItemAction"]
+script = ExtResource( 12 )
+stream = ExtResource( 22 )
+random_pitch = 1.0
+mute_music = true
+
+[node name="TransitionAction2" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/PartnerWorkout/Failer/Selector/HasItemAction"]
+script = ExtResource( 9 )
+transition = 1
+transition_kind = 2
+
+[node name="MessageDialogAction2" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/PartnerWorkout/Failer/Selector/HasItemAction"]
+script = ExtResource( 4 )
+audio = ExtResource( 23 )
+title = "RANGER_BODYBUILDER_NAME"
+messages = [ "RANGER_BODYBUILDER_AFTER_WORKOUT" ]
+close_after = false
+
+[node name="Sequence" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/PartnerWorkout/Failer/Selector"]
+script = ExtResource( 13 )
+
+[node name="MessageDialogAction" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/PartnerWorkout/Failer/Selector/Sequence"]
+script = ExtResource( 4 )
+audio = ExtResource( 20 )
+title = "RANGER_BODYBUILDER_NAME"
+messages = [ "RANGER_BODYBUILDER_NO_PASS1" ]
+close_after = false
+
+[node name="Selector" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/PartnerWorkout/Failer/Selector/Sequence"]
+script = ExtResource( 7 )
+
+[node name="CheckConditionAction" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/PartnerWorkout/Failer/Selector/Sequence/Selector"]
+script = ExtResource( 2 )
+require_quest = ExtResource( 11 )
+require_quest_state = 1
+
+[node name="MessageDialogAction2" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/PartnerWorkout/Failer/Selector/Sequence/Selector/CheckConditionAction"]
+script = ExtResource( 4 )
+title = "RANGER_BODYBUILDER_NAME"
+messages = [ "RANGER_BODYBUILDER_NOT_JOINED1", "RANGER_BODYBUILDER_NOT_JOINED2" ]
+close_after = false
+
+[node name="MessageDialogAction3" type="Node" parent="Cutscene/Succeeder/Repeater/MenuDialogAction/PartnerWorkout/Failer/Selector/Sequence/Selector"]
+script = ExtResource( 4 )
+title = "RANGER_BODYBUILDER_NAME"
+messages = [ "RANGER_BODYBUILDER_NO_PASS2" ]
+close_after = false
+
+[node name="MessageDialogAction2" type="Node" parent="Cutscene"]
+script = ExtResource( 4 )
+audio = ExtResource( 21 )
+title = "RANGER_BODYBUILDER_NAME"
+messages = [ "RANGER_BODYBUILDER_BYE" ]

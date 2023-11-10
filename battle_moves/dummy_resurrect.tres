@@ -1,0 +1,45 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://data/hit_vfx/status_healing_1.tres" type="Resource" id=1]
+[ext_resource path="res://data/battle_move_scripts/PassiveResurrect.gd" type="Script" id=2]
+[ext_resource path="res://data/elemental_types/air.tres" type="Resource" id=3]
+[ext_resource path="res://data/attack_vfx/morgante_attack_white.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 2 )
+name = "Perfect Training"
+category_name = "MOVE_CATEGORY_MISC"
+description = ""
+title_override = ""
+tags = [  ]
+priority = 0
+cost = 0
+is_debug = false
+is_passive_only = true
+power = 0
+physicality = 0
+target_type = 0
+default_target = 0
+elemental_types = [ ExtResource( 3 ) ]
+accuracy = 100
+unavoidable = false
+crit_rate_numerator = 1
+crit_rate_denominator = 16
+crit_damage_percent = 150
+play_attack_animation = false
+fade_lights_during_attack = false
+windup_animation = "windup"
+attack_animation = "attack"
+windup_sfx_override = [  ]
+attack_vfx = [ ExtResource( 4 ) ]
+play_attack_vfx_against_allies = true
+attack_duration = 0.2
+hit_vfx = [  ]
+hit_delay = 0.0
+disable_melee_movement = false
+can_be_copied = true
+camera_state_override = ""
+once_only = false
+percent_hp_regen = 100
+absolute_hp_regen = 1000000
+resurrect_vfx = [ ExtResource( 1 ) ]

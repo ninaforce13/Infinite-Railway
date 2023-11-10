@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://data/exchange_scripts/LootTableExchange.gd" type="Script" id=1]
+[ext_resource path="res://ui/icons/types/element_typeless.png" type="Texture" id=2]
+[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=3]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/LootTables/specialized_splash_stickers.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 1 )
+max_amount = 1000
+only_sold_if_unowned = false
+name = "Splash Zone Sticker Pack"
+description = "A pack of 4 rare stickers guaranteed to have an \"Splash Damage per empty slot\" bonus effect!"
+icon = ExtResource( 2 )
+rarity = 2
+amount = 1
+service = ""
+currencies = [ ExtResource( 3 ) ]
+prices = [ 15 ]
+loot_table = ExtResource( 4 )
+loot_value = 1000

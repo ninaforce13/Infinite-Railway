@@ -1,0 +1,27 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://data/battle_vfx_scripts/ShaderParamVfx.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+initial_delay = 0.0
+sound_pitch_scale = 1.0
+sound_random_pitch = 1.1
+background_lighting = 1.0
+background_lighting_ease_duration = 0.5
+origin_anchor_name = "attack"
+target_anchor_name = "hit"
+origin_anchor_on_ground = false
+target_anchor_on_ground = false
+play_form_sound = ""
+duration = 0.75
+tween_in_duration = 0.35
+tween_out_duration = 0.35
+shader_params = {
+"static_amount": 0.1,
+"static_speed": 2.0,
+"wave_amplitude": 0.01,
+"wave_t_frequency": 100.0,
+"wave_v_frequency": 100.0
+}
+tweened_params = [ "wave_amplitude", "static_amount" ]

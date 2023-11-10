@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://battle/ai/archangels/ArchangelAI.gd" type="Script" id=1]
+
+[node name="AAAlephAI" type="Node"]
+script = ExtResource( 1 )
+max_move_orders = 2
+weight_ap_cost = -0.1

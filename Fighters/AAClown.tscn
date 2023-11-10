@@ -1,0 +1,367 @@
+[gd_scene load_steps=50 format=2]
+
+[ext_resource path="res://nodes/actions/PlayAnimationAction.gd" type="Script" id=1]
+[ext_resource path="res://sfx/voices/clown/clown_laugh.wav" type="AudioStream" id=2]
+[ext_resource path="res://dlc/01_pier/music/clown_battle_1.ogg" type="AudioStream" id=3]
+[ext_resource path="res://nodes/actions/CameraShakeAction.gd" type="Script" id=4]
+[ext_resource path="res://mods/Infinite_Dungeon/Rooms/BattleAction_InfDung.gd" type="Script" id=5]
+[ext_resource path="res://world/behaviors/ArchangelIntroBehavior.gd" type="Script" id=6]
+[ext_resource path="res://addons/misc_utils/actions/values/GetNode.gd" type="Script" id=7]
+[ext_resource path="res://nodes/actions/SetVisibleAction.gd" type="Script" id=8]
+[ext_resource path="res://addons/misc_utils/actions/CallMethodAction.gd" type="Script" id=9]
+[ext_resource path="res://nodes/encounter_config/EncounterConfig.gd" type="Script" id=10]
+[ext_resource path="res://world/npc/NPC.tscn" type="PackedScene" id=11]
+[ext_resource path="res://data/battle_moves/smack.tres" type="Resource" id=12]
+[ext_resource path="res://nodes/encounter_config/TapeConfig.gd" type="Script" id=13]
+[ext_resource path="res://nodes/encounter_config/CharacterConfig.gd" type="Script" id=14]
+[ext_resource path="res://addons/misc_utils/actions/WaitAction.gd" type="Script" id=15]
+[ext_resource path="res://nodes/actions/FollowAction.gd" type="Script" id=16]
+[ext_resource path="res://nodes/actions/values/GetPlayer.gd" type="Script" id=17]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=18]
+[ext_resource path="res://menus/boss_title/TitleBannerConfig.gd" type="Script" id=19]
+[ext_resource path="res://menus/boss_title/ArchangelTitleBanner.tscn" type="PackedScene" id=20]
+[ext_resource path="res://data/battle_moves/neutralise.tres" type="Resource" id=21]
+[ext_resource path="res://nodes/actions/FaceDirectionAction.gd" type="Script" id=22]
+[ext_resource path="res://battle/backgrounds/BattlePierFinal.tscn" type="PackedScene" id=23]
+[ext_resource path="res://data/battle_moves/clobber.tres" type="Resource" id=24]
+[ext_resource path="res://data/battle_moves/be_random.tres" type="Resource" id=25]
+[ext_resource path="res://data/battle_moves/waterworks.tres" type="Resource" id=26]
+[ext_resource path="res://data/battle_moves/glitter_bomb.tres" type="Resource" id=27]
+[ext_resource path="res://data/battle_moves/status_resistance.tres" type="Resource" id=28]
+[ext_resource path="res://data/battle_moves/crumble.tres" type="Resource" id=29]
+[ext_resource path="res://nodes/actions/ChangeTrackerTargetAction.gd" type="Script" id=30]
+[ext_resource path="res://nodes/actions/PlayAudioAction.gd" type="Script" id=31]
+[ext_resource path="res://addons/misc_utils/actions/composites/Selector.gd" type="Script" id=32]
+[ext_resource path="res://addons/misc_utils/actions/composites/Parallel.gd" type="Script" id=33]
+[ext_resource path="res://sprites/characters/world/gwen.tscn" type="PackedScene" id=34]
+[ext_resource path="res://battle/ai/archangels/AAClownAI.tscn" type="PackedScene" id=35]
+[ext_resource path="res://data/battle_moves/resistance_glitter.tres" type="Resource" id=36]
+[ext_resource path="res://data/archangel_forms/clown.tres" type="Resource" id=37]
+[ext_resource path="res://data/archangel_moves/clown_clown_for_help.tres" type="Resource" id=38]
+[ext_resource path="res://data/battle_moves/machine_curse.tres" type="Resource" id=39]
+[ext_resource path="res://data/archangel_moves/clown_topsy_turvy.tres" type="Resource" id=40]
+[ext_resource path="res://data/characters/aa_clown.tres" type="Resource" id=41]
+[ext_resource path="res://data/archangel_moves/eldritch.tres" type="Resource" id=42]
+[ext_resource path="res://mods/Infinite_Dungeon/CutScenes/TransformationCutscene.tscn" type="PackedScene" id=43]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Bosses/infinite_dungeon_boss.tres" type="Resource" id=44]
+[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=45]
+
+[sub_resource type="Animation" id=21]
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Rect2( 1, 1, 36, 38 ) ]
+}
+
+[sub_resource type="Animation" id=22]
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 38, 1, 36, 38 ), Rect2( 75, 1, 36, 38 ), Rect2( 1, 40, 36, 38 ), Rect2( 38, 40, 36, 38 ), Rect2( 75, 40, 36, 38 ), Rect2( 1, 79, 36, 38 ), Rect2( 38, 79, 36, 38 ), Rect2( 75, 79, 36, 38 ) ]
+}
+
+[sub_resource type="Resource" id=23]
+script = ExtResource( 19 )
+banner_scene = ExtResource( 20 )
+title = "AA_CLOWN_NAME"
+subtitle = "AA_CLOWN_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[sub_resource type="BoxShape" id=20]
+extents = Vector3( 24.34, 7.07323, 18.6833 )
+
+[node name="Archangel" instance=ExtResource( 11 )]
+visible = false
+
+[node name="Sprite" parent="." index="2"]
+idle = "idle"
+alt_idle = "alt_idle"
+flip_h = true
+offset = null
+emission = Color( 0, 0, 0, 1 )
+wave_amplitude = 0.0
+wave_t_frequency = 5.0
+wave_v_frequency = 0.0
+static_amount = 0.0
+static_offset = 0.0
+static_speed = 0.0
+sparkle = false
+sprite_rotation = Vector3( 0, 0, 0 )
+
+[node name="GwenSprite" parent="Sprite" index="0" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
+
+[node name="Sprite3D" parent="Sprite/GwenSprite" index="0"]
+region_rect = Rect2( 38, 1, 36, 38 )
+
+[node name="AnimationPlayer" parent="Sprite/GwenSprite" index="1"]
+anims/animation_1 = SubResource( 21 )
+anims/animation_2 = SubResource( 22 )
+
+[node name="Node" type="Node" parent="Sprite" index="1"]
+
+[node name="Tween" type="Tween" parent="Sprite/Node" index="0"]
+
+[node name="Node2" type="Node" parent="Sprite" index="2"]
+
+[node name="Tween" type="Tween" parent="Sprite/Node2" index="0"]
+
+[node name="Interaction" parent="." index="4"]
+display_marker = false
+
+[node name="RematchConfig" type="Node" parent="." index="8"]
+script = ExtResource( 10 )
+unique_id = "infdung_boss"
+background_override = ExtResource( 23 )
+music_override = ExtResource( 3 )
+music_vox_override = ExtResource( 3 )
+can_flee = false
+loot_table_override = ExtResource( 44 )
+cutscenes = [ ExtResource( 43 ) ]
+transition = 3
+title_banner = SubResource( 23 )
+
+[node name="CharacterConfig" type="Node" parent="RematchConfig" index="0"]
+script = ExtResource( 14 )
+character_name = "AA_CLOWN_NAME"
+pronouns = 1
+level_override = 75
+levels_per_defeat = 3
+level_scale_override_key = "monster_miniboss_smart"
+exp_yield = 200
+base_character = ExtResource( 41 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 35 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="RematchConfig/CharacterConfig" index="0"]
+script = ExtResource( 13 )
+form = ExtResource( 37 )
+moves_override = [ ExtResource( 12 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 36 ), ExtResource( 38 ), ExtResource( 21 ), ExtResource( 42 ), ExtResource( 28 ), ExtResource( 24 ), ExtResource( 40 ), ExtResource( 39 ), ExtResource( 29 ), ExtResource( 26 ) ]
+
+[node name="CryPlayer" type="AudioStreamPlayer" parent="." index="9"]
+pause_mode = 2
+stream = ExtResource( 2 )
+bus = "World"
+
+[node name="ArchangelIntroBehavior" type="Area" parent="." index="10"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource( 6 )
+pawn = NodePath("..")
+
+[node name="CollisionShape" type="CollisionShape" parent="ArchangelIntroBehavior" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.39272, 0 )
+shape = SubResource( 20 )
+
+[node name="ArchangelIntroCutscene" type="Node" parent="ArchangelIntroBehavior" index="1"]
+script = ExtResource( 18 )
+
+[node name="Selector" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene" index="0"]
+script = ExtResource( 32 )
+
+[node name="ChangeTrackerTargetAction_Rematch" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector" index="0"]
+script = ExtResource( 30 )
+__meta__ = {
+"action_tree": true
+}
+zoom = 1.75
+snap_at_exit = true
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="0"]
+script = ExtResource( 7 )
+node_name = "Positions/RailEdge"
+
+[node name="Parallel" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="1"]
+script = ExtResource( 33 )
+
+[node name="PlayAnimationAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel" index="0"]
+script = ExtResource( 1 )
+__meta__ = {
+"action_tree": true
+}
+animation_name = "arrive"
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/PlayAnimationAction" index="0"]
+script = ExtResource( 7 )
+node_name = "Train/AnimationPlayer"
+
+[node name="WaitAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/PlayAnimationAction" index="1"]
+script = ExtResource( 15 )
+
+[node name="FollowAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel" index="1"]
+script = ExtResource( 16 )
+__meta__ = {
+"action_tree": true
+}
+always_succeed = true
+can_fly = true
+can_jump = true
+can_fall = true
+can_glide = true
+can_warp = true
+
+[node name="GetPlayer" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction" index="0"]
+script = ExtResource( 17 )
+which = 1
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction" index="1"]
+script = ExtResource( 7 )
+node_name = "Positions/PlayerTarget"
+
+[node name="FaceDirectionAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction" index="2"]
+script = ExtResource( 22 )
+__meta__ = {
+"action_tree": true
+}
+direction = "up"
+
+[node name="GetPlayer" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction/FaceDirectionAction" index="0"]
+script = ExtResource( 17 )
+which = 1
+
+[node name="FollowAction2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel" index="2"]
+script = ExtResource( 16 )
+__meta__ = {
+"action_tree": true
+}
+always_succeed = true
+can_fly = true
+can_jump = true
+can_fall = true
+can_glide = true
+can_warp = true
+
+[node name="GetPartner" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2" index="0"]
+script = ExtResource( 17 )
+which = 2
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2" index="1"]
+script = ExtResource( 7 )
+node_name = "Positions/PartnerTarget"
+
+[node name="FaceDirectionAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2" index="2"]
+script = ExtResource( 22 )
+__meta__ = {
+"action_tree": true
+}
+direction = "up"
+
+[node name="GetPartner" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2/FaceDirectionAction" index="0"]
+script = ExtResource( 17 )
+which = 2
+
+[node name="PlayAnimationAction2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="2"]
+script = ExtResource( 1 )
+__meta__ = {
+"action_tree": true
+}
+animation_name = "depart"
+wait_for_animation = false
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/PlayAnimationAction2" index="0"]
+script = ExtResource( 7 )
+node_name = "Train/AnimationPlayer"
+
+[node name="WaitAction2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="3"]
+script = ExtResource( 15 )
+base_seconds = 0.5
+
+[node name="SetVisibleAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="4"]
+script = ExtResource( 8 )
+
+[node name="ChangeTrackerTargetAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="5"]
+script = ExtResource( 30 )
+__meta__ = {
+"action_tree": true
+}
+wait_for_arrival = false
+wait_for_exit = false
+zoom = 1.5
+snap_at_exit = true
+
+[node name="WaitAction4" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="0"]
+script = ExtResource( 15 )
+
+[node name="PlayAudioAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="1"]
+script = ExtResource( 31 )
+wait_for_finish = false
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction/PlayAudioAction" index="0"]
+script = ExtResource( 7 )
+node_name = "CryPlayer"
+
+[node name="CameraShakeAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="2"]
+script = ExtResource( 4 )
+fade_in_duration = 0.25
+fade_out_duration = 0.25
+
+[node name="BattleAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="3"]
+script = ExtResource( 5 )
+encounter_name_override = "RematchConfig"
+result_on_player_win = 1
+result_on_player_loss = 0
+result_on_flee = 0
+disable_fleeing = true
+railway_shards = ExtResource( 45 )
+
+[node name="CallMethodAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="4"]
+script = ExtResource( 9 )
+method = "fade_out"
+wait_for_completed = false
+
+[node name="GetNode2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction/CallMethodAction" index="0"]
+script = ExtResource( 7 )
+node_name = "WorldAnalogueHorror"
+
+[editable path="Sprite/GwenSprite"]

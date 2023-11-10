@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://nodes/encounter_config/CharacterConfig.gd" type="Script" id=1]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/RandomTapeConfig_mod.gd" type="Script" id=3]
+[ext_resource path="res://mods/Infinite_Dungeon/Spawn Profile/all_mobs.tres" type="Resource" id=4]
+
+[node name="CharacterConfig" type="Node"]
+script = ExtResource( 1 )
+character_name = "Mer-Line Attendant"
+pronouns = 0
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="."]
+script = ExtResource( 3 )
+seeded = false
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 4 )
+profile_evolution_rate = 0.5
+
+[node name="TapeConfig2" type="Node" parent="."]
+script = ExtResource( 3 )
+seeded = false
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 4 )
+profile_evolution_rate = 0.5
+
+[node name="TapeConfig3" type="Node" parent="."]
+script = ExtResource( 3 )
+seeded = false
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 4 )
+profile_evolution_rate = 0.5

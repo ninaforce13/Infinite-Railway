@@ -1,0 +1,202 @@
+[gd_scene load_steps=42 format=2]
+
+[ext_resource path="res://data/battle_moves/neutralise.tres" type="Resource" id=1]
+[ext_resource path="res://data/archangel_forms/tower.tres" type="Resource" id=2]
+[ext_resource path="res://data/archangel_forms/lamento_mori.tres" type="Resource" id=3]
+[ext_resource path="res://data/battle_moves/status_resistance.tres" type="Resource" id=4]
+[ext_resource path="res://data/archangel_forms/cube.tres" type="Resource" id=5]
+[ext_resource path="res://data/characters/aa_aleph_null.tres" type="Resource" id=6]
+[ext_resource path="res://data/archangel_forms/monarch.tres" type="Resource" id=7]
+[ext_resource path="res://data/archangel_forms/serpent.tres" type="Resource" id=8]
+[ext_resource path="res://data/archangel_forms/mammon.tres" type="Resource" id=9]
+[ext_resource path="res://data/archangel_forms/puppet.tres" type="Resource" id=10]
+[ext_resource path="res://mods/Infinite_Dungeon/monsters/aleph_null_infdung_form.tres" type="Resource" id=11]
+[ext_resource path="res://data/archangel_forms/alice.tres" type="Resource" id=12]
+[ext_resource path="res://sfx/typing/aleph/aleph1.tres" type="Resource" id=13]
+[ext_resource path="res://data/archangel_forms/robin.tres" type="Resource" id=14]
+[ext_resource path="res://data/archangel_moves/eldritch.tres" type="Resource" id=15]
+[ext_resource path="res://music/release/battle_final_1.ogg" type="AudioStream" id=16]
+[ext_resource path="res://data/Character.gd" type="Script" id=17]
+[ext_resource path="res://addons/misc_utils/actions/WaitAction.gd" type="Script" id=18]
+[ext_resource path="res://nodes/actions/battle/BattleStartCutscene.gd" type="Script" id=19]
+[ext_resource path="res://menus/boss_title/TitleBannerConfig.gd" type="Script" id=20]
+[ext_resource path="res://nodes/actions/MessageDialogAction.gd" type="Script" id=21]
+[ext_resource path="res://menus/boss_title/ArchangelTitleBanner.tscn" type="PackedScene" id=22]
+[ext_resource path="res://nodes/actions/battle/ChangeBattleCameraTargetAction.gd" type="Script" id=23]
+[ext_resource path="res://nodes/actions/ShowBossTitleBannerAction.gd" type="Script" id=24]
+[ext_resource path="res://nodes/actions/MuteMusicAction.gd" type="Script" id=25]
+[ext_resource path="res://cutscenes/end/End_Part8_SummonArchangels.gd" type="Script" id=26]
+[ext_resource path="res://nodes/actions/ChangeMusicAction.gd" type="Script" id=27]
+[ext_resource path="res://cutscenes/end/FuseTeamAction.gd" type="Script" id=28]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/SpawnNullArchangels.gd" type="Script" id=29]
+[ext_resource path="res://music/demo/title_theme.ogg" type="AudioStream" id=30]
+[ext_resource path="res://sfx/voices/aleph/aleph_thinking_1.wav" type="AudioStream" id=31]
+[ext_resource path="res://sprites/portraits/aleph.png" type="Texture" id=32]
+[ext_resource path="res://sfx/voices/aleph/aleph_story_2.wav" type="AudioStream" id=33]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/AllyTransformations.gd" type="Script" id=34]
+[ext_resource path="res://data/archangel_moves/mammon_too_big_to_fail.tres" type="Resource" id=35]
+[ext_resource path="res://data/battle_moves/radioactive.tres" type="Resource" id=36]
+[ext_resource path="res://data/battle_moves/prismatic.tres" type="Resource" id=37]
+[ext_resource path="res://mods/Infinite_Dungeon/battle_moves/aleph_null_resurrect.tres" type="Resource" id=38]
+[ext_resource path="res://data/archangel_forms/helia.tres" type="Resource" id=39]
+
+[sub_resource type="Resource" id=1]
+resource_name = "Archangel Lv1"
+script = ExtResource( 17 )
+name = ""
+swap_colors = [  ]
+default_palette = [  ]
+emission_palette = [  ]
+named_positions = {
+}
+elemental_types = [  ]
+exp_yield = 40
+require_dlc = ""
+character_kind = 2
+force_unrecordable = false
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": "",
+"wings": ""
+}
+level = 1
+pronouns = 2
+max_ap = 5
+base_ap_regen = 2
+base_max_hp = 100
+base_melee_attack = 100
+base_melee_defense = 100
+base_ranged_attack = 100
+base_ranged_defense = 100
+base_speed = 100
+base_accuracy = 100
+base_evasion = 100
+tapes = [  ]
+team_name_override = ""
+exp_gradient = 5
+exp_base_level = 0
+partner_id = ""
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 20 )
+banner_scene = ExtResource( 22 )
+title = "AA_ALEPH_NULL_NAME"
+subtitle = "AA_ALEPH_NULL_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[node name="BattleStartCutscene" type="Node"]
+script = ExtResource( 19 )
+
+[node name="ChangeBattleCameraTargetAction" type="Node" parent="."]
+script = ExtResource( 23 )
+state = "portal"
+
+[node name="WaitAction" type="Node" parent="ChangeBattleCameraTargetAction"]
+script = ExtResource( 18 )
+
+[node name="WaitAction2" type="Node" parent="."]
+script = ExtResource( 18 )
+base_seconds = 3.0
+
+[node name="MessageDialogAction" type="Node" parent="."]
+script = ExtResource( 21 )
+portrait = ExtResource( 32 )
+portrait_position = 2
+audio = ExtResource( 31 )
+title = "AA_ALEPH_NAME"
+messages = [ "There's no end to this, you know.", "You could have returned home, but instead you chose to be here. ", "Endlessly fighting a pointless battle. ", "Why do you think that is?" ]
+style = 2
+
+[node name="End_Part8_SpawnArchangels" type="Node" parent="."]
+script = ExtResource( 29 )
+monster_forms = [ ExtResource( 5 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 39 ), ExtResource( 12 ), ExtResource( 9 ) ]
+base_character = SubResource( 1 )
+
+[node name="MuteMusicAction" type="Node" parent="."]
+script = ExtResource( 25 )
+
+[node name="ChangeMusicAction" type="Node" parent="MuteMusicAction"]
+script = ExtResource( 27 )
+music = ExtResource( 30 )
+revert_on_exit = false
+
+[node name="End_Part8_SummonArchangels" type="Node" parent="MuteMusicAction"]
+script = ExtResource( 26 )
+
+[node name="WaitAction" type="Node" parent="MuteMusicAction/End_Part8_SummonArchangels"]
+script = ExtResource( 18 )
+
+[node name="AllyBattleTransformation" type="Node" parent="MuteMusicAction/End_Part8_SummonArchangels"]
+script = ExtResource( 34 )
+fighter_team = 1
+animation = "transform"
+reset_idle_override = true
+
+[node name="MessageDialogAction2" type="Node" parent="MuteMusicAction/End_Part8_SummonArchangels"]
+script = ExtResource( 21 )
+portrait = ExtResource( 32 )
+portrait_position = 2
+audio = ExtResource( 33 )
+title = "AA_ALEPH_NAME"
+messages = [ "Let's try this again, shall we?" ]
+style = 2
+
+[node name="FuseTeamAction" type="Node" parent="MuteMusicAction/End_Part8_SummonArchangels"]
+script = ExtResource( 28 )
+team_index = 1
+result_character = ExtResource( 6 )
+result_form = ExtResource( 11 )
+delay_per_character = 0.1
+moves = [ ExtResource( 15 ), ExtResource( 4 ), ExtResource( 1 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ) ]
+remove_characters = true
+
+[node name="WaitAction2" type="Node" parent="MuteMusicAction"]
+script = ExtResource( 18 )
+
+[node name="MessageDialogAction" type="Node" parent="MuteMusicAction"]
+script = ExtResource( 21 )
+portrait_position = 2
+type_sounds = ExtResource( 13 )
+title = "AA_ALEPH_NULL_NAME"
+messages = [ "The Witch won't be joining us this time..." ]
+style = 1
+
+[node name="WaitAction" type="Node" parent="MuteMusicAction"]
+script = ExtResource( 18 )
+
+[node name="ChangeMusicAction2" type="Node" parent="."]
+script = ExtResource( 27 )
+music = ExtResource( 16 )
+revert_on_exit = false
+
+[node name="ShowBossTitleBannerAction" type="Node" parent="."]
+script = ExtResource( 24 )
+title_banner = SubResource( 2 )

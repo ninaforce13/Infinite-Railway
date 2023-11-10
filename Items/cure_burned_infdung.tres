@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/LootTableExchangeCustom.gd" type="Script" id=1]
+[ext_resource path="res://sprites/items/cure_burned.png" type="Texture" id=2]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Item Sale Substitutes/cure_burned.tres" type="Resource" id=3]
+[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=4]
+[ext_resource path="res://mods/Infinite_Dungeon/Conditionals/cure_burned_conditional.tres" type="Resource" id=5]
+
+[resource]
+script = ExtResource( 1 )
+max_amount = 1000
+only_sold_if_unowned = false
+conditional = ExtResource( 5 )
+name = "ITEM_CURE_BURNED_NAME"
+description = "ITEM_CURE_BURNED_DESCRIPTION"
+icon = ExtResource( 2 )
+rarity = 2
+amount = 1
+service = ""
+currencies = [ ExtResource( 4 ) ]
+prices = [ 2 ]
+loot_table = ExtResource( 3 )
+loot_value = 1000

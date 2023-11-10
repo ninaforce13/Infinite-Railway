@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://data/exchange_scripts/SimpleExchange.gd" type="Script" id=1]
+[ext_resource path="res://mods/Infinite_Dungeon/Items/vending_machine_acquisition.tres" type="Resource" id=2]
+[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 1 )
+item = ExtResource( 2 )
+max_amount = 1
+only_sold_if_unowned = true
+currency = ExtResource( 4 )

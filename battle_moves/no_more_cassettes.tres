@@ -1,0 +1,56 @@
+[gd_resource type="Resource" load_steps=8 format=2]
+
+[ext_resource path="res://mods/Infinite_Dungeon/battle_moves/no_more_cassettes.gd" type="Script" id=1]
+[ext_resource path="res://data/sticker_attribute_profiles/misc.tres" type="Resource" id=2]
+[ext_resource path="res://mods/Infinite_Dungeon/battle_moves/no_more_cassettes_vfx.tres" type="Resource" id=3]
+[ext_resource path="res://mods/Infinite_Dungeon/status/locked_out.tres" type="Resource" id=4]
+[ext_resource path="res://sfx/voices/aleph/aleph_story_6.wav" type="AudioStream" id=5]
+[ext_resource path="res://mods/Infinite_Dungeon/cassette_player_locked.tres" type="Resource" id=6]
+[ext_resource path="res://data/elemental_types/glass.tres" type="Resource" id=7]
+
+[resource]
+script = ExtResource( 1 )
+name = "No More Cassettes"
+category_name = "Misc"
+description = "Swaps out active cassettes and locks the form switch button for 2 turns"
+title_override = ""
+tags = [ "infinite_dungeon_boss" ]
+priority = 0
+cost = 10
+is_debug = false
+is_passive_only = false
+power = 300
+physicality = 1
+target_type = 2
+default_target = 3
+elemental_types = [ ExtResource( 7 ) ]
+accuracy = 100
+unavoidable = true
+crit_rate_numerator = 1
+crit_rate_denominator = 16
+crit_damage_percent = 150
+play_attack_animation = true
+fade_lights_during_attack = true
+windup_animation = "windup"
+attack_animation = "attack_2"
+windup_sfx_override = [ ExtResource( 5 ) ]
+attack_vfx = [ ExtResource( 3 ) ]
+play_attack_vfx_against_allies = true
+attack_duration = 2.0
+hit_vfx = [ ExtResource( 6 ) ]
+hit_delay = 0.0
+disable_melee_movement = false
+can_be_copied = false
+attribute_profile = ExtResource( 2 )
+camera_state_override = ""
+status_effects = [ ExtResource( 4 ) ]
+amount = 2
+status_effects_to_apply = 0
+num_at_random = 1
+fail_if_already_present = false
+fail_against_archangels = false
+fail_if_has_tag = ""
+sacrifice_hp_percent = 0
+destroys_walls = true
+min_hits = 1
+max_hits = 1

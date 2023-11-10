@@ -1,0 +1,318 @@
+[gd_scene load_steps=49 format=2]
+
+[ext_resource path="res://menus/boss_title/ArchangelTitleBanner.tscn" type="PackedScene" id=1]
+[ext_resource path="res://menus/boss_title/TitleBannerConfig.gd" type="Script" id=2]
+[ext_resource path="res://nodes/encounter_config/EncounterConfig.gd" type="Script" id=3]
+[ext_resource path="res://data/battle_moves/smack.tres" type="Resource" id=4]
+[ext_resource path="res://nodes/encounter_config/CharacterConfig.gd" type="Script" id=5]
+[ext_resource path="res://nodes/encounter_config/TapeConfig.gd" type="Script" id=6]
+[ext_resource path="res://world/npc/NPC.tscn" type="PackedScene" id=7]
+[ext_resource path="res://data/battle_moves/crumble.tres" type="Resource" id=8]
+[ext_resource path="res://data/battle_moves/brick_blast.tres" type="Resource" id=9]
+[ext_resource path="res://data/battle_moves/wonderful_7.tres" type="Resource" id=10]
+[ext_resource path="res://data/battle_moves/spray.tres" type="Resource" id=11]
+[ext_resource path="res://data/battle_moves/phase_shift.tres" type="Resource" id=12]
+[ext_resource path="res://data/battle_moves/crystal_lens.tres" type="Resource" id=13]
+[ext_resource path="res://data/battle_moves/bad_joke.tres" type="Resource" id=14]
+[ext_resource path="res://data/battle_moves/neutralise.tres" type="Resource" id=15]
+[ext_resource path="res://data/archangel_moves/eldritch.tres" type="Resource" id=16]
+[ext_resource path="res://data/battle_moves/status_resistance.tres" type="Resource" id=17]
+[ext_resource path="res://data/characters/aa_tower.tres" type="Resource" id=18]
+[ext_resource path="res://data/archangel_moves/tower_false_illumination.tres" type="Resource" id=19]
+[ext_resource path="res://data/archangel_moves/tower_true_illumination.tres" type="Resource" id=20]
+[ext_resource path="res://data/archangel_forms/tower.tres" type="Resource" id=21]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Bosses/infinite_dungeon_boss.tres" type="Resource" id=22]
+[ext_resource path="res://battle/backgrounds/archangel/BattleStationPlatformTower.tscn" type="PackedScene" id=23]
+[ext_resource path="res://battle/ai/archangels/TowerAI.tscn" type="PackedScene" id=24]
+[ext_resource path="res://sprites/archangels/tower/TowerWorld.tscn" type="PackedScene" id=25]
+[ext_resource path="res://sfx/cries/aa_tower_cry.wav" type="AudioStream" id=26]
+[ext_resource path="res://nodes/actions/FaceDirectionAction.gd" type="Script" id=27]
+[ext_resource path="res://nodes/actions/PlayAnimationAction.gd" type="Script" id=28]
+[ext_resource path="res://nodes/actions/CameraShakeAction.gd" type="Script" id=29]
+[ext_resource path="res://addons/misc_utils/actions/CallMethodAction.gd" type="Script" id=30]
+[ext_resource path="res://addons/misc_utils/actions/composites/Parallel.gd" type="Script" id=31]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=32]
+[ext_resource path="res://mods/Infinite_Dungeon/Rooms/BattleAction_InfDung.gd" type="Script" id=33]
+[ext_resource path="res://nodes/actions/values/GetPlayer.gd" type="Script" id=34]
+[ext_resource path="res://nodes/actions/FollowAction.gd" type="Script" id=35]
+[ext_resource path="res://addons/misc_utils/actions/WaitAction.gd" type="Script" id=36]
+[ext_resource path="res://nodes/actions/ChangeTrackerTargetAction.gd" type="Script" id=37]
+[ext_resource path="res://world/behaviors/ArchangelIntroBehavior.gd" type="Script" id=38]
+[ext_resource path="res://nodes/actions/PlayAudioAction.gd" type="Script" id=39]
+[ext_resource path="res://addons/misc_utils/actions/values/GetNode.gd" type="Script" id=40]
+[ext_resource path="res://mods/Infinite_Dungeon/CutScenes/TransformationCutscene.tscn" type="PackedScene" id=41]
+[ext_resource path="res://nodes/actions/SetVisibleAction.gd" type="Script" id=42]
+[ext_resource path="res://addons/misc_utils/actions/composites/Selector.gd" type="Script" id=43]
+[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=44]
+[ext_resource path="res://music/demo/battle_archangel_vox.ogg" type="AudioStream" id=45]
+[ext_resource path="res://music/demo/battle_archangel_instr.ogg" type="AudioStream" id=46]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+banner_scene = ExtResource( 1 )
+title = "AA_TOWER_NAME"
+subtitle = "AA_TOWER_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 24.34, 7.07323, 18.6833 )
+
+[node name="Archangel" instance=ExtResource( 7 )]
+visible = false
+
+[node name="Sprite" parent="." index="2"]
+idle = "idle_world"
+emission = Color( 0, 0, 0, 1 )
+wave_amplitude = 0.0
+wave_t_frequency = 5.0
+wave_v_frequency = 0.0
+static_amount = 0.0
+static_offset = 0.0
+static_speed = 0.0
+sparkle = false
+
+[node name="TowerBattle" parent="Sprite" index="0" instance=ExtResource( 25 )]
+
+[node name="Node" type="Node" parent="Sprite" index="1"]
+
+[node name="Tween" type="Tween" parent="Sprite/Node" index="0"]
+
+[node name="Interaction" parent="." index="4"]
+display_marker = false
+
+[node name="RematchConfig" type="Node" parent="." index="8"]
+script = ExtResource( 3 )
+unique_id = "infdung_boss"
+background_override = ExtResource( 23 )
+music_override = ExtResource( 46 )
+music_vox_override = ExtResource( 45 )
+can_flee = false
+loot_table_override = ExtResource( 22 )
+cutscenes = [ ExtResource( 41 ) ]
+transition = 3
+title_banner = SubResource( 1 )
+
+[node name="CharacterConfig" type="Node" parent="RematchConfig" index="0"]
+script = ExtResource( 5 )
+character_name = "AA_TOWER_NAME"
+pronouns = 1
+level_override = 75
+levels_per_defeat = 3
+level_scale_override_key = "monster_miniboss"
+exp_yield = 200
+base_character = ExtResource( 18 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 24 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="RematchConfig/CharacterConfig" index="0"]
+script = ExtResource( 6 )
+form = ExtResource( 21 )
+moves_override = [ ExtResource( 10 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 13 ), ExtResource( 8 ), ExtResource( 14 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 15 ), ExtResource( 12 ) ]
+
+[node name="CryPlayer" type="AudioStreamPlayer" parent="." index="9"]
+pause_mode = 2
+stream = ExtResource( 26 )
+bus = "World"
+
+[node name="ArchangelIntroBehavior" type="Area" parent="." index="10"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource( 38 )
+pawn = NodePath("..")
+
+[node name="CollisionShape" type="CollisionShape" parent="ArchangelIntroBehavior" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.39272, 0 )
+shape = SubResource( 2 )
+
+[node name="ArchangelIntroCutscene" type="Node" parent="ArchangelIntroBehavior" index="1"]
+script = ExtResource( 32 )
+
+[node name="Selector" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene" index="0"]
+script = ExtResource( 43 )
+
+[node name="ChangeTrackerTargetAction_Rematch" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector" index="0"]
+script = ExtResource( 37 )
+__meta__ = {
+"action_tree": true
+}
+zoom = 1.75
+snap_at_exit = true
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="0"]
+script = ExtResource( 40 )
+node_name = "Positions/RailEdge"
+
+[node name="Parallel" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="1"]
+script = ExtResource( 31 )
+
+[node name="PlayAnimationAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel" index="0"]
+script = ExtResource( 28 )
+__meta__ = {
+"action_tree": true
+}
+animation_name = "arrive"
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/PlayAnimationAction" index="0"]
+script = ExtResource( 40 )
+node_name = "Train/AnimationPlayer"
+
+[node name="WaitAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/PlayAnimationAction" index="1"]
+script = ExtResource( 36 )
+
+[node name="FollowAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel" index="1"]
+script = ExtResource( 35 )
+__meta__ = {
+"action_tree": true
+}
+always_succeed = true
+can_fly = true
+can_jump = true
+can_fall = true
+can_glide = true
+can_warp = true
+
+[node name="GetPlayer" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction" index="0"]
+script = ExtResource( 34 )
+which = 1
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction" index="1"]
+script = ExtResource( 40 )
+node_name = "Positions/PlayerTarget"
+
+[node name="FaceDirectionAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction" index="2"]
+script = ExtResource( 27 )
+__meta__ = {
+"action_tree": true
+}
+direction = "up"
+
+[node name="GetPlayer" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction/FaceDirectionAction" index="0"]
+script = ExtResource( 34 )
+which = 1
+
+[node name="FollowAction2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel" index="2"]
+script = ExtResource( 35 )
+__meta__ = {
+"action_tree": true
+}
+always_succeed = true
+can_fly = true
+can_jump = true
+can_fall = true
+can_glide = true
+can_warp = true
+
+[node name="GetPartner" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2" index="0"]
+script = ExtResource( 34 )
+which = 2
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2" index="1"]
+script = ExtResource( 40 )
+node_name = "Positions/PartnerTarget"
+
+[node name="FaceDirectionAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2" index="2"]
+script = ExtResource( 27 )
+__meta__ = {
+"action_tree": true
+}
+direction = "up"
+
+[node name="GetPartner" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2/FaceDirectionAction" index="0"]
+script = ExtResource( 34 )
+which = 2
+
+[node name="PlayAnimationAction2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="2"]
+script = ExtResource( 28 )
+__meta__ = {
+"action_tree": true
+}
+animation_name = "depart"
+wait_for_animation = false
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/PlayAnimationAction2" index="0"]
+script = ExtResource( 40 )
+node_name = "Train/AnimationPlayer"
+
+[node name="WaitAction2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="3"]
+script = ExtResource( 36 )
+base_seconds = 0.5
+
+[node name="SetVisibleAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="4"]
+script = ExtResource( 42 )
+
+[node name="ChangeTrackerTargetAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="5"]
+script = ExtResource( 37 )
+__meta__ = {
+"action_tree": true
+}
+wait_for_arrival = false
+wait_for_exit = false
+zoom = 1.5
+snap_at_exit = true
+
+[node name="WaitAction4" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="0"]
+script = ExtResource( 36 )
+
+[node name="PlayAudioAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="1"]
+script = ExtResource( 39 )
+wait_for_finish = false
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction/PlayAudioAction" index="0"]
+script = ExtResource( 40 )
+node_name = "CryPlayer"
+
+[node name="CameraShakeAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="2"]
+script = ExtResource( 29 )
+fade_in_duration = 0.25
+fade_out_duration = 0.25
+
+[node name="BattleAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="3"]
+script = ExtResource( 33 )
+encounter_name_override = "RematchConfig"
+result_on_player_win = 1
+result_on_player_loss = 0
+result_on_flee = 0
+disable_fleeing = true
+railway_shards = ExtResource( 44 )
+
+[node name="CallMethodAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="4"]
+script = ExtResource( 30 )
+method = "fade_out"
+wait_for_completed = false
+
+[node name="GetNode2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction/CallMethodAction" index="0"]
+script = ExtResource( 40 )
+node_name = "WorldAnalogueHorror"

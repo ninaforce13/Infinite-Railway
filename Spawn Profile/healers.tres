@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://data/spawn_config_scripts/MonsterSpawnProfile.gd" type="Script" id=1]
+[ext_resource path="res://data/monster_forms/wooltergeist.tres" type="Resource" id=2]
+
+[resource]
+script = ExtResource( 1 )
+spawn_configs = [  ]
+habitat_name = ""
+habitat_require_flag = ""
+habitat_overworld_chunks = [  ]
+habitat_endless = true
+min_team_size = 1
+max_team_size = 2
+disable_fleeing = false
+num_species = 1
+species_0/monster_form = ExtResource( 2 )
+species_0/weight = 1.0
+species_0/hour_min = 0.0
+species_0/hour_max = 24.0

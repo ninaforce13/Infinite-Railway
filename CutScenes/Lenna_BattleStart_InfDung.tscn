@@ -1,0 +1,58 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://music/release/battle_lenna_instr.ogg" type="AudioStream" id=1]
+[ext_resource path="res://music/release/battle_lenna_vox.ogg" type="AudioStream" id=2]
+[ext_resource path="res://nodes/actions/ChangeMusicAction.gd" type="Script" id=3]
+[ext_resource path="res://menus/boss_title/ArchangelTitleBanner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://menus/boss_title/TitleBannerConfig.gd" type="Script" id=5]
+[ext_resource path="res://nodes/actions/battle/BattleStartCutscene.gd" type="Script" id=6]
+[ext_resource path="res://nodes/actions/MessageDialogAction.gd" type="Script" id=7]
+[ext_resource path="res://nodes/actions/ShowBossTitleBannerAction.gd" type="Script" id=8]
+[ext_resource path="res://nodes/actions/battle/BattleSlotAnimationAction.gd" type="Script" id=9]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/AllyTransformations.gd" type="Script" id=10]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+banner_scene = ExtResource( 4 )
+title = "LENNA_NAME"
+subtitle = "LENNA_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[node name="BattleStartCutscene" type="Node"]
+script = ExtResource( 6 )
+
+[node name="MessageDialogAction" type="Node" parent="."]
+script = ExtResource( 7 )
+title = "LENNA_UNKNOWN_NAME"
+messages = [ "LENNA_ENCOUNTER_LENNA4" ]
+
+[node name="ChangeMusicAction" type="Node" parent="."]
+script = ExtResource( 3 )
+music = ExtResource( 1 )
+music_vox = ExtResource( 2 )
+revert_on_exit = false
+
+[node name="BattleSlotAnimationAction" type="Node" parent="."]
+script = ExtResource( 9 )
+fighter_team = 1
+animation = "transform"
+play_slot_animation = false
+reset_idle_override = true
+
+[node name="AllyTransformations" type="Node" parent="."]
+script = ExtResource( 10 )
+fighter_team = 1
+animation = "transform"
+reset_idle_override = true
+
+[node name="MessageDialogAction2" type="Node" parent="."]
+script = ExtResource( 7 )
+title = "LENNA_NAME"
+messages = [ "Show me what you've learned!" ]
+
+[node name="ShowBossTitleBannerAction" type="Node" parent="."]
+script = ExtResource( 8 )
+title_banner = SubResource( 1 )

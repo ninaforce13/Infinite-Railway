@@ -1,0 +1,1319 @@
+[gd_scene load_steps=74 format=2]
+
+[ext_resource path="res://nodes/actions/WarpAction.gd" type="Script" id=1]
+[ext_resource path="res://world/objects/wired/floor_button/floorbutton_switch_1.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://world/objects/wired/floor_button/floorbutton_base_1.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://world/objects/wired/floor_button/materials/floorbutton_switch_off_mat_2.tres" type="Material" id=4]
+[ext_resource path="res://world/objects/wired/floor_button/materials/floorbutton_switch_on_mat_1.tres" type="Material" id=5]
+[ext_resource path="res://world/objects/wired/floor_button/materials/floorbutton_switch_on_mat_2.tres" type="Material" id=6]
+[ext_resource path="res://world/objects/wired/floor_button/materials/floorbutton_switch_off_mat_1.tres" type="Material" id=7]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/ShowUIElement.gd" type="Script" id=8]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/EmitSignal.gd" type="Script" id=9]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/RemoveSpecifiedNode.gd" type="Script" id=10]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/CheckDungeonCounter.gd" type="Script" id=11]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/IncreaseDungeonCounter.gd" type="Script" id=12]
+[ext_resource path="res://nodes/weather/cave_depth_fade/cave_double_depth_fade.shader" type="Shader" id=13]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/CheckRailwayStats.gd" type="Script" id=14]
+[ext_resource path="res://world/objects/wired/floor_button/FloorButton.gd" type="Script" id=15]
+[ext_resource path="res://addons/misc_utils/actions/composites/Selector.gd" type="Script" id=16]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/TimeTrialTimer.gd" type="Script" id=17]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/WarpRegion_mod.gd" type="Script" id=18]
+[ext_resource path="res://nodes/camera/LaggingTracker.gd" type="Script" id=19]
+[ext_resource path="res://nodes/actions/ChangeMusicAction.gd" type="Script" id=20]
+[ext_resource path="res://sprites/sky_battle_grasslands_night.png" type="Texture" id=21]
+[ext_resource path="res://sfx/world/wired/floor_button.wav" type="AudioStream" id=22]
+[ext_resource path="res://music/demo/menacing_theme.ogg" type="AudioStream" id=23]
+[ext_resource path="res://ui/battle_theme.tres" type="Theme" id=24]
+[ext_resource path="res://data/map_metadata/deadworld.tres" type="Resource" id=25]
+[ext_resource path="res://world/core/LevelMap.gd" type="Script" id=26]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=27]
+[ext_resource path="res://nodes/actions/MessageDialogAction.gd" type="Script" id=28]
+[ext_resource path="res://world/maps/StationMeshlib.meshlib" type="MeshLibrary" id=29]
+[ext_resource path="res://mods/Infinite_Dungeon/regions/dash_trial.tres" type="Resource" id=30]
+[ext_resource path="res://nodes/actions/CameraShakeAction.gd" type="Script" id=31]
+[ext_resource path="res://nodes/actions/GiveLootAction.gd" type="Script" id=32]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/WiredGridMap.gd" type="Script" id=33]
+[ext_resource path="res://nodes/actions/PlayAudioAction.gd" type="Script" id=34]
+[ext_resource path="res://sfx/world/wired/success_chime.wav" type="AudioStream" id=35]
+[ext_resource path="res://sfx/world/wired/dungeon_rise.wav" type="AudioStream" id=36]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage1/timetrial_loot_3.tres" type="Resource" id=37]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage1/timetrial_loot_2.tres" type="Resource" id=38]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage1/timetrial_loot_1.tres" type="Resource" id=39]
+[ext_resource path="res://nodes/camera/WorldCamera.tscn" type="PackedScene" id=40]
+[ext_resource path="res://world/objects/rigid_physics/LiftableCrate.tscn" type="PackedScene" id=41]
+[ext_resource path="res://world/maps/CaveMeshlib.meshlib" type="MeshLibrary" id=42]
+[ext_resource path="res://world/objects/static_physics/brokenhead_props/BrokenheadPillar1.tscn" type="PackedScene" id=43]
+[ext_resource path="res://nodes/water/RapidsWater.tscn" type="PackedScene" id=44]
+[ext_resource path="res://world/objects/static_physics/shipping_containers/shipping_container_1.tscn" type="PackedScene" id=45]
+[ext_resource path="res://world/objects/static_physics/shipyard_props/ShipyardScrap2.tscn" type="PackedScene" id=46]
+[ext_resource path="res://world/objects/static_physics/shipping_containers/shipping_container_2.tscn" type="PackedScene" id=47]
+[ext_resource path="res://world/objects/static_physics/wooden_sign/wooden_sign_2.tscn" type="PackedScene" id=48]
+[ext_resource path="res://nodes/actions/SetNPCStateAction.gd" type="Script" id=50]
+[ext_resource path="res://world/objects/collapsing/CollapsingRockBridge.tscn" type="PackedScene" id=51]
+[ext_resource path="res://world/objects/static_physics/town_props/BuoyLight.tscn" type="PackedScene" id=52]
+[ext_resource path="res://nodes/actions/values/GetPlayer.gd" type="Script" id=53]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage3/timetrial_loot_3.tres" type="Resource" id=54]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage4/timetrial_loot_2.tres" type="Resource" id=55]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage3/timetrial_loot_2.tres" type="Resource" id=56]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage4/timetrial_loot_1.tres" type="Resource" id=57]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage3/timetrial_loot_1.tres" type="Resource" id=58]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage4/timetrial_loot_3.tres" type="Resource" id=59]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage2/timetrial_loot_2.tres" type="Resource" id=60]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage2/timetrial_loot_3.tres" type="Resource" id=61]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/StageSelect.gd" type="Script" id=62]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage2/timetrial_loot_1.tres" type="Resource" id=63]
+
+[sub_resource type="PanoramaSky" id=18]
+panorama = ExtResource( 21 )
+
+[sub_resource type="Environment" id=14]
+resource_local_to_scene = true
+background_mode = 3
+background_sky = SubResource( 18 )
+background_sky_custom_fov = 88.0
+background_energy = 0.2
+ambient_light_color = Color( 0.419608, 0.419608, 0.419608, 1 )
+ambient_light_energy = 0.5
+ambient_light_sky_contribution = 0.25
+fog_enabled = true
+fog_color = Color( 0, 0, 0, 1 )
+fog_sun_color = Color( 1, 0.956863, 0.87451, 1 )
+fog_depth_begin = 60.0
+fog_transmit_enabled = true
+ssao_color = Color( 0.2, 0.172549, 0.25098, 1 )
+dof_blur_far_enabled = true
+dof_blur_far_distance = 51.0
+dof_blur_far_transition = 20.0
+dof_blur_far_quality = 2
+dof_blur_near_enabled = true
+dof_blur_near_distance = 37.0
+dof_blur_near_transition = 5.0
+dof_blur_near_quality = 2
+glow_enabled = true
+glow_intensity = 1.0
+adjustment_enabled = true
+adjustment_contrast = 1.16
+adjustment_saturation = 1.16
+
+[sub_resource type="ShaderMaterial" id=12]
+render_priority = 30
+shader = ExtResource( 13 )
+shader_param/draw_distance = 100.0
+shader_param/a_top_y = 4.0
+shader_param/a_bottom_y = 12.0
+shader_param/b_top_y = 0.0
+shader_param/b_bottom_y = -4.0
+shader_param/color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 0.062, 1 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.762, 0.125, 0.761 )
+
+[sub_resource type="AudioStreamRandomPitch" id=3]
+audio_stream = ExtResource( 22 )
+
+[sub_resource type="CubeMesh" id=31]
+custom_aabb = AABB( -251, -8.5, -101, 502, 17, 202 )
+size = Vector3( 500, 15, 200 )
+subdivide_width = 124
+subdivide_depth = 49
+
+[sub_resource type="BoxShape" id=22]
+resource_local_to_scene = true
+extents = Vector3( 250, 7.5, 100 )
+
+[sub_resource type="SpatialMaterial" id=30]
+flags_unshaded = true
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="QuadMesh" id=20]
+material = SubResource( 30 )
+size = Vector2( 10, 10 )
+
+[sub_resource type="BoxShape" id=19]
+
+[node name="TimeTrial" type="Spatial"]
+script = ExtResource( 26 )
+default_warp_target = "WarpS"
+map_metadata = ExtResource( 25 )
+world_time_rate = 1.0
+default_region_settings = ExtResource( 30 )
+
+[node name="BaseMap" type="Spatial" parent="."]
+
+[node name="GridMap" type="GridMap" parent="BaseMap"]
+mesh_library = ExtResource( 29 )
+data = {
+"cells": PoolIntArray( -65536, 0, 0, -65535, 0, 0, -65534, 0, 1048582, -6, 0, 1441798, -5, 0, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 1, 0, -65535, 1, 0, -65534, 1, 1048582, -6, 1, 1441799, -5, 1, 655360, -4, 1, 0, -3, 1, 0, -2, 1, 0, -1, 1, 0, -65536, 2, 0, -65535, 2, 0, -65534, 2, 1048582, -6, 2, 1441798, -5, 2, 655360, -4, 2, 0, -3, 2, 0, -2, 2, 0, -1, 2, 0, -65536, 3, 0, -65535, 3, 0, -65534, 3, 1048582, -6, 3, 1441799, -5, 3, 0, -4, 3, 0, -3, 3, 0, -2, 3, 0, -1, 3, 0, -65536, 4, 0, -65535, 4, 0, -65534, 4, 1048582, -6, 4, 1441799, -5, 4, 0, -4, 4, 0, -3, 4, 0, -2, 4, 0, -1, 4, 0, -65536, 5, 0, -65535, 5, 0, -65534, 5, 1048582, -6, 5, 1441799, -5, 5, 0, -4, 5, 0, -3, 5, 0, -2, 5, 0, -1, 5, 0, -65536, 6, 7, -65535, 6, 7, -65534, 6, 1048584, -6, 6, 8, -5, 6, 7, -4, 6, 7, -3, 6, 7, -2, 6, 7, -1, 6, 7, -65536, 65529, 655367, -65535, 65529, 655367, -65534, 65529, 655368, -6, 65529, 1441800, -5, 65529, 655367, -4, 65529, 655367, -3, 65529, 655367, -2, 65529, 655367, -1, 65529, 655367, -65536, 65530, 0, -65535, 65530, 0, -65534, 65530, 1048582, -6, 65530, 1441799, -5, 65530, 0, -4, 65530, 0, -3, 65530, 0, -2, 65530, 0, -1, 65530, 0, -65536, 65531, 0, -65535, 65531, 0, -65534, 65531, 1048582, -6, 65531, 1441799, -5, 65531, 0, -4, 65531, 0, -3, 65531, 0, -2, 65531, 0, -1, 65531, 0, -65536, 65532, 0, -65535, 65532, 0, -65534, 65532, 1048582, -6, 65532, 1441799, -5, 65532, 0, -4, 65532, 0, -3, 65532, 0, -2, 65532, 0, -1, 65532, 0, -65536, 65533, 0, -65535, 65533, 0, -65534, 65533, 1048582, -6, 65533, 1441799, -5, 65533, 0, -4, 65533, 0, -3, 65533, 0, -2, 65533, 0, -1, 65533, 0, -65536, 65534, 0, -65535, 65534, 0, -65534, 65534, 1048582, -6, 65534, 1441799, -5, 65534, 0, -4, 65534, 0, -3, 65534, 0, -2, 65534, 0, -1, 65534, 0, -65536, 65535, 0, -65535, 65535, 0, -65534, 65535, 1048582, -6, 65535, 1441799, -5, 65535, 0, -4, 65535, 0, -3, 65535, 0, -2, 65535, 0, -1, 65535, 0 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, -1, 0 )
+}
+
+[node name="Tracker" type="Spatial" parent="."]
+script = ExtResource( 19 )
+limits = AABB( -20, 0, -1000, 40, 10, 1004 )
+limit_y = false
+snap = true
+lookahead_distance = 5.0
+
+[node name="WorldCamera" parent="Tracker" instance=ExtResource( 40 )]
+fov = 20.0
+environment = SubResource( 14 )
+clouds_enabled = false
+cloud_material_override = SubResource( 12 )
+
+[node name="WarpS" type="Area" parent="."]
+transform = Transform( -2.05872, 0, -1.29253e-06, 0, 1, 0, 6.27833e-07, 0, -1, 0, 0, 12.1176 )
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 18 )
+size = Vector3( 6, 10, 2 )
+force_same_scene_warps = true
+
+[node name="PlayerTarget" type="Position3D" parent="WarpS"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 3 )
+
+[node name="PartnerTarget" type="Position3D" parent="WarpS"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 3 )
+
+[node name="Lights" type="Spatial" parent="."]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 73.1794, 0 )
+light_color = Color( 0.670588, 0.737255, 0.0588235, 1 )
+
+[node name="DirectionalLight2" type="DirectionalLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 24.8855, 52.5842, 0 )
+light_color = Color( 0.670588, 0.737255, 0.0588235, 1 )
+
+[node name="StopTimer" type="Spatial" parent="."]
+transform = Transform( -0.0151838, 0.00979007, -0.999837, 0, 0.999952, 0.00979119, 0.999885, 0.000148667, -0.015183, 112.568, 0.682919, -42.9761 )
+script = ExtResource( 15 )
+button_regular_y = 0.033
+button_depressed_y = -0.133
+on_material = ExtResource( 5 )
+off_material = ExtResource( 7 )
+sticky_on_material = ExtResource( 6 )
+sticky_off_material = ExtResource( 4 )
+require_body_group = "player_control"
+
+[node name="floorbutton_base_1" type="MeshInstance" parent="StopTimer"]
+mesh = ExtResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="StopTimer"]
+
+[node name="CollisionShape2" type="CollisionShape" parent="StopTimer/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.062, 0 )
+shape = SubResource( 1 )
+
+[node name="Button" type="MeshInstance" parent="StopTimer"]
+transform = Transform( 1.33, 0, 0, 0, 1.33, 0, 0, 0, 1.33, 0, 0.033, 0 )
+material_override = ExtResource( 7 )
+mesh = ExtResource( 2 )
+
+[node name="Area" type="Area" parent="StopTimer"]
+collision_layer = 0
+collision_mask = 32772
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="StopTimer/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.135203, 0 )
+shape = SubResource( 2 )
+
+[node name="AudioPlayer" type="AudioStreamPlayer3D" parent="StopTimer"]
+stream = SubResource( 3 )
+attenuation_model = 2
+unit_size = 50.0
+max_distance = 100.0
+bus = "World"
+
+[node name="Sprite3D" type="Sprite3D" parent="StopTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween" type="Tween" parent="StopTimer"]
+
+[node name="Sprite3D2" type="Sprite3D" parent="StopTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween2" type="Tween" parent="StopTimer"]
+
+[node name="Sprite3D3" type="Sprite3D" parent="StopTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween3" type="Tween" parent="StopTimer"]
+
+[node name="Sprite3D4" type="Sprite3D" parent="StopTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween4" type="Tween" parent="StopTimer"]
+
+[node name="Sprite3D5" type="Sprite3D" parent="StopTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween5" type="Tween" parent="StopTimer"]
+
+[node name="Sprite3D6" type="Sprite3D" parent="StopTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween6" type="Tween" parent="StopTimer"]
+
+[node name="Sprite3D7" type="Sprite3D" parent="StopTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween7" type="Tween" parent="StopTimer"]
+
+[node name="StartTimer" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.91049, 0.0874777, -0.079874 )
+script = ExtResource( 15 )
+button_regular_y = 0.033
+button_depressed_y = -0.133
+on_material = ExtResource( 5 )
+off_material = ExtResource( 7 )
+sticky_on_material = ExtResource( 6 )
+sticky_off_material = ExtResource( 4 )
+require_body_group = "player_control"
+
+[node name="floorbutton_base_1" type="MeshInstance" parent="StartTimer"]
+mesh = ExtResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="StartTimer"]
+
+[node name="CollisionShape2" type="CollisionShape" parent="StartTimer/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.062, 0 )
+shape = SubResource( 1 )
+
+[node name="Button" type="MeshInstance" parent="StartTimer"]
+transform = Transform( 1.33, 0, 0, 0, 1.33, 0, 0, 0, 1.33, 0, 0.033, 0 )
+material_override = ExtResource( 7 )
+mesh = ExtResource( 2 )
+
+[node name="Area" type="Area" parent="StartTimer"]
+collision_layer = 0
+collision_mask = 32772
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="StartTimer/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.135203, 0 )
+shape = SubResource( 2 )
+
+[node name="AudioPlayer" type="AudioStreamPlayer3D" parent="StartTimer"]
+stream = SubResource( 3 )
+attenuation_model = 2
+unit_size = 50.0
+max_distance = 100.0
+bus = "World"
+
+[node name="Sprite3D" type="Sprite3D" parent="StartTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween" type="Tween" parent="StartTimer"]
+
+[node name="Sprite3D2" type="Sprite3D" parent="StartTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween2" type="Tween" parent="StartTimer"]
+
+[node name="Sprite3D3" type="Sprite3D" parent="StartTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween3" type="Tween" parent="StartTimer"]
+
+[node name="Sprite3D4" type="Sprite3D" parent="StartTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween4" type="Tween" parent="StartTimer"]
+
+[node name="Sprite3D5" type="Sprite3D" parent="StartTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween5" type="Tween" parent="StartTimer"]
+
+[node name="Sprite3D6" type="Sprite3D" parent="StartTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween6" type="Tween" parent="StartTimer"]
+
+[node name="Sprite3D7" type="Sprite3D" parent="StartTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween7" type="Tween" parent="StartTimer"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Timer" type="Label" parent="CanvasLayer"]
+margin_left = 868.0
+margin_top = 24.0
+margin_right = 1057.0
+margin_bottom = 104.0
+size_flags_vertical = 1
+theme = ExtResource( 24 )
+text = "00:00:00"
+align = 1
+valign = 1
+
+[node name="Obstacles" type="Spatial" parent="."]
+
+[node name="RapidsWater" parent="Obstacles" instance=ExtResource( 44 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.24171, -0.23305, -13.512 )
+size = Vector2( 500, 200 )
+mesh = SubResource( 31 )
+
+[node name="LiftableCrate" parent="Obstacles" instance=ExtResource( 41 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05222, -15.8317 )
+
+[node name="BrokenheadPillar1" parent="Obstacles" instance=ExtResource( 43 )]
+transform = Transform( -0.372518, 0.928025, 2.48099e-08, -2.41558e-08, -3.64305e-08, 1, 0.928025, 0.372518, 3.59882e-08, -3.57148, -0.632162, -30.2911 )
+
+[node name="BrokenheadPillar3" parent="Obstacles" instance=ExtResource( 43 )]
+transform = Transform( -0.939692, -0.34202, -4.37114e-08, -4.10753e-08, -1.49502e-08, 1, -0.34202, 0.939692, 1.91068e-15, 8.69022, -0.72304, -56.4116 )
+
+[node name="BrokenheadPillar5" parent="Obstacles" instance=ExtResource( 43 )]
+transform = Transform( -0.964939, 0.262475, 2.29905e-08, 3.19425e-08, 2.9839e-08, 1, 0.262475, 0.964938, -3.71769e-08, 29.4082, -0.60194, -77.1179 )
+
+[node name="BrokenheadPillar7" parent="Obstacles" instance=ExtResource( 43 )]
+transform = Transform( 0.115159, -0.98363, -0.138602, 0.0505921, -0.133541, 0.989751, -0.992058, -0.120991, 0.0343853, 51.0343, -0.60194, -73.9999 )
+
+[node name="BrokenheadPillar8" parent="Obstacles" instance=ExtResource( 43 )]
+transform = Transform( -0.0268536, -0.996962, -0.0731155, -0.0161916, -0.072698, 0.997223, -0.999508, 0.0279628, -0.0141902, 58.4094, -0.913172, -22.7466 )
+
+[node name="wooden_sign_2" parent="Obstacles" instance=ExtResource( 48 )]
+transform = Transform( 0.965831, -0.259173, 0, 0.259173, 0.965831, 0, 0, 0, 1, -7.81455, -1.54634, -28.461 )
+
+[node name="shipping_container_1" parent="Obstacles" instance=ExtResource( 45 )]
+transform = Transform( -0.862531, -0.0693824, 0.501224, 0.0801814, -0.99678, 0, 0.49961, 0.0401888, 0.865318, 61.8058, -3.56919, -58.1173 )
+
+[node name="shipping_container_2" parent="Obstacles" instance=ExtResource( 47 )]
+transform = Transform( 0.4919, -0.315715, 0.811393, 0.163672, 0.948854, 0.269977, -0.855129, 0, 0.518415, 76.6355, -0.747099, -47.8325 )
+
+[node name="ShipyardScrap2" parent="Obstacles" instance=ExtResource( 46 )]
+transform = Transform( -4.37114e-08, 0.955752, -0.294174, 0, 0.294174, 0.955752, 1, 4.17772e-08, -1.28587e-08, 83.3083, 5.09243, -43.0066 )
+
+[node name="ShipyardScrap7" parent="Obstacles" instance=ExtResource( 46 )]
+transform = Transform( -4.36985e-08, 0.962621, -0.270852, 1.06263e-09, 0.270852, 0.962621, 1, 4.17772e-08, -1.28587e-08, 90.8612, 7.32249, -43.0066 )
+
+[node name="ShipyardScrap8" parent="Obstacles" instance=ExtResource( 46 )]
+transform = Transform( -4.17766e-08, 1, 5.24223e-05, 1.28609e-08, -5.24223e-05, 1, 1, 4.17772e-08, -1.28587e-08, 99.4537, 8.41312, -43.0066 )
+
+[node name="ShipyardScrap9" parent="Obstacles" instance=ExtResource( 46 )]
+transform = Transform( -3.07865e-08, 0.881979, 0.471289, 3.10303e-08, -0.471289, 0.881979, 1, 4.17772e-08, -1.28587e-08, 107.277, 6.43082, -43.0066 )
+
+[node name="ShipyardScrap6" parent="Obstacles" instance=ExtResource( 46 )]
+transform = Transform( -0.00689393, 0.999842, 0.0163875, 0, -0.016388, 0.999866, 0.999976, 0.0068934, 0.000112968, 111.118, 0.158596, -42.976 )
+
+[node name="UpperArea" type="Area" parent="Obstacles"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.24171, -7.73305, -13.512 )
+collision_layer = 64
+collision_mask = 98448
+priority = 101.0
+space_override = 4
+gravity_vec = Vector3( 0, 1, 0 )
+gravity = 95.0
+linear_damp = 4.43
+angular_damp = 2.26
+
+[node name="CollisionShape" type="CollisionShape" parent="Obstacles/UpperArea"]
+shape = SubResource( 22 )
+
+[node name="Spatial" parent="Obstacles" instance=ExtResource( 52 )]
+transform = Transform( 0.992404, 0.0792569, 0.0940898, -0.0868241, 0.993066, 0.0792569, -0.0871557, -0.0868241, 0.992404, 30.152, 0.0173621, -39.9911 )
+
+[node name="CollapsingRockBridge" parent="Obstacles" instance=ExtResource( 51 )]
+transform = Transform( 0.0185866, 0, 0.999827, 0, 1, 0, -0.999827, 0, 0.0185866, 26.2306, 0.466773, -22.7527 )
+rows = 16
+block_spacing = Vector2( 3, 4 )
+
+[node name="CollapsingRockBridge4" parent="Obstacles" instance=ExtResource( 51 )]
+transform = Transform( -0.905343, -0.0790227, 0.417263, -0.0869541, 0.996213, 0, -0.415683, -0.0362828, -0.908785, 2.53174, 0.348601, -44.942 )
+rows = 5
+block_spacing = Vector2( 3, 4 )
+
+[node name="CollapsingRockBridge5" parent="Obstacles" instance=ExtResource( 51 )]
+transform = Transform( -0.708279, -0.061822, 0.70322, -0.0869541, 0.996213, 0, -0.700556, -0.0611479, -0.710972, 17.7761, 0.348601, -68.1877 )
+rows = 5
+block_spacing = Vector2( 3, 4 )
+
+[node name="CollapsingRockBridge6" parent="Obstacles" instance=ExtResource( 51 )]
+transform = Transform( 0.281771, 0.0245943, 0.959166, -0.0869541, 0.996213, 0, -0.955533, -0.0834035, 0.282843, 42.4731, 0.348601, -75.3613 )
+rows = 4
+block_spacing = Vector2( 3, 4 )
+
+[node name="CollapsingRockBridge7" parent="Obstacles" instance=ExtResource( 51 )]
+transform = Transform( 0.825157, 0.0720236, 0.560293, -0.0869541, 0.996213, 0, -0.558171, -0.0487198, 0.828294, 56.5301, 0.348601, -66.2347 )
+rows = 2
+block_spacing = Vector2( 3, 4 )
+
+[node name="CollapsingRockBridge2" parent="Obstacles" instance=ExtResource( 51 )]
+transform = Transform( -0.173047, 0, 0.984914, 0, 1, 0, -0.984914, 0, -0.173047, 91.419, 0.348601, -28.7037 )
+rows = 15
+block_spacing = Vector2( 3, 4 )
+
+[node name="CollapsingRockBridge3" parent="Obstacles" instance=ExtResource( 51 )]
+transform = Transform( -0.754137, 0, 0.656718, 0, 1, 0, -0.656718, 0, -0.754137, 67.0844, 0.348601, -50.9252 )
+rows = 1
+block_spacing = Vector2( 3, 3 )
+
+[node name="TrialContoller" type="Node" parent="."]
+script = ExtResource( 17 )
+trialname = "SwimTrial"
+timer_path = NodePath("../CanvasLayer/Timer")
+autostop_seconds = 60.01
+autostop_enabled = true
+supress_flight = true
+supress_magnetism = true
+supress_climb = true
+supress_glide = true
+supress_dash = true
+
+[node name="IntroSequence" type="Node" parent="."]
+script = ExtResource( 27 )
+always_succeed = true
+
+[node name="MessageDialogAction" type="Node" parent="IntroSequence"]
+script = ExtResource( 28 )
+messages = [ "You feel an immense pressure. ", "Only your ability to Swim remains.", "Find the Release Button as quickly as possible." ]
+style = 3
+
+[node name="BringDownWalls" type="Node" parent="IntroSequence"]
+script = ExtResource( 9 )
+
+[node name="CameraShakeAction" type="Node" parent="IntroSequence"]
+script = ExtResource( 31 )
+hold_duration = 2.0
+
+[node name="RemoveNodes" type="Node" parent="IntroSequence"]
+script = ExtResource( 10 )
+nodepath = [ NodePath("../../Barrier2"), NodePath("../../Walls"), NodePath("../../StartTimer") ]
+
+[node name="ShowTimer" type="Node" parent="IntroSequence"]
+script = ExtResource( 8 )
+UIElement = NodePath("../../CanvasLayer")
+
+[node name="PlayAudioAction" type="Node" parent="IntroSequence"]
+script = ExtResource( 34 )
+stream = ExtResource( 35 )
+
+[node name="ChangeMusicAction" type="Node" parent="IntroSequence"]
+script = ExtResource( 20 )
+music = ExtResource( 23 )
+music_vox = ExtResource( 23 )
+revert_on_exit = false
+
+[node name="StartTrial" type="Node" parent="IntroSequence"]
+script = ExtResource( 9 )
+
+[node name="EndingSequence" type="Node" parent="."]
+script = ExtResource( 27 )
+always_succeed = true
+
+[node name="Selector" type="Node" parent="EndingSequence"]
+script = ExtResource( 16 )
+
+[node name="StageSelect1" type="Node" parent="EndingSequence/Selector"]
+script = ExtResource( 62 )
+encounter_range_max = 15
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect1"]
+script = ExtResource( 16 )
+
+[node name="CheckTime" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 2
+threshold_value = 25.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 37 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime2" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 2
+threshold_value = 35.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 38 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime3" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 2
+threshold_value = 60.0
+
+[node name="ChangeMusicAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3"]
+script = ExtResource( 20 )
+revert_on_exit = false
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 39 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="Failed" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 1
+threshold_value = 60.0
+
+[node name="SetNPCStateAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed"]
+script = ExtResource( 50 )
+state = "Defeated"
+
+[node name="GetPlayer" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed/SetNPCStateAction"]
+script = ExtResource( 53 )
+which = 1
+
+[node name="MessageDialogAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed"]
+script = ExtResource( 28 )
+messages = [ "The pressure in this chamber was too much. ", "You passed out." ]
+style = 3
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="StageSelect2" type="Node" parent="EndingSequence/Selector"]
+script = ExtResource( 62 )
+encounter_range_min = 15
+encounter_range_max = 30
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect2"]
+script = ExtResource( 16 )
+
+[node name="CheckTime" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 2
+threshold_value = 25.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 61 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime2" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 2
+threshold_value = 35.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 60 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime3" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 2
+threshold_value = 60.0
+
+[node name="ChangeMusicAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3"]
+script = ExtResource( 20 )
+revert_on_exit = false
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 63 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="Failed" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 1
+threshold_value = 60.0
+
+[node name="SetNPCStateAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed"]
+script = ExtResource( 50 )
+state = "Defeated"
+
+[node name="GetPlayer" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed/SetNPCStateAction"]
+script = ExtResource( 53 )
+which = 1
+
+[node name="MessageDialogAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed"]
+script = ExtResource( 28 )
+messages = [ "The pressure in this chamber was too much. ", "You passed out." ]
+style = 3
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="StageSelect3" type="Node" parent="EndingSequence/Selector"]
+script = ExtResource( 62 )
+encounter_range_min = 30
+encounter_range_max = 45
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect3"]
+script = ExtResource( 16 )
+
+[node name="CheckTime" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 2
+threshold_value = 25.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 54 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime2" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 2
+threshold_value = 35.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 56 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime3" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 2
+threshold_value = 60.0
+
+[node name="ChangeMusicAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3"]
+script = ExtResource( 20 )
+revert_on_exit = false
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 58 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="Failed" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 1
+threshold_value = 60.0
+
+[node name="SetNPCStateAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed"]
+script = ExtResource( 50 )
+state = "Defeated"
+
+[node name="GetPlayer" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed/SetNPCStateAction"]
+script = ExtResource( 53 )
+which = 1
+
+[node name="MessageDialogAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed"]
+script = ExtResource( 28 )
+messages = [ "The pressure in this chamber was too much. ", "You passed out." ]
+style = 3
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="StageSelect4" type="Node" parent="EndingSequence/Selector"]
+script = ExtResource( 62 )
+encounter_range_min = 45
+encounter_range_max = 1000000
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect4"]
+script = ExtResource( 16 )
+
+[node name="CheckTime" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 2
+threshold_value = 25.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 59 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime2" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 2
+threshold_value = 35.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 55 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime3" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 2
+threshold_value = 60.0
+
+[node name="ChangeMusicAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3"]
+script = ExtResource( 20 )
+revert_on_exit = false
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 57 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="Failed" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector"]
+script = ExtResource( 14 )
+stat_name = "SwimTrial"
+operator = 1
+threshold_value = 60.0
+
+[node name="SetNPCStateAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed"]
+script = ExtResource( 50 )
+state = "Defeated"
+
+[node name="GetPlayer" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed/SetNPCStateAction"]
+script = ExtResource( 53 )
+which = 1
+
+[node name="MessageDialogAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed"]
+script = ExtResource( 28 )
+messages = [ "The pressure in this chamber was too much. ", "You passed out." ]
+style = 3
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="Walls" type="StaticBody" parent="."]
+visible = false
+script = ExtResource( 33 )
+target_positions = [ NodePath("DropTarget") ]
+duration = 4.0
+audio_stream = ExtResource( 36 )
+
+[node name="GridMap" type="GridMap" parent="Walls"]
+mesh_library = ExtResource( 29 )
+data = {
+"cells": PoolIntArray( 1, 0, 1441798, 65531, 0, 1048583, 65537, 0, 1441804, 131067, 0, 1048588, 131073, 0, 1441804, 196603, 0, 1048588, 196609, 0, 1441804, 262139, 0, 1048588, 262145, 0, 1441804, 327675, 0, 1048588, 327681, 0, 1441804, 393211, 0, 1048588, 1, 1, 1441798, 65531, 1, 1048583, 65537, 1, 1441804, 131067, 1, 1048588, 131073, 1, 1441804, 196603, 1, 1048588, 196609, 1, 1441804, 262139, 1, 1048588, 262145, 1, 1441804, 327675, 1, 1048601, 327681, 1, 1441804, 393211, 1, 1048588, 1, 2, 1441798, 65531, 2, 1048583, 65537, 2, 1441804, 131067, 2, 1048588, 131073, 2, 1441804, 196603, 2, 1048601, 196609, 2, 1441804, 262139, 2, 1048588, 262145, 2, 1441804, 327675, 2, 1048588, 327681, 2, 1441804, 393211, 2, 1048588, 1, 3, 1441798, 65531, 3, 1048583, 65537, 3, 1441804, 131067, 3, 1048588, 131073, 3, 1441804, 196603, 3, 1048588, 196609, 3, 1441804, 262139, 3, 1048588, 262145, 3, 1441804, 327675, 3, 1048588, 327681, 3, 1441804, 393211, 3, 1048588, 1, 4, 1441798, 65531, 4, 1048583, 65537, 4, 1441804, 131067, 4, 1048588, 131073, 4, 1441804, 196603, 4, 1048588, 196609, 4, 1441804, 262139, 4, 1048601, 262145, 4, 1441804, 327675, 4, 1048588, 327681, 4, 1441804, 393211, 4, 1048588, 1, 5, 1441798, 65531, 5, 1048583, 65537, 5, 1441804, 131067, 5, 1048588, 131073, 5, 1441804, 196603, 5, 1048588, 196609, 5, 1441804, 262139, 5, 1048588, 262145, 5, 1441804, 327675, 5, 1048588, 327681, 5, 1441804, 393211, 5, 1048588, 0, 65530, 6, 1, 65530, 9, 65531, 65530, 1048585, 65532, 65530, 6, 65533, 65530, 6, 65534, 65530, 6, 65535, 65530, 6, 65536, 65530, 12, 65537, 65530, 17, 131067, 65530, 1048593, 131068, 65530, 12, 131069, 65530, 12, 131070, 65530, 12, 131071, 65530, 12, 131072, 65530, 25, 131073, 65530, 17, 131075, 65530, 12, 196603, 65530, 1048593, 196604, 65530, 12, 196605, 65530, 25, 196606, 65530, 12, 196607, 65530, 12, 196608, 65530, 12, 196609, 65530, 17, 262139, 65530, 1048593, 262140, 65530, 12, 262141, 65530, 12, 262142, 65530, 12, 262143, 65530, 12, 262144, 65530, 12, 262145, 65530, 17, 327675, 65530, 1048593, 327676, 65530, 12, 327677, 65530, 12, 327678, 65530, 12, 327679, 65530, 12, 327680, 65530, 12, 327681, 65530, 17, 393211, 65530, 1048593, 393212, 65530, 25, 393213, 65530, 12, 393214, 65530, 12, 393215, 65530, 25, 1, 65531, 1441798, 65531, 65531, 1048583, 65537, 65531, 1441804, 131067, 65531, 1048588, 131073, 65531, 1441804, 196603, 65531, 1048588, 196609, 65531, 1441804, 262139, 65531, 1048588, 262145, 65531, 1441804, 327675, 65531, 1048588, 327681, 65531, 1441804, 393211, 65531, 1048588, 1, 65532, 1441798, 65531, 65532, 1048583, 65537, 65532, 1441804, 131067, 65532, 1048588, 131073, 65532, 1441804, 196603, 65532, 1048588, 196609, 65532, 1441804, 262139, 65532, 1048588, 262145, 65532, 1441804, 327675, 65532, 1048601, 327681, 65532, 1441804, 393211, 65532, 1048588, 1, 65533, 1441798, 65531, 65533, 1048583, 65537, 65533, 1441804, 131067, 65533, 1048588, 131073, 65533, 1441804, 196603, 65533, 1048588, 196609, 65533, 1441804, 262139, 65533, 1048588, 262145, 65533, 1441804, 327675, 65533, 1048588, 327681, 65533, 1441804, 393211, 65533, 1048588, 1, 65534, 1441798, 65531, 65534, 1048583, 65537, 65534, 1441804, 131067, 65534, 1048588, 131073, 65534, 1441804, 196603, 65534, 1048588, 196609, 65534, 1441804, 262139, 65534, 1048588, 262145, 65534, 1441804, 327675, 65534, 1048588, 327681, 65534, 1441804, 393211, 65534, 1048588, 1, 65535, 1441798, 65531, 65535, 1048583, 65537, 65535, 1441804, 131067, 65535, 1048588, 131073, 65535, 1441804, 196603, 65535, 1048588, 196609, 65535, 1441804, 262139, 65535, 1048601, 262145, 65535, 1441804, 327675, 65535, 1048588, 327681, 65535, 1441804, 393211, 65535, 1048601 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+
+[node name="MeshInstance4" type="MeshInstance" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1.47749, 0, 0, 0, 1, -14.5126, 4.68575, 12.6334 )
+mesh = SubResource( 20 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="Walls"]
+transform = Transform( 2.5335, 0, 0, 0, 0.481554, 0, 0, 0, 1, 0.608665, -4.44406, 12.5809 )
+mesh = SubResource( 20 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1.47749, 0, 0, 0, 1, 8.36067, 4.82214, 12.6461 )
+mesh = SubResource( 20 )
+
+[node name="MeshInstance7" type="MeshInstance" parent="Walls"]
+transform = Transform( 2.53269, 0, 0, 0, -6.45831e-08, 1, 0, -4.6152, -1.3654e-07, 16.1178, 12.0228, -10.4457 )
+mesh = SubResource( 20 )
+
+[node name="MeshInstance12" type="MeshInstance" parent="Walls"]
+transform = Transform( -1.10707e-07, -4.6152, -4.37114e-08, 0, -2.01737e-07, 1, -2.53269, 2.01737e-07, 1.91069e-15, -2.93018, -0.0495872, 17.4741 )
+mesh = SubResource( 20 )
+
+[node name="MeshInstance9" type="MeshInstance" parent="Walls"]
+transform = Transform( -1.10707e-07, -2.34057e-07, -1, 0, -1.45756, 4.75941e-08, -2.53269, 1.0231e-14, 4.37114e-08, 3.53459, 4.93669, -0.0926056 )
+mesh = SubResource( 20 )
+
+[node name="MeshInstance10" type="MeshInstance" parent="Walls"]
+transform = Transform( -1.10707e-07, 1.27424e-07, 1, 0, -1.45756, 8.74228e-08, 2.53269, 5.56987e-15, 4.37114e-08, -9.53511, 4.93669, -0.0926056 )
+mesh = SubResource( 20 )
+
+[node name="MeshInstance8" type="MeshInstance" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, -6.45831e-08, 1, 0, -2.46411, -7.29004e-08, -14.5009, 12.0035, 0.324308 )
+mesh = SubResource( 20 )
+
+[node name="MeshInstance11" type="MeshInstance" parent="Walls"]
+transform = Transform( -4.37114e-08, 2.46411, 4.37114e-08, 0, -1.0771e-07, 1, 1, 1.0771e-07, 1.91069e-15, -5.28115, 12.023, -16.4166 )
+mesh = SubResource( 20 )
+
+[node name="DropTarget" type="Position3D" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -21.2293, 0 )
+
+[node name="Barrier2" type="StaticBody" parent="."]
+visible = false
+
+[node name="CollisionShape4" type="CollisionShape" parent="Barrier2"]
+transform = Transform( -2.13313e-07, 0, 1.01718, 0, 10.544, 0, -14.5294, 0, -1.32379e-07, 11.1763, 0, 0.550426 )
+shape = SubResource( 19 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="Barrier2"]
+transform = Transform( -2.13313e-07, 0, 1.01718, 0, 10.544, 0, -14.5294, 0, -1.32379e-07, -11.0297, 0, 0.550426 )
+shape = SubResource( 19 )
+
+[node name="CollisionShape6" type="CollisionShape" parent="Barrier2"]
+transform = Transform( 14.5294, 0, 0, 0, 10.544, 0, 0, 0, 1.01718, 0.0289574, 0, -13.0254 )
+shape = SubResource( 19 )
+
+[node name="CollisionShape7" type="CollisionShape" parent="Barrier2"]
+transform = Transform( 14.5294, 0, 0, 0, 10.544, 0, 0, 0, 1.01718, 0.0289574, 0, 13.2192 )
+shape = SubResource( 19 )
+
+[node name="CollisionShape8" type="CollisionShape" parent="Barrier2"]
+transform = Transform( 14.5294, 0, 0, 0, 1.78238, 0, 0, 0, 14.6356, 0.0289574, 11.4412, 0.440434 )
+shape = SubResource( 19 )
+
+[node name="CourseMap" type="Spatial" parent="."]
+
+[node name="GridMap" type="GridMap" parent="CourseMap"]
+mesh_library = ExtResource( 42 )
+data = {
+"cells": PoolIntArray( -65536, 65526, 655373, -65535, 65526, 655374, -65534, 65526, 1048591, -6, 65526, 655375, -5, 65526, 655374, -4, 65526, 655373, -3, 65526, 655373, -2, 65526, 655374, -1, 65526, 655374, 1, 65527, 27, 65532, 65527, 655387, -65536, 65527, 1441800, -65535, 65527, 655367, -65534, 65527, 1048589, -6, 65527, 1441805, -5, 65527, 1441800, -4, 65527, 1441800, -3, 65527, 1441800, -2, 65527, 1441800, -1, 65527, 1441800, 65531, 65528, 1441820, -65536, 65528, 1441800, -65535, 65528, 1441800, -65534, 65528, 1048589, -65533, 65528, 1048604, -7, 65528, 655388, -6, 65528, 1441805, -5, 65528, 655367, -4, 65528, 1441800, -3, 65528, 655367, -2, 65528, 1441800, -1, 65528, 1441800, -65536, 65529, 0, -65535, 65529, 0, -65534, 65529, 15, -65532, 65529, 1048604, -8, 65529, 655388, -6, 65529, 1441807, -5, 65529, 0, -4, 65529, 0, -3, 65529, 13, -2, 65529, 1, -1, 65529, 1 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, -1, 0 )
+}
+
+[connection signal="activated" from="StopTimer" to="TrialContoller" method="stop"]
+[connection signal="activated" from="StopTimer" to="EndingSequence" method="queue_run"]
+[connection signal="body_entered" from="StopTimer/Area" to="StopTimer" method="_on_Area_body_entered"]
+[connection signal="body_exited" from="StopTimer/Area" to="StopTimer" method="_on_Area_body_exited"]
+[connection signal="activated" from="StartTimer" to="IntroSequence" method="queue_run"]
+[connection signal="body_entered" from="StartTimer/Area" to="StartTimer" method="_on_Area_body_entered"]
+[connection signal="body_exited" from="StartTimer/Area" to="StartTimer" method="_on_Area_body_exited"]
+[connection signal="body_entered" from="Obstacles/UpperArea" to="Obstacles/RapidsWater" method="_on_UpperArea_body_entered"]
+[connection signal="body_exited" from="Obstacles/UpperArea" to="Obstacles/RapidsWater" method="_on_UpperArea_body_exited"]
+[connection signal="TrialForceEnd" from="TrialContoller" to="EndingSequence" method="queue_run"]
+[connection signal="triggeraction" from="IntroSequence/BringDownWalls" to="Walls" method="_input_state_changed" binds= [ true ]]
+[connection signal="triggeraction" from="IntroSequence/StartTrial" to="TrialContoller" method="start"]

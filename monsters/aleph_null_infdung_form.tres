@@ -1,0 +1,53 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://data/MonsterForm.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+name = "AA_ALEPH_NULL_NAME"
+swap_colors = [  ]
+default_palette = [  ]
+emission_palette = [  ]
+named_positions = {
+"attack": NodePath("Positions/AttackPosition"),
+"decoy": NodePath("Positions/DecoyPosition"),
+"eye": NodePath("Armature/Skeleton/BoneAttachment5/aleph_null_head"),
+"hit": NodePath("Positions/HitPosition"),
+"melee_range": NodePath("Positions/MeleeRange"),
+"super_attack": NodePath("Armature/Skeleton/BoneAttachment5/aleph_null_head")
+}
+elemental_types = [  ]
+exp_yield = 500
+require_dlc = ""
+battle_sprite_path = "res://mods/Infinite_Dungeon/Sprites/infDung_AlephNullBattle.tscn"
+ui_sprite_path = ""
+pronouns = 0
+description = ""
+max_hp = 1500
+melee_attack = 200
+melee_defense = 200
+ranged_attack = 200
+ranged_defense = 200
+speed = 100
+accuracy = 100
+evasion = 100
+max_ap = 10
+move_slots = 8
+evolutions = [  ]
+evolution_specialization_question = ""
+capture_rate = 0
+exp_gradient = 14
+exp_base_level = 0
+move_tags = [  ]
+initial_moves = [  ]
+tape_upgrades = [  ]
+unlock_ability = ""
+fusion_name_prefix = ""
+fusion_name_suffix = ""
+fusion_generator_path = ""
+bestiary_index = -1
+bestiary_category = 1
+bestiary_bios = [  ]
+bestiary_data_requirement = 3
+bestiary_data_requirement_flag = "infdung_bosses"
+loot_table = ""

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://data/BaseItem.gd" type="Script" id=1]
+[ext_resource path="res://sprites/items/keystone.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Railway Shard"
+aux_name = ""
+icon = ExtResource( 2 )
+description = "A broken piece of the Infinite Railway. It radiates with the energy of the Mer-Line. Someone might find this valuable"
+category = "resources"
+base_stack_limit = 0
+stack_limit_category = ""
+consume_on_use = true
+discardable = false
+value = 1
+usable_contexts = 0
+battle_usage = 0
+sort_order = 0

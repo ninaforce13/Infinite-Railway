@@ -1,0 +1,1308 @@
+[gd_scene load_steps=60 format=2]
+
+[ext_resource path="res://nodes/actions/FaceDirectionAction.gd" type="Script" id=1]
+[ext_resource path="res://nodes/actions/PlayAnimationAction.gd" type="Script" id=2]
+[ext_resource path="res://nodes/actions/CameraShakeAction.gd" type="Script" id=3]
+[ext_resource path="res://addons/misc_utils/actions/CallMethodAction.gd" type="Script" id=4]
+[ext_resource path="res://addons/misc_utils/actions/composites/Parallel.gd" type="Script" id=5]
+[ext_resource path="res://battle/backgrounds/archangel/BattleStationPlatform.tscn" type="PackedScene" id=6]
+[ext_resource path="res://battle/ai/archangels/ArchangelAI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://menus/boss_title/ArchangelTitleBanner.tscn" type="PackedScene" id=8]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=9]
+[ext_resource path="res://menus/boss_title/TitleBannerConfig.gd" type="Script" id=10]
+[ext_resource path="res://nodes/sprite_container/alpha_scissor.shader" type="Shader" id=11]
+[ext_resource path="res://addons/misc_utils/ExtendedAnimationPlayerFallback.gd" type="Script" id=12]
+[ext_resource path="res://nodes/encounter_config/EncounterConfig.gd" type="Script" id=13]
+[ext_resource path="res://sprites/archangels/MorganteTextureSetup.gd" type="Script" id=14]
+[ext_resource path="res://nodes/encounter_config/CharacterConfig.gd" type="Script" id=15]
+[ext_resource path="res://nodes/encounter_config/TapeConfig.gd" type="Script" id=16]
+[ext_resource path="res://world/npc/NPC.tscn" type="PackedScene" id=17]
+[ext_resource path="res://mods/Infinite_Dungeon/Rooms/BattleAction_InfDung.gd" type="Script" id=18]
+[ext_resource path="res://nodes/actions/values/GetPlayer.gd" type="Script" id=19]
+[ext_resource path="res://nodes/actions/FollowAction.gd" type="Script" id=20]
+[ext_resource path="res://addons/misc_utils/actions/WaitAction.gd" type="Script" id=21]
+[ext_resource path="res://nodes/actions/ChangeTrackerTargetAction.gd" type="Script" id=22]
+[ext_resource path="res://world/behaviors/ArchangelIntroBehavior.gd" type="Script" id=23]
+[ext_resource path="res://nodes/actions/PlayAudioAction.gd" type="Script" id=24]
+[ext_resource path="res://addons/misc_utils/actions/values/GetNode.gd" type="Script" id=25]
+[ext_resource path="res://data/battle_moves/shooting_star.tres" type="Resource" id=26]
+[ext_resource path="res://data/battle_moves/spit.tres" type="Resource" id=27]
+[ext_resource path="res://data/battle_moves/inflame.tres" type="Resource" id=28]
+[ext_resource path="res://data/battle_moves/meteor_barrage.tres" type="Resource" id=29]
+[ext_resource path="res://data/battle_moves/radiation_breath.tres" type="Resource" id=30]
+[ext_resource path="res://mods/Infinite_Dungeon/CutScenes/TransformationCutscene.tscn" type="PackedScene" id=31]
+[ext_resource path="res://nodes/actions/SetVisibleAction.gd" type="Script" id=32]
+[ext_resource path="res://addons/misc_utils/actions/composites/Selector.gd" type="Script" id=33]
+[ext_resource path="res://data/battle_moves/galactic_beatdown.tres" type="Resource" id=34]
+[ext_resource path="res://data/battle_moves/incinerate.tres" type="Resource" id=35]
+[ext_resource path="res://data/battle_moves/phase_shift.tres" type="Resource" id=36]
+[ext_resource path="res://data/battle_moves/neutralise.tres" type="Resource" id=37]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Bosses/infinite_dungeon_boss.tres" type="Resource" id=38]
+[ext_resource path="res://data/archangel_moves/eldritch.tres" type="Resource" id=39]
+[ext_resource path="res://data/battle_moves/status_resistance.tres" type="Resource" id=40]
+[ext_resource path="res://data/battle_moves/radioactive.tres" type="Resource" id=41]
+[ext_resource path="res://data/archangel_forms/helia.tres" type="Resource" id=42]
+[ext_resource path="res://data/characters/aa_helia.tres" type="Resource" id=43]
+[ext_resource path="res://data/battle_moves/fusion_power.tres" type="Resource" id=44]
+[ext_resource path="res://sprites/archangels/helia/HeliaModel.tscn" type="PackedScene" id=45]
+[ext_resource path="res://sfx/cries/aa_helia_cry.wav" type="AudioStream" id=46]
+[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=47]
+[ext_resource path="res://music/demo/battle_archangel_vox.ogg" type="AudioStream" id=48]
+[ext_resource path="res://music/demo/battle_archangel_instr.ogg" type="AudioStream" id=49]
+
+[sub_resource type="Animation" id=2]
+resource_name = "alt_idle"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Offset/Helia/helia_ring_1:mesh:surface_1/material:uv1_offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 1, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Offset/Helia:translation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( -0.4, 0, 0.4, 0.8, 1.2, 1.6, 2, 2.4, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -0.28125, 0 ), Vector3( 0, -0.5, 0 ), Vector3( 0, -0.263672, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, -0.28125, 0 ), Vector3( 0, -0.5, 0 ), Vector3( 0, -0.263672, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Offset/Helia:rotation_degrees")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Offset/Helia/helia_sphere:translation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Offset/Helia/helia_sphere:rotation_degrees")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 90, 0, 0 ), Vector3( 90, 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Offset/Helia/helia_ring_1/helia_ring_3:rotation_degrees")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6 ),
+"transitions": PoolRealArray( 2, 0.5, 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( -90, -90, 0 ), Vector3( -90, -115.312, 0 ), Vector3( -90, -135, 0 ), Vector3( -90, -113.73, 0 ), Vector3( -90, -90, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Offset/Helia/helia_ring_2:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -360, 0, 360 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Offset/Helia/helia_ring_1:rotation_degrees")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.8, 1.6 ),
+"transitions": PoolRealArray( 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 105, 0, 0 ), Vector3( 0, 180, 0 ), Vector3( 105, 360, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Offset/Helia/helia_sphere:mesh:surface_1/material:uv1_offset")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.4, 1.2, 1.6 ),
+"transitions": PoolRealArray( 0.5, 1, 2, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -0.1, 0 ), Vector3( 0, 0.05, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Offset/Helia/helia_sphere/helia_shine:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Offset/Helia/helia_sphere:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.91696, 1.91696, 1.91696 ), Vector3( 1.8, 1.8, 1.8 ), Vector3( 1.91696, 1.91696, 1.91696 ), Vector3( 1.8, 1.8, 1.8 ), Vector3( 1.91696, 1.91696, 1.91696 ), Vector3( 1.8, 1.8, 1.8 ), Vector3( 1.91696, 1.91696, 1.91696 ), Vector3( 1.8, 1.8, 1.8 ), Vector3( 1.91696, 1.91696, 1.91696 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "attack"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Offset/Helia/helia_ring_1:mesh:surface_1/material:uv1_offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.5, 0, 0 ), Vector3( 1, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Offset/Helia:translation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( -0.4, 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -0.263672, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, -0.28125, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Offset/Helia:rotation_degrees")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Offset/Helia/helia_sphere:translation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Offset/Helia/helia_sphere:rotation_degrees")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 90, 0, 0 ), Vector3( 90, 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Offset/Helia/helia_ring_1/helia_ring_3:rotation_degrees")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( -90, -135, 0 ), Vector3( -90, -113.73, 0 ), Vector3( -90, -90, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Offset/Helia/helia_ring_2:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( -90, 0, 0 ), Vector3( -22.5, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Offset/Helia/helia_ring_1:rotation_degrees")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 75, 0, 0 ), Vector3( 89.1797, 0, 0 ), Vector3( 105, 0, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Offset/Helia/helia_sphere:mesh:surface_1/material:uv1_offset")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 2, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.15, 0 ), Vector3( 0, 0.115, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Offset/Helia/helia_sphere/helia_shine:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Offset/Helia/helia_sphere:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.91696, 1.91696, 1.91696 ), Vector3( 2.2, 2.2, 2.2 ), Vector3( 1.4, 1.4, 1.4 ), Vector3( 1.91696, 1.91696, 1.91696 ), Vector3( 1.8, 1.8, 1.8 ), Vector3( 1.91696, 1.91696, 1.91696 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Offset/Helia/helia_sphere/helia_shine:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -90, 0, 0 ), Vector3( 0.488087, -93.8411, -75.5219 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Offset/Helia/helia_sphere/helia_shine:scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 0.52166, 0.52166, 0.52166 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "hurt"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Offset/Helia/helia_ring_1:mesh:surface_1/material:uv1_offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Offset/Helia:translation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.28125, -2 ), Vector3( 0, -0.28125, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Offset/Helia:rotation_degrees")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Offset/Helia/helia_sphere:translation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Offset/Helia/helia_sphere:rotation_degrees")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 90, 0, 0 ), Vector3( 90, 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Offset/Helia/helia_ring_1/helia_ring_3:rotation_degrees")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 2 ),
+"update": 0,
+"values": [ Vector3( -90, -120, 0 ), Vector3( -90, -90, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Offset/Helia/helia_ring_2:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -60, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Offset/Helia/helia_ring_1:rotation_degrees")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 2 ),
+"update": 0,
+"values": [ Vector3( 90, 0, 0 ), Vector3( 105, 0, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Offset/Helia/helia_sphere:mesh:surface_1/material:uv1_offset")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Offset/Helia/helia_sphere/helia_shine:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Offset/Helia/helia_sphere:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.91696, 1.91696, 1.91696 ), Vector3( 1.91696, 1.91696, 1.91696 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Offset/Helia/helia_ring_1:mesh:surface_1/material:uv1_offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 1, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Offset/Helia:translation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( -0.4, 0, 0.4, 0.8, 1.2, 1.6, 2, 2.4, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -0.28125, 0 ), Vector3( 0, -0.5, 0 ), Vector3( 0, -0.263672, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, -0.28125, 0 ), Vector3( 0, -0.5, 0 ), Vector3( 0, -0.263672, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Offset/Helia:rotation_degrees")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Offset/Helia/helia_sphere:translation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Offset/Helia/helia_sphere:rotation_degrees")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 90, 0, 0 ), Vector3( 90, 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Offset/Helia/helia_ring_1/helia_ring_3:rotation_degrees")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6 ),
+"transitions": PoolRealArray( 2, 0.5, 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( -90, -90, 0 ), Vector3( -90, -115.312, 0 ), Vector3( -90, -135, 0 ), Vector3( -90, -113.73, 0 ), Vector3( -90, -90, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Offset/Helia/helia_ring_2:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -360, 0, 360 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Offset/Helia/helia_ring_1:rotation_degrees")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6 ),
+"transitions": PoolRealArray( 2, 0.5, 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 105, 0, 0 ), Vector3( 88.125, 0, 0 ), Vector3( 75, 0, 0 ), Vector3( 89.1797, 0, 0 ), Vector3( 105, 0, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Offset/Helia/helia_sphere:mesh:surface_1/material:uv1_offset")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.4, 1.2, 1.6 ),
+"transitions": PoolRealArray( 0.5, 1, 2, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -0.05, 0 ), Vector3( 0, 0.05, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Offset/Helia/helia_sphere/helia_shine:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Offset/Helia/helia_sphere:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.91696, 1.91696, 1.91696 ), Vector3( 1.8, 1.8, 1.8 ), Vector3( 1.91696, 1.91696, 1.91696 ), Vector3( 1.8, 1.8, 1.8 ), Vector3( 1.91696, 1.91696, 1.91696 ), Vector3( 1.8, 1.8, 1.8 ), Vector3( 1.91696, 1.91696, 1.91696 ), Vector3( 1.8, 1.8, 1.8 ), Vector3( 1.91696, 1.91696, 1.91696 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "windup"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Offset/Helia/helia_ring_1:mesh:surface_1/material:uv1_offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0.5, 0, 0 ), Vector3( 1, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Offset/Helia:translation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( -0.4, 0, 0.4, 0.8, 1.2, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -0.28125, 0 ), Vector3( 0, -0.5, 0 ), Vector3( 0, -0.263672, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, -0.28125, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Offset/Helia:rotation_degrees")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Offset/Helia/helia_sphere:translation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Offset/Helia/helia_sphere:rotation_degrees")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.8, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 90, 0, 0 ), Vector3( 90, 0, 0 ), Vector3( 90, 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Offset/Helia/helia_ring_1/helia_ring_3:rotation_degrees")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6 ),
+"transitions": PoolRealArray( 2, 0.5, 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( -90, -90, 0 ), Vector3( -90, -115.312, 0 ), Vector3( -90, -135, 0 ), Vector3( -90, -113.73, 0 ), Vector3( -90, -90, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Offset/Helia/helia_ring_2:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6 ),
+"transitions": PoolRealArray( 2, 0.5, 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -45, 0, 0 ), Vector3( -90, 0, 0 ), Vector3( -22.5, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Offset/Helia/helia_ring_1:rotation_degrees")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6 ),
+"transitions": PoolRealArray( 2, 0.5, 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 105, 0, 0 ), Vector3( 88.125, 0, 0 ), Vector3( 75, 0, 0 ), Vector3( 89.1797, 0, 0 ), Vector3( 105, 0, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Offset/Helia/helia_sphere:mesh:surface_1/material:uv1_offset")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.1, 1.6 ),
+"transitions": PoolRealArray( 0.5, 1, 2, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.115, 0 ), Vector3( 0, -0.15, 0 ), Vector3( 0, 0.115, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Offset/Helia/helia_sphere/helia_shine:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Offset/Helia/helia_sphere:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.4, 0.7, 0.8, 0.9, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.91696, 1.91696, 1.91696 ), Vector3( 1.5, 1.5, 1.5 ), Vector3( 1.4, 1.4, 1.4 ), Vector3( 1.91696, 1.91696, 1.91696 ), Vector3( 2.2, 2.2, 2.2 ), Vector3( 1.4, 1.4, 1.4 ), Vector3( 1.91696, 1.91696, 1.91696 ), Vector3( 1.8, 1.8, 1.8 ), Vector3( 1.91696, 1.91696, 1.91696 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Offset/Helia/helia_sphere/helia_shine:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -90, 0, 0 ), Vector3( 0.488087, -93.8411, -75.5219 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Offset/Helia/helia_sphere/helia_shine:scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 0.52166, 0.52166, 0.52166 ) ]
+}
+
+[sub_resource type="ViewportTexture" id=7]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = ExtResource( 11 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/flags_albedo_tex_force_srgb = false
+shader_param/alpha_scissor_threshold = 0.98
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/metallic_texture_channel = null
+shader_param/roughness_texture_channel = null
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/rotation = Vector3( 0, 0, 0 )
+shader_param/overlay_scroll_rate = Vector2( 0, 0 )
+shader_param/overlay_opacity = 0.0
+shader_param/swap_blend = 0.0
+shader_param/swap_from_0 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_1 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_2 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_3 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_4 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_5 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_6 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_7 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_8 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_9 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_10 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_11 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_12 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_13 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_14 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_0 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_1 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_2 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_3 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_4 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_5 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_6 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_7 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_8 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_9 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_10 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_11 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_12 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_13 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_14 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_0 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_1 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_2 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_3 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_4 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_5 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_6 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_7 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_8 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_9 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_10 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_11 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_12 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_13 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_14 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_0 = Color( 0.282353, 0.054902, 0.12549, 1 )
+shader_param/emission_color_1 = Color( 0.435294, 0.0862745, 0.145098, 1 )
+shader_param/emission_color_2 = Color( 0.694118, 0.12549, 0.192157, 1 )
+shader_param/emission_color_3 = Color( 0.913725, 0.258824, 0.247059, 1 )
+shader_param/emission_color_4 = Color( 0.976471, 0.521569, 0.443137, 1 )
+shader_param/emission_color_5 = Color( 0.286275, 0.0941176, 0.0941176, 1 )
+shader_param/emission_color_6 = Color( 0.439216, 0.160784, 0.141176, 1 )
+shader_param/emission_color_7 = Color( 0.815686, 0.301961, 0.184314, 1 )
+shader_param/emission_color_8 = Color( 0.94902, 0.509804, 0.270588, 1 )
+shader_param/emission_color_9 = Color( 0.968627, 0.764706, 0.431373, 1 )
+shader_param/wave_amplitude = 0.0
+shader_param/wave_v_frequency = 0.0
+shader_param/wave_t_frequency = 5.0
+shader_param/wave_min_u = 0.0
+shader_param/wave_max_u = 1.0
+shader_param/wave_min_v = 0.0
+shader_param/wave_max_v = 1.0
+shader_param/glow = 0.0
+shader_param/billboard_mode = 1
+shader_param/billboard_depth_hack = true
+shader_param/static_offset = 0.0
+shader_param/static_amount = 0.0
+shader_param/static_border = 0.125
+shader_param/static_speed = 0.0
+shader_param/sparkle = false
+shader_param/sparkle_period = 20.0
+shader_param/sparkle_falloff = 100.0
+shader_param/sparkle_amplitude = 5.0
+shader_param/sparkliness = 2.0
+shader_param/texture_albedo = SubResource( 7 )
+
+[sub_resource type="ShaderMaterial" id=12]
+next_pass = SubResource( 11 )
+shader = ExtResource( 11 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/flags_albedo_tex_force_srgb = false
+shader_param/alpha_scissor_threshold = 0.98
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/metallic_texture_channel = null
+shader_param/roughness_texture_channel = null
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/rotation = Vector3( 0, 0, 0 )
+shader_param/overlay_scroll_rate = Vector2( 0, 0 )
+shader_param/overlay_opacity = 0.0
+shader_param/swap_blend = 0.0
+shader_param/swap_from_0 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_1 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_2 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_3 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_4 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_5 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_6 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_7 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_8 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_9 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_10 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_11 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_12 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_13 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_14 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_0 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_1 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_2 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_3 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_4 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_5 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_6 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_7 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_8 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_9 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_10 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_11 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_12 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_13 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_14 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_0 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_1 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_2 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_3 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_4 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_5 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_6 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_7 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_8 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_9 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_10 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_11 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_12 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_13 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_14 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_0 = Color( 0.282353, 0.054902, 0.12549, 1 )
+shader_param/emission_color_1 = Color( 0.435294, 0.0862745, 0.145098, 1 )
+shader_param/emission_color_2 = Color( 0.694118, 0.12549, 0.192157, 1 )
+shader_param/emission_color_3 = Color( 0.913725, 0.258824, 0.247059, 1 )
+shader_param/emission_color_4 = Color( 0.976471, 0.521569, 0.443137, 1 )
+shader_param/emission_color_5 = Color( 0.286275, 0.0941176, 0.0941176, 1 )
+shader_param/emission_color_6 = Color( 0.439216, 0.160784, 0.141176, 1 )
+shader_param/emission_color_7 = Color( 0.815686, 0.301961, 0.184314, 1 )
+shader_param/emission_color_8 = Color( 0.94902, 0.509804, 0.270588, 1 )
+shader_param/emission_color_9 = Color( 0.968627, 0.764706, 0.431373, 1 )
+shader_param/wave_amplitude = 0.0
+shader_param/wave_v_frequency = 0.0
+shader_param/wave_t_frequency = 5.0
+shader_param/wave_min_u = 0.0
+shader_param/wave_max_u = 1.0
+shader_param/wave_min_v = 0.0
+shader_param/wave_max_v = 1.0
+shader_param/glow = 0.0
+shader_param/billboard_mode = 1
+shader_param/billboard_depth_hack = true
+shader_param/static_offset = 0.0
+shader_param/static_amount = 0.0
+shader_param/static_border = 0.125
+shader_param/static_speed = 0.0
+shader_param/sparkle = false
+shader_param/sparkle_period = 20.0
+shader_param/sparkle_falloff = 100.0
+shader_param/sparkle_amplitude = 5.0
+shader_param/sparkliness = 2.0
+shader_param/texture_albedo = SubResource( 7 )
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 10 )
+banner_scene = ExtResource( 8 )
+title = "AA_HELIA_NAME"
+subtitle = "AA_HELIA_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 24.34, 7.07323, 18.6833 )
+
+[node name="Archangel" instance=ExtResource( 17 )]
+visible = false
+npc_name = "AA_HELIA_NAME"
+pronouns = 1
+
+[node name="Sprite" parent="." index="2"]
+idle = "idle"
+alt_idle = "alt_idle"
+emission_palette = [ Color( 0.282353, 0.054902, 0.12549, 1 ), Color( 0.435294, 0.0862745, 0.145098, 1 ), Color( 0.694118, 0.12549, 0.192157, 1 ), Color( 0.913725, 0.258824, 0.247059, 1 ), Color( 0.976471, 0.521569, 0.443137, 1 ), Color( 0.286275, 0.0941176, 0.0941176, 1 ), Color( 0.439216, 0.160784, 0.141176, 1 ), Color( 0.815686, 0.301961, 0.184314, 1 ), Color( 0.94902, 0.509804, 0.270588, 1 ), Color( 0.968627, 0.764706, 0.431373, 1 ), Color( 0.470588, 0.14902, 0.14902, 1 ), Color( 0.611765, 0.290196, 0.207843, 1 ), Color( 0.85098, 0.541176, 0.188235, 1 ), Color( 0.945098, 0.760784, 0.333333, 1 ), Color( 0.972549, 0.901961, 0.545098, 1 ) ]
+emission = Color( 0, 0, 0, 1 )
+wave_amplitude = 0.0
+wave_t_frequency = 5.0
+wave_v_frequency = 0.0
+static_amount = 0.0
+static_offset = 0.0
+static_speed = 0.0
+sparkle = false
+sprite_rotation = Vector3( 0, 0, 0 )
+
+[node name="HeliaWorld" type="Spatial" parent="Sprite" index="0"]
+script = ExtResource( 14 )
+
+[node name="Viewport" type="Viewport" parent="Sprite/HeliaWorld" index="0"]
+size = Vector2( 800, 800 )
+own_world = true
+transparent_bg = true
+hdr = false
+keep_3d_linear = true
+usage = 3
+render_target_v_flip = true
+gui_disable_input = true
+
+[node name="HeliaModel" parent="Sprite/HeliaWorld/Viewport" index="0" instance=ExtResource( 45 )]
+
+[node name="Helia" parent="Sprite/HeliaWorld/Viewport/HeliaModel/Offset" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.267741, 0 )
+
+[node name="helia_ring_1" parent="Sprite/HeliaWorld/Viewport/HeliaModel/Offset/Helia" index="0"]
+transform = Transform( -0.998716, 5.8905e-05, 0.0506607, 0, 0.999998, -0.00116273, -0.0506608, -0.00116124, -0.998714, 0, 0, 0 )
+
+[node name="helia_ring_3" parent="Sprite/HeliaWorld/Viewport/HeliaModel/Offset/Helia/helia_ring_1" index="0"]
+transform = Transform( -0.707109, 0.707104, 3.09085e-08, 0, -4.37114e-08, 1, 0.707104, 0.707109, 3.09087e-08, 0.0421514, 0, 0 )
+
+[node name="helia_ring_2" parent="Sprite/HeliaWorld/Viewport/HeliaModel/Offset/Helia" index="1"]
+transform = Transform( -0.799745, -0.0201934, 0, -0.0201869, 0.79949, 0.0201934, -0.000509715, 0.0201869, -0.799745, 0, 0, 0 )
+
+[node name="helia_sphere" parent="Sprite/HeliaWorld/Viewport/HeliaModel/Offset/Helia" index="2"]
+transform = Transform( 1.9132, 0, 0, 0, -8.36287e-08, -1.9132, 0, 1.9132, -8.36287e-08, 0, 0, 0 )
+
+[node name="AnimationPlayer" parent="Sprite/HeliaWorld/Viewport/HeliaModel" index="1"]
+anims/alt_idle = SubResource( 2 )
+anims/attack = SubResource( 3 )
+anims/hurt = SubResource( 4 )
+anims/idle = SubResource( 5 )
+anims/windup = SubResource( 6 )
+script = ExtResource( 12 )
+
+[node name="Sprite3D" type="Sprite3D" parent="Sprite/HeliaWorld" index="1"]
+material_override = SubResource( 12 )
+cast_shadow = 0
+centered = false
+offset = Vector2( -400, 0 )
+pixel_size = 0.02
+billboard = 1
+texture = SubResource( 7 )
+
+[node name="OmniLight" type="OmniLight" parent="Sprite/HeliaWorld" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.41622, -4.6852 )
+light_color = Color( 0.972549, 0.901961, 0.545098, 1 )
+light_energy = 5.0
+omni_range = 100.0
+
+[node name="Node" type="Node" parent="Sprite" index="1"]
+
+[node name="Tween" type="Tween" parent="Sprite/Node" index="0"]
+
+[node name="Interaction" parent="." index="4"]
+display_marker = false
+
+[node name="CryPlayer" type="AudioStreamPlayer" parent="." index="8"]
+pause_mode = 2
+stream = ExtResource( 46 )
+bus = "World"
+
+[node name="RematchConfig" type="Node" parent="." index="9"]
+script = ExtResource( 13 )
+unique_id = "infdung_boss"
+background_override = ExtResource( 6 )
+music_override = ExtResource( 49 )
+music_vox_override = ExtResource( 48 )
+can_flee = false
+loot_table_override = ExtResource( 38 )
+cutscenes = [ ExtResource( 31 ) ]
+transition = 3
+title_banner = SubResource( 1 )
+
+[node name="CharacterConfig" type="Node" parent="RematchConfig" index="0"]
+script = ExtResource( 15 )
+character_name = "AA_HELIA_NAME"
+pronouns = 1
+level_override = 75
+levels_per_defeat = 3
+level_scale_override_key = "monster_miniboss_smart"
+exp_yield = 200
+base_character = ExtResource( 43 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 7 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="RematchConfig/CharacterConfig" index="0"]
+script = ExtResource( 16 )
+form = ExtResource( 42 )
+moves_override = [ ExtResource( 28 ), ExtResource( 35 ), ExtResource( 34 ), ExtResource( 26 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 44 ), ExtResource( 27 ), ExtResource( 41 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 37 ), ExtResource( 36 ) ]
+
+[node name="ArchangelIntroBehavior" type="Area" parent="." index="10"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource( 23 )
+pawn = NodePath("..")
+
+[node name="CollisionShape" type="CollisionShape" parent="ArchangelIntroBehavior" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.39272, 0 )
+shape = SubResource( 10 )
+
+[node name="ArchangelIntroCutscene" type="Node" parent="ArchangelIntroBehavior" index="1"]
+script = ExtResource( 9 )
+
+[node name="Selector" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene" index="0"]
+script = ExtResource( 33 )
+
+[node name="ChangeTrackerTargetAction_Rematch" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector" index="0"]
+script = ExtResource( 22 )
+__meta__ = {
+"action_tree": true
+}
+zoom = 1.75
+snap_at_exit = true
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="0"]
+script = ExtResource( 25 )
+node_name = "Positions/RailEdge"
+
+[node name="Parallel" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="1"]
+script = ExtResource( 5 )
+
+[node name="PlayAnimationAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel" index="0"]
+script = ExtResource( 2 )
+__meta__ = {
+"action_tree": true
+}
+animation_name = "arrive"
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/PlayAnimationAction" index="0"]
+script = ExtResource( 25 )
+node_name = "Train/AnimationPlayer"
+
+[node name="WaitAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/PlayAnimationAction" index="1"]
+script = ExtResource( 21 )
+
+[node name="FollowAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel" index="1"]
+script = ExtResource( 20 )
+__meta__ = {
+"action_tree": true
+}
+always_succeed = true
+can_fly = true
+can_jump = true
+can_fall = true
+can_glide = true
+can_warp = true
+
+[node name="GetPlayer" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction" index="0"]
+script = ExtResource( 19 )
+which = 1
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction" index="1"]
+script = ExtResource( 25 )
+node_name = "Positions/PlayerTarget"
+
+[node name="FaceDirectionAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction" index="2"]
+script = ExtResource( 1 )
+__meta__ = {
+"action_tree": true
+}
+direction = "up"
+
+[node name="GetPlayer" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction/FaceDirectionAction" index="0"]
+script = ExtResource( 19 )
+which = 1
+
+[node name="FollowAction2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel" index="2"]
+script = ExtResource( 20 )
+__meta__ = {
+"action_tree": true
+}
+always_succeed = true
+can_fly = true
+can_jump = true
+can_fall = true
+can_glide = true
+can_warp = true
+
+[node name="GetPartner" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2" index="0"]
+script = ExtResource( 19 )
+which = 2
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2" index="1"]
+script = ExtResource( 25 )
+node_name = "Positions/PartnerTarget"
+
+[node name="FaceDirectionAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2" index="2"]
+script = ExtResource( 1 )
+__meta__ = {
+"action_tree": true
+}
+direction = "up"
+
+[node name="GetPartner" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2/FaceDirectionAction" index="0"]
+script = ExtResource( 19 )
+which = 2
+
+[node name="PlayAnimationAction2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="2"]
+script = ExtResource( 2 )
+__meta__ = {
+"action_tree": true
+}
+animation_name = "depart"
+wait_for_animation = false
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/PlayAnimationAction2" index="0"]
+script = ExtResource( 25 )
+node_name = "Train/AnimationPlayer"
+
+[node name="WaitAction2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="3"]
+script = ExtResource( 21 )
+base_seconds = 0.5
+
+[node name="SetVisibleAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="4"]
+script = ExtResource( 32 )
+
+[node name="ChangeTrackerTargetAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch" index="5"]
+script = ExtResource( 22 )
+__meta__ = {
+"action_tree": true
+}
+wait_for_arrival = false
+wait_for_exit = false
+zoom = 1.5
+snap_at_exit = true
+
+[node name="WaitAction4" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="0"]
+script = ExtResource( 21 )
+
+[node name="PlayAudioAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="1"]
+script = ExtResource( 24 )
+wait_for_finish = false
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction/PlayAudioAction" index="0"]
+script = ExtResource( 25 )
+node_name = "CryPlayer"
+
+[node name="CameraShakeAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="2"]
+script = ExtResource( 3 )
+fade_in_duration = 0.25
+fade_out_duration = 0.25
+
+[node name="BattleAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="3"]
+script = ExtResource( 18 )
+encounter_name_override = "RematchConfig"
+result_on_player_win = 1
+result_on_player_loss = 0
+result_on_flee = 0
+disable_fleeing = true
+railway_shards = ExtResource( 47 )
+
+[node name="CallMethodAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="4"]
+script = ExtResource( 4 )
+method = "fade_out"
+wait_for_completed = false
+
+[node name="GetNode2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction/CallMethodAction" index="0"]
+script = ExtResource( 25 )
+node_name = "WorldAnalogueHorror"
+
+[editable path="Sprite/HeliaWorld/Viewport/HeliaModel"]

@@ -1,0 +1,1249 @@
+[gd_scene load_steps=70 format=2]
+
+[ext_resource path="res://nodes/actions/WarpAction.gd" type="Script" id=1]
+[ext_resource path="res://world/objects/wired/floor_button/floorbutton_switch_1.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://world/objects/wired/floor_button/floorbutton_base_1.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://world/objects/wired/floor_button/materials/floorbutton_switch_off_mat_2.tres" type="Material" id=4]
+[ext_resource path="res://world/objects/wired/floor_button/materials/floorbutton_switch_on_mat_1.tres" type="Material" id=5]
+[ext_resource path="res://world/objects/wired/floor_button/materials/floorbutton_switch_on_mat_2.tres" type="Material" id=6]
+[ext_resource path="res://world/objects/wired/floor_button/materials/floorbutton_switch_off_mat_1.tres" type="Material" id=7]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/ShowUIElement.gd" type="Script" id=8]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/EmitSignal.gd" type="Script" id=9]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/RemoveSpecifiedNode.gd" type="Script" id=10]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/CheckDungeonCounter.gd" type="Script" id=11]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/IncreaseDungeonCounter.gd" type="Script" id=12]
+[ext_resource path="res://nodes/weather/cave_depth_fade/cave_double_depth_fade.shader" type="Shader" id=13]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/CheckRailwayStats.gd" type="Script" id=14]
+[ext_resource path="res://world/objects/wired/floor_button/FloorButton.gd" type="Script" id=15]
+[ext_resource path="res://addons/misc_utils/actions/composites/Selector.gd" type="Script" id=16]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/TimeTrialTimer.gd" type="Script" id=17]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/WarpRegion_mod.gd" type="Script" id=18]
+[ext_resource path="res://nodes/camera/LaggingTracker.gd" type="Script" id=19]
+[ext_resource path="res://nodes/actions/ChangeMusicAction.gd" type="Script" id=20]
+[ext_resource path="res://sprites/sky_battle_grasslands_night.png" type="Texture" id=21]
+[ext_resource path="res://sfx/world/wired/floor_button.wav" type="AudioStream" id=22]
+[ext_resource path="res://music/demo/menacing_theme.ogg" type="AudioStream" id=23]
+[ext_resource path="res://ui/battle_theme.tres" type="Theme" id=24]
+[ext_resource path="res://data/map_metadata/deadworld.tres" type="Resource" id=25]
+[ext_resource path="res://world/core/LevelMap.gd" type="Script" id=26]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=27]
+[ext_resource path="res://nodes/actions/MessageDialogAction.gd" type="Script" id=28]
+[ext_resource path="res://world/maps/StationMeshlib.meshlib" type="MeshLibrary" id=29]
+[ext_resource path="res://mods/Infinite_Dungeon/regions/dash_trial.tres" type="Resource" id=30]
+[ext_resource path="res://nodes/actions/CameraShakeAction.gd" type="Script" id=31]
+[ext_resource path="res://nodes/actions/GiveLootAction.gd" type="Script" id=32]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/WiredGridMap.gd" type="Script" id=33]
+[ext_resource path="res://nodes/actions/PlayAudioAction.gd" type="Script" id=34]
+[ext_resource path="res://sfx/world/wired/success_chime.wav" type="AudioStream" id=35]
+[ext_resource path="res://sfx/world/wired/dungeon_rise.wav" type="AudioStream" id=36]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage1/timetrial_loot_3.tres" type="Resource" id=37]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage1/timetrial_loot_2.tres" type="Resource" id=38]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage1/timetrial_loot_1.tres" type="Resource" id=39]
+[ext_resource path="res://nodes/camera/WorldCamera.tscn" type="PackedScene" id=40]
+[ext_resource path="res://world/objects/forces/LevitatorMagnet.tscn" type="PackedScene" id=41]
+[ext_resource path="res://world/objects/forces/AttractiveMagnet.tscn" type="PackedScene" id=42]
+[ext_resource path="res://world/objects/static_physics/wooden_sign/wooden_sign_3.tscn" type="PackedScene" id=43]
+[ext_resource path="res://world/objects/static_physics/wooden_sign/wooden_sign_2.tscn" type="PackedScene" id=44]
+[ext_resource path="res://world/objects/static_physics/wooden_sign/wooden_sign_4.tscn" type="PackedScene" id=45]
+[ext_resource path="res://world/objects/forces/magnetic_pylon/magnetic_pylon.tscn" type="PackedScene" id=46]
+[ext_resource path="res://nodes/actions/SetNPCStateAction.gd" type="Script" id=47]
+[ext_resource path="res://nodes/actions/values/GetPlayer.gd" type="Script" id=48]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage3/timetrial_loot_3.tres" type="Resource" id=49]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage4/timetrial_loot_2.tres" type="Resource" id=50]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage3/timetrial_loot_2.tres" type="Resource" id=51]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage4/timetrial_loot_1.tres" type="Resource" id=52]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage3/timetrial_loot_1.tres" type="Resource" id=53]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage4/timetrial_loot_3.tres" type="Resource" id=54]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage2/timetrial_loot_2.tres" type="Resource" id=55]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage2/timetrial_loot_3.tres" type="Resource" id=56]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/StageSelect.gd" type="Script" id=57]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage2/timetrial_loot_1.tres" type="Resource" id=58]
+
+[sub_resource type="PanoramaSky" id=18]
+panorama = ExtResource( 21 )
+
+[sub_resource type="Environment" id=14]
+resource_local_to_scene = true
+background_mode = 3
+background_sky = SubResource( 18 )
+background_sky_custom_fov = 88.0
+background_energy = 0.2
+ambient_light_color = Color( 0.419608, 0.419608, 0.419608, 1 )
+ambient_light_energy = 0.5
+ambient_light_sky_contribution = 0.25
+fog_enabled = true
+fog_color = Color( 0, 0, 0, 1 )
+fog_sun_color = Color( 1, 0.956863, 0.87451, 1 )
+fog_depth_begin = 60.0
+fog_transmit_enabled = true
+ssao_color = Color( 0.2, 0.172549, 0.25098, 1 )
+dof_blur_far_enabled = true
+dof_blur_far_distance = 51.0
+dof_blur_far_transition = 20.0
+dof_blur_far_quality = 2
+dof_blur_near_enabled = true
+dof_blur_near_distance = 37.0
+dof_blur_near_transition = 5.0
+dof_blur_near_quality = 2
+glow_enabled = true
+glow_intensity = 1.0
+adjustment_enabled = true
+adjustment_contrast = 1.16
+adjustment_saturation = 1.16
+
+[sub_resource type="ShaderMaterial" id=12]
+render_priority = 30
+shader = ExtResource( 13 )
+shader_param/draw_distance = 100.0
+shader_param/a_top_y = 4.0
+shader_param/a_bottom_y = 12.0
+shader_param/b_top_y = 0.0
+shader_param/b_bottom_y = -4.0
+shader_param/color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 0.062, 1 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.762, 0.125, 0.761 )
+
+[sub_resource type="AudioStreamRandomPitch" id=3]
+audio_stream = ExtResource( 22 )
+
+[sub_resource type="SpatialMaterial" id=30]
+flags_unshaded = true
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="QuadMesh" id=20]
+material = SubResource( 30 )
+size = Vector2( 10, 10 )
+
+[sub_resource type="SpatialMaterial" id=21]
+flags_unshaded = true
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="QuadMesh" id=23]
+material = SubResource( 21 )
+size = Vector2( 10, 10 )
+
+[sub_resource type="BoxShape" id=19]
+
+[node name="TimeTrial" type="Spatial"]
+script = ExtResource( 26 )
+default_warp_target = "WarpS"
+map_metadata = ExtResource( 25 )
+world_time_rate = 1.0
+default_region_settings = ExtResource( 30 )
+
+[node name="BaseMap" type="Spatial" parent="."]
+
+[node name="GridMap" type="GridMap" parent="BaseMap"]
+mesh_library = ExtResource( 29 )
+data = {
+"cells": PoolIntArray( -65536, 0, 0, -65535, 0, 0, -65534, 0, 1048582, -6, 0, 1441799, -5, 0, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 1, 0, -65535, 1, 0, -65534, 1, 1048582, -6, 1, 1441799, -5, 1, 655360, -4, 1, 0, -3, 1, 0, -2, 1, 0, -1, 1, 0, -65536, 2, 0, -65535, 2, 0, -65534, 2, 1048582, -6, 2, 1441799, -5, 2, 655360, -4, 2, 0, -3, 2, 0, -2, 2, 0, -1, 2, 0, -65536, 3, 0, -65535, 3, 0, -65534, 3, 1048582, -6, 3, 1441799, -5, 3, 0, -4, 3, 0, -3, 3, 0, -2, 3, 0, -1, 3, 0, -65536, 4, 0, -65535, 4, 0, -65534, 4, 1048582, -6, 4, 1441799, -5, 4, 0, -4, 4, 0, -3, 4, 0, -2, 4, 0, -1, 4, 0, -65536, 5, 0, -65535, 5, 0, -65534, 5, 1048582, -6, 5, 1441799, -5, 5, 0, -4, 5, 0, -3, 5, 0, -2, 5, 0, -1, 5, 0, -65536, 6, 7, -65535, 6, 7, -65534, 6, 1048584, -6, 6, 8, -5, 6, 7, -4, 6, 7, -3, 6, 7, -2, 6, 7, -1, 6, 7, 393249, 65507, 1441800, 393250, 65507, 655367, 393251, 65507, 655367, 393252, 65507, 655367, 393253, 65507, 655367, 393254, 65507, 655368, 262147, 65508, 1441800, 262148, 65508, 655366, 262149, 65508, 655366, 262150, 65508, 655366, 262151, 65508, 655366, 262152, 65508, 655368, 393249, 65508, 1441799, 393250, 65508, 1441792, 393251, 65508, 1441792, 393252, 65508, 1441792, 393253, 65508, 1441792, 393254, 65508, 1048583, -65519, 65508, 1441800, -65518, 65508, 655366, -65517, 65508, 655366, -65516, 65508, 655368, -65503, 65508, 1441800, -65502, 65508, 655367, -65501, 65508, 655367, -65500, 65508, 655367, -65499, 65508, 655368, 262147, 65509, 1441798, 262148, 65509, 1441795, 262149, 65509, 1441795, 262150, 65509, 1441795, 262151, 65509, 1441795, 262152, 65509, 1048582, 393249, 65509, 1441799, 393250, 65509, 1441792, 393251, 65509, 1048585, 393252, 65509, 9, 393253, 65509, 1441792, 393254, 65509, 1048583, -65519, 65509, 1441798, -65518, 65509, 0, -65517, 65509, 0, -65516, 65509, 1048582, -65503, 65509, 1441799, -65502, 65509, 1048576, -65501, 65509, 1048576, -65500, 65509, 1048576, -65499, 65509, 1048583, 262147, 65510, 1441798, 262148, 65510, 1441795, 262149, 65510, 1441795, 262150, 65510, 1441795, 262151, 65510, 1441795, 262152, 65510, 1048582, 393249, 65510, 1441799, 393250, 65510, 1441792, 393251, 65510, 655369, 393252, 65510, 1441801, 393253, 65510, 1441792, 393254, 65510, 1048583, -65519, 65510, 1441798, -65518, 65510, 1048579, -65517, 65510, 0, -65516, 65510, 1048582, -65503, 65510, 1441799, -65502, 65510, 1048579, -65501, 65510, 1048576, -65500, 65510, 1048576, -65499, 65510, 1048583, 262147, 65511, 1441798, 262148, 65511, 1441795, 262149, 65511, 1441795, 262150, 65511, 1441795, 262151, 65511, 1441795, 262152, 65511, 1048582, 393249, 65511, 1441799, 393250, 65511, 1441792, 393251, 65511, 1441792, 393252, 65511, 1441792, 393253, 65511, 1441792, 393254, 65511, 1048583, -65519, 65511, 1441798, -65518, 65511, 0, -65517, 65511, 0, -65516, 65511, 1048582, -65503, 65511, 1441799, -65502, 65511, 1048576, -65501, 65511, 1048576, -65500, 65511, 1048576, -65499, 65511, 1048583, 262147, 65512, 1441798, 262148, 65512, 1441795, 262149, 65512, 1441795, 262150, 65512, 1441795, 262151, 65512, 1441795, 262152, 65512, 1048582, 393249, 65512, 8, 393250, 65512, 9, 393251, 65512, 1048632, 393252, 65512, 1441848, 393253, 65512, 1048585, 393254, 65512, 1048584, -65519, 65512, 1441798, -65518, 65512, 0, -65517, 65512, 0, -65516, 65512, 1048582, -65503, 65512, 8, -65502, 65512, 7, -65501, 65512, 7, -65500, 65512, 7, -65499, 65512, 1048584, 262147, 65513, 8, 262148, 65513, 6, 262149, 65513, 6, 262150, 65513, 6, 262151, 65513, 6, 262152, 65513, 1048584, 393250, 65513, 1441798, 393251, 65513, 1048632, 393252, 65513, 1441848, 393253, 65513, 1048583, -65519, 65513, 8, -65518, 65513, 6, -65517, 65513, 6, -65516, 65513, 1048584, 393250, 65514, 1441798, 393251, 65514, 1048632, 393252, 65514, 1441848, 393253, 65514, 1048583, 393250, 65515, 1441798, 393251, 65515, 1048632, 393252, 65515, 1441848, 393253, 65515, 1048583, 393250, 65516, 1441798, 393251, 65516, 1048632, 393252, 65516, 1441848, 393253, 65516, 1048583, 393250, 65517, 1441798, 393251, 65517, 1048632, 393252, 65517, 1441848, 393253, 65517, 1048583, 393250, 65518, 1441798, 393251, 65518, 1048632, 393252, 65518, 1441848, 393253, 65518, 1048583, 393250, 65519, 1441798, 393251, 65519, 1048632, 393252, 65519, 1441848, 393253, 65519, 1048583, 393250, 65520, 1441798, 393251, 65520, 1048632, 393252, 65520, 1441848, 393253, 65520, 1048583, 393250, 65521, 1441798, 393251, 65521, 1048632, 393252, 65521, 1441848, 393253, 65521, 1048583, 393250, 65522, 1441798, 393251, 65522, 1048632, 393252, 65522, 1441848, 393253, 65522, 1048583, 393250, 65523, 1441798, 393251, 65523, 1048632, 393252, 65523, 1441848, 393253, 65523, 1048583, 393250, 65524, 1441798, 393251, 65524, 1048632, 393252, 65524, 1441848, 393253, 65524, 1048583, 262160, 65525, 1441800, 262161, 65525, 655366, 262162, 65525, 655366, 262163, 65525, 655366, 262164, 65525, 655366, 262165, 65525, 655368, 327674, 65525, 1441800, 327675, 65525, 655366, 327676, 65525, 655366, 327677, 65525, 655366, 327678, 65525, 655366, 327679, 65525, 655368, 393249, 65525, 1441800, 393250, 65525, 1441801, 393251, 65525, 1048632, 393252, 65525, 1441848, 393253, 65525, 655369, 393254, 65525, 655368, -6, 65525, 1441800, -5, 65525, 655367, -4, 65525, 655367, -3, 65525, 655367, -2, 65525, 655367, -1, 65525, 655368, 33, 65526, 8, 34, 65526, 7, 35, 65526, 7, 36, 65526, 7, 37, 65526, 9, 65531, 65526, 1048605, 65532, 65526, 27, 65533, 65526, 27, 65534, 65526, 29, 65569, 65526, 26, 65570, 65526, 12, 65571, 65526, 15, 65572, 65526, 12, 65573, 65526, 17, 131105, 65526, 26, 131106, 65526, 13, 131107, 65526, 15, 131108, 65526, 13, 131109, 65526, 17, 196641, 65526, 26, 196642, 65526, 12, 196643, 65526, 15, 196644, 65526, 25, 196645, 65526, 17, 262160, 65526, 1441798, 262161, 65526, 655360, 262162, 65526, 655360, 262163, 65526, 655360, 262164, 65526, 655360, 262165, 65526, 1048582, 262177, 65526, 26, 262178, 65526, 25, 262179, 65526, 15, 262180, 65526, 12, 262181, 65526, 17, 327674, 65526, 1441798, 327675, 65526, 0, 327676, 65526, 0, 327677, 65526, 0, 327678, 65526, 0, 327679, 65526, 1048582, 327713, 65526, 26, 327714, 65526, 12, 327715, 65526, 15, 327716, 65526, 12, 327717, 65526, 17, 393249, 65526, 1441799, 393250, 65526, 655360, 393251, 65526, 655360, 393252, 65526, 655360, 393253, 65526, 655360, 393254, 65526, 1048583, -65519, 65526, 1441800, -65518, 65526, 655366, -65517, 65526, 655366, -65516, 65526, 655368, -65503, 65526, 1441799, -65502, 65526, 1441792, -65501, 65526, 1441792, -65500, 65526, 1441792, -65499, 65526, 1441792, -6, 65526, 1441799, -5, 65526, 1441792, -4, 65526, 1441792, -3, 65526, 1441792, -2, 65526, 1441792, -1, 65526, 1048583, 37, 65527, 1441799, 65531, 65527, 1048603, 65534, 65527, 1441819, 65573, 65527, 1441804, 131109, 65527, 1441804, 196645, 65527, 1441805, 262160, 65527, 1441798, 262161, 65527, 655360, 262162, 65527, 1048585, 262163, 65527, 9, 262164, 65527, 655360, 262165, 65527, 1048582, 262181, 65527, 1441804, 327674, 65527, 1441798, 327675, 65527, 0, 327676, 65527, 1048585, 327677, 65527, 9, 327678, 65527, 0, 327679, 65527, 1048582, 327717, 65527, 1441804, 393249, 65527, 1441799, 393250, 65527, 655360, 393251, 65527, 1048585, 393252, 65527, 9, 393253, 65527, 655360, 393254, 65527, 1048583, -65519, 65527, 1441798, -65518, 65527, 655360, -65517, 65527, 655360, -65516, 65527, 1048582, -65503, 65527, 1441798, -65502, 65527, 655360, -65501, 65527, 1441792, -65500, 65527, 655360, -65499, 65527, 1441792, -6, 65527, 1441799, -5, 65527, 1441792, -4, 65527, 1441792, -3, 65527, 1441792, -2, 65527, 1441792, -1, 65527, 1048583, 37, 65528, 1441799, 65531, 65528, 1048603, 65534, 65528, 1441819, 65573, 65528, 1441807, 131109, 65528, 1441807, 196645, 65528, 1441807, 262160, 65528, 1441798, 262161, 65528, 655360, 262162, 65528, 655369, 262163, 65528, 1441801, 262164, 65528, 655360, 262165, 65528, 1048582, 262181, 65528, 1441807, 327674, 65528, 1441798, 327675, 65528, 0, 327676, 65528, 655369, 327677, 65528, 1441801, 327678, 65528, 0, 327679, 65528, 1048582, 327717, 65528, 1441807, 393249, 65528, 1441799, 393250, 65528, 655360, 393251, 65528, 655369, 393252, 65528, 1441801, 393253, 65528, 655360, 393254, 65528, 1048583, -65519, 65528, 1441798, -65518, 65528, 655360, -65517, 65528, 655360, -65516, 65528, 1048582, -65503, 65528, 1441798, -65502, 65528, 655360, -65501, 65528, 655360, -65500, 65528, 655360, -65499, 65528, 1441792, -6, 65528, 1441799, -5, 65528, 1441792, -4, 65528, 1441792, -3, 65528, 1441792, -2, 65528, 1441792, -1, 65528, 1048583, 37, 65529, 1441799, 65531, 65529, 1048606, 65534, 65529, 30, 65573, 65529, 1441805, 131109, 65529, 1441804, 196645, 65529, 1441817, 262160, 65529, 1441798, 262161, 65529, 655360, 262162, 65529, 655360, 262163, 65529, 655360, 262164, 65529, 655360, 262165, 65529, 1048582, 262181, 65529, 1441804, 327674, 65529, 8, 327675, 65529, 7, 327676, 65529, 7, 327677, 65529, 7, 327678, 65529, 7, 327679, 65529, 1048584, 327717, 65529, 1441804, 393249, 65529, 1441799, 393250, 65529, 655360, 393251, 65529, 655360, 393252, 65529, 655360, 393253, 65529, 655360, 393254, 65529, 1048583, -65536, 65529, 655367, -65535, 65529, 655367, -65534, 65529, 655368, -65519, 65529, 8, -65518, 65529, 6, -65517, 65529, 6, -65516, 65529, 1048584, -65503, 65529, 1441798, -65502, 65529, 655360, -65501, 65529, 655360, -65500, 65529, 655360, -65499, 65529, 1441792, -6, 65529, 1441799, -5, 65529, 655360, -4, 65529, 655360, -3, 65529, 655360, -2, 65529, 655360, -1, 65529, 655369, 37, 65530, 8, 65573, 65530, 26, 131109, 65530, 26, 196645, 65530, 26, 262160, 65530, 8, 262161, 65530, 6, 262162, 65530, 6, 262163, 65530, 6, 262164, 65530, 6, 262165, 65530, 1048584, 262181, 65530, 26, 327717, 65530, 26, 393249, 65530, 8, 393250, 65530, 7, 393251, 65530, 7, 393252, 65530, 7, 393253, 65530, 7, 393254, 65530, 1048584, -65536, 65530, 0, -65535, 65530, 0, -65534, 65530, 1048582, -65503, 65530, 8, -65502, 65530, 6, -65501, 65530, 6, -65500, 65530, 6, -65499, 65530, 7, -6, 65530, 1441799, -5, 65530, 0, -4, 65530, 0, -3, 65530, 0, -2, 65530, 0, -1, 65530, 0, -65536, 65531, 0, -65535, 65531, 0, -65534, 65531, 1048582, -6, 65531, 1441799, -5, 65531, 0, -4, 65531, 0, -3, 65531, 0, -2, 65531, 0, -1, 65531, 0, -65536, 65532, 0, -65535, 65532, 0, -65534, 65532, 1048582, -6, 65532, 1441799, -5, 65532, 0, -4, 65532, 0, -3, 65532, 0, -2, 65532, 0, -1, 65532, 0, -65536, 65533, 0, -65535, 65533, 0, -65534, 65533, 1048582, -6, 65533, 1441799, -5, 65533, 0, -4, 65533, 0, -3, 65533, 0, -2, 65533, 0, -1, 65533, 0, -65536, 65534, 0, -65535, 65534, 0, -65534, 65534, 1048582, -6, 65534, 1441799, -5, 65534, 0, -4, 65534, 0, -3, 65534, 0, -2, 65534, 0, -1, 65534, 0, -65536, 65535, 0, -65535, 65535, 0, -65534, 65535, 1048582, -6, 65535, 1441799, -5, 65535, 0, -4, 65535, 0, -3, 65535, 0, -2, 65535, 0, -1, 65535, 0 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 4, 0 )
+}
+
+[node name="Tracker" type="Spatial" parent="."]
+script = ExtResource( 19 )
+limits = AABB( -20, 0, -1000, 40, 10, 1004 )
+limit_y = false
+snap = true
+lookahead_distance = 5.0
+
+[node name="WorldCamera" parent="Tracker" instance=ExtResource( 40 )]
+fov = 20.0
+environment = SubResource( 14 )
+clouds_enabled = false
+cloud_material_override = SubResource( 12 )
+
+[node name="WarpS" type="Area" parent="."]
+transform = Transform( -2.05872, 0, -1.29253e-06, 0, 1, 0, 6.27833e-07, 0, -1, 0, 0, 12.1176 )
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 18 )
+size = Vector3( 6, 10, 2 )
+force_same_scene_warps = true
+
+[node name="PlayerTarget" type="Position3D" parent="WarpS"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 3 )
+
+[node name="PartnerTarget" type="Position3D" parent="WarpS"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 3 )
+
+[node name="Lights" type="Spatial" parent="."]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 73.1794, 0 )
+light_color = Color( 0.670588, 0.737255, 0.0588235, 1 )
+
+[node name="DirectionalLight2" type="DirectionalLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 24.8855, 52.5842, 0 )
+light_color = Color( 0.670588, 0.737255, 0.0588235, 1 )
+
+[node name="StopTimer" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7849, 10.1384, -49.9088 )
+script = ExtResource( 15 )
+button_regular_y = 0.033
+button_depressed_y = -0.133
+on_material = ExtResource( 5 )
+off_material = ExtResource( 7 )
+sticky_on_material = ExtResource( 6 )
+sticky_off_material = ExtResource( 4 )
+require_body_group = "player_control"
+
+[node name="floorbutton_base_1" type="MeshInstance" parent="StopTimer"]
+mesh = ExtResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="StopTimer"]
+
+[node name="CollisionShape2" type="CollisionShape" parent="StopTimer/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.062, 0 )
+shape = SubResource( 1 )
+
+[node name="Button" type="MeshInstance" parent="StopTimer"]
+transform = Transform( 1.33, 0, 0, 0, 1.33, 0, 0, 0, 1.33, 0, 0.033, 0 )
+material_override = ExtResource( 7 )
+mesh = ExtResource( 2 )
+
+[node name="Area" type="Area" parent="StopTimer"]
+collision_layer = 0
+collision_mask = 32772
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="StopTimer/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.135203, 0 )
+shape = SubResource( 2 )
+
+[node name="AudioPlayer" type="AudioStreamPlayer3D" parent="StopTimer"]
+stream = SubResource( 3 )
+attenuation_model = 2
+unit_size = 50.0
+max_distance = 100.0
+bus = "World"
+
+[node name="Sprite3D" type="Sprite3D" parent="StopTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween" type="Tween" parent="StopTimer"]
+
+[node name="Sprite3D2" type="Sprite3D" parent="StopTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween2" type="Tween" parent="StopTimer"]
+
+[node name="Sprite3D3" type="Sprite3D" parent="StopTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween3" type="Tween" parent="StopTimer"]
+
+[node name="StartTimer" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.91049, 0.0874777, -0.079874 )
+script = ExtResource( 15 )
+button_regular_y = 0.033
+button_depressed_y = -0.133
+on_material = ExtResource( 5 )
+off_material = ExtResource( 7 )
+sticky_on_material = ExtResource( 6 )
+sticky_off_material = ExtResource( 4 )
+require_body_group = "player_control"
+
+[node name="floorbutton_base_1" type="MeshInstance" parent="StartTimer"]
+mesh = ExtResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="StartTimer"]
+
+[node name="CollisionShape2" type="CollisionShape" parent="StartTimer/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.062, 0 )
+shape = SubResource( 1 )
+
+[node name="Button" type="MeshInstance" parent="StartTimer"]
+transform = Transform( 1.33, 0, 0, 0, 1.33, 0, 0, 0, 1.33, 0, 0.033, 0 )
+material_override = ExtResource( 7 )
+mesh = ExtResource( 2 )
+
+[node name="Area" type="Area" parent="StartTimer"]
+collision_layer = 0
+collision_mask = 32772
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="StartTimer/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.135203, 0 )
+shape = SubResource( 2 )
+
+[node name="AudioPlayer" type="AudioStreamPlayer3D" parent="StartTimer"]
+stream = SubResource( 3 )
+attenuation_model = 2
+unit_size = 50.0
+max_distance = 100.0
+bus = "World"
+
+[node name="Sprite3D" type="Sprite3D" parent="StartTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween" type="Tween" parent="StartTimer"]
+
+[node name="Sprite3D2" type="Sprite3D" parent="StartTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween2" type="Tween" parent="StartTimer"]
+
+[node name="Sprite3D3" type="Sprite3D" parent="StartTimer"]
+pixel_size = 0.125
+billboard = 1
+
+[node name="Tween3" type="Tween" parent="StartTimer"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Timer" type="Label" parent="CanvasLayer"]
+margin_left = 868.0
+margin_top = 24.0
+margin_right = 1057.0
+margin_bottom = 104.0
+size_flags_vertical = 1
+theme = ExtResource( 24 )
+text = "00:00:00"
+align = 1
+valign = 1
+
+[node name="Obstacles" type="Spatial" parent="."]
+
+[node name="LevitatorMagnet" parent="Obstacles" instance=ExtResource( 41 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.02145, 3.05176e-05, -15.9155 )
+
+[node name="AttractiveMagnet" parent="Obstacles" instance=ExtResource( 42 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 4.86235, 24.2546, -20.6021 )
+
+[node name="AttractiveMagnet2" parent="Obstacles" instance=ExtResource( 42 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 4.80609, 24.2546, -11.2631 )
+
+[node name="AttractiveMagnet3" parent="Obstacles" instance=ExtResource( 42 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 18.6492, 24.2546, -20.6021 )
+
+[node name="AttractiveMagnet4" parent="Obstacles" instance=ExtResource( 42 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 18.5929, 24.2546, -11.2631 )
+
+[node name="AttractiveMagnet7" parent="Obstacles" instance=ExtResource( 42 )]
+transform = Transform( 4.34861e-11, 0.000994845, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -0.000994845, 6.90613, 49.8169, -15.9561 )
+
+[node name="AttractiveMagnet8" parent="Obstacles" instance=ExtResource( 42 )]
+transform = Transform( 4.34861e-11, 0.000994845, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -0.000994845, 16.2451, 49.8169, -15.9091 )
+
+[node name="AttractiveMagnet9" parent="Obstacles" instance=ExtResource( 42 )]
+transform = Transform( 4.34861e-11, 0.000994845, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -0.000994845, 6.90613, 49.8169, -34.7189 )
+
+[node name="AttractiveMagnet10" parent="Obstacles" instance=ExtResource( 42 )]
+transform = Transform( 4.34861e-11, 0.000994845, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -0.000994845, 16.2451, 49.8169, -34.6719 )
+
+[node name="AttractiveMagnet11" parent="Obstacles" instance=ExtResource( 42 )]
+transform = Transform( 4.34861e-11, 0.000994845, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -0.000994845, 6.90613, 42.2295, -49.8033 )
+
+[node name="AttractiveMagnet12" parent="Obstacles" instance=ExtResource( 42 )]
+transform = Transform( 4.34861e-11, 0.000994845, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -0.000994845, 16.2451, 42.2295, -49.7563 )
+
+[node name="AttractiveMagnet5" parent="Obstacles" instance=ExtResource( 42 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 32.3888, 24.2546, -20.6021 )
+
+[node name="AttractiveMagnet6" parent="Obstacles" instance=ExtResource( 42 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 32.3325, 24.2546, -11.2631 )
+
+[node name="LevitatorMagnet2" parent="Obstacles" instance=ExtResource( 41 )]
+transform = Transform( -0.00865676, 0, -0.999963, 0, 1, 0, 0.999963, 0, -0.00865676, 44.9843, -7.28282, -15.7335 )
+
+[node name="LevitatorMagnet3" parent="Obstacles" instance=ExtResource( 41 )]
+transform = Transform( -0.00865676, 0, -0.999963, 0, 1, 0, 0.999963, 0, -0.00865676, 51.6342, -7.28282, -15.6759 )
+
+[node name="LevitatorMagnet4" parent="Obstacles" instance=ExtResource( 41 )]
+transform = Transform( -0.00865676, 0, -0.999963, 0, 1, 0, 0.999963, 0, -0.00865676, 58.7903, -7.28282, -15.614 )
+
+[node name="LevitatorMagnet5" parent="Obstacles" instance=ExtResource( 41 )]
+transform = Transform( -0.00865676, 0, -0.999963, 0, 1, 0, 0.999963, 0, -0.00865676, 65.4402, -7.28282, -15.5564 )
+
+[node name="LevitatorMagnet10" parent="Obstacles" instance=ExtResource( 41 )]
+transform = Transform( -0.00865676, 0, -0.999963, 0, 1, 0, 0.999963, 0, -0.00865676, 71.7531, -4.76837e-07, -15.5564 )
+
+[node name="LevitatorMagnet14" parent="Obstacles" instance=ExtResource( 41 )]
+transform = Transform( -0.999961, 0, 0.0088313, 0, 1, 0, -0.0088313, 0, -0.999961, 65.5273, -0.437922, -50.227 )
+
+[node name="LevitatorMagnet15" parent="Obstacles" instance=ExtResource( 41 )]
+transform = Transform( -0.999961, 0, 0.0088313, 0, 1, 0, -0.0088313, 0, -0.999961, 57.7976, -0.437922, -50.3146 )
+
+[node name="LevitatorMagnet16" parent="Obstacles" instance=ExtResource( 41 )]
+transform = Transform( -0.999961, 0, 0.0088313, 0, 1, 0, -0.0088313, 0, -0.999961, 50.2604, -0.437922, -50.4021 )
+
+[node name="LevitatorMagnet17" parent="Obstacles" instance=ExtResource( 41 )]
+transform = Transform( -0.999961, 0, 0.0088313, 0, 1, 0, -0.0088313, 0, -0.999961, 42.5942, -0.437922, -50.4892 )
+
+[node name="LevitatorMagnet6" parent="Obstacles" instance=ExtResource( 41 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.6604, -4.76837e-07, -50.6338 )
+
+[node name="LevitatorMagnet7" parent="Obstacles" instance=ExtResource( 41 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.0205, 3.1797, -50.6338 )
+
+[node name="LevitatorMagnet8" parent="Obstacles" instance=ExtResource( 41 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2551, 6.27573, -50.6338 )
+
+[node name="LevitatorMagnet9" parent="Obstacles" instance=ExtResource( 41 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5315, 9.37176, -50.6338 )
+
+[node name="wooden_sign_6" parent="Obstacles" instance=ExtResource( 45 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 16.1899, 48.1128, -34.5078 )
+
+[node name="wooden_sign_7" parent="Obstacles" instance=ExtResource( 45 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.89255, 48.0546, -34.5078 )
+
+[node name="wooden_sign_8" parent="Obstacles" instance=ExtResource( 45 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 16.1899, 48.1128, -15.8008 )
+
+[node name="wooden_sign_9" parent="Obstacles" instance=ExtResource( 45 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.89255, 48.0546, -15.8008 )
+
+[node name="wooden_sign_5" parent="Obstacles" instance=ExtResource( 43 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 18.4014, 43.4563, -49.9314 )
+
+[node name="wooden_sign_2" parent="Obstacles" instance=ExtResource( 44 )]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 4.79132, 43.4619, -49.9314 )
+
+[node name="magnetic_pylon" parent="Obstacles" instance=ExtResource( 46 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 75.9916, 14.0002, -15.7406 )
+
+[node name="TrialContoller" type="Node" parent="."]
+script = ExtResource( 17 )
+trialname = "MagnetismTrial"
+timer_path = NodePath("../CanvasLayer/Timer")
+autostop_seconds = 60.01
+autostop_enabled = true
+supress_flight = true
+supress_swim = true
+supress_climb = true
+supress_glide = true
+supress_dash = true
+
+[node name="IntroSequence" type="Node" parent="."]
+script = ExtResource( 27 )
+always_succeed = true
+
+[node name="MessageDialogAction" type="Node" parent="IntroSequence"]
+script = ExtResource( 28 )
+messages = [ "You feel an immense pressure.", "Only your Magnetism ability remains.", "Find the Release Button as quickly as possible." ]
+style = 3
+
+[node name="BringDownWalls" type="Node" parent="IntroSequence"]
+script = ExtResource( 9 )
+
+[node name="CameraShakeAction" type="Node" parent="IntroSequence"]
+script = ExtResource( 31 )
+hold_duration = 2.0
+
+[node name="RemoveNodes" type="Node" parent="IntroSequence"]
+script = ExtResource( 10 )
+nodepath = [ NodePath("../../Barrier2"), NodePath("../../Walls"), NodePath("../../StartTimer") ]
+
+[node name="ShowTimer" type="Node" parent="IntroSequence"]
+script = ExtResource( 8 )
+UIElement = NodePath("../../CanvasLayer")
+
+[node name="PlayAudioAction" type="Node" parent="IntroSequence"]
+script = ExtResource( 34 )
+stream = ExtResource( 35 )
+
+[node name="ChangeMusicAction" type="Node" parent="IntroSequence"]
+script = ExtResource( 20 )
+music = ExtResource( 23 )
+music_vox = ExtResource( 23 )
+revert_on_exit = false
+
+[node name="StartTrial" type="Node" parent="IntroSequence"]
+script = ExtResource( 9 )
+
+[node name="EndingSequence" type="Node" parent="."]
+script = ExtResource( 27 )
+always_succeed = true
+
+[node name="Selector" type="Node" parent="EndingSequence"]
+script = ExtResource( 16 )
+
+[node name="StageSelect1" type="Node" parent="EndingSequence/Selector"]
+script = ExtResource( 57 )
+encounter_range_max = 15
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect1"]
+script = ExtResource( 16 )
+
+[node name="CheckTime" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 2
+threshold_value = 20.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 37 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime2" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 2
+threshold_value = 35.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 38 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime3" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 2
+threshold_value = 60.0
+
+[node name="ChangeMusicAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3"]
+script = ExtResource( 20 )
+revert_on_exit = false
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 39 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="Failed" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 1
+threshold_value = 60.0
+
+[node name="SetNPCStateAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed"]
+script = ExtResource( 47 )
+state = "Defeated"
+
+[node name="GetPlayer" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed/SetNPCStateAction"]
+script = ExtResource( 48 )
+which = 1
+
+[node name="MessageDialogAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed"]
+script = ExtResource( 28 )
+messages = [ "The pressure in this chamber was too much. ", "You passed out." ]
+style = 3
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="StageSelect2" type="Node" parent="EndingSequence/Selector"]
+script = ExtResource( 57 )
+encounter_range_min = 15
+encounter_range_max = 30
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect2"]
+script = ExtResource( 16 )
+
+[node name="CheckTime" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 2
+threshold_value = 20.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 56 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime2" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 2
+threshold_value = 35.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 55 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime3" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 2
+threshold_value = 60.0
+
+[node name="ChangeMusicAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3"]
+script = ExtResource( 20 )
+revert_on_exit = false
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 58 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="Failed" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 1
+threshold_value = 60.0
+
+[node name="SetNPCStateAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed"]
+script = ExtResource( 47 )
+state = "Defeated"
+
+[node name="GetPlayer" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed/SetNPCStateAction"]
+script = ExtResource( 48 )
+which = 1
+
+[node name="MessageDialogAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed"]
+script = ExtResource( 28 )
+messages = [ "The pressure in this chamber was too much. ", "You passed out." ]
+style = 3
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="StageSelect3" type="Node" parent="EndingSequence/Selector"]
+script = ExtResource( 57 )
+encounter_range_min = 30
+encounter_range_max = 45
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect3"]
+script = ExtResource( 16 )
+
+[node name="CheckTime" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 2
+threshold_value = 20.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 49 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime2" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 2
+threshold_value = 35.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 51 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime3" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 2
+threshold_value = 60.0
+
+[node name="ChangeMusicAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3"]
+script = ExtResource( 20 )
+revert_on_exit = false
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 53 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="Failed" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 1
+threshold_value = 60.0
+
+[node name="SetNPCStateAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed"]
+script = ExtResource( 47 )
+state = "Defeated"
+
+[node name="GetPlayer" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed/SetNPCStateAction"]
+script = ExtResource( 48 )
+which = 1
+
+[node name="MessageDialogAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed"]
+script = ExtResource( 28 )
+messages = [ "The pressure in this chamber was too much. ", "You passed out." ]
+style = 3
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="StageSelect4" type="Node" parent="EndingSequence/Selector"]
+script = ExtResource( 57 )
+encounter_range_min = 45
+encounter_range_max = 1000000
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect4"]
+script = ExtResource( 16 )
+
+[node name="CheckTime" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 2
+threshold_value = 20.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 54 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime2" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 2
+threshold_value = 35.0
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 50 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckTime3" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 2
+threshold_value = 60.0
+
+[node name="ChangeMusicAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3"]
+script = ExtResource( 20 )
+revert_on_exit = false
+
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3"]
+script = ExtResource( 32 )
+loot_table = ExtResource( 52 )
+
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3"]
+script = ExtResource( 12 )
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 4
+disable_scene_preservation = true
+
+[node name="Failed" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector"]
+script = ExtResource( 14 )
+stat_name = "MagnetismTrial"
+operator = 1
+threshold_value = 60.0
+
+[node name="SetNPCStateAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed"]
+script = ExtResource( 47 )
+state = "Defeated"
+
+[node name="GetPlayer" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed/SetNPCStateAction"]
+script = ExtResource( 48 )
+which = 1
+
+[node name="MessageDialogAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed"]
+script = ExtResource( 28 )
+messages = [ "The pressure in this chamber was too much. ", "You passed out." ]
+style = 3
+
+[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed"]
+script = ExtResource( 16 )
+
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+operator = 3
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed/Selector/CheckRoomWarp"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed/Selector"]
+script = ExtResource( 11 )
+threshold_value = 5.0
+
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed/Selector/CheckRoomWarp2"]
+script = ExtResource( 1 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
+warp_target_name = "WarpS"
+transition_kind = 5
+
+[node name="Walls" type="StaticBody" parent="."]
+script = ExtResource( 33 )
+target_positions = [ NodePath("DropTarget") ]
+duration = 4.0
+audio_stream = ExtResource( 36 )
+
+[node name="GridMap" type="GridMap" parent="Walls"]
+mesh_library = ExtResource( 29 )
+data = {
+"cells": PoolIntArray( 1, 0, 1441798, 65531, 0, 1048583, 65537, 0, 1441804, 131067, 0, 1048588, 131073, 0, 1441804, 196603, 0, 1048588, 196609, 0, 1441804, 262139, 0, 1048588, 262145, 0, 1441804, 327675, 0, 1048588, 327681, 0, 1441804, 393211, 0, 1048588, 1, 1, 1441798, 65531, 1, 1048583, 65537, 1, 1441804, 131067, 1, 1048588, 131073, 1, 1441804, 196603, 1, 1048588, 196609, 1, 1441804, 262139, 1, 1048588, 262145, 1, 1441804, 327675, 1, 1048601, 327681, 1, 1441804, 393211, 1, 1048588, 1, 2, 1441798, 65531, 2, 1048583, 65537, 2, 1441804, 131067, 2, 1048588, 131073, 2, 1441804, 196603, 2, 1048601, 196609, 2, 1441804, 262139, 2, 1048588, 262145, 2, 1441804, 327675, 2, 1048588, 327681, 2, 1441804, 393211, 2, 1048588, 1, 3, 1441798, 65531, 3, 1048583, 65537, 3, 1441804, 131067, 3, 1048588, 131073, 3, 1441804, 196603, 3, 1048588, 196609, 3, 1441804, 262139, 3, 1048588, 262145, 3, 1441804, 327675, 3, 1048588, 327681, 3, 1441804, 393211, 3, 1048588, 1, 4, 1441798, 65531, 4, 1048583, 65537, 4, 1441804, 131067, 4, 1048588, 131073, 4, 1441804, 196603, 4, 1048588, 196609, 4, 1441804, 262139, 4, 1048601, 262145, 4, 1441804, 327675, 4, 1048588, 327681, 4, 1441804, 393211, 4, 1048588, 1, 5, 1441798, 65531, 5, 1048583, 65537, 5, 1441804, 131067, 5, 1048588, 131073, 5, 1441804, 196603, 5, 1048588, 196609, 5, 1441804, 262139, 5, 1048588, 262145, 5, 1441804, 327675, 5, 1048588, 327681, 5, 1441804, 393211, 5, 1048588, 0, 65530, 6, 1, 65530, 9, 65531, 65530, 1048585, 65532, 65530, 6, 65533, 65530, 6, 65534, 65530, 6, 65535, 65530, 6, 65536, 65530, 12, 65537, 65530, 17, 131067, 65530, 1048593, 131068, 65530, 12, 131069, 65530, 12, 131070, 65530, 12, 131071, 65530, 12, 131072, 65530, 25, 131073, 65530, 17, 131075, 65530, 12, 196603, 65530, 1048593, 196604, 65530, 12, 196605, 65530, 25, 196606, 65530, 12, 196607, 65530, 12, 196608, 65530, 12, 196609, 65530, 17, 262139, 65530, 1048593, 262140, 65530, 12, 262141, 65530, 12, 262142, 65530, 12, 262143, 65530, 12, 262144, 65530, 12, 262145, 65530, 17, 327675, 65530, 1048593, 327676, 65530, 12, 327677, 65530, 12, 327678, 65530, 12, 327679, 65530, 12, 327680, 65530, 12, 327681, 65530, 17, 393211, 65530, 1048593, 393212, 65530, 25, 393213, 65530, 12, 393214, 65530, 12, 393215, 65530, 25, 1, 65531, 1441798, 65531, 65531, 1048583, 65537, 65531, 1441804, 131067, 65531, 1048588, 131073, 65531, 1441804, 196603, 65531, 1048588, 196609, 65531, 1441804, 262139, 65531, 1048588, 262145, 65531, 1441804, 327675, 65531, 1048588, 327681, 65531, 1441804, 393211, 65531, 1048588, 1, 65532, 1441798, 65531, 65532, 1048583, 65537, 65532, 1441804, 131067, 65532, 1048588, 131073, 65532, 1441804, 196603, 65532, 1048588, 196609, 65532, 1441804, 262139, 65532, 1048588, 262145, 65532, 1441804, 327675, 65532, 1048601, 327681, 65532, 1441804, 393211, 65532, 1048588, 1, 65533, 1441798, 65531, 65533, 1048583, 65537, 65533, 1441804, 131067, 65533, 1048588, 131073, 65533, 1441804, 196603, 65533, 1048588, 196609, 65533, 1441804, 262139, 65533, 1048588, 262145, 65533, 1441804, 327675, 65533, 1048588, 327681, 65533, 1441804, 393211, 65533, 1048588, 1, 65534, 1441798, 65531, 65534, 1048583, 65537, 65534, 1441804, 131067, 65534, 1048588, 131073, 65534, 1441804, 196603, 65534, 1048588, 196609, 65534, 1441804, 262139, 65534, 1048588, 262145, 65534, 1441804, 327675, 65534, 1048588, 327681, 65534, 1441804, 393211, 65534, 1048588, 1, 65535, 1441798, 65531, 65535, 1048583, 65537, 65535, 1441804, 131067, 65535, 1048588, 131073, 65535, 1441804, 196603, 65535, 1048588, 196609, 65535, 1441804, 262139, 65535, 1048601, 262145, 65535, 1441804, 327675, 65535, 1048588, 327681, 65535, 1441804, 393211, 65535, 1048601 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+
+[node name="MeshInstance4" type="MeshInstance" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1.47749, 0, 0, 0, 1, -14.5126, 4.68575, 12.6334 )
+mesh = SubResource( 20 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="Walls"]
+transform = Transform( 2.5335, 0, 0, 0, 0.481554, 0, 0, 0, 1, 0.608665, -4.44406, 12.5809 )
+mesh = SubResource( 20 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1.47749, 0, 0, 0, 1, 8.36067, 4.82214, 12.6461 )
+mesh = SubResource( 20 )
+
+[node name="MeshInstance7" type="MeshInstance" parent="Walls"]
+transform = Transform( 2.53269, 0, 0, 0, -6.45831e-08, 1, 0, -4.6152, -1.3654e-07, 16.1178, 12.0228, -10.4457 )
+mesh = SubResource( 20 )
+
+[node name="MeshInstance9" type="MeshInstance" parent="Walls"]
+transform = Transform( -1.10707e-07, -2.34057e-07, -1, 0, -1.45756, 4.75941e-08, -2.53269, 1.0231e-14, 4.37114e-08, 3.53459, 4.93669, -0.0926056 )
+mesh = SubResource( 20 )
+
+[node name="MeshInstance10" type="MeshInstance" parent="Walls"]
+transform = Transform( -1.10707e-07, 1.27424e-07, 1, 0, -1.45756, 8.74228e-08, 2.53269, 5.56987e-15, 4.37114e-08, -9.53511, 4.93669, -0.0926056 )
+mesh = SubResource( 20 )
+
+[node name="MeshInstance8" type="MeshInstance" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, -6.45831e-08, 1, 0, -2.46411, -7.29004e-08, -14.5009, 12.0035, 0.324308 )
+mesh = SubResource( 20 )
+
+[node name="MeshInstance11" type="MeshInstance" parent="Walls"]
+transform = Transform( -4.37114e-08, 2.46411, 4.37114e-08, 0, -1.0771e-07, 1, 1, 1.0771e-07, 1.91069e-15, -5.28115, 12.023, -16.4166 )
+mesh = SubResource( 20 )
+
+[node name="DropTarget" type="Position3D" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -21.2293, 0 )
+
+[node name="MeshInstance12" type="MeshInstance" parent="Walls"]
+transform = Transform( -1.10707e-07, -4.6152, -4.37114e-08, 0, -2.01737e-07, 1, -2.53269, 2.01737e-07, 1.91069e-15, -2.93018, -0.0495872, 17.4741 )
+mesh = SubResource( 23 )
+
+[node name="Barrier2" type="StaticBody" parent="."]
+
+[node name="CollisionShape4" type="CollisionShape" parent="Barrier2"]
+transform = Transform( -2.13313e-07, 0, 1.01718, 0, 10.544, 0, -14.5294, 0, -1.32379e-07, 11.1763, 0, 0.550426 )
+shape = SubResource( 19 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="Barrier2"]
+transform = Transform( -2.13313e-07, 0, 1.01718, 0, 10.544, 0, -14.5294, 0, -1.32379e-07, -11.0297, 0, 0.550426 )
+shape = SubResource( 19 )
+
+[node name="CollisionShape6" type="CollisionShape" parent="Barrier2"]
+transform = Transform( 14.5294, 0, 0, 0, 10.544, 0, 0, 0, 1.01718, 0.0289574, 0, -13.0254 )
+shape = SubResource( 19 )
+
+[node name="CollisionShape7" type="CollisionShape" parent="Barrier2"]
+transform = Transform( 14.5294, 0, 0, 0, 10.544, 0, 0, 0, 1.01718, 0.0289574, 0, 13.2192 )
+shape = SubResource( 19 )
+
+[node name="CollisionShape8" type="CollisionShape" parent="Barrier2"]
+transform = Transform( 14.5294, 0, 0, 0, 1.78238, 0, 0, 0, 14.6356, 0.0289574, 11.4412, 0.440434 )
+shape = SubResource( 19 )
+
+[connection signal="activated" from="StopTimer" to="TrialContoller" method="stop"]
+[connection signal="activated" from="StopTimer" to="EndingSequence" method="queue_run"]
+[connection signal="body_entered" from="StopTimer/Area" to="StopTimer" method="_on_Area_body_entered"]
+[connection signal="body_exited" from="StopTimer/Area" to="StopTimer" method="_on_Area_body_exited"]
+[connection signal="activated" from="StartTimer" to="IntroSequence" method="queue_run"]
+[connection signal="body_entered" from="StartTimer/Area" to="StartTimer" method="_on_Area_body_entered"]
+[connection signal="body_exited" from="StartTimer/Area" to="StartTimer" method="_on_Area_body_exited"]
+[connection signal="TrialForceEnd" from="TrialContoller" to="EndingSequence" method="queue_run"]
+[connection signal="triggeraction" from="IntroSequence/BringDownWalls" to="Walls" method="_input_state_changed" binds= [ true ]]
+[connection signal="triggeraction" from="IntroSequence/StartTrial" to="TrialContoller" method="start"]

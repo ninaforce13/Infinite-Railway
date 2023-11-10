@@ -1,0 +1,89 @@
+[gd_resource type="Resource" load_steps=18 format=2]
+
+[ext_resource path="res://data/elemental_types/plant.tres" type="Resource" id=1]
+[ext_resource path="res://data/battle_moves/smack.tres" type="Resource" id=3]
+[ext_resource path="res://data/battle_moves/defend.tres" type="Resource" id=5]
+[ext_resource path="res://data/battle_moves/raise_shields.tres" type="Resource" id=6]
+[ext_resource path="res://data/battle_moves/plant_wall.tres" type="Resource" id=7]
+[ext_resource path="res://data/battle_moves/wink.tres" type="Resource" id=8]
+[ext_resource path="res://data/battle_moves/desperation.tres" type="Resource" id=9]
+[ext_resource path="res://data/Evolution.gd" type="Script" id=10]
+[ext_resource path="res://data/monster_forms/kirikuri.tres" type="Resource" id=11]
+[ext_resource path="res://data/MonsterForm.gd" type="Script" id=12]
+[ext_resource path="res://data/tape_upgrade_scripts/TapeUpgradeMove.gd" type="Script" id=13]
+[ext_resource path="res://ui/monster_stickers/twirligig.png" type="Texture" id=14]
+[ext_resource path="res://sfx/cries/twirligig_cry.wav" type="AudioStream" id=15]
+[ext_resource path="res://data/battle_moves/splinter.tres" type="Resource" id=16]
+
+[sub_resource type="Resource" id=1]
+resource_name = "kirikuri"
+script = ExtResource( 10 )
+evolved_form = ExtResource( 11 )
+required_tape_grade = 5
+min_hour = 0.0
+max_hour = 24.0
+required_location = ""
+specialization = ""
+is_secret = false
+
+[sub_resource type="Resource" id=2]
+resource_name = "Slot + plant_wall"
+script = ExtResource( 13 )
+add_slot = true
+sticker = ExtResource( 7 )
+
+[sub_resource type="Resource" id=3]
+resource_name = "Slot + defend"
+script = ExtResource( 13 )
+add_slot = true
+sticker = ExtResource( 5 )
+
+[resource]
+script = ExtResource( 12 )
+name = "TWIRLIGIG_NAME"
+swap_colors = [ Color( 0.321569, 0.305882, 0.239216, 1 ), Color( 0.458824, 0.443137, 0.341176, 1 ), Color( 0.690196, 0.666667, 0.509804, 1 ), Color( 0.815686, 0.8, 0.682353, 1 ), Color( 0.933333, 0.933333, 0.886275, 1 ), Color( 0.196078, 0.101961, 0.337255, 1 ), Color( 0.360784, 0.207843, 0.494118, 1 ), Color( 0.764706, 0.333333, 0.756863, 1 ), Color( 0.952941, 0.509804, 0.772549, 1 ), Color( 0.980392, 0.639216, 0.811765, 1 ), Color( 0.231373, 0.105882, 0.105882, 1 ), Color( 0.360784, 0.192157, 0.176471, 1 ), Color( 0.572549, 0.278431, 0.227451, 1 ), Color( 0.72549, 0.415686, 0.27451, 1 ), Color( 0.866667, 0.607843, 0.392157, 1 ) ]
+default_palette = [  ]
+emission_palette = [  ]
+battle_cry = ExtResource( 15 )
+named_positions = {
+"attack": Vector2( 76, 46 ),
+"decoy": Vector2( 79, 79 ),
+"eye": Vector2( 47, 28 ),
+"hit": Vector2( 49, 46 )
+}
+elemental_types = [ ExtResource( 1 ) ]
+tape_sticker_texture = ExtResource( 14 )
+exp_yield = 0
+require_dlc = ""
+battle_sprite_path = "res://sprites/monsters/twirligig.json"
+ui_sprite_path = ""
+pronouns = 0
+description = "TWIRLIGIG_DESCRIPTION"
+max_hp = 10000
+melee_attack = 1
+melee_defense = 100
+ranged_attack = 1
+ranged_defense = 100
+speed = 1
+accuracy = 100
+evasion = 100
+max_ap = 10
+move_slots = 5
+evolutions = [ SubResource( 1 ) ]
+evolution_specialization_question = ""
+capture_rate = 0
+exp_gradient = 0
+exp_base_level = 0
+move_tags = [ "dummy", "wood", "junk", "righteous" ]
+initial_moves = [ ExtResource( 3 ), ExtResource( 8 ) ]
+tape_upgrades = [ SubResource( 2 ), SubResource( 3 ), ExtResource( 16 ), ExtResource( 6 ), ExtResource( 9 ) ]
+unlock_ability = ""
+fusion_name_prefix = "TWIRLIGIG_NAME_PREFIX"
+fusion_name_suffix = "TWIRLIGIG_NAME_SUFFIX"
+fusion_generator_path = "res://data/fusions/twirligig.tscn"
+bestiary_index = -1
+bestiary_category = 0
+bestiary_bios = [ "TWIRLIGIG_LORE_1", "TWIRLIGIG_LORE_2" ]
+bestiary_data_requirement = 3
+bestiary_data_requirement_flag = ""
+loot_table = ""

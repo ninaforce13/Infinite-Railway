@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://ui/icons/types/element_glitter.png" type="Texture" id=1]
+[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=2]
+[ext_resource path="res://data/exchange_scripts/LootTableExchange.gd" type="Script" id=3]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/LootTables/rare_stickers.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 3 )
+max_amount = 1000
+only_sold_if_unowned = false
+name = "Extra Slot Sticker Pack"
+description = "A pack of 4 rare stickers guaranteed to have a      \"+1 Slot\" bonus effect!"
+icon = ExtResource( 1 )
+rarity = 2
+amount = 1
+service = ""
+currencies = [ ExtResource( 2 ) ]
+prices = [ 25 ]
+loot_table = ExtResource( 4 )
+loot_value = 1000

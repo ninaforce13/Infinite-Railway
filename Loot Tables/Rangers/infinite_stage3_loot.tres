@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://data/LootTable.gd" type="Script" id=1]
+[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=2]
+[ext_resource path="res://data/items/upgrape.tres" type="Resource" id=3]
+[ext_resource path="res://data/items/olive_up.tres" type="Resource" id=4]
+[ext_resource path="res://data/items/metal.tres" type="Resource" id=5]
+[ext_resource path="res://data/items/fused_material.tres" type="Resource" id=6]
+
+[resource]
+script = ExtResource( 1 )
+items = [ ExtResource( 5 ) ]
+guaranteed_items = [ ExtResource( 2 ), ExtResource( 6 ) ]
+guaranteed_item_amounts = [ 3, 1 ]
+rare_items = [ ExtResource( 3 ), ExtResource( 4 ) ]
+rare_item_chance = 0.051
+max_stickers = 0
+sticker_tags = [  ]
+allow_unsellable_stickers = false
+upgrade_sticker_rarity = false
+upgrade_sticker_rarity_chance = 100
+fixed_max_value = 700
+fixed_max_num = 0

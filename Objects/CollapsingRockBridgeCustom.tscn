@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/CollapsingBridgeToolMod.gd" type="Script" id=1]
+
+[node name="CollapsingRockBridgeCustom" type="Spatial"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 119.775, -6.08274, 0.206971 )
+script = ExtResource( 1 )
+rows = 12
+columns = 4
+shake_duration = 0.7

@@ -1,0 +1,75 @@
+[gd_scene load_steps=38 format=2]
+
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=1]
+[ext_resource path="res://nodes/actions/ExchangeMenuAction.gd" type="Script" id=2]
+[ext_resource path="res://world/core/Interaction.gd" type="Script" id=3]
+[ext_resource path="res://world/objects/static_physics/ranger_props/VendingMachineGlass.tscn" type="PackedScene" id=4]
+[ext_resource path="res://world/objects/static_physics/ranger_props/vending_machine_inside.json" type="PackedScene" id=5]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/rare_sticker_pack1.tres" type="Resource" id=6]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/spec_passive_mdef_sticker_pack.tres" type="Resource" id=7]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/per_emptyslot_splash_sticker_pack.tres" type="Resource" id=8]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/spec_passive_max_hp_sticker_pack.tres" type="Resource" id=9]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/alt_rdef_sticker_pack.tres" type="Resource" id=10]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/spec_passive_speed_sticker_pack.tres" type="Resource" id=11]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/alt_ratk_sticker_pack.tres" type="Resource" id=12]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/alt_mdef_sticker_pack.tres" type="Resource" id=13]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/alt_max_hp_sticker_pack.tres" type="Resource" id=14]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/spec_passive_rdef_sticker_pack.tres" type="Resource" id=15]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/extra_hit_sticker_pack.tres" type="Resource" id=16]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/compatible_sticker_pack.tres" type="Resource" id=17]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/alt_matk_sticker_pack.tres" type="Resource" id=18]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/alt_speed_sticker_pack.tres" type="Resource" id=19]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/stat_passive_max_hp_sticker_pack.tres" type="Resource" id=20]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/shared_sticker_pack.tres" type="Resource" id=21]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/use_again_sticker_pack.tres" type="Resource" id=22]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/splash_sticker_pack.tres" type="Resource" id=23]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/stat_passive_ratk_sticker_pack.tres" type="Resource" id=24]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/stat_passive_mdef_sticker_pack.tres" type="Resource" id=25]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/spec_passive_evasion_sticker_pack.tres" type="Resource" id=26]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/type_advantage_crit_sticker_pack.tres" type="Resource" id=27]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/spec_passive_accuracy_sticker_pack.tres" type="Resource" id=28]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/stat_passive_evasion_sticker_pack.tres" type="Resource" id=29]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/stat_passive_rdef_sticker_pack.tres" type="Resource" id=30]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/stat_passive_matk_sticker_pack.tres" type="Resource" id=31]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/stat_passive_accuracy_sticker_pack.tres" type="Resource" id=32]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/spec_passive_matk_sticker_pack.tres" type="Resource" id=33]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/spec_passive_ratk_sticker_pack.tres" type="Resource" id=34]
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/stat_passive_speed_sticker_pack.tres" type="Resource" id=35]
+[ext_resource path="res://world/objects/static_physics/ranger_props/vending_machine_1.mesh" type="ArrayMesh" id=36]
+
+[sub_resource type="BoxShape" id=20]
+extents = Vector3( 1, 1.43559, 0.821178 )
+
+[node name="EnhancedVendingMachine" type="Spatial"]
+
+[node name="VendingMachine1" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30.2161, 3.98209, 3.39156 )
+script = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="VendingMachine1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55965, -0.0590771 )
+shape = SubResource( 20 )
+
+[node name="vending_machine_1" type="MeshInstance" parent="VendingMachine1"]
+mesh = ExtResource( 36 )
+
+[node name="Sprite2" type="Spatial" parent="VendingMachine1" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.246505, 1.55647, 0.468817 )
+__meta__ = {
+"_ase_imported": true
+}
+
+[node name="Glass" type="Spatial" parent="VendingMachine1" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.246505, 1.61584, 0.662786 )
+__meta__ = {
+"_ase_imported": true
+}
+
+[node name="Cutscene" type="Node" parent="VendingMachine1"]
+script = ExtResource( 1 )
+
+[node name="ExchangeMenuAction" type="Node" parent="VendingMachine1/Cutscene"]
+script = ExtResource( 2 )
+title = "Specialized Sticker Packs"
+exchanges = [ ExtResource( 18 ), ExtResource( 14 ), ExtResource( 13 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 6 ), ExtResource( 21 ), ExtResource( 23 ), ExtResource( 22 ), ExtResource( 27 ), ExtResource( 8 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 33 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 34 ), ExtResource( 15 ), ExtResource( 11 ), ExtResource( 32 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 20 ), ExtResource( 25 ), ExtResource( 24 ), ExtResource( 30 ), ExtResource( 35 ) ]
+discountable = false

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://mods/Infinite_Dungeon/StickerPacks/LootTables/alt_mdef_stickers.tres" type="Resource" id=1]
+[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=2]
+[ext_resource path="res://data/exchange_scripts/LootTableExchange.gd" type="Script" id=3]
+[ext_resource path="res://ui/icons/status_effects/defense_melee_up.png" type="Texture" id=4]
+
+[resource]
+script = ExtResource( 3 )
+max_amount = 1000
+only_sold_if_unowned = false
+name = "Shielded Attacker Sticker Pack"
+description = "A pack of 4 rare stickers guaranteed to have a \"Based on Melee Defense if Higher\" bonus effect!"
+icon = ExtResource( 4 )
+rarity = 2
+amount = 1
+service = ""
+currencies = [ ExtResource( 2 ) ]
+prices = [ 10 ]
+loot_table = ExtResource( 1 )
+loot_value = 1000

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://data/BaseItem.gd" type="Script" id=1]
+[ext_resource path="res://sprites/items/note_1.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Acquisition Form #1"
+aux_name = ""
+icon = ExtResource( 2 )
+description = "A request form to acquire a Specialized Vending Machine for the Amber Lodge."
+category = "misc"
+base_stack_limit = 1
+stack_limit_category = ""
+consume_on_use = false
+discardable = false
+value = 100
+usable_contexts = 0
+battle_usage = 0
+sort_order = 0

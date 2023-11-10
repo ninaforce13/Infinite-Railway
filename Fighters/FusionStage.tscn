@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://nodes/encounter_config/RogueFusionCharacterConfig.gd" type="Script" id=3]
+[ext_resource path="res://nodes/encounter_config/RandomTapeConfig.gd" type="Script" id=4]
+
+[node name="Boss" type="Node"]
+script = ExtResource( 3 )
+character_name = "Mer-Line Attendant"
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+title = "Fusion Battle"
+subtitle = "Mer-Line's Blessing"
+complete_encounter_on_defeat = false
+
+[node name="Bootleg" type="Node" parent="."]
+script = ExtResource( 4 )
+seeded = false
+seed_key = "fusion_part1"
+bootleg_rate = 0.02
+profile_evolution_rate = 0.5
+
+[node name="RandomTapeConfig" type="Node" parent="."]
+script = ExtResource( 4 )
+seeded = false
+seed_key = "fusion_part2"
+profile_evolution_rate = 0.5

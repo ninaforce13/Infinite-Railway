@@ -1,0 +1,2027 @@
+[gd_scene load_steps=244 format=2]
+
+[ext_resource path="res://world/maps/CaveMeshlib.meshlib" type="MeshLibrary" id=1]
+[ext_resource path="res://world/maps/StationMeshlib.meshlib" type="MeshLibrary" id=2]
+[ext_resource path="res://world/world_camera_env_dungeon_graveyard.tres" type="Environment" id=3]
+[ext_resource path="res://world/maps/dungeon_graveyard/EntranceCaveWarp.gd" type="Script" id=4]
+[ext_resource path="res://data/map_metadata/overworld.tres" type="Resource" id=5]
+[ext_resource path="res://nodes/camera/LaggingTracker.gd" type="Script" id=6]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/WarpRegion_mod.gd" type="Script" id=7]
+[ext_resource path="res://mods/Infinite_Dungeon/regions/infinite_railway.tres" type="Resource" id=8]
+[ext_resource path="res://nodes/warp_region/WarpTarget.gd" type="Script" id=9]
+[ext_resource path="res://world/core/LevelMap.gd" type="Script" id=10]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/Initializer.gd" type="Script" id=11]
+[ext_resource path="res://nodes/actions/SetNPCStateAction.gd" type="Script" id=12]
+[ext_resource path="res://world/objects/campsite/campfire_stick_1.mesh" type="ArrayMesh" id=13]
+[ext_resource path="res://ui/icons/map_markers/campsite_icon.png" type="Texture" id=14]
+[ext_resource path="res://world/core/Interaction.gd" type="Script" id=15]
+[ext_resource path="res://nodes/weather/dust/DustParticles.tscn" type="PackedScene" id=16]
+[ext_resource path="res://nodes/camera/WorldCamera.tscn" type="PackedScene" id=17]
+[ext_resource path="res://nodes/actions/values/GetPlayer.gd" type="Script" id=18]
+[ext_resource path="res://nodes/weather/cave_depth_fade/cave_double_depth_fade.shader" type="Shader" id=19]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=20]
+[ext_resource path="res://world/objects/static_physics/deadworld_props/DeadSign1.tscn" type="PackedScene" id=21]
+[ext_resource path="res://world/objects/static_physics/station_bench/station_bench.tscn" type="PackedScene" id=22]
+[ext_resource path="res://world/objects/static_physics/deadworld_props/DeadSword1.tscn" type="PackedScene" id=23]
+[ext_resource path="res://world/objects/campsite/campfire_1.json" type="PackedScene" id=24]
+[ext_resource path="res://cutscenes/kayleigh_quest/KayleighQuest1_Part1.tscn" type="PackedScene" id=25]
+[ext_resource path="res://world/objects/campsite/campfire_base.json" type="PackedScene" id=26]
+[ext_resource path="res://sprites/environment/world/pebble_1.json" type="PackedScene" id=27]
+[ext_resource path="res://nodes/actions/ConfirmDialogAction.gd" type="Script" id=28]
+[ext_resource path="res://world/objects/campsite/Camping.gd" type="Script" id=29]
+[ext_resource path="res://world/objects/campsite/CampWarpAction.gd" type="Script" id=30]
+[ext_resource path="res://world/objects/campsite/fire_particle.png" type="Texture" id=31]
+[ext_resource path="res://data/map_metadata/overworld_chunk_metadata/overworld_4_0.tres" type="Resource" id=32]
+[ext_resource path="res://cutscenes/CampingAdvanceTime.tscn" type="PackedScene" id=33]
+[ext_resource path="res://cutscenes/intro/Tutorial4_Part3.tscn" type="PackedScene" id=34]
+[ext_resource path="res://nodes/actions/ChangeTrackerTargetAction.gd" type="Script" id=35]
+[ext_resource path="res://addons/misc_utils/actions/values/GetNode.gd" type="Script" id=36]
+[ext_resource path="res://addons/misc_utils/actions/CallMethodAction.gd" type="Script" id=37]
+[ext_resource path="res://addons/misc_utils/actions/decorators/Succeeder.gd" type="Script" id=38]
+[ext_resource path="res://music/demo/campfire_theme.ogg" type="AudioStream" id=39]
+[ext_resource path="res://addons/misc_utils/actions/WaitAction.gd" type="Script" id=40]
+[ext_resource path="res://nodes/actions/CheckConditionAction.gd" type="Script" id=41]
+[ext_resource path="res://addons/misc_utils/actions/composites/Selector.gd" type="Script" id=42]
+[ext_resource path="res://nodes/actions/TransitionAction.gd" type="Script" id=43]
+[ext_resource path="res://nodes/actions/WaitForSceneChangeEndingAction.gd" type="Script" id=44]
+[ext_resource path="res://nodes/actions/values/GetPartner.gd" type="Script" id=45]
+[ext_resource path="res://cutscenes/viola_quest/ViolaQuest4_Epilogue.tscn" type="PackedScene" id=46]
+[ext_resource path="res://cutscenes/camping/ViolaGeneric.tscn" type="PackedScene" id=47]
+[ext_resource path="res://cutscenes/camping/MeredithGeneric.tscn" type="PackedScene" id=48]
+[ext_resource path="res://cutscenes/intermission/Intermission_Part6.tscn" type="PackedScene" id=49]
+[ext_resource path="res://cutscenes/camping/EugeneGeneric.tscn" type="PackedScene" id=50]
+[ext_resource path="res://cutscenes/archangels/CafeRetrospective.tscn" type="PackedScene" id=51]
+[ext_resource path="res://cutscenes/camping/KayleighGeneric.tscn" type="PackedScene" id=52]
+[ext_resource path="res://cutscenes/camping/DogGeneric.tscn" type="PackedScene" id=53]
+[ext_resource path="res://cutscenes/camping/FelixGeneric.tscn" type="PackedScene" id=54]
+[ext_resource path="res://nodes/actions/SelectCutsceneAction.gd" type="Script" id=55]
+[ext_resource path="res://nodes/actions/AfterSceneChangeFailer.gd" type="Script" id=56]
+[ext_resource path="res://nodes/actions/PlayAnimationAction.gd" type="Script" id=57]
+[ext_resource path="res://nodes/network/FetchInterdimensionalPostAction.gd" type="Script" id=58]
+[ext_resource path="res://cutscenes/ShouldTryLongCampingCutsceneAction.gd" type="Script" id=59]
+[ext_resource path="res://cutscenes/ShowCampingMenuAction.gd" type="Script" id=60]
+[ext_resource path="res://data/battle_moves/neutralise.tres" type="Resource" id=61]
+[ext_resource path="res://data/battle_moves/status_resistance.tres" type="Resource" id=62]
+[ext_resource path="res://data/characters/aa_aleph_null.tres" type="Resource" id=63]
+[ext_resource path="res://data/archangel_forms/aleph.tres" type="Resource" id=64]
+[ext_resource path="res://data/archangel_moves/eldritch.tres" type="Resource" id=65]
+[ext_resource path="res://nodes/encounter_config/EncounterConfig.gd" type="Script" id=66]
+[ext_resource path="res://nodes/sprite_container/SpriteContainer.gd" type="Script" id=67]
+[ext_resource path="res://nodes/encounter_config/CharacterConfig.gd" type="Script" id=68]
+[ext_resource path="res://nodes/encounter_config/TapeConfig.gd" type="Script" id=69]
+[ext_resource path="res://world/npc/Controls.gd" type="Script" id=70]
+[ext_resource path="res://world/npc/NPC.gd" type="Script" id=71]
+[ext_resource path="res://world/npc/FloorRay.gd" type="Script" id=72]
+[ext_resource path="res://world/npc/Footsteps.tscn" type="PackedScene" id=73]
+[ext_resource path="res://world/npc/EmotePlayer.tscn" type="PackedScene" id=74]
+[ext_resource path="res://world/core/Interaction.tscn" type="PackedScene" id=75]
+[ext_resource path="res://nodes/actions/FaceTowardsAction.gd" type="Script" id=76]
+[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=77]
+[ext_resource path="res://mods/Infinite_Dungeon/monsters/aleph_null_infdung_form.tres" type="Resource" id=78]
+[ext_resource path="res://world/npc/HumanStateMachine.tscn" type="PackedScene" id=79]
+[ext_resource path="res://data/battle_moves/phase_shift.tres" type="Resource" id=80]
+[ext_resource path="res://data/archangel_forms/cube.tres" type="Resource" id=81]
+[ext_resource path="res://music/release/battle_final_1.ogg" type="AudioStream" id=82]
+[ext_resource path="res://mods/Infinite_Dungeon/CustomAI/AlephNullAI_Infdung.tscn" type="PackedScene" id=83]
+[ext_resource path="res://data/elemental_types/beast.tres" type="Resource" id=84]
+[ext_resource path="res://data/battle_moves/radioactive.tres" type="Resource" id=85]
+[ext_resource path="res://nodes/actions/IdleBehavior.gd" type="Script" id=86]
+[ext_resource path="res://data/archangel_moves/mammon_too_big_to_fail.tres" type="Resource" id=87]
+[ext_resource path="res://mods/Infinite_Dungeon/battle_moves/aleph_null_resurrect.tres" type="Resource" id=88]
+[ext_resource path="res://sprites/monsters/world/magikrab.json" type="PackedScene" id=89]
+[ext_resource path="res://addons/misc_utils/actions/decorators/Repeater.gd" type="Script" id=90]
+[ext_resource path="res://menus/boss_title/TitleBannerConfig.gd" type="Script" id=91]
+[ext_resource path="res://nodes/actions/MessageDialogAction.gd" type="Script" id=92]
+[ext_resource path="res://menus/boss_title/ArchangelTitleBanner.tscn" type="PackedScene" id=93]
+[ext_resource path="res://nodes/actions/MenuDialogAction.gd" type="Script" id=94]
+[ext_resource path="res://data/battle_moves/damage_roll.tres" type="Resource" id=95]
+[ext_resource path="res://data/archangel_moves/cube_frustum_cull.tres" type="Resource" id=96]
+[ext_resource path="res://data/battle_moves/sharp_edges.tres" type="Resource" id=97]
+[ext_resource path="res://data/battle_moves/sharpen.tres" type="Resource" id=98]
+[ext_resource path="res://data/battle_moves/brick_blast.tres" type="Resource" id=99]
+[ext_resource path="res://addons/misc_utils/actions/composites/Sequence.gd" type="Script" id=100]
+[ext_resource path="res://mods/Infinite_Dungeon/CutScenes/TransformationCutscene.tscn" type="PackedScene" id=101]
+[ext_resource path="res://battle/ai/archangels/ArchangelAI.tscn" type="PackedScene" id=102]
+[ext_resource path="res://data/characters/aa_cube.tres" type="Resource" id=103]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Misc/practice_loottable.tres" type="Resource" id=104]
+[ext_resource path="res://sprites/portraits/magikrab.png" type="Texture" id=105]
+[ext_resource path="res://data/archangel_forms/tower.tres" type="Resource" id=106]
+[ext_resource path="res://data/archangel_forms/lamento_mori.tres" type="Resource" id=107]
+[ext_resource path="res://data/battle_moves/trick.tres" type="Resource" id=108]
+[ext_resource path="res://data/battle_moves/clobber.tres" type="Resource" id=109]
+[ext_resource path="res://data/archangel_forms/monarch.tres" type="Resource" id=110]
+[ext_resource path="res://data/archangel_forms/serpent.tres" type="Resource" id=111]
+[ext_resource path="res://data/archangel_forms/mammon.tres" type="Resource" id=112]
+[ext_resource path="res://data/archangel_forms/puppet.tres" type="Resource" id=113]
+[ext_resource path="res://data/archangel_forms/alice.tres" type="Resource" id=114]
+[ext_resource path="res://data/archangel_forms/robin.tres" type="Resource" id=115]
+[ext_resource path="res://data/battle_moves/ap_steal.tres" type="Resource" id=116]
+[ext_resource path="res://data/battle_moves/toy_hammer.tres" type="Resource" id=117]
+[ext_resource path="res://mods/Infinite_Dungeon/battle_moves/BombVoyage_InfDung.tres" type="Resource" id=118]
+[ext_resource path="res://music/demo/battle_archangel_vox.ogg" type="AudioStream" id=119]
+[ext_resource path="res://music/demo/battle_archangel_instr.ogg" type="AudioStream" id=120]
+[ext_resource path="res://addons/misc_utils/actions/decorators/Failer.gd" type="Script" id=121]
+[ext_resource path="res://battle/backgrounds/archangel/BattleStationPlatform.tscn" type="PackedScene" id=122]
+[ext_resource path="res://world/objects/interior_props/WoodenPlaque1.tscn" type="PackedScene" id=123]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/SetDungeonProperty.gd" type="Script" id=124]
+[ext_resource path="res://data/battle_moves/smack.tres" type="Resource" id=128]
+[ext_resource path="res://data/battle_moves/spit.tres" type="Resource" id=129]
+[ext_resource path="res://data/archangel_moves/monarch_call_to_arms.tres" type="Resource" id=130]
+[ext_resource path="res://data/archangel_moves/tower_true_illumination.tres" type="Resource" id=131]
+[ext_resource path="res://data/archangel_moves/robin_fairy_horde.tres" type="Resource" id=132]
+[ext_resource path="res://data/archangel_moves/alice_high_and_mighty.tres" type="Resource" id=133]
+[ext_resource path="res://data/archangel_moves/serpent_judgment.tres" type="Resource" id=134]
+[ext_resource path="res://data/archangel_moves/lamento_mori_death_ray.tres" type="Resource" id=135]
+[ext_resource path="res://data/battle_moves/ritual.tres" type="Resource" id=136]
+[ext_resource path="res://data/archangel_moves/puppet_feedback.tres" type="Resource" id=137]
+[ext_resource path="res://data/archangel_moves/mammon_market_crash.tres" type="Resource" id=138]
+[ext_resource path="res://data/archangel_moves/aleph_deus_ex_calibur.tres" type="Resource" id=140]
+[ext_resource path="res://data/characters/aa_aleph.tres" type="Resource" id=141]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Bosses/infinite_dungeon_boss.tres" type="Resource" id=142]
+[ext_resource path="res://data/battle_moves/the_old_1_2.tres" type="Resource" id=143]
+[ext_resource path="res://data/battle_moves/copper_chop.tres" type="Resource" id=144]
+[ext_resource path="res://data/battle_moves/bone_cannon.tres" type="Resource" id=145]
+[ext_resource path="res://world/monsters/MorganteTapeConfig.gd" type="Script" id=146]
+[ext_resource path="res://data/battle_moves/focus.tres" type="Resource" id=147]
+[ext_resource path="res://data/battle_moves/shooting_star.tres" type="Resource" id=148]
+[ext_resource path="res://data/battle_moves/broadcast.tres" type="Resource" id=149]
+[ext_resource path="res://data/battle_moves/trip.tres" type="Resource" id=150]
+[ext_resource path="res://data/battle_moves/thunder_blast.tres" type="Resource" id=151]
+[ext_resource path="res://data/battle_moves/call_for_help.tres" type="Resource" id=152]
+[ext_resource path="res://data/battle_moves/revenge_strike.tres" type="Resource" id=153]
+[ext_resource path="res://data/battle_moves/preemptive_strike.tres" type="Resource" id=154]
+[ext_resource path="res://data/battle_moves/wallop.tres" type="Resource" id=155]
+[ext_resource path="res://data/battle_moves/prismatic.tres" type="Resource" id=156]
+[ext_resource path="res://data/battle_moves/incinerate.tres" type="Resource" id=157]
+[ext_resource path="res://data/battle_moves/hp_absorb.tres" type="Resource" id=158]
+[ext_resource path="res://data/battle_moves/wonderful_7.tres" type="Resource" id=159]
+[ext_resource path="res://data/battle_moves/crumble.tres" type="Resource" id=160]
+[ext_resource path="res://data/battle_moves/meteor_barrage.tres" type="Resource" id=161]
+[ext_resource path="res://data/battle_moves/radiation_breath.tres" type="Resource" id=162]
+[ext_resource path="res://data/battle_moves/beast_wall.tres" type="Resource" id=163]
+[ext_resource path="res://data/battle_moves/guzzle_fuel.tres" type="Resource" id=164]
+[ext_resource path="res://data/battle_moves/inflame.tres" type="Resource" id=165]
+[ext_resource path="res://data/battle_moves/sticky_tongue.tres" type="Resource" id=166]
+[ext_resource path="res://data/battle_moves/waterworks.tres" type="Resource" id=167]
+[ext_resource path="res://data/battle_moves/spray.tres" type="Resource" id=168]
+[ext_resource path="res://data/battle_moves/galactic_beatdown.tres" type="Resource" id=169]
+[ext_resource path="res://data/battle_moves/crystal_lens.tres" type="Resource" id=170]
+[ext_resource path="res://data/battle_moves/bad_joke.tres" type="Resource" id=171]
+[ext_resource path="res://data/archangel_moves/robin_night_mare.tres" type="Resource" id=172]
+[ext_resource path="res://data/archangel_moves/tower_false_illumination.tres" type="Resource" id=173]
+[ext_resource path="res://data/archangel_moves/mammon_asset_freeze.tres" type="Resource" id=174]
+[ext_resource path="res://data/archangel_moves/mammon_leverage.tres" type="Resource" id=175]
+[ext_resource path="res://data/archangel_moves/serpent_temptation.tres" type="Resource" id=176]
+[ext_resource path="res://data/battle_moves/mountain_smash.tres" type="Resource" id=177]
+[ext_resource path="res://data/archangel_moves/mammon_loss_leader.tres" type="Resource" id=178]
+[ext_resource path="res://data/archangel_moves/monarch_tentacle.tres" type="Resource" id=179]
+[ext_resource path="res://data/archangel_moves/robin_fairy_dust.tres" type="Resource" id=180]
+[ext_resource path="res://data/archangel_moves/aleph_death_by_10000_cuts.tres" type="Resource" id=181]
+[ext_resource path="res://data/archangel_moves/aleph_death_by_1000_cuts.tres" type="Resource" id=182]
+[ext_resource path="res://data/archangel_forms/helia.tres" type="Resource" id=183]
+[ext_resource path="res://battle/ai/archangels/AARobinAI.tscn" type="PackedScene" id=184]
+[ext_resource path="res://battle/ai/archangels/AAMammonAI.tscn" type="PackedScene" id=185]
+[ext_resource path="res://battle/ai/archangels/AAMonarchAI.tscn" type="PackedScene" id=186]
+[ext_resource path="res://battle/ai/archangels/AAMourningstarAI.tscn" type="PackedScene" id=187]
+[ext_resource path="res://battle/ai/archangels/TowerAI.tscn" type="PackedScene" id=188]
+[ext_resource path="res://battle/ai/archangels/LamentoMoriAI.tscn" type="PackedScene" id=189]
+[ext_resource path="res://battle/ai/archangels/AAAliceAI.tscn" type="PackedScene" id=190]
+[ext_resource path="res://mods/Infinite_Dungeon/CustomAI/InfDung_AAAlephAI.tscn" type="PackedScene" id=191]
+[ext_resource path="res://mods/Infinite_Dungeon/CustomAI/InfDung_AAPuppetAI.tscn" type="PackedScene" id=192]
+[ext_resource path="res://data/characters/aa_helia.tres" type="Resource" id=193]
+[ext_resource path="res://data/characters/aa_robin.tres" type="Resource" id=194]
+[ext_resource path="res://data/characters/aa_tower.tres" type="Resource" id=195]
+[ext_resource path="res://data/battle_moves/fusion_power.tres" type="Resource" id=196]
+[ext_resource path="res://data/archangel_moves/mammon_margin_call.tres" type="Resource" id=197]
+[ext_resource path="res://data/characters/aa_mammon.tres" type="Resource" id=198]
+[ext_resource path="res://data/characters/aa_serpent.tres" type="Resource" id=199]
+[ext_resource path="res://data/characters/aa_lamento_mori.tres" type="Resource" id=200]
+[ext_resource path="res://mods/Infinite_Dungeon/CutScenes/alephtitlebanner.tres" type="Resource" id=201]
+[ext_resource path="res://data/characters/aa_puppet.tres" type="Resource" id=202]
+[ext_resource path="res://data/characters/aa_alice.tres" type="Resource" id=203]
+[ext_resource path="res://data/characters/aa_monarch.tres" type="Resource" id=204]
+[ext_resource path="res://data/archangel_forms/morgante.tres" type="Resource" id=205]
+[ext_resource path="res://data/characters/aa_morgante.tres" type="Resource" id=206]
+[ext_resource path="res://music/release/battle_aleph.ogg" type="AudioStream" id=207]
+[ext_resource path="res://data/battle_moves/heroic_blade.tres" type="Resource" id=208]
+[ext_resource path="res://data/battle_moves/parry_stance.tres" type="Resource" id=209]
+[ext_resource path="res://data/battle_moves/defend.tres" type="Resource" id=210]
+[ext_resource path="res://sfx/silence.wav" type="AudioStream" id=211]
+[ext_resource path="res://data/battle_moves/hot_potato.tres" type="Resource" id=212]
+[ext_resource path="res://data/archangel_moves/lenna_whistle_for_help.tres" type="Resource" id=213]
+[ext_resource path="res://data/archangel_forms/lenna.tres" type="Resource" id=214]
+[ext_resource path="res://mods/Infinite_Dungeon/CutScenes/Lenna_BattleStart_InfDung.tscn" type="PackedScene" id=215]
+[ext_resource path="res://battle/ai/archangels/LennaAI.tscn" type="PackedScene" id=216]
+[ext_resource path="res://data/archangel_moves/lenna_power_of_truth.tres" type="Resource" id=217]
+[ext_resource path="res://data/characters/aa_lenna.tres" type="Resource" id=218]
+[ext_resource path="res://world/core/FlagVisibility.gd" type="Script" id=219]
+[ext_resource path="res://mods/Infinite_Dungeon/Rooms/BattleAction_InfDung.gd" type="Script" id=220]
+[ext_resource path="res://mods/Infinite_Dungeon/battle_moves/dummy_resurrect.tres" type="Resource" id=221]
+[ext_resource path="res://mods/Infinite_Dungeon/monsters/dummy.tres" type="Resource" id=222]
+[ext_resource path="res://battle/backgrounds/BattleCave.tscn" type="PackedScene" id=223]
+
+[sub_resource type="ShaderMaterial" id=1]
+render_priority = 30
+shader = ExtResource( 19 )
+shader_param/draw_distance = 100.0
+shader_param/a_top_y = -4.0
+shader_param/a_bottom_y = -8.0
+shader_param/b_top_y = 12.0
+shader_param/b_bottom_y = 16.0
+shader_param/color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="BoxShape" id=12]
+
+[sub_resource type="Animation" id=13]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1.5, 0 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "end_camping"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1.5, 0 ), Vector3( 0, 3, 0 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+length = 3.0
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("OmniLight:omni_range")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 8, -0.25, 0, 0.25, 0, 7.3, -0.25, 0, 0.25, 0, 8, -0.25, 0, 0.25, 0, 7.8, -0.25, 0, 0.25, 0, 8.5, -0.25, 0, 0.25, 0, 7.9, -0.25, 0, 0.25, 0, 8, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.3, 1.8, 2.6, 3 )
+}
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.936916, 1 )
+colors = PoolColorArray( 0.992157, 0.67451, 0.227451, 1, 0.545098, 0.101961, 0.0352941, 1, 0.470588, 0.14902, 0.14902, 0 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+spread = 180.0
+gravity = Vector3( 0, 0.5, 0 )
+initial_velocity = 0.25
+tangential_accel = 0.25
+tangential_accel_random = 1.0
+color_ramp = SubResource( 9 )
+
+[sub_resource type="SpatialMaterial" id=11]
+render_priority = 1
+flags_transparent = true
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource( 31 )
+emission_enabled = true
+emission = Color( 0.992157, 0.67451, 0.227451, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="QuadMesh" id=5]
+material = SubResource( 11 )
+size = Vector2( 0.1, 0.1 )
+
+[sub_resource type="Animation" id=6]
+length = 3.0
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("OmniLight:omni_range")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 8, -0.25, 0, 0.25, 0, 7.3, -0.25, 0, 0.25, 0, 8, -0.25, 0, 0.25, 0, 7.8, -0.25, 0, 0.25, 0, 8.5, -0.25, 0, 0.25, 0, 7.9, -0.25, 0, 0.25, 0, 8, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.3, 1.8, 2.6, 3 )
+}
+
+[sub_resource type="CylinderShape" id=7]
+height = 3.0
+radius = 0.75
+
+[sub_resource type="CapsuleShape" id=16]
+radius = 0.9
+height = 0.9
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 91 )
+banner_scene = ExtResource( 93 )
+title = "AA_TOWER_NAME"
+subtitle = "AA_TOWER_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 91 )
+banner_scene = ExtResource( 93 )
+title = "AA_ROBIN_NAME"
+subtitle = "AA_ROBIN_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 91 )
+banner_scene = ExtResource( 93 )
+title = "AA_MORGANTE_NAME"
+subtitle = "AA_MORGANTE_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 91 )
+banner_scene = ExtResource( 93 )
+title = "AA_MONARCH_NAME"
+subtitle = "AA_MONARCH_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 91 )
+banner_scene = ExtResource( 93 )
+title = "AA_MAMMON_NAME"
+subtitle = "AA_MAMMON_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[sub_resource type="Resource" id=23]
+script = ExtResource( 91 )
+banner_scene = ExtResource( 93 )
+title = "AA_HELIA_NAME"
+subtitle = "AA_HELIA_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[sub_resource type="Resource" id=24]
+script = ExtResource( 91 )
+banner_scene = ExtResource( 93 )
+title = "AA_ALICE_NAME"
+subtitle = "AA_ALICE_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[sub_resource type="Resource" id=25]
+script = ExtResource( 91 )
+banner_scene = ExtResource( 93 )
+title = "AA_PUPPET_NAME"
+subtitle = "AA_PUPPET_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[sub_resource type="Resource" id=26]
+script = ExtResource( 91 )
+banner_scene = ExtResource( 93 )
+title = "AA_SERPENT_NAME"
+subtitle = "AA_SERPENT_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[sub_resource type="Resource" id=27]
+script = ExtResource( 91 )
+banner_scene = ExtResource( 93 )
+title = "AA_LAMENTO_MORI_NAME"
+subtitle = "AA_LAMENTO_MORI_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 91 )
+banner_scene = ExtResource( 93 )
+title = "AA_CUBE_NAME"
+subtitle = "AA_CUBE_SUBTITLE"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false
+
+[node name="Entrance" type="Spatial"]
+script = ExtResource( 10 )
+default_warp_target = "EntranceWarp"
+map_metadata = ExtResource( 5 )
+map_chunk_metadata = ExtResource( 32 )
+world_time_rate = 1.0
+default_region_settings = ExtResource( 8 )
+visited_flag = "visited_infinite_railway"
+enable_fast_travel = true
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource( 2 )
+data = {
+"cells": PoolIntArray( 3, 4, 1048588, 65539, 4, 1048588, 131075, 4, 1048588, 196611, 4, 1048588, 262147, 4, 1048588, 327683, 4, 1048588, 393219, 4, 1048588, 458755, 4, 1048588, 524291, 4, 1048588, 589827, 4, 1048588, 655363, 4, 1048588, 720899, 4, 1048603, -65533, 4, 1048582, 3, 5, 1048588, 65539, 5, 1048588, 131072, 5, 0, 131073, 5, 32, 131074, 5, 32, 131075, 5, 1048588, 196604, 5, 32, 196605, 5, 32, 196606, 5, 0, 196607, 5, 0, 196611, 5, 1048588, 262147, 5, 1048588, 327683, 5, 1048588, 393219, 5, 1048588, 458755, 5, 1048588, 524291, 5, 1048588, 589827, 5, 1048588, 655363, 5, 1048588, 720899, 5, 1048603, -65533, 5, 1048582, 3, 6, 1048588, 65539, 6, 1048588, 131072, 6, 0, 131073, 6, 32, 131074, 6, 32, 131075, 6, 1048588, 196604, 6, 32, 196605, 6, 32, 196606, 6, 0, 196607, 6, 0, 196611, 6, 1048588, 262147, 6, 1048588, 327683, 6, 1048588, 393219, 6, 1048588, 458755, 6, 1048588, 524291, 6, 1048588, 589827, 6, 1048588, 655363, 6, 1048588, 720899, 6, 1048603, -65533, 6, 1048582, 3, 7, 1048588, 65539, 7, 1048588, 131072, 7, 0, 131073, 7, 32, 131074, 7, 32, 131075, 7, 1048588, 196604, 7, 32, 196605, 7, 32, 196606, 7, 0, 196607, 7, 0, 196611, 7, 1048588, 262147, 7, 1048588, 327683, 7, 1048588, 393219, 7, 1048588, 458755, 7, 1048588, 524291, 7, 1048588, 589827, 7, 1048588, 655363, 7, 1048588, 720899, 7, 1048603, -65533, 7, 1048582, 3, 8, 1048590, 65539, 8, 1048590, 131072, 8, 0, 131073, 8, 32, 131074, 8, 32, 131075, 8, 1048590, 196604, 8, 32, 196605, 8, 32, 196606, 8, 0, 196607, 8, 0, 196611, 8, 1048590, 262147, 8, 1048590, 327683, 8, 1048590, 393219, 8, 1048590, 458755, 8, 1048590, 524291, 8, 1048590, 589827, 8, 1048590, 655363, 8, 1048590, 720899, 8, 1048603, -65533, 8, 1048582, 3, 9, 1048588, 65539, 9, 1048588, 131072, 9, 0, 131073, 9, 32, 131074, 9, 32, 131075, 9, 1048588, 196604, 9, 32, 196605, 9, 32, 196606, 9, 0, 196607, 9, 0, 196611, 9, 1048588, 262147, 9, 1048589, 327683, 9, 1048588, 393219, 9, 1048588, 458755, 9, 1048588, 524291, 9, 1048588, 589827, 9, 1048588, 655363, 9, 1048588, 720899, 9, 1048603, -65533, 9, 1048582, 3, 10, 1048588, 65539, 10, 1048588, 131072, 10, 1, 131073, 10, 32, 131074, 10, 32, 131075, 10, 1048588, 196604, 10, 32, 196605, 10, 32, 196606, 10, 0, 196607, 10, 0, 196611, 10, 1048588, 262147, 10, 1048588, 327680, 10, 1441824, 327683, 10, 1048588, 393213, 10, 1441824, 393214, 10, 1441824, 393215, 10, 1441824, 393219, 10, 1048588, 458755, 10, 1048588, 524291, 10, 1048588, 589827, 10, 1048588, 655363, 10, 1048588, 720899, 10, 1048603, -65533, 10, 1048582, 3, 11, 1048588, 65539, 11, 1048588, 131072, 11, 0, 131073, 11, 32, 131074, 11, 32, 131075, 11, 1048588, 196604, 11, 32, 196605, 11, 32, 196606, 11, 0, 196607, 11, 0, 196611, 11, 1048588, 262147, 11, 1048588, 327680, 11, 32, 327683, 11, 1048588, 393213, 11, 1441824, 393214, 11, 1441824, 393215, 11, 32, 393219, 11, 1048588, 458755, 11, 1048588, 524291, 11, 1048588, 589827, 11, 1048588, 655363, 11, 1048588, 720899, 11, 1048603, -131070, 11, 917516, -65533, 11, 1048582, 2, 12, 1048593, 3, 12, 1048602, 65538, 12, 1048593, 65539, 12, 1048602, 131072, 12, 2, 131073, 12, 32, 131074, 12, 1048585, 131075, 12, 1048602, 196604, 12, 32, 196605, 12, 32, 196606, 12, 0, 196607, 12, 0, 196610, 12, 1048585, 196611, 12, 1048602, 262146, 12, 1048593, 262147, 12, 1048602, 327680, 12, 32, 327682, 12, 1048593, 327683, 12, 1048602, 393213, 12, 1441824, 393214, 12, 32, 393215, 12, 32, 393218, 12, 1048593, 393219, 12, 1048602, 458754, 12, 1048593, 458755, 12, 1048602, 524290, 12, 1048593, 524291, 12, 1048602, 589826, 12, 1048593, 589827, 12, 1048602, 655362, 12, 1048593, 655363, 12, 1048602, 720898, 12, 1048593, 720899, 12, 1048602, 786434, 12, 1048593, 786435, 12, 1048602, 851970, 12, 1048605, 851971, 12, 1048606, -65534, 12, 131089, -65533, 12, 131098, 2, 13, 1310737, 3, 13, 262144, 65538, 13, 1048588, 131072, 13, 1441792, 131073, 13, 0, 131074, 13, 1048582, 196604, 13, 0, 196605, 13, 0, 196606, 13, 1441792, 196607, 13, 1441792, 196609, 13, 6, 196610, 13, 1048584, 262140, 13, 1048585, 262141, 13, 6, 262145, 13, 20, 262146, 13, 1048602, 327676, 13, 1048593, 327677, 13, 13, 327680, 13, 12, 327681, 13, 12, 327682, 13, 1048602, 393212, 13, 1048593, 393213, 13, 12, 393214, 13, 12, 393215, 13, 12, 393216, 13, 12, 393217, 13, 12, 393218, 13, 1048602, 458748, 13, 1048593, 458749, 13, 12, 458750, 13, 12, 458751, 13, 12, 458752, 13, 12, 458753, 13, 12, 458754, 13, 1048602, 524284, 13, 1048593, 524285, 13, 12, 524286, 13, 12, 524287, 13, 12, 524288, 13, 12, 524289, 13, 12, 524290, 13, 1048602, 589820, 13, 1048593, 589821, 13, 12, 589822, 13, 12, 589823, 13, 25, 589824, 13, 12, 589825, 13, 12, 589826, 13, 1048602, 655356, 13, 1048593, 655357, 13, 12, 655358, 13, 12, 655359, 13, 12, 655360, 13, 12, 655361, 13, 12, 655362, 13, 1048602, 720892, 13, 1048593, 720893, 13, 12, 720894, 13, 12, 720895, 13, 12, 720896, 13, 12, 720897, 13, 12, 720898, 13, 1048602, 786428, 13, 1048593, 786429, 13, 12, 786430, 13, 12, 786431, 13, 25, 786432, 13, 12, 786433, 13, 12, 786434, 13, 1048602, 851964, 13, 1048593, 851965, 13, 12, 851966, 13, 12, 851967, 13, 12, 851968, 13, 27, 851969, 13, 27, 851970, 13, 1048606, 917500, 13, 1048605, 917501, 13, 27, 917502, 13, 27, 917503, 13, 27, -65534, 13, 1310737, -65533, 13, 393216, 1, 14, 1310732, 2, 14, 524300, 3, 14, 524300, 4, 14, 1048587, 65538, 14, 1310732, 65539, 14, 1048587, 131072, 14, 0, 131073, 14, 1048576, 131074, 14, 1048587, 196604, 14, 0, 196605, 14, 0, 196606, 14, 0, 196607, 14, 0, 262140, 14, 1048582, 327676, 14, 1048588, 393212, 14, 1048588, 458748, 14, 1048588, 524284, 14, 1048588, 589820, 14, 1048588, 655356, 14, 1048588, 720892, 14, 1048588, 786428, 14, 1048588, 851964, 14, 1048588, 917500, 14, 1048603, -131070, 14, 917516, -65534, 14, 524288, -65533, 14, 524288, -65532, 14, 786432, -65531, 14, 1048587, 2, 15, 458752, 3, 15, 458752, 4, 15, 1048586, 65538, 15, 262145, 65539, 15, 1048586, 131072, 15, 0, 131073, 15, 1048576, 131074, 15, 1048586, 196604, 15, 0, 196605, 15, 0, 196606, 15, 0, 196607, 15, 0, 262140, 15, 1048582, 327676, 15, 1048588, 393212, 15, 1048588, 458748, 15, 1048588, 524284, 15, 1048588, 589820, 15, 1048588, 655356, 15, 1048588, 720892, 15, 1048588, 786428, 15, 1048588, 851964, 15, 1048588, 917500, 15, 1048603, -131070, 15, 917516, -65534, 15, 458752, -65533, 15, 458752, -65532, 15, 393216, -65531, 15, 1048586, 2, 16, 1048589, 65538, 16, 1048588, 131072, 16, 0, 131073, 16, 1048576, 131074, 16, 1048582, 196604, 16, 0, 196605, 16, 0, 196606, 16, 0, 196607, 16, 0, 262140, 16, 1048582, 327676, 16, 1048588, 393212, 16, 1048588, 458748, 16, 1048588, 524284, 16, 1048588, 589820, 16, 1048588, 655356, 16, 1048588, 720892, 16, 1048588, 786428, 16, 1048588, 851964, 16, 1048588, 917500, 16, 1048603, -131071, 16, 53, -131068, 16, 655411, -65534, 16, 1048582, 2, 17, 1048588, 65538, 17, 1048588, 131072, 17, 0, 131073, 17, 1048576, 131074, 17, 1048582, 196604, 17, 0, 196605, 17, 0, 196606, 17, 0, 196607, 17, 1048577, 196608, 17, 655370, 196609, 17, 655366, 196610, 17, 655368, 262140, 17, 1048582, 262141, 17, 1441800, 262142, 17, 655366, 262143, 17, 655371, 327676, 17, 1048588, 393212, 17, 1048588, 458748, 17, 1048588, 524284, 17, 1048588, 589820, 17, 1048588, 655356, 17, 1048588, 720892, 17, 1048588, 786428, 17, 1048588, 851964, 17, 1048588, 917500, 17, 1048603, -131068, 17, 655411, -131067, 17, 655411, -65534, 17, 1048582, 2, 18, 1048592, 65538, 18, 1048592, 131074, 18, 1048591, 196604, 18, 22, 196605, 18, 23, 196608, 18, 1441792, 196609, 18, 0, 196610, 18, 1048582, 262141, 18, 1441813, 262142, 18, 1441792, 262143, 18, 1441792, 327676, 18, 1048602, 393212, 18, 1048602, 458748, 18, 1048602, 524284, 18, 1048602, 589820, 18, 1048602, 655356, 18, 1048602, 720892, 18, 1048602, 786428, 18, 1048602, 851964, 18, 1048602, 917500, 18, 1048606, -65534, 18, 1048582, 2, 19, 1048602, 65538, 19, 1048602, 131074, 19, 1048602, 196608, 19, 0, 196609, 19, 1048576, 196610, 19, 1048597, 262141, 19, 1441813, 262142, 19, 0, 262143, 19, 0, -65534, 19, 1048584, 196608, 20, 0, 196609, 20, 1048576, 196610, 20, 1048597, 262141, 20, 1441813, 262142, 20, 0, 262143, 20, 0, 196608, 21, 0, 196609, 21, 1048576, 196610, 21, 1048597, 262141, 21, 1441813, 262142, 21, 0, 262143, 21, 0, 196608, 22, 0, 196609, 22, 1048576, 196610, 22, 1048598, 262141, 22, 1441815, 262142, 22, 0, 262143, 22, 1048577, 262144, 22, 655370, 262145, 22, 655366, 327678, 22, 655366, 327679, 22, 655371, 262144, 23, 0, 262145, 23, 1048576, 262146, 23, 1048597, 327677, 23, 1441813, 327678, 23, 0, 327679, 23, 0, 262144, 24, 0, 262145, 24, 1048576, 262146, 24, 1048597, 327677, 24, 1441813, 327678, 24, 0, 327679, 24, 0, 262144, 25, 0, 262145, 25, 1048576, 262146, 25, 1048597, 327677, 25, 1441813, 327678, 25, 0, 327679, 25, 0, 262144, 26, 0, 262145, 26, 1048576, 262146, 26, 1048597, 327677, 26, 1441813, 327678, 26, 0, 327679, 26, 0, 262144, 27, 0, 262145, 27, 1048576, 262146, 27, 1048597, 327677, 27, 1441813, 327678, 27, 0, 327679, 27, 0, 262144, 28, 0, 262145, 28, 1048576, 262146, 28, 1048597, 327677, 28, 1441813, 327678, 28, 0, 327679, 28, 0, 262144, 29, 0, 262145, 29, 1048576, 262146, 29, 1048597, 327677, 29, 1441813, 327678, 29, 0, 327679, 29, 0, 262144, 30, 0, 262145, 30, 1048576, 262146, 30, 1048597, 327677, 30, 1441813, 327678, 30, 0, 327679, 30, 0, 262144, 31, 0, 262145, 31, 1048576, 262146, 31, 1048597, 327677, 31, 1441813, 327678, 31, 0, 327679, 31, 0, 262144, 32, 0, 262145, 32, 1048576, 262146, 32, 1048597, 327677, 32, 1441813, 327678, 32, 0, 327679, 32, 0, 262144, 33, 0, 262145, 33, 1048576, 262146, 33, 1048597, 327677, 33, 1441813, 327678, 33, 0, 327679, 33, 0, 262144, 34, 21, 262145, 34, 21, 262146, 34, 1048607, 327677, 34, 31, 327678, 34, 21, 327679, 34, 21 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 3, -2, 0 )
+}
+
+[node name="GridMap2" type="GridMap" parent="."]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray( 1, 0, 1441815, 12, 0, 1048599, 65537, 0, 1441815, 65548, 0, 1048599, 131073, 0, 1441815, 131084, 0, 1048599, 196609, 0, 1441815, 196620, 0, 1048599, 262145, 0, 1441815, 262156, 0, 1048599, 327681, 0, 1441815, 327692, 0, 1048599, 393217, 0, 1441815, 393228, 0, 1048599, 458753, 0, 1441815, 458764, 0, 1048599, 524289, 0, 1441815, 524300, 0, 1048599, 589825, 0, 1441815, 589836, 0, 1048599, 655361, 0, 1441815, 655372, 0, 1048599, -262143, 0, 1441815, -262132, 0, 1048599, -196607, 0, 1441815, -196603, 0, 655368, -196602, 0, 655369, -196601, 0, 9, -196600, 0, 655368, -196596, 0, 1048599, -131071, 0, 1441815, -131067, 0, 1048593, -131064, 0, 1441809, -131060, 0, 1048599, -65535, 0, 1441815, -65524, 0, 1048599, 1, 1, 1441815, 12, 1, 1048599, 65537, 1, 1441815, 65548, 1, 1048599, 131073, 1, 1441815, 131084, 1, 1048599, 196609, 1, 1441815, 196620, 1, 1048599, 262145, 1, 1441815, 262156, 1, 1048599, 327681, 1, 1441815, 327692, 1, 1048599, 393217, 1, 1441815, 393228, 1, 1048599, 458753, 1, 1441815, 458764, 1, 1048599, 524289, 1, 1441815, 524300, 1, 1048599, 589825, 1, 1441815, 589836, 1, 1048599, 655361, 1, 1441815, 655372, 1, 1048599, -262143, 1, 1441815, -262132, 1, 1048599, -196607, 1, 1441815, -196603, 1, 655368, -196602, 1, 655369, -196601, 1, 9, -196600, 1, 655368, -196596, 1, 1048599, -131071, 1, 1441815, -131067, 1, 1048593, -131064, 1, 1441809, -131060, 1, 1048599, -65535, 1, 1441815, -65531, 1, 1048599, -65528, 1, 1441815, -65524, 1, 1048599, 1, 2, 1441815, 12, 2, 1048599, 65537, 2, 1441815, 65548, 2, 1048599, 131073, 2, 1441815, 131084, 2, 1048599, 196609, 2, 1441815, 196620, 2, 1048599, 262145, 2, 1441815, 262156, 2, 1048599, 327681, 2, 1441815, 327692, 2, 1048599, 393217, 2, 1441815, 393228, 2, 1048599, 458753, 2, 1441815, 458764, 2, 1048599, 524289, 2, 1441815, 524300, 2, 1048599, 589825, 2, 1441815, 589836, 2, 1048599, 655361, 2, 1441815, 655372, 2, 1048599, -262143, 2, 1441815, -262132, 2, 1048599, -196607, 2, 1441815, -196603, 2, 655368, -196602, 2, 655369, -196601, 2, 9, -196600, 2, 655368, -196596, 2, 1048599, -131071, 2, 1441815, -131067, 2, 1048593, -131064, 2, 1441809, -131060, 2, 1048599, -65535, 2, 1441815, -65531, 2, 1048599, -65528, 2, 1441815, -65524, 2, 1048599, 1, 3, 1441815, 12, 3, 1048599, 65537, 3, 1441815, 65548, 3, 1048599, 131073, 3, 1441815, 131084, 3, 1048599, 196609, 3, 1441815, 196620, 3, 1048599, 262145, 3, 1441815, 262156, 3, 1048599, 327681, 3, 1441815, 327692, 3, 1048599, 393217, 3, 1441815, 393228, 3, 1048599, 458753, 3, 1441815, 458764, 3, 1048599, 524289, 3, 1441815, 524300, 3, 1048599, 589825, 3, 1441815, 589836, 3, 1048599, 655361, 3, 1441815, 655372, 3, 1048599, -262143, 3, 1441815, -262132, 3, 1048599, -196607, 3, 1441815, -196603, 3, 655368, -196602, 3, 655369, -196601, 3, 9, -196600, 3, 655368, -196596, 3, 1048599, -131071, 3, 1441815, -131067, 3, 1048593, -131064, 3, 1441809, -131060, 3, 1048599, -65535, 3, 1441815, -65533, 3, 23, -65524, 3, 1048599, 1, 4, 1441817, 2, 4, 23, 3, 4, 23, 4, 4, 23, 5, 4, 23, 6, 4, 23, 7, 4, 23, 8, 4, 23, 9, 4, 23, 10, 4, 23, 11, 4, 23, 12, 4, 25, 65537, 4, 1441817, 65538, 4, 23, 65539, 4, 23, 65540, 4, 23, 65541, 4, 23, 65542, 4, 23, 65543, 4, 23, 65544, 4, 23, 65545, 4, 23, 65546, 4, 23, 65547, 4, 23, 65548, 4, 25, 131073, 4, 1441817, 131074, 4, 23, 131075, 4, 23, 131076, 4, 23, 131077, 4, 23, 131078, 4, 23, 131079, 4, 23, 131080, 4, 23, 131081, 4, 23, 131082, 4, 23, 131083, 4, 23, 131084, 4, 25, 196609, 4, 1441817, 196610, 4, 23, 196611, 4, 23, 196612, 4, 23, 196613, 4, 23, 196614, 4, 23, 196615, 4, 23, 196616, 4, 23, 196617, 4, 23, 196618, 4, 23, 196619, 4, 23, 196620, 4, 25, 262145, 4, 1441817, 262146, 4, 23, 262147, 4, 23, 262148, 4, 23, 262149, 4, 23, 262150, 4, 23, 262151, 4, 23, 262152, 4, 23, 262153, 4, 23, 262154, 4, 23, 262155, 4, 23, 262156, 4, 25, 327681, 4, 1441817, 327682, 4, 23, 327683, 4, 23, 327684, 4, 23, 327685, 4, 23, 327686, 4, 23, 327687, 4, 23, 327688, 4, 23, 327689, 4, 23, 327690, 4, 23, 327691, 4, 23, 327692, 4, 25, 393217, 4, 1441817, 393218, 4, 23, 393219, 4, 23, 393220, 4, 23, 393221, 4, 23, 393222, 4, 23, 393223, 4, 23, 393224, 4, 23, 393225, 4, 23, 393226, 4, 23, 393227, 4, 23, 393228, 4, 25, 458753, 4, 1441817, 458754, 4, 23, 458755, 4, 23, 458756, 4, 23, 458757, 4, 23, 458758, 4, 23, 458759, 4, 23, 458760, 4, 23, 458761, 4, 23, 458762, 4, 23, 458763, 4, 23, 458764, 4, 25, 524289, 4, 1441817, 524290, 4, 23, 524291, 4, 23, 524292, 4, 23, 524293, 4, 23, 524294, 4, 23, 524295, 4, 23, 524296, 4, 23, 524297, 4, 23, 524298, 4, 23, 524299, 4, 23, 524300, 4, 25, 589825, 4, 1441817, 589826, 4, 23, 589827, 4, 23, 589828, 4, 23, 589829, 4, 23, 589830, 4, 23, 589831, 4, 23, 589832, 4, 23, 589833, 4, 23, 589834, 4, 23, 589835, 4, 23, 589836, 4, 25, 655361, 4, 1441817, 655362, 4, 23, 655363, 4, 23, 655364, 4, 23, 655365, 4, 23, 655366, 4, 23, 655367, 4, 23, 655368, 4, 23, 655369, 4, 23, 655370, 4, 23, 655371, 4, 23, 655372, 4, 25, -262143, 4, 1441817, -262142, 4, 23, -262141, 4, 23, -262140, 4, 1441818, -262135, 4, 26, -262134, 4, 23, -262133, 4, 23, -262132, 4, 25, -196607, 4, 1441817, -196606, 4, 23, -196605, 4, 1048584, -196604, 4, 1048584, -196603, 4, 1441800, -196602, 4, 655369, -196601, 4, 9, -196600, 4, 7, -196599, 4, 3, -196598, 4, 23, -196597, 4, 23, -196596, 4, 25, -131071, 4, 1441817, -131070, 4, 23, -131069, 4, 3, -131068, 4, 17, -131067, 4, 0, -131066, 4, 0, -131065, 4, 0, -131064, 4, 0, -131063, 4, 23, -131062, 4, 23, -131061, 4, 23, -131060, 4, 25, -65535, 4, 1441817, -65534, 4, 23, -65533, 4, 23, -65532, 4, 23, -65531, 4, 23, -65530, 4, 23, -65529, 4, 23, -65528, 4, 23, -65527, 4, 23, -65526, 4, 23, -65525, 4, 23, -65524, 4, 25, -262135, 5, 1048599, -196605, 5, 1048584, -196604, 5, 1048584, -196603, 5, 8, -196602, 5, 655369, -196601, 5, 9, -196600, 5, 8, -196599, 5, 1048576, -131069, 5, 1048589, -262135, 6, 1048599, -196605, 6, 1048584, -196604, 6, 1048584, -196603, 6, 8, -196602, 6, 655369, -196601, 6, 9, -196600, 6, 8, -196599, 6, 1048576, -131069, 6, 1048576, -262135, 7, 1048599, -196605, 7, 1048584, -196604, 7, 1048584, -196603, 7, 8, -196602, 7, 655369, -196601, 7, 9, -196600, 7, 8, -196599, 7, 1048576, -131069, 7, 1048576, -262135, 8, 1048599, -196605, 8, 1048584, -196604, 8, 1048584, -196603, 8, 8, -196602, 8, 655369, -196601, 8, 9, -196600, 8, 8, -196599, 8, 1048576, -131069, 8, 1048576, -262135, 9, 1048599, -196605, 9, 1048584, -196604, 9, 1048584, -196603, 9, 1048583, -196602, 9, 655371, -196601, 9, 1441803, -196600, 9, 8, -196599, 9, 1048576, -131069, 9, 1048589, -262135, 10, 1048599, -196605, 10, 1048584, -196604, 10, 1048584, -196603, 10, 8, -196602, 10, 8, -196601, 10, 8, -196600, 10, 8, -196599, 10, 1048576, -131069, 10, 1048589, -262135, 11, 1048599, -196605, 11, 1048584, -196604, 11, 1048584, -196603, 11, 8, -196602, 11, 8, -196601, 11, 8, -196600, 11, 8, -196599, 11, 1048576, -131070, 11, 655360, -131069, 11, 1048579, -131068, 11, 655360, -131067, 11, 655373, -131066, 11, 655373, -131065, 11, 655373, -131064, 11, 1048591, -262135, 12, 1048599, -196600, 12, 8, -196599, 12, 1048576, -131069, 12, 1441800, -131068, 12, 1441800, -131067, 12, 1441800, -131066, 12, 1441800, -131065, 12, 1048584, -131064, 12, 1048592, -131063, 12, 1048578, -65534, 12, 1179656, -262135, 13, 1048599, -196599, 13, 1048599, -131069, 13, 1441800, -131068, 13, 1441800, -131067, 13, 1441800, -131066, 13, 1441800, -131065, 13, 1048584, -131064, 13, 1048584, -131063, 13, 1048576, -65534, 13, 1179656, -262135, 14, 1048599, -196599, 14, 1048599, -131066, 14, 655368, -131065, 14, 8, -131064, 14, 1048584, -131063, 14, 1048576, -262135, 15, 1048599, -196599, 15, 1048599, -131067, 15, 8, -131066, 15, 8, -131065, 15, 8, -131064, 15, 1048584, -131063, 15, 1048576, -262135, 16, 1048599, -196599, 16, 1048599, -131070, 16, 8, -131069, 16, 8, -131067, 16, 8, -131066, 16, 8, -131065, 16, 8, -131064, 16, 1048584, -131063, 16, 1048576, -262135, 17, 1048599, -196599, 17, 1048599, -131070, 17, 8, -131069, 17, 8, -131066, 17, 8, -131065, 17, 8, -131064, 17, 1048584, -131063, 17, 1048576, -262135, 18, 1048599, -196599, 18, 1048599, -131070, 18, 7, -131069, 18, 8, -131068, 18, 8, -131067, 18, 8, -131066, 18, 8, -131065, 18, 8, -131064, 18, 1048584, -131063, 18, 1048576, 2, 19, 1048599, 65538, 19, 1048599, 131074, 19, 1048599, 196610, 19, 1048576, -262142, 19, 26, -262141, 19, 23, -262140, 19, 23, -262139, 19, 23, -262138, 19, 23, -262137, 19, 23, -262136, 19, 23, -262135, 19, 25, -196606, 19, 26, -196605, 19, 23, -196604, 19, 23, -196603, 19, 23, -196602, 19, 23, -196601, 19, 23, -196600, 19, 23, -196599, 19, 25, -131070, 19, 3, -131069, 19, 0, -131068, 19, 0, -131067, 19, 0, -131066, 19, 0, -131065, 19, 0, -131064, 19, 0, -131063, 19, 2, -65534, 19, 1048599, 2, 20, 1048599, 65538, 20, 1048599, 131074, 20, 1048599, 196610, 20, 1048576, -262142, 20, 1048599, -196606, 20, 1048599, -131070, 20, 1048599, -65534, 20, 1048599, 2, 21, 1048599, 65538, 21, 1048599, 131074, 21, 1048599, 196610, 21, 1048576, -262142, 21, 1048599, -196606, 21, 1048599, -131070, 21, 1048599, -65534, 21, 1048599, 2, 22, 1048599, 65538, 22, 1048599, 131074, 22, 1048599, 196610, 22, 1048576, -262142, 22, 1048599, -196606, 22, 1048599, -131070, 22, 1048599, -65534, 22, 1048599, 0, 23, 23, 1, 23, 23, 2, 23, 25, 65536, 23, 23, 65537, 23, 23, 65538, 23, 25, 131072, 23, 23, 131073, 23, 23, 131074, 23, 25, 196608, 23, 0, 196609, 23, 0, 196610, 23, 2, -262144, 23, 23, -262143, 23, 23, -262142, 23, 25, -196608, 23, 23, -196607, 23, 23, -196606, 23, 25, -131072, 23, 23, -131071, 23, 23, -131070, 23, 25, -65536, 23, 23, -65535, 23, 23, -65534, 23, 25, 1, 65533, 1441815, 12, 65533, 1048599, 65537, 65533, 1441815, 65548, 65533, 1048599, 131073, 65533, 1441815, 131084, 65533, 1048599, 196609, 65533, 1441815, 196620, 65533, 1048599, 262145, 65533, 1441815, 262156, 65533, 1048599, 327681, 65533, 1441815, 327692, 65533, 1048599, 393217, 65533, 1441815, 393228, 65533, 1048599, 458753, 65533, 1441815, 458764, 65533, 1048599, 524289, 65533, 1441815, 524300, 65533, 1048599, 589825, 65533, 1441815, 589836, 65533, 1048599, 655361, 65533, 1441815, 655372, 65533, 1048599, -262143, 65533, 1441815, -262132, 65533, 1048599, -196607, 65533, 1441815, -196603, 65533, 655368, -196602, 65533, 655369, -196601, 65533, 9, -196600, 65533, 655368, -196596, 65533, 1048599, -131071, 65533, 1441815, -131067, 65533, 1048593, -131064, 65533, 1441809, -131060, 65533, 1048599, -65535, 65533, 1441815, -65524, 65533, 1048599, 1, 65534, 1441815, 12, 65534, 1048599, 65537, 65534, 1441815, 65548, 65534, 1048599, 131073, 65534, 1441815, 131084, 65534, 1048599, 196609, 65534, 1441815, 196620, 65534, 1048599, 262145, 65534, 1441815, 262156, 65534, 1048599, 327681, 65534, 1441815, 327692, 65534, 1048599, 393217, 65534, 1441815, 393228, 65534, 1048599, 458753, 65534, 1441815, 458764, 65534, 1048599, 524289, 65534, 1441815, 524300, 65534, 1048599, 589825, 65534, 1441815, 589836, 65534, 1048599, 655361, 65534, 1441815, 655372, 65534, 1048599, -262143, 65534, 1441815, -262132, 65534, 1048599, -196607, 65534, 1441815, -196603, 65534, 655368, -196602, 65534, 655369, -196601, 65534, 9, -196600, 65534, 655368, -196596, 65534, 1048599, -131071, 65534, 1441815, -131067, 65534, 1048593, -131064, 65534, 1441809, -131060, 65534, 1048599, -65535, 65534, 1441815, -65524, 65534, 1048599, 1, 65535, 1441815, 12, 65535, 1048599, 65537, 65535, 1441815, 65548, 65535, 1048599, 131073, 65535, 1441815, 131084, 65535, 1048599, 196609, 65535, 1441815, 196620, 65535, 1048599, 262145, 65535, 1441815, 262156, 65535, 1048599, 327681, 65535, 1441815, 327692, 65535, 1048599, 393217, 65535, 1441815, 393228, 65535, 1048599, 458753, 65535, 1441815, 458764, 65535, 1048599, 524289, 65535, 1441815, 524300, 65535, 1048599, 589825, 65535, 1441815, 589836, 65535, 1048599, 655361, 65535, 1441815, 655372, 65535, 1048599, -262143, 65535, 1441815, -262132, 65535, 1048599, -196607, 65535, 1441815, -196603, 65535, 655368, -196602, 65535, 655369, -196601, 65535, 9, -196600, 65535, 655368, -196596, 65535, 1048599, -131071, 65535, 1441815, -131067, 65535, 1048593, -131064, 65535, 1441809, -131060, 65535, 1048599, -65535, 65535, 1441815, -65524, 65535, 1048599 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, -1, 0 )
+}
+
+[node name="Tracker" type="Spatial" parent="."]
+script = ExtResource( 6 )
+limits = AABB( -1000, 0, -1000, 2000, 1000, 1040 )
+limit_z = true
+
+[node name="WorldCamera" parent="Tracker" instance=ExtResource( 17 )]
+environment = ExtResource( 3 )
+cloud_material_override = SubResource( 1 )
+
+[node name="Start" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017, 8, 48.877 )
+script = ExtResource( 9 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.865964, -0.412462, 0.28281, 0, 0.5655, 0.824749, -0.500106, -0.714203, 0.489702, 0.00448418, 9.22346, 11.3542 )
+light_color = Color( 0.639216, 0.321569, 0.321569, 1 )
+shadow_enabled = true
+shadow_color = Color( 0.239216, 0.235294, 0.372549, 1 )
+directional_shadow_mode = 0
+
+[node name="EntranceWarp" type="Area" parent="."]
+transform = Transform( -0.5, 0, -8.0157e-08, 0, 0.774, 0, 1.62921e-07, 0, -0.246, -0.0614901, 10.0442, 55.1876 )
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 7 )
+warp_target_scene = "res://world/maps/Overworld.tscn"
+warp_target_name = "Infinite_Dungeon/InfiniteRailway"
+warp_target_chunk = Vector2( 4, 0 )
+size = Vector3( 16, 12, 8 )
+
+[node name="CaveWarp" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01061, 6.14875, 25.5437 )
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 4 )
+warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
+warp_target_name = "CeilingTarget"
+fill_black = true
+size = Vector3( 5.75, 10, 2 )
+
+[node name="Props" type="Spatial" parent="."]
+transform = Transform( 2.34118, 0, 0, 0, 1, 0, 0, 0, 2.34118, 0, 0, 0 )
+
+[node name="DustParticles" parent="Props" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 18, 41 )
+visibility_aabb = AABB( -8, -8, -13, 16, 16, 26 )
+
+[node name="DeadSword1" parent="Props" instance=ExtResource( 23 )]
+transform = Transform( 0.357681, 0.233472, 0, -0.546599, 0.837395, 0, 0, 0, 0.427135, 4.13485, -4.6015, 5.86449 )
+
+[node name="DeadSign1" parent="Props" instance=ExtResource( 21 )]
+transform = Transform( 0.427135, 0, 0, 0, 1, 0, 0, 0, 0.427135, -2.21816, 6.00002, 11.6843 )
+
+[node name="station_bench" parent="Props" instance=ExtResource( 22 )]
+transform = Transform( -0.00889305, 0, 0.427042, 0, 1, 0, -0.427042, 0, -0.00889305, -2.91946, 5.68601, 13.4277 )
+
+[node name="Initializer" type="Node" parent="."]
+script = ExtResource( 11 )
+
+[node name="Campsite" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4182, -3.72217, 14.8577 )
+script = ExtResource( 9 )
+
+[node name="Interaction" type="Area" parent="Campsite"]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource( 15 )
+pawn_path = NodePath("..")
+icon_override = ExtResource( 14 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Campsite/Interaction"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 12 )
+
+[node name="Cutscene" type="Node" parent="Campsite/Interaction"]
+script = ExtResource( 20 )
+
+[node name="ConfirmDialogAction" type="Node" parent="Campsite/Interaction/Cutscene"]
+script = ExtResource( 28 )
+message = "CAMPING_CONFIRM"
+
+[node name="CampWarpAction" type="Node" parent="Campsite/Interaction/Cutscene"]
+script = ExtResource( 30 )
+
+[node name="PlayerTarget" type="Position3D" parent="Campsite"]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -2.42135, 0, 0 )
+
+[node name="PartnerTarget" type="Position3D" parent="Campsite"]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 1.84855, 0, 0 )
+
+[node name="CameraTarget" type="Position3D" parent="Campsite"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Campsite/CameraTarget"]
+anims/default = SubResource( 13 )
+anims/end_camping = SubResource( 14 )
+
+[node name="Camping" type="Spatial" parent="Campsite"]
+script = ExtResource( 29 )
+music = ExtResource( 39 )
+
+[node name="SetNPCStateAction" type="Node" parent="Campsite/Camping"]
+script = ExtResource( 12 )
+state = "Sitting"
+
+[node name="GetPartner" type="Node" parent="Campsite/Camping/SetNPCStateAction"]
+script = ExtResource( 45 )
+
+[node name="SetNPCStateAction2" type="Node" parent="Campsite/Camping"]
+script = ExtResource( 12 )
+state = "Sitting"
+
+[node name="GetPlayer" type="Node" parent="Campsite/Camping/SetNPCStateAction2"]
+script = ExtResource( 18 )
+which = 1
+
+[node name="Cutscene" type="Node" parent="Campsite/Camping"]
+script = ExtResource( 20 )
+wait_for_animation = false
+disable_spawns = true
+
+[node name="Succeeder" type="Node" parent="Campsite/Camping/Cutscene"]
+script = ExtResource( 38 )
+
+[node name="ChangeTrackerTargetAction" type="Node" parent="Campsite/Camping/Cutscene/Succeeder"]
+script = ExtResource( 35 )
+__meta__ = {
+"action_tree": true
+}
+zoom = 2.0
+snap_at_entry = true
+snap_at_exit = true
+snap_throughout = true
+angle_degrees_override = Vector3( -15, 0, 0 )
+
+[node name="GetNode" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction"]
+script = ExtResource( 36 )
+node_name = "../CameraTarget"
+
+[node name="Intermission_Part6" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction" instance=ExtResource( 49 )]
+
+[node name="CafeRetrospective" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction" instance=ExtResource( 51 )]
+
+[node name="WaitForSceneChangeEndingAction" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction"]
+script = ExtResource( 44 )
+
+[node name="KayleighQuest1_Part1" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction" instance=ExtResource( 25 )]
+priority = 0
+
+[node name="ViolaQuest4_Epilogue" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction" instance=ExtResource( 46 )]
+always_succeed = true
+
+[node name="Tutorial4_Part3" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction" instance=ExtResource( 34 )]
+require_partner_unlocked = "kayleigh"
+
+[node name="ShowCampingMenuAction" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction"]
+script = ExtResource( 60 )
+
+[node name="FetchInterdimensionalPost" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction"]
+script = ExtResource( 58 )
+use_ranger_id_as_code = true
+
+[node name="CheckConditionAction" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost"]
+script = ExtResource( 41 )
+always_succeed = true
+require_partner_unlocked = "kayleigh"
+
+[node name="AfterSceneChangeFailer" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction"]
+script = ExtResource( 56 )
+
+[node name="Selector" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer"]
+script = ExtResource( 42 )
+
+[node name="ShouldTryLongCampingCutsceneAction" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector"]
+script = ExtResource( 59 )
+
+[node name="Succeeder" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector/ShouldTryLongCampingCutsceneAction"]
+script = ExtResource( 38 )
+
+[node name="SelectCutsceneAction" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector/ShouldTryLongCampingCutsceneAction/Succeeder"]
+script = ExtResource( 55 )
+cutscenes_dir = "res://cutscenes/camping"
+
+[node name="CheckConditionAction_Kayleigh" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector"]
+script = ExtResource( 41 )
+require_partner_id = "kayleigh"
+
+[node name="Cutscene" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector/CheckConditionAction_Kayleigh" instance=ExtResource( 52 )]
+
+[node name="CheckConditionAction_Meredith" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector"]
+script = ExtResource( 41 )
+require_partner_id = "meredith"
+
+[node name="Cutscene" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector/CheckConditionAction_Meredith" instance=ExtResource( 48 )]
+
+[node name="CheckConditionAction_Eugene" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector"]
+script = ExtResource( 41 )
+require_partner_id = "eugene"
+
+[node name="Cutscene" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector/CheckConditionAction_Eugene" instance=ExtResource( 50 )]
+
+[node name="CheckConditionAction_Felix" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector"]
+script = ExtResource( 41 )
+require_partner_id = "felix"
+
+[node name="Cutscene" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector/CheckConditionAction_Felix" instance=ExtResource( 54 )]
+
+[node name="CheckConditionAction_Viola" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector"]
+script = ExtResource( 41 )
+require_partner_id = "viola"
+
+[node name="Cutscene" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector/CheckConditionAction_Viola" instance=ExtResource( 47 )]
+
+[node name="CheckConditionAction_Dog" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector"]
+script = ExtResource( 41 )
+require_partner_id = "dog"
+
+[node name="Cutscene" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector/CheckConditionAction_Dog" instance=ExtResource( 53 )]
+
+[node name="Succeeder" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost/CheckConditionAction/AfterSceneChangeFailer/Selector"]
+script = ExtResource( 38 )
+
+[node name="CampingAdvanceTime" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction/FetchInterdimensionalPost" instance=ExtResource( 33 )]
+
+[node name="WaitAction" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/ShowCampingMenuAction"]
+script = ExtResource( 40 )
+
+[node name="PlayAnimationAction" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction"]
+script = ExtResource( 57 )
+__meta__ = {
+"action_tree": true
+}
+animation_name = "end_camping"
+wait_for_animation = false
+
+[node name="GetNode" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction/PlayAnimationAction"]
+script = ExtResource( 36 )
+node_name = "../CameraTarget/AnimationPlayer"
+
+[node name="TransitionAction" type="Node" parent="Campsite/Camping/Cutscene/Succeeder/ChangeTrackerTargetAction"]
+script = ExtResource( 43 )
+transition_kind = 5
+
+[node name="CallMethodAction" type="Node" parent="Campsite/Camping/Cutscene"]
+script = ExtResource( 37 )
+method = "end_camping_music"
+
+[node name="CallMethodAction2" type="Node" parent="Campsite/Camping/Cutscene"]
+script = ExtResource( 37 )
+method = "deactivate"
+
+[node name="WaitAction3" type="Node" parent="Campsite/Camping/Cutscene"]
+script = ExtResource( 40 )
+
+[node name="TransitionAction2" type="Node" parent="Campsite/Camping/Cutscene"]
+script = ExtResource( 43 )
+transition = 1
+transition_kind = 2
+
+[node name="OmniLight" type="OmniLight" parent="Campsite/Camping"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.236, 0.049 )
+light_color = Color( 0.992157, 0.67451, 0.227451, 1 )
+omni_range = 8.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Campsite/Camping"]
+autoplay = "Idle"
+anims/Idle = SubResource( 15 )
+
+[node name="PropCampsite" type="Spatial" parent="Campsite"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.274158, -0.260146, -0.549242 )
+
+[node name="campfire" type="Spatial" parent="Campsite/PropCampsite"]
+transform = Transform( 1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, -0.149403, 0, 0 )
+
+[node name="Sprite2" parent="Campsite/PropCampsite/campfire" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 0.925269, 0.379311, 0, -0.379311, 0.925269, 1.24116, 0, 0.228938 )
+
+[node name="Sprite4" parent="Campsite/PropCampsite/campfire" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 0.925269, 0.379311, 0, -0.379311, 0.925269, -1.14994, 0, -0.452605 )
+
+[node name="Sprite7" parent="Campsite/PropCampsite/campfire" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 0.925269, 0.379311, 0, -0.379311, 0.925269, -1.36288, 0, 0.169423 )
+
+[node name="Sprite5" parent="Campsite/PropCampsite/campfire" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 0.925269, 0.379311, 0, -0.379311, 0.925269, -0.640975, 0, 1.13869 )
+
+[node name="Sprite8" parent="Campsite/PropCampsite/campfire" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 0.925269, 0.379311, 0, -0.379311, 0.925269, 0.506806, 0, 1.26521 )
+
+[node name="Sprite6" parent="Campsite/PropCampsite/campfire" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 0.925269, 0.379311, 0, -0.379311, 0.925269, 0.631993, 0, -1.10108 )
+
+[node name="Sprite3" parent="Campsite/PropCampsite/campfire" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.02, 0 )
+
+[node name="Fire Sprite" parent="Campsite/PropCampsite" instance=ExtResource( 24 )]
+transform = Transform( 1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, -0.149403, 0.5, 0 )
+
+[node name="Particles" type="Particles" parent="Campsite/PropCampsite/Fire Sprite"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5 )
+amount = 6
+lifetime = 5.0
+process_material = SubResource( 10 )
+draw_pass_1 = SubResource( 5 )
+
+[node name="OmniLight" type="OmniLight" parent="Campsite/PropCampsite"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.236, 0.049 )
+light_color = Color( 0.992157, 0.67451, 0.227451, 1 )
+omni_range = 8.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Campsite/PropCampsite"]
+autoplay = "Idle"
+anims/Idle = SubResource( 6 )
+
+[node name="campfire_stick_1" type="MeshInstance" parent="Campsite/PropCampsite"]
+transform = Transform( 0.989949, 0, 0.989949, 0, 1.4, 0, -0.989949, 0, 0.989949, -0.149403, 0, 0 )
+mesh = ExtResource( 13 )
+
+[node name="Area" type="Area" parent="Campsite/PropCampsite"]
+collision_layer = 0
+collision_mask = 128
+space_override = 1
+gravity_point = true
+gravity_vec = Vector3( 0, 0, 0 )
+gravity = -75.0
+
+[node name="CollisionShape" type="CollisionShape" parent="Campsite/PropCampsite/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+shape = SubResource( 7 )
+
+[node name="WarpTarget" type="Position3D" parent="Campsite/PropCampsite"]
+script = ExtResource( 9 )
+
+[node name="station_bench2" parent="Campsite/PropCampsite" instance=ExtResource( 22 )]
+transform = Transform( -0.0416404, 0, 1.99957, 0, 2, 0, -1.99957, 0, -0.0416404, -4.51362, -0.378213, -0.134941 )
+
+[node name="station_bench3" parent="Campsite/PropCampsite" instance=ExtResource( 22 )]
+transform = Transform( -8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 4.35518, -0.378213, -0.134941 )
+
+[node name="FlagVisibility" type="Node" parent="."]
+script = ExtResource( 219 )
+flag = "infdung_null_defeated"
+pawn_path = NodePath("Magikrab")
+
+[node name="Magikrab" type="KinematicBody" parent="FlagVisibility"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8545, -3.97412, 15.1168 )
+collision_layer = 144
+collision_mask = 32785
+script = ExtResource( 71 )
+direction = Vector2( 0, 1 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="FlagVisibility/Magikrab"]
+aabb = AABB( -2, -1, -2, 4, 4.7, 4 )
+max_distance = 100.0
+
+[node name="CollisionShape" type="CollisionShape" parent="FlagVisibility/Magikrab"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.325, 0 )
+shape = SubResource( 16 )
+
+[node name="Sprite" type="Spatial" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 67 )
+direction = "down"
+billboard_depth_hack = true
+wave_t_frequency = 5.0
+aabb = AABB( -2, 0, -2, 4, 3.4641, 2 )
+
+[node name="Sprite" parent="FlagVisibility/Magikrab/Sprite" instance=ExtResource( 89 )]
+
+[node name="EmotePlayer" parent="FlagVisibility/Magikrab" instance=ExtResource( 74 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+
+[node name="Interaction" parent="FlagVisibility/Magikrab" instance=ExtResource( 75 )]
+pawn_path = NodePath("..")
+
+[node name="CollisionShape" type="CollisionShape" parent="FlagVisibility/Magikrab/Interaction"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.325, 0 )
+shape = SubResource( 16 )
+
+[node name="Footsteps" parent="FlagVisibility/Magikrab" instance=ExtResource( 73 )]
+
+[node name="Controls" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 70 )
+
+[node name="FloorRay" type="RayCast" parent="FlagVisibility/Magikrab"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+enabled = true
+cast_to = Vector3( 0, -5, 0 )
+collision_mask = 8193
+collide_with_areas = true
+script = ExtResource( 72 )
+
+[node name="StateMachine" parent="FlagVisibility/Magikrab" instance=ExtResource( 79 )]
+
+[node name="IdleBehavior" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 86 )
+
+[node name="FaceTowardsAction" type="Node" parent="FlagVisibility/Magikrab/IdleBehavior"]
+script = ExtResource( 76 )
+__meta__ = {
+"action_tree": true
+}
+
+[node name="GetPlayer" type="Node" parent="FlagVisibility/Magikrab/IdleBehavior/FaceTowardsAction"]
+script = ExtResource( 18 )
+which = 3
+
+[node name="InteractionBehavior" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 20 )
+
+[node name="Selector" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior"]
+script = ExtResource( 42 )
+
+[node name="Sequence" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector"]
+script = ExtResource( 100 )
+
+[node name="MainDialogue" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence"]
+script = ExtResource( 92 )
+portrait = ExtResource( 105 )
+title = "MAGIKRAB_NAME"
+messages = [ "Hello again, friend!", "Would you like to an astral projection to practice with?" ]
+wait_for_confirm = false
+close_after = false
+style = 3
+
+[node name="Succeeder" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence"]
+script = ExtResource( 38 )
+
+[node name="Repeater" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder"]
+script = ExtResource( 90 )
+stop_on_success = true
+stop_on_failure = true
+
+[node name="MenuDialogAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater"]
+script = ExtResource( 94 )
+menu_options = [ "Practice Dummy", "AA_ALEPH_NULL_NAME", "AA_ALEPH_NAME", "AA_MORGANTE_NAME", "AA_PUPPET_NAME", "AA_CUBE_NAME", "AA_LAMENTO_MORI_NAME", "AA_ALICE_NAME", "AA_HELIA_NAME", "LENNA_NAME", "AA_MAMMON_NAME", "AA_MONARCH_NAME", "AA_ROBIN_NAME", "AA_TOWER_NAME", "AA_SERPENT_NAME", "Nevermind" ]
+default_option = 15
+
+[node name="Succeeder15" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder15"]
+script = ExtResource( 220 )
+encounter_name_override = "Dummy"
+railway_shards = ExtResource( 77 )
+
+[node name="Succeeder" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder"]
+script = ExtResource( 220 )
+encounter_name_override = "Aleph_Null"
+railway_shards = ExtResource( 77 )
+
+[node name="Succeeder2" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder2"]
+script = ExtResource( 220 )
+encounter_name_override = "Aleph"
+railway_shards = ExtResource( 77 )
+
+[node name="Succeeder3" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder3"]
+script = ExtResource( 220 )
+encounter_name_override = "Morgante"
+railway_shards = ExtResource( 77 )
+
+[node name="Succeeder4" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder4"]
+script = ExtResource( 220 )
+encounter_name_override = "Puppet"
+railway_shards = ExtResource( 77 )
+
+[node name="Succeeder5" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder5"]
+script = ExtResource( 220 )
+encounter_name_override = "Cube"
+railway_shards = ExtResource( 77 )
+
+[node name="Succeeder6" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder6"]
+script = ExtResource( 220 )
+encounter_name_override = "Lamentomori"
+railway_shards = ExtResource( 77 )
+
+[node name="Succeeder7" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder7"]
+script = ExtResource( 220 )
+encounter_name_override = "Alice"
+railway_shards = ExtResource( 77 )
+
+[node name="Succeeder8" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder8"]
+script = ExtResource( 220 )
+encounter_name_override = "Helia"
+railway_shards = ExtResource( 77 )
+
+[node name="Succeeder9" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder9"]
+script = ExtResource( 220 )
+encounter_name_override = "Lenna"
+railway_shards = ExtResource( 77 )
+
+[node name="Succeeder10" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder10"]
+script = ExtResource( 220 )
+encounter_name_override = "Mammon"
+railway_shards = ExtResource( 77 )
+
+[node name="Succeeder11" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder11"]
+script = ExtResource( 220 )
+encounter_name_override = "Monarch"
+railway_shards = ExtResource( 77 )
+
+[node name="Succeeder12" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder12"]
+script = ExtResource( 220 )
+encounter_name_override = "Robin"
+railway_shards = ExtResource( 77 )
+
+[node name="Succeeder13" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder13"]
+script = ExtResource( 220 )
+encounter_name_override = "Tower"
+railway_shards = ExtResource( 77 )
+
+[node name="Succeeder14" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder14"]
+script = ExtResource( 220 )
+encounter_name_override = "Mourningstar"
+railway_shards = ExtResource( 77 )
+
+[node name="Lenna" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 66 )
+background_override = ExtResource( 122 )
+music_override = ExtResource( 211 )
+suppress_exp = true
+loot_table_override = ExtResource( 104 )
+cutscenes = [ ExtResource( 215 ) ]
+transition = 4
+
+[node name="CharacterConfig" type="Node" parent="FlagVisibility/Magikrab/Lenna"]
+script = ExtResource( 68 )
+level_override = 75
+level_scale_override_key = "npc_boss"
+exp_yield = 0
+base_character = ExtResource( 218 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 216 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="FlagVisibility/Magikrab/Lenna/CharacterConfig"]
+script = ExtResource( 69 )
+form = ExtResource( 214 )
+moves_override = [ ExtResource( 128 ), ExtResource( 165 ), ExtResource( 208 ), ExtResource( 210 ), ExtResource( 209 ), ExtResource( 212 ), ExtResource( 213 ), ExtResource( 65 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 217 ) ]
+
+[node name="Tower" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 66 )
+background_override = ExtResource( 122 )
+music_override = ExtResource( 120 )
+music_vox_override = ExtResource( 119 )
+suppress_exp = true
+loot_table_override = ExtResource( 104 )
+cutscenes = [ ExtResource( 101 ) ]
+transition = 3
+title_banner = SubResource( 18 )
+
+[node name="CharacterConfig" type="Node" parent="FlagVisibility/Magikrab/Tower"]
+script = ExtResource( 68 )
+character_name = "AA_TOWER_NAME"
+pronouns = 1
+level_override = 75
+level_scale_override_key = "npc_boss"
+exp_yield = 0
+base_character = ExtResource( 195 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 188 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="FlagVisibility/Magikrab/Tower/CharacterConfig"]
+script = ExtResource( 69 )
+form = ExtResource( 106 )
+moves_override = [ ExtResource( 159 ), ExtResource( 128 ), ExtResource( 168 ), ExtResource( 99 ), ExtResource( 170 ), ExtResource( 160 ), ExtResource( 171 ), ExtResource( 173 ), ExtResource( 131 ), ExtResource( 65 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 80 ) ]
+
+[node name="Robin" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 66 )
+background_override = ExtResource( 122 )
+music_override = ExtResource( 120 )
+music_vox_override = ExtResource( 119 )
+suppress_exp = true
+loot_table_override = ExtResource( 104 )
+cutscenes = [ ExtResource( 101 ) ]
+transition = 3
+title_banner = SubResource( 19 )
+
+[node name="CharacterConfig" type="Node" parent="FlagVisibility/Magikrab/Robin"]
+script = ExtResource( 68 )
+character_name = "AA_ROBIN_NAME"
+pronouns = 0
+level_override = 75
+level_scale_override_key = "npc_boss"
+exp_yield = 0
+base_character = ExtResource( 194 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 184 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="FlagVisibility/Magikrab/Robin/CharacterConfig"]
+script = ExtResource( 69 )
+form = ExtResource( 115 )
+moves_override = [ ExtResource( 128 ), ExtResource( 108 ), ExtResource( 180 ), ExtResource( 172 ), ExtResource( 132 ), ExtResource( 65 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 80 ) ]
+
+[node name="Morgante" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 66 )
+background_override = ExtResource( 122 )
+music_override = ExtResource( 120 )
+music_vox_override = ExtResource( 119 )
+suppress_exp = true
+loot_table_override = ExtResource( 142 )
+cutscenes = [ ExtResource( 101 ) ]
+transition = 3
+title_banner = SubResource( 20 )
+
+[node name="CharacterConfig" type="Node" parent="FlagVisibility/Magikrab/Morgante"]
+script = ExtResource( 68 )
+character_name = "AA_MORGANTE_NAME"
+pronouns = 1
+level_override = 75
+level_scale_override_key = "npc_boss"
+exp_yield = 0
+base_character = ExtResource( 206 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 102 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="FlagVisibility/Magikrab/Morgante/CharacterConfig"]
+script = ExtResource( 146 )
+form = ExtResource( 205 )
+moves_override = [ ExtResource( 65 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 80 ) ]
+
+[node name="Monarch" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 66 )
+background_override = ExtResource( 122 )
+music_override = ExtResource( 120 )
+music_vox_override = ExtResource( 119 )
+suppress_exp = true
+loot_table_override = ExtResource( 104 )
+cutscenes = [ ExtResource( 101 ) ]
+transition = 3
+title_banner = SubResource( 21 )
+
+[node name="CharacterConfig" type="Node" parent="FlagVisibility/Magikrab/Monarch"]
+script = ExtResource( 68 )
+character_name = "AA_MONARCH_NAME"
+pronouns = 0
+level_override = 75
+level_scale_override_key = "npc_boss"
+exp_yield = 0
+base_character = ExtResource( 204 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 186 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="FlagVisibility/Magikrab/Monarch/CharacterConfig"]
+script = ExtResource( 69 )
+form = ExtResource( 110 )
+moves_override = [ ExtResource( 128 ), ExtResource( 129 ), ExtResource( 108 ), ExtResource( 130 ), ExtResource( 179 ), ExtResource( 65 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 80 ), ExtResource( 118 ) ]
+
+[node name="Mammon" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 66 )
+background_override = ExtResource( 122 )
+music_override = ExtResource( 120 )
+music_vox_override = ExtResource( 119 )
+suppress_exp = true
+loot_table_override = ExtResource( 104 )
+cutscenes = [ ExtResource( 101 ) ]
+transition = 3
+title_banner = SubResource( 22 )
+
+[node name="CharacterConfig" type="Node" parent="FlagVisibility/Magikrab/Mammon"]
+script = ExtResource( 68 )
+character_name = "AA_MAMMON_NAME"
+pronouns = 0
+level_override = 75
+level_scale_override_key = "npc_boss"
+exp_yield = 0
+base_character = ExtResource( 198 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 185 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="FlagVisibility/Magikrab/Mammon/CharacterConfig"]
+script = ExtResource( 69 )
+form = ExtResource( 112 )
+moves_override = [ ExtResource( 144 ), ExtResource( 138 ), ExtResource( 197 ), ExtResource( 175 ), ExtResource( 174 ), ExtResource( 87 ), ExtResource( 178 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 80 ) ]
+
+[node name="Helia" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 66 )
+background_override = ExtResource( 122 )
+music_override = ExtResource( 120 )
+music_vox_override = ExtResource( 119 )
+suppress_exp = true
+loot_table_override = ExtResource( 104 )
+cutscenes = [ ExtResource( 101 ) ]
+transition = 3
+title_banner = SubResource( 23 )
+
+[node name="CharacterConfig" type="Node" parent="FlagVisibility/Magikrab/Helia"]
+script = ExtResource( 68 )
+character_name = "AA_HELIA_NAME"
+pronouns = 1
+level_override = 75
+level_scale_override_key = "npc_boss"
+exp_yield = 0
+base_character = ExtResource( 193 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 102 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="FlagVisibility/Magikrab/Helia/CharacterConfig"]
+script = ExtResource( 69 )
+form = ExtResource( 183 )
+moves_override = [ ExtResource( 165 ), ExtResource( 157 ), ExtResource( 169 ), ExtResource( 148 ), ExtResource( 161 ), ExtResource( 162 ), ExtResource( 196 ), ExtResource( 129 ), ExtResource( 85 ), ExtResource( 65 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 80 ) ]
+
+[node name="Alice" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 66 )
+background_override = ExtResource( 122 )
+music_override = ExtResource( 120 )
+music_vox_override = ExtResource( 119 )
+suppress_exp = true
+loot_table_override = ExtResource( 104 )
+cutscenes = [ ExtResource( 101 ) ]
+transition = 3
+title_banner = SubResource( 24 )
+
+[node name="CharacterConfig" type="Node" parent="FlagVisibility/Magikrab/Alice"]
+script = ExtResource( 68 )
+character_name = "AA_ALICE_NAME"
+pronouns = 1
+level_override = 75
+level_scale_override_key = "npc_boss"
+exp_yield = 0
+base_character = ExtResource( 203 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 190 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig2" type="Node" parent="FlagVisibility/Magikrab/Alice/CharacterConfig"]
+script = ExtResource( 69 )
+form = ExtResource( 114 )
+moves_override = [ ExtResource( 128 ), ExtResource( 177 ), ExtResource( 164 ), ExtResource( 152 ), ExtResource( 166 ), ExtResource( 167 ), ExtResource( 117 ), ExtResource( 133 ), ExtResource( 65 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 80 ) ]
+
+[node name="Aleph" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 66 )
+background_override = ExtResource( 122 )
+music_override = ExtResource( 207 )
+suppress_exp = true
+loot_table_override = ExtResource( 104 )
+cutscenes = [ ExtResource( 101 ) ]
+transition = 3
+title_banner = ExtResource( 201 )
+
+[node name="CharacterConfig" type="Node" parent="FlagVisibility/Magikrab/Aleph"]
+script = ExtResource( 68 )
+level_override = 75
+level_scale_override_key = "npc_boss"
+exp_yield = 0
+base_character = ExtResource( 141 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 191 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="FlagVisibility/Magikrab/Aleph/CharacterConfig"]
+script = ExtResource( 69 )
+form = ExtResource( 64 )
+moves_override = [ ExtResource( 170 ), ExtResource( 61 ), ExtResource( 156 ), ExtResource( 97 ), ExtResource( 182 ), ExtResource( 181 ), ExtResource( 140 ) ]
+
+[node name="Puppet" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 66 )
+background_override = ExtResource( 122 )
+music_override = ExtResource( 120 )
+music_vox_override = ExtResource( 119 )
+suppress_exp = true
+loot_table_override = ExtResource( 104 )
+cutscenes = [ ExtResource( 101 ) ]
+transition = 3
+title_banner = SubResource( 25 )
+
+[node name="CharacterConfig" type="Node" parent="FlagVisibility/Magikrab/Puppet"]
+script = ExtResource( 68 )
+character_name = "AA_PUPPET_NAME"
+pronouns = 0
+level_override = 75
+level_scale_override_key = "npc_boss"
+exp_yield = 0
+base_character = ExtResource( 202 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 192 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="FlagVisibility/Magikrab/Puppet/CharacterConfig"]
+script = ExtResource( 69 )
+form = ExtResource( 113 )
+moves_override = [ ExtResource( 153 ), ExtResource( 116 ), ExtResource( 143 ), ExtResource( 155 ), ExtResource( 109 ), ExtResource( 137 ), ExtResource( 65 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 150 ), ExtResource( 80 ) ]
+
+[node name="Mourningstar" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 66 )
+background_override = ExtResource( 122 )
+music_override = ExtResource( 120 )
+music_vox_override = ExtResource( 119 )
+suppress_exp = true
+loot_table_override = ExtResource( 104 )
+cutscenes = [ ExtResource( 101 ) ]
+transition = 3
+title_banner = SubResource( 26 )
+
+[node name="CharacterConfig" type="Node" parent="FlagVisibility/Magikrab/Mourningstar"]
+script = ExtResource( 68 )
+character_name = "AA_SERPENT_NAME"
+pronouns = 0
+level_override = 75
+level_scale_override_key = "npc_boss"
+exp_yield = 0
+base_character = ExtResource( 199 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 187 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="FlagVisibility/Magikrab/Mourningstar/CharacterConfig"]
+script = ExtResource( 69 )
+form = ExtResource( 111 )
+moves_override = [ ExtResource( 154 ), ExtResource( 153 ), ExtResource( 147 ), ExtResource( 149 ), ExtResource( 148 ), ExtResource( 151 ), ExtResource( 176 ), ExtResource( 134 ), ExtResource( 65 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 80 ) ]
+
+[node name="Lamentomori" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 66 )
+background_override = ExtResource( 122 )
+music_override = ExtResource( 120 )
+music_vox_override = ExtResource( 119 )
+suppress_exp = true
+loot_table_override = ExtResource( 104 )
+cutscenes = [ ExtResource( 101 ) ]
+transition = 3
+title_banner = SubResource( 27 )
+
+[node name="CharacterConfig" type="Node" parent="FlagVisibility/Magikrab/Lamentomori"]
+script = ExtResource( 68 )
+character_name = "AA_LAMENTO_MORI_NAME"
+pronouns = 0
+level_override = 75
+level_scale_override_key = "npc_boss"
+exp_yield = 0
+base_character = ExtResource( 200 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 189 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="FlagVisibility/Magikrab/Lamentomori/CharacterConfig"]
+script = ExtResource( 69 )
+form = ExtResource( 107 )
+moves_override = [ ExtResource( 145 ), ExtResource( 158 ), ExtResource( 163 ), ExtResource( 136 ), ExtResource( 135 ), ExtResource( 65 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 80 ) ]
+
+[node name="Aleph_Null" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 66 )
+background_override = ExtResource( 122 )
+music_override = ExtResource( 82 )
+suppress_exp = true
+loot_table_override = ExtResource( 104 )
+transition = 3
+
+[node name="CharacterConfig" type="Node" parent="FlagVisibility/Magikrab/Aleph_Null"]
+script = ExtResource( 68 )
+pronouns = 0
+level_override = 75
+level_scale_override_key = "npc_boss"
+exp_yield = 0
+base_character = ExtResource( 63 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 83 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="FlagVisibility/Magikrab/Aleph_Null/CharacterConfig"]
+script = ExtResource( 69 )
+form = ExtResource( 78 )
+moves_override = [ ExtResource( 65 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 80 ), ExtResource( 87 ), ExtResource( 85 ), ExtResource( 88 ) ]
+
+[node name="Cube" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 66 )
+background_override = ExtResource( 122 )
+music_override = ExtResource( 120 )
+music_vox_override = ExtResource( 119 )
+suppress_exp = true
+loot_table_override = ExtResource( 104 )
+cutscenes = [ ExtResource( 101 ) ]
+transition = 3
+title_banner = SubResource( 17 )
+
+[node name="CharacterConfig" type="Node" parent="FlagVisibility/Magikrab/Cube"]
+script = ExtResource( 68 )
+character_name = "AA_CUBE_NAME"
+level_override = 75
+level_scale_override_key = "npc_boss"
+exp_yield = 0
+base_character = ExtResource( 103 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 102 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig2" type="Node" parent="FlagVisibility/Magikrab/Cube/CharacterConfig"]
+script = ExtResource( 69 )
+form = ExtResource( 81 )
+moves_override = [ ExtResource( 97 ), ExtResource( 98 ), ExtResource( 99 ), ExtResource( 95 ), ExtResource( 96 ), ExtResource( 65 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 80 ) ]
+
+[node name="Dummy" type="Node" parent="FlagVisibility/Magikrab"]
+script = ExtResource( 66 )
+background_override = ExtResource( 223 )
+suppress_exp = true
+loot_table_override = ExtResource( 104 )
+transition = 3
+
+[node name="CharacterConfig" type="Node" parent="FlagVisibility/Magikrab/Dummy"]
+script = ExtResource( 68 )
+character_name = "Training Partner"
+level_override = 1
+level_scale_override_key = "npc"
+exp_yield = 0
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+randomize_human_sprite = true
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig2" type="Node" parent="FlagVisibility/Magikrab/Dummy/CharacterConfig"]
+script = ExtResource( 69 )
+form = ExtResource( 222 )
+moves_override = [ ExtResource( 221 ), ExtResource( 128 ), ExtResource( 129 ) ]
+type_override = [ ExtResource( 84 ) ]
+
+[node name="CharacterConfig2" type="Node" parent="FlagVisibility/Magikrab/Dummy"]
+script = ExtResource( 68 )
+character_name = "Training Partner"
+level_override = 1
+level_scale_override_key = "npc"
+exp_yield = 0
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+randomize_human_sprite = true
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig2" type="Node" parent="FlagVisibility/Magikrab/Dummy/CharacterConfig2"]
+script = ExtResource( 69 )
+form = ExtResource( 222 )
+moves_override = [ ExtResource( 221 ), ExtResource( 128 ), ExtResource( 129 ) ]
+type_override = [ ExtResource( 84 ) ]
+
+[node name="WoodenPlaque1" parent="." instance=ExtResource( 123 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5282, 6, 27.427 )
+
+[node name="Interaction" parent="WoodenPlaque1" instance=ExtResource( 75 )]
+pawn_path = NodePath("..")
+
+[node name="CollisionShape" type="CollisionShape" parent="WoodenPlaque1/Interaction"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.325, 0 )
+shape = SubResource( 16 )
+
+[node name="InteractionBehavior" type="Node" parent="WoodenPlaque1"]
+script = ExtResource( 20 )
+
+[node name="SetDungeonPropertyAction" type="Node" parent="WoodenPlaque1/InteractionBehavior"]
+script = ExtResource( 124 )
+initialize = true
+
+[node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior"]
+script = ExtResource( 92 )
+messages = [ "It appears to be a regular wooden plaque. [pause] There's a list written on it's surface. " ]
+wait_for_confirm = false
+close_after = false
+style = 3
+
+[node name="Repeater" type="Node" parent="WoodenPlaque1/InteractionBehavior"]
+script = ExtResource( 90 )
+stop_on_failure = true
+
+[node name="MenuDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater"]
+script = ExtResource( 94 )
+menu_options = [ "Trial Chambers.", "Overspill Damage.", "Ignore it." ]
+default_option = 2
+
+[node name="Succeeder" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder"]
+script = ExtResource( 92 )
+messages = [ "The words on the plaque have mysteriously shifted. [pause] It's almost as though it were an interactive menu..." ]
+wait_for_confirm = false
+close_after = false
+style = 3
+
+[node name="MenuDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder"]
+script = ExtResource( 94 )
+menu_options = [ "Disable Trial Chambers", "Enable Trial Chambers" ]
+
+[node name="Succeeder" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="SetDungeonPropertyAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder/MenuDialogAction/Succeeder"]
+script = ExtResource( 124 )
+property_name = "TrialChambers"
+
+[node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder/MenuDialogAction/Succeeder"]
+script = ExtResource( 92 )
+messages = [ "You hear the sound of something shifting in the distance. It feels as though something has been removed.", "The words on the plaque have rearranged themselves again." ]
+wait_for_confirm = false
+close_after = false
+style = 3
+
+[node name="Succeeder2" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="SetDungeonPropertyAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder/MenuDialogAction/Succeeder2"]
+script = ExtResource( 124 )
+property_name = "TrialChambers"
+property_value = true
+
+[node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder/MenuDialogAction/Succeeder2"]
+script = ExtResource( 92 )
+messages = [ "You hear the sound of something shifting in the distance. It feels as though something has been added. ", "The words on the plaque have rearranged themselves again." ]
+wait_for_confirm = false
+close_after = false
+style = 3
+
+[node name="Succeeder2" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2"]
+script = ExtResource( 92 )
+messages = [ "The words on the plaque have mysteriously shifted.[pause] It's almost as though it were an interactive menu..." ]
+wait_for_confirm = false
+close_after = false
+style = 3
+
+[node name="MenuDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2"]
+script = ExtResource( 94 )
+menu_options = [ "Disable overspill damage for everyone.", "Enable overspill damage for everyone." ]
+
+[node name="Succeeder" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="SetDungeonPropertyAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2/MenuDialogAction/Succeeder"]
+script = ExtResource( 124 )
+property_name = "Overspill"
+
+[node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2/MenuDialogAction/Succeeder"]
+script = ExtResource( 92 )
+messages = [ "Your body tenses up. [pause]You feel as though your human form plays no part in this game anymore. It is less vulnerable now.", "The words on the plaque have rearranged themselves again." ]
+wait_for_confirm = false
+close_after = false
+style = 3
+
+[node name="Succeeder2" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2/MenuDialogAction"]
+script = ExtResource( 38 )
+
+[node name="SetDungeonPropertyAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2/MenuDialogAction/Succeeder2"]
+script = ExtResource( 124 )
+property_name = "Overspill"
+property_value = true
+
+[node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2/MenuDialogAction/Succeeder2"]
+script = ExtResource( 92 )
+messages = [ "You feel a cold sweat across your face. Your body feels squishy[pause], unbearably squishy. Somehow you feel more vulnerable than before.", "The words on the plaque have rearranged themselves again." ]
+wait_for_confirm = false
+close_after = false
+style = 3
+
+[node name="Failer" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction"]
+script = ExtResource( 121 )
+
+[node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Failer"]
+script = ExtResource( 92 )
+messages = [ "You ignore the plaque. What good would messing with it do anyway." ]
+style = 3
+
+[connection signal="arrived" from="Campsite" to="Campsite/Camping" method="_on_Campsite_arrived"]
+[connection signal="screen_entered" from="FlagVisibility/Magikrab/VisibilityNotifier" to="FlagVisibility/Magikrab" method="set_paused" binds= [ false ]]
+[connection signal="screen_exited" from="FlagVisibility/Magikrab/VisibilityNotifier" to="FlagVisibility/Magikrab" method="set_paused" binds= [ true ]]

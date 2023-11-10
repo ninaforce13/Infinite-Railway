@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/LootTableExchangeCustom.gd" type="Script" id=1]
+[ext_resource path="res://sprites/items/rewind.png" type="Texture" id=2]
+[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=3]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Item Sale Substitutes/rewind_LT.tres" type="Resource" id=4]
+[ext_resource path="res://mods/Infinite_Dungeon/Conditionals/rewind_conditional.tres" type="Resource" id=5]
+
+[resource]
+script = ExtResource( 1 )
+max_amount = 1000
+only_sold_if_unowned = false
+conditional = ExtResource( 5 )
+name = "ITEM_REWIND_NAME"
+description = "ITEM_REWIND_DESCRIPTION"
+icon = ExtResource( 2 )
+rarity = 0
+amount = 1
+service = ""
+currencies = [ ExtResource( 3 ) ]
+prices = [ 1 ]
+loot_table = ExtResource( 4 )
+loot_value = 1000

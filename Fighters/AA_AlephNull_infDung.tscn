@@ -1,0 +1,946 @@
+[gd_scene load_steps=61 format=2]
+
+[ext_resource path="res://data/battle_moves/neutralise.tres" type="Resource" id=1]
+[ext_resource path="res://data/battle_moves/status_resistance.tres" type="Resource" id=2]
+[ext_resource path="res://data/archangel_forms/aleph.tres" type="Resource" id=3]
+[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=4]
+[ext_resource path="res://data/archangel_moves/eldritch.tres" type="Resource" id=5]
+[ext_resource path="res://mods/Infinite_Dungeon/BattleBackground/BattleVortex.tscn" type="PackedScene" id=6]
+[ext_resource path="res://nodes/misc_shaders/mirror.shader" type="Shader" id=7]
+[ext_resource path="res://mods/Infinite_Dungeon/Rooms/BattleAction_InfDung.gd" type="Script" id=8]
+[ext_resource path="res://nodes/actions/PlayAnimationAction.gd" type="Script" id=9]
+[ext_resource path="res://addons/misc_utils/actions/composites/Selector.gd" type="Script" id=10]
+[ext_resource path="res://nodes/encounter_config/EncounterConfig.gd" type="Script" id=11]
+[ext_resource path="res://nodes/encounter_config/CharacterConfig.gd" type="Script" id=12]
+[ext_resource path="res://nodes/encounter_config/TapeConfig.gd" type="Script" id=13]
+[ext_resource path="res://nodes/sprite_container/SpriteContainer.gd" type="Script" id=14]
+[ext_resource path="res://addons/misc_utils/actions/WaitAction.gd" type="Script" id=15]
+[ext_resource path="res://nodes/actions/FollowAction.gd" type="Script" id=16]
+[ext_resource path="res://nodes/actions/values/GetPlayer.gd" type="Script" id=17]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=18]
+[ext_resource path="res://music/demo/in_the_warp.ogg" type="AudioStream" id=19]
+[ext_resource path="res://mods/Infinite_Dungeon/CutScenes/aleph_null_battlestart.tscn" type="PackedScene" id=20]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Bosses/aleph_null_droptable.tres" type="Resource" id=21]
+[ext_resource path="res://sfx/voices/aleph/aleph_laugh_2.wav" type="AudioStream" id=22]
+[ext_resource path="res://nodes/actions/PlayAudioAction.gd" type="Script" id=23]
+[ext_resource path="res://nodes/actions/ChangeTrackerTargetAction.gd" type="Script" id=24]
+[ext_resource path="res://addons/misc_utils/actions/CallMethodAction.gd" type="Script" id=25]
+[ext_resource path="res://addons/misc_utils/actions/values/GetNode.gd" type="Script" id=26]
+[ext_resource path="res://addons/misc_utils/actions/composites/Parallel.gd" type="Script" id=27]
+[ext_resource path="res://data/battle_moves/phase_shift.tres" type="Resource" id=28]
+[ext_resource path="res://sprites/archangels/aleph/aleph_battle_body.png" type="Texture" id=29]
+[ext_resource path="res://data/characters/aa_aleph_null.tres" type="Resource" id=30]
+[ext_resource path="res://nodes/sprite_container/alpha_scissor.shader" type="Shader" id=31]
+[ext_resource path="res://mods/Infinite_Dungeon/CustomAI/AlephNullAI_Infdung.tscn" type="PackedScene" id=32]
+[ext_resource path="res://world/behaviors/ArchangelIntroBehavior.gd" type="Script" id=33]
+[ext_resource path="res://nodes/actions/SetVisibleAction.gd" type="Script" id=34]
+[ext_resource path="res://nodes/actions/FaceDirectionAction.gd" type="Script" id=35]
+[ext_resource path="res://nodes/actions/CameraShakeAction.gd" type="Script" id=36]
+[ext_resource path="res://addons/misc_utils/ExtendedAnimationPlayerFallback.gd" type="Script" id=37]
+[ext_resource path="res://world/npc/Controls.gd" type="Script" id=38]
+[ext_resource path="res://world/npc/NPC.gd" type="Script" id=39]
+[ext_resource path="res://world/npc/FloorRay.gd" type="Script" id=40]
+[ext_resource path="res://world/npc/Footsteps.tscn" type="PackedScene" id=41]
+[ext_resource path="res://world/npc/EmotePlayer.tscn" type="PackedScene" id=42]
+[ext_resource path="res://world/core/Interaction.tscn" type="PackedScene" id=43]
+[ext_resource path="res://data/archangel_moves/mammon_too_big_to_fail.tres" type="Resource" id=44]
+[ext_resource path="res://data/battle_moves/radioactive.tres" type="Resource" id=45]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/CustomSetFlagAction.gd" type="Script" id=46]
+[ext_resource path="res://nodes/actions/CheckConditionAction.gd" type="Script" id=47]
+
+[sub_resource type="CapsuleShape" id=21]
+radius = 0.9
+height = 0.9
+
+[sub_resource type="ShaderMaterial" id=24]
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/flags_albedo_tex_force_srgb = false
+shader_param/alpha_scissor_threshold = 0.98
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/metallic_texture_channel = null
+shader_param/roughness_texture_channel = null
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/rotation = Vector3( 0, 0, 0 )
+shader_param/overlay_scroll_rate = Vector2( 0, 0 )
+shader_param/overlay_opacity = 0.0
+shader_param/swap_blend = 0.0
+shader_param/swap_from_0 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_1 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_2 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_3 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_4 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_5 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_6 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_7 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_8 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_9 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_10 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_11 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_12 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_13 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_14 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_0 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_1 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_2 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_3 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_4 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_5 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_6 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_7 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_8 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_9 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_10 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_11 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_12 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_13 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_14 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_0 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_1 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_2 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_3 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_4 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_5 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_6 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_7 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_8 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_9 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_10 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_11 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_12 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_13 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_14 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_0 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_1 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_2 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_3 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_4 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_5 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_6 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_7 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_8 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_9 = Color( 0, 0, 0, 0 )
+shader_param/wave_amplitude = 0.0
+shader_param/wave_v_frequency = 0.0
+shader_param/wave_t_frequency = 5.0
+shader_param/wave_min_u = 0.0
+shader_param/wave_max_u = 1.0
+shader_param/wave_min_v = 0.0
+shader_param/wave_max_v = 1.0
+shader_param/glow = 0.0
+shader_param/billboard_mode = 1
+shader_param/billboard_depth_hack = true
+shader_param/static_offset = 0.0
+shader_param/static_amount = 0.0
+shader_param/static_border = 0.125
+shader_param/static_speed = 0.0
+shader_param/sparkle = false
+shader_param/sparkle_period = 20.0
+shader_param/sparkle_falloff = 100.0
+shader_param/sparkle_amplitude = 5.0
+shader_param/sparkliness = 2.0
+shader_param/texture_albedo = ExtResource( 29 )
+
+[sub_resource type="ShaderMaterial" id=25]
+next_pass = SubResource( 24 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/flags_albedo_tex_force_srgb = false
+shader_param/alpha_scissor_threshold = 0.98
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/metallic_texture_channel = null
+shader_param/roughness_texture_channel = null
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/rotation = Vector3( 0, 0, 0 )
+shader_param/overlay_scroll_rate = Vector2( 0, 0 )
+shader_param/overlay_opacity = 0.0
+shader_param/swap_blend = 0.0
+shader_param/swap_from_0 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_1 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_2 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_3 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_4 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_5 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_6 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_7 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_8 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_9 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_10 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_11 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_12 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_13 = Color( 0, 0, 0, 0 )
+shader_param/swap_from_14 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_0 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_1 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_2 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_3 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_4 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_5 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_6 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_7 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_8 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_9 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_10 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_11 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_12 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_13 = Color( 0, 0, 0, 0 )
+shader_param/swap_default_14 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_0 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_1 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_2 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_3 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_4 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_5 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_6 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_7 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_8 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_9 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_10 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_11 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_12 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_13 = Color( 0, 0, 0, 0 )
+shader_param/swap_to_14 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_0 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_1 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_2 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_3 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_4 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_5 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_6 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_7 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_8 = Color( 0, 0, 0, 0 )
+shader_param/emission_color_9 = Color( 0, 0, 0, 0 )
+shader_param/wave_amplitude = 0.0
+shader_param/wave_v_frequency = 0.0
+shader_param/wave_t_frequency = 5.0
+shader_param/wave_min_u = 0.0
+shader_param/wave_max_u = 1.0
+shader_param/wave_min_v = 0.0
+shader_param/wave_max_v = 1.0
+shader_param/glow = 0.0
+shader_param/billboard_mode = 1
+shader_param/billboard_depth_hack = true
+shader_param/static_offset = 0.0
+shader_param/static_amount = 0.0
+shader_param/static_border = 0.125
+shader_param/static_speed = 0.0
+shader_param/sparkle = false
+shader_param/sparkle_period = 20.0
+shader_param/sparkle_falloff = 100.0
+shader_param/sparkle_amplitude = 5.0
+shader_param/sparkliness = 2.0
+shader_param/texture_albedo = ExtResource( 29 )
+
+[sub_resource type="Animation" id=2]
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 420, 0, 70, 80 ), Rect2( 70, 0, 70, 80 ), Rect2( 490, 0, 70, 80 ), Rect2( 0, 80, 70, 80 ), Rect2( 70, 80, 70, 80 ), Rect2( 140, 80, 70, 80 ), Rect2( 420, 0, 70, 80 ), Rect2( 70, 0, 70, 80 ), Rect2( 490, 0, 70, 80 ), Rect2( 0, 80, 70, 80 ), Rect2( 70, 80, 70, 80 ), Rect2( 140, 80, 70, 80 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head:material_override:shader_param/billboard_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2 ),
+"transitions": PoolRealArray( 2, 0.5, 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 7, 0 ), Vector3( 0, 6.5, 0 ), Vector3( 0, 7.5, 0 ), Vector3( 0, 7, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Head:material_override:shader_param/rotation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 1.2 ),
+"transitions": PoolRealArray( 2, 0.5, 1 ),
+"update": 0,
+"values": [ 0.5, 2.07, 3.64 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 160, 70, 80 ), Rect2( 70, 160, 70, 80 ), Rect2( 140, 160, 70, 80 ), Rect2( 210, 160, 70, 80 ), Rect2( 280, 160, 70, 80 ), Rect2( 350, 160, 70, 80 ), Rect2( 350, 0, 70, 80 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head:material_override:shader_param/rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 2, 0.5, 1 ),
+"update": 0,
+"values": [ 0.5, 0.5, 2.07, 3.64 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Head:material_override:shader_param/billboard_offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 5.75, 0 ), Vector3( 0, 5, 0 ), Vector3( 0, 7, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Head:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 2, 1 ),
+"update": 0,
+"values": [ Vector3( 2, 2, 2 ), Vector3( 2, 2, 2 ), Vector3( 1.5, 1.5, 1.5 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 420, 240, 70, 80 ), Rect2( 490, 240, 70, 80 ), Rect2( 0, 320, 70, 80 ), Rect2( 70, 320, 70, 80 ), Rect2( 140, 320, 70, 80 ), Rect2( 210, 320, 70, 80 ), Rect2( 280, 320, 70, 80 ), Rect2( 350, 0, 70, 80 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 2, 2, 1 ),
+"update": 0,
+"values": [ Vector3( 3, 3, 3 ), Vector3( 2.5, 2.5, 2.5 ), Vector3( 3, 3, 3 ), Vector3( 3, 3, 3 ), Vector3( 1.5, 1.5, 1.5 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Head:material_override:shader_param/rotation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 2, 2.07053, 1 ),
+"update": 0,
+"values": [ 0.5, 0.5, 0.5, 2.07, 3.64 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Head:material_override:shader_param/billboard_offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 2, 2, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 3.9, 0 ), Vector3( 0, 4.5, 0 ), Vector3( 0, 3.9, 0 ), Vector3( 0, 3.9, 0 ), Vector3( 0, 7, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 350, 320, 70, 80 ), Rect2( 420, 320, 70, 80 ), Rect2( 350, 0, 70, 80 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head:material_override:shader_param/rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.5, 0.5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Head:material_override:shader_param/billboard_offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 0.5, 1, 1 ),
+"update": 1,
+"values": [ Vector3( -0.75, 7.5, 0 ), Vector3( -0.1875, 7.125, 0 ), Vector3( 0, 7, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 70, 80 ), Rect2( 70, 0, 70, 80 ), Rect2( 140, 0, 70, 80 ), Rect2( 210, 0, 70, 80 ), Rect2( 280, 0, 70, 80 ), Rect2( 350, 0, 70, 80 ), Rect2( 0, 0, 70, 80 ), Rect2( 70, 0, 70, 80 ), Rect2( 140, 0, 70, 80 ), Rect2( 210, 0, 70, 80 ), Rect2( 280, 0, 70, 80 ), Rect2( 350, 0, 70, 80 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head:material_override:shader_param/rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6, 1.2 ),
+"transitions": PoolRealArray( 2, 0.5, 1 ),
+"update": 0,
+"values": [ 0.5, 2.07, 3.64 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Head:material_override:shader_param/billboard_offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6, 1.2 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 7, 0 ), Vector3( 0, 7.25, 0 ), Vector3( 0, 7, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Head:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.5, 1.5, 1.5 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 210, 80, 70, 80 ), Rect2( 280, 80, 70, 80 ), Rect2( 350, 80, 70, 80 ), Rect2( 420, 80, 70, 80 ), Rect2( 490, 80, 70, 80 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head:material_override:shader_param/rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.5, 0.5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Head:material_override:shader_param/billboard_offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 7, 0 ), Vector3( 0, 5.75, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Head:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 1.5, 1.5, 1.5 ), Vector3( 2, 2, 2 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 420, 160, 70, 80 ), Rect2( 490, 160, 70, 80 ), Rect2( 0, 240, 70, 80 ), Rect2( 70, 240, 70, 80 ), Rect2( 140, 240, 70, 80 ), Rect2( 210, 240, 70, 80 ), Rect2( 280, 240, 70, 80 ), Rect2( 350, 240, 70, 80 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head:material_override:shader_param/rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8 ),
+"transitions": PoolRealArray( 2, 0.5, 1 ),
+"update": 0,
+"values": [ 0.5, 2.07, 3.64 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Head:material_override:shader_param/billboard_offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 2, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 7, 0 ), Vector3( 0, 6.75, 0 ), Vector3( 0, 3.9, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Head:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 2, 1 ),
+"update": 0,
+"values": [ Vector3( 1.5, 1.5, 1.5 ), Vector3( 1.5, 1.5, 1.5 ), Vector3( 3, 3, 3 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=23]
+resource_local_to_scene = true
+shader = ExtResource( 7 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/reflection_direction = Vector2( 0, 1 )
+shader_param/reflection_scale = Vector2( 1, 1 )
+shader_param/tint = Color( 0.501961, 0.501961, 0.501961, 0.12549 )
+shader_param/rotation = Vector3( 0, 2.09647, 0 )
+shader_param/billboard_mode = 1
+shader_param/billboard_depth_hack = true
+shader_param/billboard_offset = Vector3( 0, 4.62473, 0 )
+shader_param/lod = 0.0
+shader_param/glow = 0.0
+shader_param/alpha = 1.0
+
+[sub_resource type="PrismMesh" id=10]
+size = Vector3( 2, -2, 0.125 )
+
+[sub_resource type="BoxShape" id=20]
+extents = Vector3( 24.34, 7.07323, 18.6833 )
+
+[node name="Archangel" type="KinematicBody"]
+visible = false
+collision_layer = 144
+collision_mask = 32785
+script = ExtResource( 39 )
+direction = Vector2( 0, 1 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
+aabb = AABB( -2, -1, -2, 4, 4.7, 4 )
+max_distance = 100.0
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.325, 0 )
+shape = SubResource( 21 )
+
+[node name="Sprite" type="Spatial" parent="."]
+script = ExtResource( 14 )
+idle = "idle"
+alt_idle = "alt_idle"
+direction = "down"
+flip_h = true
+billboard_depth_hack = true
+offset = Vector3( -0.0361755, 0, 0 )
+wave_t_frequency = 5.0
+
+[node name="Sprite" type="Spatial" parent="Sprite"]
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.0361755, 0, 0 )
+__meta__ = {
+"_ase_imported": true
+}
+
+[node name="Sprite3D" type="Sprite3D" parent="Sprite/Sprite"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.58706, 0 )
+material_override = SubResource( 25 )
+centered = false
+offset = Vector2( -35, 0 )
+flip_h = true
+pixel_size = 0.125
+texture = ExtResource( 29 )
+region_enabled = true
+region_rect = Rect2( 210, 320, 70, 80 )
+__meta__ = {
+"_ase_imported": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite/Sprite"]
+anims/alt_idle = SubResource( 2 )
+anims/attack = SubResource( 3 )
+anims/attack_2 = SubResource( 4 )
+anims/hurt = SubResource( 5 )
+anims/idle = SubResource( 6 )
+anims/windup = SubResource( 7 )
+anims/windup_2 = SubResource( 8 )
+script = ExtResource( 37 )
+__meta__ = {
+"_ase_imported": true
+}
+
+[node name="Head" type="MeshInstance" parent="Sprite/Sprite"]
+transform = Transform( 2.64932, 0, 0, 0, 2.64932, 0, 0, 0, 2.64932, 0, -1.58706, 0.25 )
+material_override = SubResource( 23 )
+mesh = SubResource( 10 )
+
+[node name="Node" type="Node" parent="Sprite"]
+
+[node name="Tween" type="Tween" parent="Sprite/Node"]
+
+[node name="Node2" type="Node" parent="Sprite"]
+
+[node name="Tween" type="Tween" parent="Sprite/Node2"]
+
+[node name="EmotePlayer" parent="." instance=ExtResource( 42 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+
+[node name="Interaction" parent="." instance=ExtResource( 43 )]
+pawn_path = NodePath("..")
+display_marker = false
+
+[node name="CollisionShape" type="CollisionShape" parent="Interaction"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.325, 0 )
+shape = SubResource( 21 )
+
+[node name="Footsteps" parent="." instance=ExtResource( 41 )]
+
+[node name="Controls" type="Node" parent="."]
+script = ExtResource( 38 )
+
+[node name="FloorRay" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+enabled = true
+cast_to = Vector3( 0, -5, 0 )
+collision_mask = 8193
+collide_with_areas = true
+script = ExtResource( 40 )
+
+[node name="CryPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 22 )
+bus = "World"
+
+[node name="RematchConfig" type="Node" parent="."]
+script = ExtResource( 11 )
+unique_id = "infdung_boss"
+background_override = ExtResource( 6 )
+music_override = ExtResource( 19 )
+can_flee = false
+loot_table_override = ExtResource( 21 )
+cutscenes = [ ExtResource( 20 ) ]
+transition = 3
+
+[node name="CharacterConfig" type="Node" parent="RematchConfig"]
+script = ExtResource( 12 )
+pronouns = 0
+level_override = 75
+levels_per_defeat = 3
+level_scale_override_key = "monster_miniboss_smart"
+exp_yield = 400
+base_character = ExtResource( 30 )
+character_kind = 2
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 32 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="RematchConfig/CharacterConfig"]
+script = ExtResource( 13 )
+form = ExtResource( 3 )
+moves_override = [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 1 ), ExtResource( 28 ), ExtResource( 44 ), ExtResource( 45 ) ]
+
+[node name="ArchangelIntroBehavior" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource( 33 )
+pawn = NodePath("..")
+
+[node name="CollisionShape" type="CollisionShape" parent="ArchangelIntroBehavior"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.39272, 0 )
+shape = SubResource( 20 )
+
+[node name="ArchangelIntroCutscene" type="Node" parent="ArchangelIntroBehavior"]
+script = ExtResource( 18 )
+
+[node name="Selector" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene"]
+script = ExtResource( 10 )
+
+[node name="ChangeTrackerTargetAction_Rematch" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector"]
+script = ExtResource( 24 )
+__meta__ = {
+"action_tree": true
+}
+zoom = 1.75
+snap_at_exit = true
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch"]
+script = ExtResource( 26 )
+node_name = "Positions/RailEdge"
+
+[node name="Parallel" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch"]
+script = ExtResource( 27 )
+
+[node name="PlayAnimationAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel"]
+script = ExtResource( 9 )
+__meta__ = {
+"action_tree": true
+}
+animation_name = "arrive"
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/PlayAnimationAction"]
+script = ExtResource( 26 )
+node_name = "Train/AnimationPlayer"
+
+[node name="WaitAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/PlayAnimationAction"]
+script = ExtResource( 15 )
+
+[node name="FollowAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel"]
+script = ExtResource( 16 )
+__meta__ = {
+"action_tree": true
+}
+always_succeed = true
+can_fly = true
+can_jump = true
+can_fall = true
+can_glide = true
+can_warp = true
+
+[node name="GetPlayer" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction"]
+script = ExtResource( 17 )
+which = 1
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction"]
+script = ExtResource( 26 )
+node_name = "Positions/PlayerTarget"
+
+[node name="FaceDirectionAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction"]
+script = ExtResource( 35 )
+__meta__ = {
+"action_tree": true
+}
+direction = "up"
+
+[node name="GetPlayer" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction/FaceDirectionAction"]
+script = ExtResource( 17 )
+which = 1
+
+[node name="FollowAction2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel"]
+script = ExtResource( 16 )
+__meta__ = {
+"action_tree": true
+}
+always_succeed = true
+can_fly = true
+can_jump = true
+can_fall = true
+can_glide = true
+can_warp = true
+
+[node name="GetPartner" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2"]
+script = ExtResource( 17 )
+which = 2
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2"]
+script = ExtResource( 26 )
+node_name = "Positions/PartnerTarget"
+
+[node name="FaceDirectionAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2"]
+script = ExtResource( 35 )
+__meta__ = {
+"action_tree": true
+}
+direction = "up"
+
+[node name="GetPartner" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/Parallel/FollowAction2/FaceDirectionAction"]
+script = ExtResource( 17 )
+which = 2
+
+[node name="PlayAnimationAction2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch"]
+script = ExtResource( 9 )
+__meta__ = {
+"action_tree": true
+}
+animation_name = "depart"
+wait_for_animation = false
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/PlayAnimationAction2"]
+script = ExtResource( 26 )
+node_name = "Train/AnimationPlayer"
+
+[node name="WaitAction2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch"]
+script = ExtResource( 15 )
+base_seconds = 0.5
+
+[node name="SetVisibleAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch"]
+script = ExtResource( 34 )
+
+[node name="ChangeTrackerTargetAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch"]
+script = ExtResource( 24 )
+__meta__ = {
+"action_tree": true
+}
+wait_for_arrival = false
+wait_for_exit = false
+zoom = 1.5
+snap_at_exit = true
+
+[node name="WaitAction4" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction"]
+script = ExtResource( 15 )
+
+[node name="PlayAudioAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction"]
+script = ExtResource( 23 )
+wait_for_finish = false
+
+[node name="GetNode" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction/PlayAudioAction"]
+script = ExtResource( 26 )
+node_name = "CryPlayer"
+
+[node name="CameraShakeAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction"]
+script = ExtResource( 36 )
+fade_in_duration = 0.25
+fade_out_duration = 0.25
+
+[node name="BattleAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction"]
+script = ExtResource( 8 )
+encounter_name_override = "RematchConfig"
+result_on_player_win = 1
+result_on_player_loss = 0
+result_on_flee = 0
+disable_fleeing = true
+railway_shards = ExtResource( 4 )
+
+[node name="CheckConditionAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction/BattleAction"]
+script = ExtResource( 47 )
+deny_flags = [ "infdung_null_defeated" ]
+
+[node name="SetFlagAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction/BattleAction/CheckConditionAction"]
+script = ExtResource( 46 )
+flag = "infdung_null_defeated"
+
+[node name="CallMethodAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction"]
+script = ExtResource( 25 )
+method = "fade_out"
+wait_for_completed = false
+
+[node name="GetNode2" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction/CallMethodAction"]
+script = ExtResource( 26 )
+node_name = "WorldAnalogueHorror"
+
+[connection signal="screen_entered" from="VisibilityNotifier" to="." method="set_paused" binds= [ false ]]
+[connection signal="screen_exited" from="VisibilityNotifier" to="." method="set_paused" binds= [ true ]]

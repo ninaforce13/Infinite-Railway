@@ -1,0 +1,33 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://mods/Infinite_Dungeon/status/locked_form.gd" type="Script" id=1]
+[ext_resource path="res://ui/icons/status_effects/tape_jam.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Cassette Locked"
+description = "Prevents Tape Switching through this Cassette Player"
+has_duration = true
+reduce_duration_at = 0
+icon = ExtResource( 2 )
+is_removable = true
+is_transferable = true
+is_buff = false
+is_debuff = true
+is_decoy = false
+always_hidden_from_display = false
+tags = [ "locked_out" ]
+toast_on_remove = ""
+vfx_on_add = [  ]
+vfx_on_remove = [  ]
+name_modifier = ""
+sprite_animation_prefix = ""
+sprite_animation_prefix_priority = 0
+percent_damage = 0
+absolute_damage = 0
+hurts_allies = false
+heals_enemies = false
+damage_boost_tags = [  ]
+damage_physicality = 1
+hit_vfx = [  ]
+heal_enemy_vfx = [  ]

@@ -1,0 +1,93 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://addons/misc_utils/actions/decorators/Succeeder.gd" type="Script" id=1]
+[ext_resource path="res://addons/misc_utils/actions/composites/Sequence.gd" type="Script" id=2]
+[ext_resource path="res://nodes/actions/SetNPCStateAction.gd" type="Script" id=3]
+[ext_resource path="res://addons/misc_utils/actions/composites/Selector.gd" type="Script" id=5]
+[ext_resource path="res://nodes/actions/RemoveNodeAction.gd" type="Script" id=6]
+[ext_resource path="res://nodes/actions/FaceDirectionAction.gd" type="Script" id=7]
+[ext_resource path="res://nodes/actions/values/GetPlayer.gd" type="Script" id=10]
+[ext_resource path="res://nodes/actions/WalkAction.gd" type="Script" id=11]
+[ext_resource path="res://addons/misc_utils/actions/values/GetPawn.gd" type="Script" id=12]
+[ext_resource path="res://nodes/actions/FaceTowardsAction.gd" type="Script" id=14]
+[ext_resource path="res://nodes/actions/BattleAction.gd" type="Script" id=15]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=17]
+[ext_resource path="res://nodes/actions/MessageDialogAction.gd" type="Script" id=18]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/LineOfSightDetector_mod.tscn" type="PackedScene" id=20]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/BattleNPCBehavior_Modded.gd" type="Script" id=21]
+[ext_resource path="res://nodes/actions/IsUndefeatedAction.gd" type="Script" id=22]
+
+[node name="InteractionBehavior" type="Spatial"]
+script = ExtResource( 21 )
+__meta__ = {
+"action_tree": true
+}
+
+[node name="Succeeder" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="IsUndefeatedAction" type="Node" parent="Succeeder"]
+script = ExtResource( 22 )
+
+[node name="FaceTowardsAction" type="Node" parent="Succeeder/IsUndefeatedAction"]
+script = ExtResource( 14 )
+__meta__ = {
+"action_tree": true
+}
+
+[node name="GetPawn" type="Node" parent="Succeeder/IsUndefeatedAction/FaceTowardsAction"]
+script = ExtResource( 12 )
+
+[node name="GetPlayer" type="Node" parent="Succeeder/IsUndefeatedAction/FaceTowardsAction"]
+script = ExtResource( 10 )
+
+[node name="Cutscene" type="Node" parent="."]
+script = ExtResource( 17 )
+
+[node name="Selector" type="Node" parent="Cutscene"]
+script = ExtResource( 5 )
+
+[node name="IsUndefeatedAction" type="Node" parent="Cutscene/Selector"]
+script = ExtResource( 22 )
+
+[node name="MainDialogue" type="Node" parent="Cutscene/Selector/IsUndefeatedAction"]
+script = ExtResource( 18 )
+title = "{pawn}"
+
+[node name="BattleAction" type="Node" parent="Cutscene/Selector/IsUndefeatedAction"]
+script = ExtResource( 15 )
+disable_fleeing = true
+
+[node name="Sequence" type="Node" parent="Cutscene/Selector"]
+script = ExtResource( 2 )
+
+[node name="SetNPCStateAction" type="Node" parent="Cutscene/Selector/Sequence"]
+script = ExtResource( 3 )
+state = "Defeated"
+
+[node name="DefeatDialogue" type="Node" parent="Cutscene/Selector/Sequence"]
+script = ExtResource( 18 )
+title = "{pawn}"
+
+[node name="FaceDirectionAction" type="Node" parent="Cutscene/Selector/Sequence"]
+script = ExtResource( 7 )
+
+[node name="WalkAction" type="Node" parent="Cutscene/Selector/Sequence"]
+script = ExtResource( 11 )
+__meta__ = {
+"action_tree": true
+}
+distance = 20.0
+can_fly = true
+can_jump = true
+can_glide = true
+can_fall = true
+hide_avatars_if_cutscene = false
+
+[node name="RemoveNodeAction" type="Node" parent="Cutscene/Selector/Sequence"]
+script = ExtResource( 6 )
+__meta__ = {
+"action_tree": true
+}
+
+[node name="LineOfSightDetector" parent="." instance=ExtResource( 20 )]

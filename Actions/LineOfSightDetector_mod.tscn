@@ -1,0 +1,83 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://world/core/LineOfSightDetector.gd" type="Script" id=1]
+[ext_resource path="res://nodes/actions/InteractAction.gd" type="Script" id=2]
+[ext_resource path="res://nodes/actions/ChangeTrackerTargetAction.gd" type="Script" id=3]
+[ext_resource path="res://world/core/PlayerDetector.tscn" type="PackedScene" id=4]
+[ext_resource path="res://nodes/actions/values/GetPlayer.gd" type="Script" id=5]
+[ext_resource path="res://addons/misc_utils/actions/values/GetPawn.gd" type="Script" id=6]
+[ext_resource path="res://nodes/actions/FollowAction.gd" type="Script" id=7]
+[ext_resource path="res://nodes/actions/AggroAction.gd" type="Script" id=9]
+[ext_resource path="res://nodes/actions/CheckConditionAction.gd" type="Script" id=10]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=11]
+[ext_resource path="res://nodes/actions/SetStatAction.gd" type="Script" id=12]
+[ext_resource path="res://addons/misc_utils/actions/composites/Parallel.gd" type="Script" id=13]
+[ext_resource path="res://nodes/actions/PlayEmoteAction.gd" type="Script" id=14]
+
+[sub_resource type="BoxShape" id=15]
+extents = Vector3( 0.25, 0.5, 0.25 )
+
+[node name="LineOfSightDetector" type="Spatial"]
+script = ExtResource( 1 )
+sneak_immunity = true
+detection_bb_key = "player"
+
+[node name="CheckConditionAction" type="Node" parent="."]
+script = ExtResource( 10 )
+
+[node name="Parallel" type="Node" parent="CheckConditionAction"]
+script = ExtResource( 13 )
+
+[node name="PlayEmoteAction" type="Node" parent="CheckConditionAction/Parallel"]
+script = ExtResource( 14 )
+emote = "aggro_in"
+
+[node name="Cutscene" type="Node" parent="CheckConditionAction/Parallel"]
+script = ExtResource( 11 )
+
+[node name="ChangeTrackerTargetAction" type="Node" parent="CheckConditionAction/Parallel/Cutscene"]
+script = ExtResource( 3 )
+__meta__ = {
+"action_tree": true
+}
+hide_avatars_if_cutscene = false
+
+[node name="AggroAction" type="Node" parent="CheckConditionAction/Parallel/Cutscene/ChangeTrackerTargetAction"]
+script = ExtResource( 9 )
+emote_intro = ""
+wait_for_intro = false
+
+[node name="FollowAction" type="Node" parent="CheckConditionAction/Parallel/Cutscene/ChangeTrackerTargetAction/AggroAction"]
+script = ExtResource( 7 )
+__meta__ = {
+"action_tree": true
+}
+always_succeed = true
+can_fly = true
+can_jump = true
+can_fall = true
+can_glide = true
+can_warp = true
+min_distance = 3.0
+hide_avatars_if_cutscene = false
+
+[node name="GetPawn" type="Node" parent="CheckConditionAction/Parallel/Cutscene/ChangeTrackerTargetAction/AggroAction/FollowAction"]
+script = ExtResource( 6 )
+
+[node name="GetPlayer" type="Node" parent="CheckConditionAction/Parallel/Cutscene/ChangeTrackerTargetAction/AggroAction/FollowAction"]
+script = ExtResource( 5 )
+
+[node name="InteractAction" type="Node" parent="CheckConditionAction/Parallel/Cutscene/ChangeTrackerTargetAction"]
+script = ExtResource( 2 )
+
+[node name="HeadSkipDetector" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="HeadSkipDetector"]
+shape = SubResource( 15 )
+
+[node name="SetStatAction" type="Node" parent="HeadSkipDetector"]
+script = ExtResource( 12 )
+stat_name = "heads_skipped"
+stat_value = 1
+mode = 1
