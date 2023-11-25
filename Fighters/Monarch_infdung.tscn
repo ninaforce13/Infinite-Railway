@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://data/archangel_moves/monarch_tentacle.tres" type="Resource" id=1]
 [ext_resource path="res://data/archangel_moves/monarch_call_to_arms.tres" type="Resource" id=2]
@@ -40,7 +40,6 @@
 [ext_resource path="res://sprites/archangels/monarch/monarch_world.json" type="PackedScene" id=38]
 [ext_resource path="res://battle/ai/archangels/AAMonarchAI.tscn" type="PackedScene" id=39]
 [ext_resource path="res://sfx/cries/aa_monarch_cry.wav" type="AudioStream" id=40]
-[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=41]
 [ext_resource path="res://music/demo/battle_archangel_vox.ogg" type="AudioStream" id=42]
 [ext_resource path="res://music/demo/battle_archangel_instr.ogg" type="AudioStream" id=43]
 
@@ -305,7 +304,6 @@ result_on_player_win = 1
 result_on_player_loss = 0
 result_on_flee = 0
 disable_fleeing = true
-railway_shards = ExtResource( 41 )
 
 [node name="CallMethodAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction" index="4"]
 script = ExtResource( 10 )

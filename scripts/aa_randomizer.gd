@@ -31,19 +31,11 @@ export(String, FILE, "*.tscn") var add_on_orbfusion
 export(NodePath) var AAtarget
 export(NodePath) var mirror
 export(NodePath) var audio
-export(int, 0, 1000000) var add_on_ranger_min
-export(int, 0, 1000000) var add_on_ranger_max
-export(int, 0, 1000000) var add_on_fusion_min
-export(int, 0, 1000000) var add_on_fusion_max
-export(int, 0, 1000000) var add_on_orbfusion_min
-export(int, 0, 1000000) var add_on_orbfusion_max
-export(int, 0, 1000000) var archangel_doubles_min
-export(int, 0, 1000000) var archangel_doubles_max
-export(int, 0, 1000000) var archangel_triples_min
-export(int, 0, 1000000) var archangel_triples_max
 export (AudioStream) var music_override:AudioStream
 export (AudioStream) var music_vox_override:AudioStream
 export (Array, Resource) var loot_table_override
+
+var RailwaySettings = preload("res://mods/Infinite_Dungeon/resources/RailwaySettings.tres")
 var archangel
 var nullBattleFlag:bool = false
 func _enter_tree():	
@@ -80,27 +72,24 @@ func _enter_tree():
 				
 		if nullBattleFlag and not demo_mode:
 			file = load(aa_list[DemoBoss.ALEPH_NULL])
-			print("Null Battle Triggered")
 				
 		if not nullBattleFlag and not demo_mode:
-			selected_angel = randi() % SaveState.other_data.archangel_lineup.size()				
-			print("Random number generated: " + str(selected_angel))
+			selected_angel = randi() % SaveState.other_data.archangel_lineup.size()
 			file = load(aa_list[SaveState.other_data.archangel_lineup[selected_angel]])
-			print("chosen " + str(SaveState.other_data.archangel_lineup[selected_angel]))
 		
 		archangel = file.instance()
 		validate_savestate()
 		add_child(archangel)			
 		setup_loot_table()
 		if not nullBattleFlag:
-			setup_triples(selected_angel)
-			setup_doubles(selected_angel)
-			setup_add_ons(add_on_orbfusion, add_on_orbfusion_min, add_on_orbfusion_max, false, (demo_mode and demo_battle_mode == BattleMode.ORBFUSION))
-			setup_add_ons(add_on_fusion, add_on_fusion_min, add_on_fusion_max, false, (demo_mode and demo_battle_mode == BattleMode.FUSION))
-			setup_add_ons(add_on_ranger, add_on_ranger_min, add_on_ranger_max, false, (demo_mode and demo_battle_mode == BattleMode.RANGERS))
-			setup_add_ons(add_on_ranger, add_on_ranger_min, add_on_ranger_max, false, (demo_mode and demo_battle_mode == BattleMode.RANGERS))
-			setup_add_ons(add_on_ranger, add_on_ranger_min, add_on_ranger_max, false, (demo_mode and demo_battle_mode == BattleMode.RANGERS))
-			setup_add_ons(add_on_ranger, add_on_ranger_min, add_on_ranger_max, false, (demo_mode and demo_battle_mode == BattleMode.RANGERS))			
+			setup_triples(selected_angel, triples_active())
+			setup_doubles(selected_angel, doubles_active())
+			setup_add_ons(add_on_orbfusion, orb_fusion_active(),false, (demo_mode and demo_battle_mode == BattleMode.ORBFUSION))
+			setup_add_ons(add_on_fusion, fusion_active(),false, (demo_mode and demo_battle_mode == BattleMode.FUSION))
+			setup_add_ons(add_on_ranger, rangers_active(),false, (demo_mode and demo_battle_mode == BattleMode.RANGERS))
+			setup_add_ons(add_on_ranger, rangers_active(),false, (demo_mode and demo_battle_mode == BattleMode.RANGERS))
+			setup_add_ons(add_on_ranger, rangers_active(),false, (demo_mode and demo_battle_mode == BattleMode.RANGERS))
+			setup_add_ons(add_on_ranger, rangers_active(),false, (demo_mode and demo_battle_mode == BattleMode.RANGERS))
 			
 			
 			SaveState.other_data.archangel_lineup.erase(SaveState.other_data.archangel_lineup[selected_angel])
@@ -154,12 +143,11 @@ func setup_loot_table():
 		get_node("Archangel/RematchConfig").loot_table_override = loot_table_override[0]
 		return
 	
-
 func validate_savestate():
 	if not SaveState.other_data.has("infDung_lifetime_counter"):
 		SaveState.other_data.infDung_lifetime_counter = 0
-func setup_add_ons(add_on_path, min_range, max_range, music_change=false, demo_override:bool = false):
-	if not (SaveState.other_data.infDung_lifetime_counter >= min_range and SaveState.other_data.infDung_lifetime_counter < max_range) and not demo_override: 				
+func setup_add_ons(add_on_path, active:bool, music_change=false, demo_override:bool = false):
+	if not active and not demo_override: 				
 		return
 	var file = load(add_on_path)
 	var instance = file.instance() 
@@ -170,8 +158,8 @@ func setup_add_ons(add_on_path, min_range, max_range, music_change=false, demo_o
 		get_node("Archangel/RematchConfig").music_vox_override = music_vox_override
 		
 		
-func setup_doubles(selected_angel:int):	
-	if not doubles_active() and not (demo_mode and demo_battle_mode == BattleMode.DOUBLE_BATTLE): 				
+func setup_doubles(selected_angel:int, active:bool):	
+	if not active and not (demo_mode and demo_battle_mode == BattleMode.DOUBLE_BATTLE): 				
 		return	
 	var index = randi() % aa_list.size() - 1 #Remove Aleph Null.
 	#Prevent copies
@@ -181,7 +169,6 @@ func setup_doubles(selected_angel:int):
 		else:
 			index += 1
 	var file = load(aa_list[index])
-#	var file = load(aa_list[8])
 	var second_angel = file.instance() 
 	var charconfig_node = second_angel.get_node("RematchConfig/CharacterConfig")
 
@@ -190,8 +177,8 @@ func setup_doubles(selected_angel:int):
 	get_node("Archangel/RematchConfig").music_override = music_override
 	get_node("Archangel/RematchConfig").music_vox_override = music_vox_override
 
-func setup_triples(selected_angel:int):	
-	if not triples_active() and not (demo_mode and demo_battle_mode == BattleMode.TRIPLE_BATTLE): 				
+func setup_triples(selected_angel:int, active:bool):	
+	if not active and not (demo_mode and demo_battle_mode == BattleMode.TRIPLE_BATTLE): 				
 		return
 	var primary_angel_index = SaveState.other_data.archangel_lineup[selected_angel]
 	var temp_angel_list = aa_list.duplicate()
@@ -200,7 +187,6 @@ func setup_triples(selected_angel:int):
 	var index = randi() % temp_angel_list.size()
 # Angel two		
 	var file = load(temp_angel_list[index])
-#	var file = load(aa_list[12])
 	var angel = file.instance() 
 	var charconfig_node = angel.get_node("RematchConfig/CharacterConfig")
 	charconfig_node.get_parent().remove_child(charconfig_node)
@@ -209,7 +195,6 @@ func setup_triples(selected_angel:int):
 # Angel three
 	index = randi() % temp_angel_list.size()	
 	file = load(temp_angel_list[index])
-#	file = load(aa_list[13])
 	angel = file.instance() 
 	charconfig_node = angel.get_node("RematchConfig/CharacterConfig")
 	charconfig_node.get_parent().remove_child(charconfig_node)
@@ -219,16 +204,16 @@ func setup_triples(selected_angel:int):
 	get_node("Archangel/RematchConfig").music_vox_override = music_vox_override
 
 func rangers_active()->bool:
-	return (SaveState.other_data.infDung_lifetime_counter >= add_on_ranger_min and SaveState.other_data.infDung_lifetime_counter < add_on_ranger_max) 						
+	return RailwaySettings.encounter_threshold_met(RailwaySettings.encounter.STAGE2) or RailwaySettings.encounter_threshold_met(RailwaySettings.encounter.STAGE3) 
 
 func fusion_active()->bool:
-	return (SaveState.other_data.infDung_lifetime_counter >= add_on_fusion_min and SaveState.other_data.infDung_lifetime_counter < add_on_fusion_max) 						
+	return RailwaySettings.encounter_threshold_met(RailwaySettings.encounter.STAGE4) or RailwaySettings.encounter_threshold_met(RailwaySettings.encounter.STAGE5)
 	
 func orb_fusion_active()->bool:
-	return (SaveState.other_data.infDung_lifetime_counter >= add_on_orbfusion_min and SaveState.other_data.infDung_lifetime_counter < add_on_orbfusion_max) 						
+	return RailwaySettings.encounter_threshold_met(RailwaySettings.encounter.STAGE6) or RailwaySettings.encounter_threshold_met(RailwaySettings.encounter.STAGE7)
 
 func doubles_active()->bool:
-	return (SaveState.other_data.infDung_lifetime_counter >= archangel_doubles_min and SaveState.other_data.infDung_lifetime_counter < archangel_doubles_max) 						
+	return RailwaySettings.encounter_threshold_met(RailwaySettings.encounter.STAGE8)
 
 func triples_active()->bool:
-	return (SaveState.other_data.infDung_lifetime_counter >= archangel_triples_min and SaveState.other_data.infDung_lifetime_counter < archangel_triples_max) 						
+	return RailwaySettings.encounter_threshold_met(RailwaySettings.encounter.STAGE9)

@@ -1,0 +1,120 @@
+﻿id,en
+RAILWAY_MAGIKRAB1,"Hello again, {player}!"
+RAILWAY_MAGIKRAB2,Would you like me to retrieve an astral projection for you to practice with?
+RAILWAY_PRACTICE_DUMMY,Practice Dummy
+RAILWAY_CANCEL,Nevermind
+RAILWAY_WOODEN_PLAQUE1,It appears to be a regular wooden plaque. [pause] There's a list written on its surface. 
+RAILWAY_WOODEN_PLAQUE_OPTION1,Trial Chambers.
+RAILWAY_WOODEN_PLAQUE_OPTION2,Overspill Damage.
+RAILWAY_WOODEN_PLAQUE_OPTION3,Ignore it.
+RAILWAY_WOODEN_PLAQUE2,The words on the plaque have mysteriously shifted. [pause] It's almost as though it were an interactive menu…
+RAILWAY_DISABLE_TRIALS,Disable Trial Chambers
+RAILWAY_ENABLE_TRIALS,Enable Trial Chambers
+RAILWAY_TRIALS_REMOVED,You hear the sound of something shifting in the distance. It feels as though something has been removed.
+RAILWAY_WOODEN_PLAQUE3,The words on the plaque have rearranged themselves again.
+RAILWAY_TRIALS_ADDED,You hear the sound of something shifting in the distance. It feels as though something has been added. 
+RAILWAY_OVERSPILL_OPTION1,Disable overspill damage for everyone.
+RAILWAY_OVERSPILL_OPTION2,Enable overspill damage for everyone.
+RAILWAY_OVERSPILL_DISABLED,Your body tenses up. [pause]You feel as though your human form plays no part in this anymore. It is less vulnerable now.
+RAILWAY_OVERSPILL_ENABLED,"You feel a cold sweat across your face. Your body feels squishy[pause], unbearably squishy. Somehow you feel more vulnerable than before. "
+RAILWAY_PLAQUE_EXIT,You ignore the plaque. Best not to play with forces you do not understand.
+RAILWAY_AMBER_LODGE_EXIT,You should talk to Amber if you want to leave. 
+RAILWAY_AMBER_DIALOG1,"What can I do for you, sugar?"
+RAILWAY_AMBER_MENU1,Continue on the Infinite Railway.
+RAILWAY_AMBER_MENU2,"I'm done, please send us home."
+RAILWAY_AMBER_MENU3,How does this work?
+RAILWAY_AMBER_MENU4,How am I doing so far?
+RAILWAY_AMBER_CONFIRM_CONTINUE1,"Encounters only get more difficult from here on out. If you die in there, you'll lose all the Railway Shards you have collected."
+RAILWAY_AMBER_CONFIRM_CONTINUE2,Are you sure you want to get back on the Infinite Railway? 
+RAILWAY_AMBER_CONTINUE_OPTION1,Let's do this!
+RAILWAY_AMBER_CANCEL,"Actually, nevermind."
+RAILWAY_AMBER_DEPARTURE,"See ya soon, sweetie."
+RAILWAY_AMBER_CANCEL_LOOP,"Just relax, there's no need to rush."
+RAILWAY_AMBER_LEAVE_RAILWAY_CONFIRMED,"Yup, get me off this crazy ride!"
+RAILWAY_AMBER_REPORT_ONLY,"If I send you back to New Wirral now, I'll convert your Railway Shards into Fused Material and even toss in a little extra for your troubles. You'd be taking home {bonus_reward}  Fused Material!"
+RAILWAY_AMBER_REPORT1,"So far, you've won {lifetime_count} battles"
+RAILWAY_AMBER_REPORT2,And survived {boss_counter} Archangel encounter(s)
+RAILWAY_AMBER_DEPARTURE2,"Off you go then, take care!"
+RAILWAY_AMBER_EXPLAIN1,"The Mer-Line is testing you, sweetie."
+RAILWAY_AMBER_EXPLAIN2,"The tracks I picked you up from are called the Infinite Railway, the Mer-Line's little ""playground""."
+RAILWAY_AMBER_EXPLAIN3,"The longer you're on it, the more difficult the encounters become."
+RAILWAY_AMBER_EXPLAIN4,"I can pull you out each time you finish a loop, but the only way home is here in the lodge."
+RAILWAY_AMBER_EXPLAIN5,"If you go back on the Infinite Railway, you'll have to survive the loop before I can rescue you again."
+RAILWAY_AMBER_STATS1,I've been keepin' an eye on you.
+RAILWAY_AMBER_INTRO1,Please take a moment to rest and buy supplies.
+RAILWAY_AMBER_INTRO2,I picked up the most fascinating individual the other day! You'll find them to your left.
+RAILWAY_MERCHANT1,Bet you didn't expect to find me here!
+RAILWAY_MERCHANT2,"Wherever ""here"" is..."
+RAILWAY_MERCHANT3,"I have no idea what these shards do, but they sure do feel powerful!"
+RAILWAY_MERCHANT_CANCEL,"Alrighty then, lemme know if ya change your mind!"
+RAILWAY_MERCHANT_MENU1,Show me your wares
+RAILWAY_MERCHANT_MENU2,Goodbye!
+RAILWAY_SHELBY_INTRO1,"Hey there, stranger! Got a song you wanna hear? "
+RAILWAY_SHELBY_MENU1,I wanna listen to...
+RAILWAY_SHELBY_CONFIRMED,Enjoy the performance!
+RAILWAY_SHELBY_EXIT,Good luck out there!
+RAILWAY_JOEL,Enjoy the show!
+RAILWAY_ATTENDANT_PREFUSION1,Can't you hear the rumble of Mer-Line?[pause] It ushers in the divine collision!
+RAILWAY_ATTENDANT_PREFUSION2,"We are the stations, the Mer-Line is the path, and conflict is the ticket[pause].[pause].[pause]. All aboard."
+RAILWAY_ATTENDANT_PREFUSION3,"Across the cosmic railway, the Mer-Line propels us towards our destiny.[pause] You are but a bump on our tracks."
+RAILWAY_ATTENDANT_PREFUSION4,"Don't mistake us for simple travelers.[pause] The Mer-Line guides us, and we shall not deviate."
+RAILWAY_ATTENDANT_PREFUSION5,"This is not a fight, it's a transit. [pause]Welcome to your stop on the Mer-Line."
+RAILWAY_ATTENDANT_PREFUSION6,"In the grand scheme of the cosmos, the Mer-Line is the thread that weaves realities.[pause] You are a loose end, needing to be tied."
+RAILWAY_ATTENDANT_PREFUSION7,We are but humble passengers on the Mer-Line.[pause] We will clear all obstructions... like you.
+RAILWAY_ATTENDANT_PREFUSION8,The Mer-Line's hum sings of conflict.[pause] An unfortunate chorus for those who stand on it's tracks.
+RAILWAY_ATTENDANT_PREFUSION9,"Our God, the Mer-Line, transcends realities and still you wish to fight?[pause] You've already lost."
+RAILWAY_ATTENDANT_PREFUSION10,The cogs of realities are ever-turning.[pause] Your defiance is futile.
+RAILWAY_ATTENDANT_PREFUSION11,"The Mer-Line's hymn echoes through the cosmic rails, signaling our battle's arrival.[pause] Ready for departure?"
+RAILWAY_ATTENDANT_PREFUSION12,The Mer-Line is eternal. It has seen countless battles across infinite realities.[pause] Your resistance is meaningless.
+RAILWAY_ATTENDANT_PREFUSION13,"On the Mer-Line, there are no free rides."
+RAILWAY_ATTENDANT_PREFUSION14,The Mer-Line's whistle blows![pause] Are you ready for the journey of a lifetime?
+RAILWAY_ATTENDANT_PREFUSION15,"Every track on the Mer-Line leads somewhere, yours happens to lead to defeat."
+RAILWAY_ATTENDANT_POSTFUSION1,"Witness the power of the Mer-Line! Two souls, merged into one by the cosmic railway!"
+RAILWAY_ATTENDANT_POSTFUSION2,The Mer-Line calls for your defeat![pause] Fusion is on the cosmic timetable!
+RAILWAY_ATTENDANT_POSTFUSION3,"Stand before the might of Fusion, a gift from the Mer-Line!"
+RAILWAY_ATTENDANT_POSTFUSION4,"Just as tracks merge on the Mer-Line, so too shall we.[pause] Prepare to face our combined might!"
+RAILWAY_ATTENDANT_POSTFUSION5,Fusion is the next stop on our journey.[pause] Will you stand against the combined power of the Mer-Line's chosen?
+RAILWAY_ATTENDANT_POSTFUSION6,"You challenge not one, but the unified strength of many, blessed by the Mer-Line!"
+RAILWAY_ATTENDANT_POSTFUSION7,Behold the spectacle of Fusion! A testament to the power of Mer-Line!
+RAILWAY_ATTENDANT_POSTFUSION8,Your ticket to conflict has been upgraded to a Fusion confrontation.[pause] Brace for a rough ride!
+RAILWAY_ATTENDANT_POSTFUSION9,"Through the cosmic railway, we unite! [pause] Fusion is not just our power..[pause] it's our faith!"
+RAILWAY_ATTENDANT_POSTFUSION10,"Our paths converge on the Mer-Line, merging us into a force of unified determination!"
+RAILWAY_ATTENDANT_ORBFUSION1,The Mer-Line roars with untamed power! Behold the calamity of Orb Fusions!
+RAILWAY_ATTENDANT_ORBFUSION2,Strap in for a power so immense it derails reality itself!
+RAILWAY_ATTENDANT_ORBFUSION3,The rails tremble as the Mer-Line delivers the erratic power of Orb Fusions!
+RAILWAY_ATTENDANT_ORBFUSION4,"The Mer-Line screams out[pause], it's calling forth the untamed might of the Orb Fusion!"
+RAILWAY_ATTENDANT_ORBFUSION5,"Just as the Mer-Line traverses realities, the Orb Fusion transcends limitations. Your defeat is imminent!"
+RAILWAY_ATTENDANT_ORBFUSION6,Brace yourself for an onslaught of power... The Mer-Line's ultimate test of survival!
+RAILWAY_ATTENDANT_ORBFUSION7,This is the Mer-Line's wrath!
+RAILWAY_ATTENDANT_ORBFUSION8,"The Mer-Line hums with an erratic rhythm, heralding the arrival of the Orb Fusion.[pause] Ready for the surge?"
+RAILWAY_TRIAL_INTRO1,You feel an immense pressure.
+RAILWAY_TRIAL_INTRO_DASH,Only your ability to Dash remains.
+RAILWAY_TRIAL_INTRO3,Find the Release Button as quickly as possible.
+RAILWAY_TRIAL_FAIL1,The pressure in this chamber was too much. 
+RAILWAY_TRIAL_FAIL2,You passed out.
+RAILWAY_TRIAL_INTRO_MAGNET,Only your Magnetism ability remains.
+RAILWAY_TRIAL_INTRO_CLIMB,Only your ability to Climb remains.
+RAILWAY_TRIAL_INTRO_GLIDE,Only your ability to Glide remains.
+RAILWAY_TRIAL_INTRO_FLY,Only your ability to Fly remains.
+RAILWAY_TRIAL_INTRO_SWIM,Only your ability to Swim remains.
+RAILWAY_ALEPHNULL1,"There's no end to this, you know."
+RAILWAY_ALEPHNULL2,"You could have returned home, but instead you chose to be here. "
+RAILWAY_ALEPHNULL3,Endlessly fighting a pointless battle. 
+RAILWAY_ALEPHNULL4,Why do you think that is?
+RAILWAY_ALEPHNULL5,"Let's try this again, shall we?"
+RAILWAY_ALEPHNULL6,The Witch won't be joining us this time...
+RAILWAY_LENNA1,Show me what you've learned!
+RAILWAY_ROGUE_ENCOUNTER,A rogue fusion has forced its way into the room!
+RAILWAY_ATTENDANT_DEFEAT1,It seems... I've missed my train...
+RAILWAY_ATTENDANT_DEFEAT2,A delay in the cosmic schedule. But the Mer-Line... always... resumes...
+RAILWAY_ATTENDANT_DEFEAT3,My ticket... has been rejected.
+RAILWAY_ATTENDANT_DEFEAT4,"Defeat? No, just... a detour on the cosmic railway..."
+RAILWAY_ATTENDANT_DEFEAT5,The signal fades... but The Mer-Line goes on...
+RAILWAY_ATTENDANT_DEFEAT6,I may fall... but the Mer-Line is eternal.
+RAILWAY_ATTENDANT_DEFEAT7,It seems I've reached my final destination...
+RAILWAY_ATTENDANT_DEFEAT8,My journey on the Mer-Line... has reached an unforeseen terminal...
+RAILWAY_ATTENDANT_DEFEAT9,The rails have faded... but The Mer-Line's journey never ends...
+RAILWAY_ATTENDANT_DEFEAT10,"You may have halted my journey, but the Mer-Line goes on..."
+RAILWAY_ATTENDANT_DEFEAT11,"I may be disembarking, but The Mer-Line will carry others..."
+RAILWAY_ATTENDANT_DEFEAT12,My ticket has expired...
+RAILWAY_ATTENDANT_DEFEAT13,You've disrupted my schedule...

@@ -116,15 +116,15 @@ func _run():
 			bonus_reward = floor(SaveState.inventory.get_item_amount(railway_shards) / 2)
 		if report_rewards_only:
 			bonus_reward += floor(SaveState.other_data.infDung_boss_counter * 2)
-			message = "If I send you back to New Wirral now, I'll convert your Railway Shards into Fused Material and even toss in a little extra for your troubles. You'd be taking home " + str(bonus_reward) + " Fused Material!"
+			message = Loc.trf("RAILWAY_AMBER_REPORT_ONLY", {"bonus_reward":bonus_reward})
 		if not report_rewards_only:
 			if i == 1:
-				message = "So far, you've won " + str(SaveState.other_data.infDung_lifetime_counter) + " battles"
+				message = Loc.trf("RAILWAY_AMBER_REPORT1", {"lifetime_count":str(SaveState.other_data.infDung_lifetime_counter)})
 			if i == 2: 
-				message = "And survived " + str(SaveState.other_data.infDung_boss_counter) + " Archangel encounter(s)"
+				message = Loc.trf("RAILWAY_AMBER_REPORT2", {"boss_counter":str(SaveState.other_data.infDung_boss_counter)})
 			if i == 3:
 				bonus_reward += floor(SaveState.other_data.infDung_boss_counter * 2)
-				message = "If I send you back to New Wirral now, I'll convert your Railway Shards into Fused Material and even toss in a little extra for your troubles. You'd be taking home " + str(bonus_reward) + " Fused Material!"
+				message = Loc.trf("RAILWAY_AMBER_REPORT_ONLY", {"bonus_reward":bonus_reward})
 		var text
 		if use_pronouns != PronounMode.DONT_USE:
 			text = Loc.trgvf(message, get_pronouns(), variant, subs)

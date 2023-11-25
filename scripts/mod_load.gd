@@ -1,5 +1,7 @@
 extends ContentInfo
 
+var quest_location_mod_patch = preload("res://mods/Infinite_Dungeon/resources/questlocationlayer_patch.tres")
+
 func _init():
-	var res = preload("QuestLocationLayer_mod.gd")
-	res.take_over_path("res://world/core/QuestLocationLayer.gd")
+	quest_location_mod_patch.patch()
+

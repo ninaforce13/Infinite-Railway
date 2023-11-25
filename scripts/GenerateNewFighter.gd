@@ -1,10 +1,22 @@
 extends Node
+enum Archetype {DPS, Tank, Support}
+onready var stage1_encounter = get_node("MerLine_Attendant/EncounterConfig")
+onready var stage2_encounter = get_node("MerLine_Attendant/TripleThreat")
+onready var stage3_encounter = get_node("MerLine_Attendant/QuadBattle")
+onready var stage4_encounter = get_node("MerLine_Attendant/FusionStage")
+onready var stage5_encounter = get_node("MerLine_Attendant/DoubleFusion")
+onready var stage6_encounter = get_node("MerLine_Attendant/OrbFusionStage")
+onready var stage7_encounter = get_node("MerLine_Attendant/DoubleOrbs")
+var RailwaySettings = preload("res://mods/Infinite_Dungeon/resources/RailwaySettings.tres")
 
 func _ready():
 	change_sprite()
+
 func _enter_tree():
-	var config
-	
+	change_music()
+		
+func change_music():
+	var config	
 	if not SaveState.other_data.has("infdung_battle_music_altload"):
 		SaveState.other_data.infdung_battle_music_altload = false
 	if not SaveState.other_data.has("infdung_battle_music"):
@@ -16,8 +28,7 @@ func _enter_tree():
 			song = load(SaveState.other_data.infdung_battle_music)
 		if SaveState.other_data.infdung_battle_music_altload:
 			song = load_external_ogg(SaveState.other_data.infdung_battle_music)
-			
-		print("Encounter music override")
+		
 		if has_node("MerLine_Attendant/EncounterConfig"):
 			config = get_node("MerLine_Attendant/EncounterConfig")
 			config.music_override = song
@@ -33,10 +44,20 @@ func _enter_tree():
 		if has_node("MerLine_Attendant/OrbFusionStage"):
 			config = get_node("MerLine_Attendant/OrbFusionStage")
 			config.music_override = song
-			config.music_vox_override = song		
-
-	
-
+			config.music_vox_override = song	
+		if has_node("MerLine_Attendant/DoubleFusion"):
+			config = get_node("MerLine_Attendant/DoubleFusion")
+			config.music_override = song
+			config.music_vox_override = song					
+		if has_node("MerLine_Attendant/DoubleOrbs"):
+			config = get_node("MerLine_Attendant/DoubleOrbs")
+			config.music_override = song
+			config.music_vox_override = song				
+		if has_node("MerLine_Attendant/QuadBattle"):
+			config = get_node("MerLine_Attendant/QuadBattle")
+			config.music_override = song
+			config.music_vox_override = song							
+			
 	if not HumanLayersHelper.human_templates:
 		HumanLayersHelper.setup()
 

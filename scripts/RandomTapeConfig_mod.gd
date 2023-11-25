@@ -80,9 +80,9 @@ func configure_stickers(tape:MonsterTape):
 				duplicates.erase(sticker.battle_move)
 				duplicates[new_sticker[0].battle_move] = new_sticker[0]
 				sticker = new_sticker[0]
-		if rare_sticker_applied():
+		if rare_sticker_applied() and move_is_upgradable(sticker.battle_move):
 			sticker = upgrade_sticker(sticker)
-			if rare_sticker_applied():
+			if rare_sticker_applied() and move_is_upgradable(sticker.battle_move):
 				sticker = upgrade_sticker(sticker)
 		new_stickers.push_back(sticker)
 
@@ -135,7 +135,7 @@ func generate_stickers(rand:Random, sticker_tags, max_num:int = - 1, suppress_up
 		var item = ItemFactory.generate_item(move, rand)
 		assert (item != null)
 		
-		if rare_sticker_applied() and not suppress_upgrade:
+		if rare_sticker_applied() and not suppress_upgrade and move_is_upgradable(move):
 			item = ItemFactory.upgrade_rarity(item, rand)
 			assert (item != null)
 			assert (item.rarity >= BaseItem.Rarity.RARITY_UNCOMMON)
@@ -155,6 +155,9 @@ func rare_sticker_applied()->bool:
 
 func upgrade_sticker(sticker):
 	return ItemFactory.upgrade_rarity(sticker, Random.new())
+
+func move_is_upgradable(move:BattleMove)->bool:
+	return move.attribute_profile != null
 
 func _rand_form(rand:Random)->MonsterForm:
 	

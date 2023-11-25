@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/RailwaySettings.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+rogue_fusion_rate = 0.0
+magikrab_vault_rate = 0.05
+ghostly_rate = 0.02
+time_trial_chance = 0.05
+mirror_match_rate = 0.01
+custom_ranger_rate = 0.05
+stage1 = 0
+stage2 = 10
+stage3 = 20
+stage4 = 30
+stage5 = 40
+stage6 = 50
+stage7 = 60
+stage8 = 70
+stage9 = 80

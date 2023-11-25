@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://nodes/actions/PlayAnimationAction.gd" type="Script" id=1]
 [ext_resource path="res://world/behaviors/ArchangelIntroBehavior.gd" type="Script" id=2]
@@ -31,7 +31,6 @@
 [ext_resource path="res://data/archangel_moves/aleph_deus_ex_calibur.tres" type="Resource" id=29]
 [ext_resource path="res://mods/Infinite_Dungeon/CutScenes/alephtitlebanner.tres" type="Resource" id=30]
 [ext_resource path="res://mods/Infinite_Dungeon/CustomAI/InfDung_AAAlephAI.tscn" type="PackedScene" id=31]
-[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=32]
 [ext_resource path="res://data/archangel_forms/aleph.tres" type="Resource" id=33]
 [ext_resource path="res://nodes/sprite_container/SpriteContainer.gd" type="Script" id=34]
 [ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Bosses/infinite_dungeon_boss.tres" type="Resource" id=35]
@@ -648,6 +647,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.58706, 0 )
 material_override = SubResource( 36 )
 centered = false
 offset = Vector2( -35, 0 )
+flip_h = true
 pixel_size = 0.125
 texture = ExtResource( 39 )
 region_enabled = true
@@ -929,7 +929,6 @@ result_on_player_win = 1
 result_on_player_loss = 0
 result_on_flee = 0
 disable_fleeing = true
-railway_shards = ExtResource( 32 )
 
 [node name="CallMethodAction" type="Node" parent="ArchangelIntroBehavior/ArchangelIntroCutscene/Selector/ChangeTrackerTargetAction_Rematch/ChangeTrackerTargetAction"]
 script = ExtResource( 10 )

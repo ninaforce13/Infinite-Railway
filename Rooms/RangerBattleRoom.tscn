@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=85 format=2]
 
 [ext_resource path="res://sprites/sky_battle_grasslands_night.png" type="Texture" id=1]
 [ext_resource path="res://nodes/encounter_config/EncounterConfig.gd" type="Script" id=2]
@@ -19,7 +19,7 @@
 [ext_resource path="res://data/map_metadata/deadworld.tres" type="Resource" id=17]
 [ext_resource path="res://mods/Infinite_Dungeon/regions/infinite_railway.tres" type="Resource" id=18]
 [ext_resource path="res://nodes/camera/WorldCamera.tscn" type="PackedScene" id=19]
-[ext_resource path="res://nodes/encounter_config/RogueFusionCharacterConfig.gd" type="Script" id=20]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_ranger_loot5.tres" type="Resource" id=20]
 [ext_resource path="res://nodes/actions/SetNPCStateAction.gd" type="Script" id=21]
 [ext_resource path="res://nodes/weather/cave_depth_fade/cave_double_depth_fade.shader" type="Shader" id=22]
 [ext_resource path="res://addons/misc_utils/actions/composites/Selector.gd" type="Script" id=23]
@@ -29,7 +29,7 @@
 [ext_resource path="res://mods/Infinite_Dungeon/CustomAI/CustomOrbFusionAI.tscn" type="PackedScene" id=27]
 [ext_resource path="res://addons/misc_utils/actions/values/GetPawn.gd" type="Script" id=28]
 [ext_resource path="res://nodes/actions/FaceTowardsAction.gd" type="Script" id=29]
-[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=30]
+[ext_resource path="res://nodes/encounter_config/FusedCharacterConfig.gd" type="Script" id=30]
 [ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=31]
 [ext_resource path="res://nodes/actions/MessageDialogAction.gd" type="Script" id=32]
 [ext_resource path="res://mods/Infinite_Dungeon/scripts/BattleNPCBehavior_Modded.gd" type="Script" id=33]
@@ -48,11 +48,13 @@
 [ext_resource path="res://nodes/actions/PlayEmoteAction.gd" type="Script" id=46]
 [ext_resource path="res://mods/Infinite_Dungeon/Rooms/BattleAction_InfDung.gd" type="Script" id=47]
 [ext_resource path="res://world/maps/StationMeshlib.meshlib" type="MeshLibrary" id=48]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_ranger_loot3.tres" type="Resource" id=49]
 [ext_resource path="res://mods/Infinite_Dungeon/Actions/StageSelect.gd" type="Script" id=50]
-[ext_resource path="res://menus/boss_title/ArchangelTitleBanner.tscn" type="PackedScene" id=52]
-[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_stage2_loot.tres" type="Resource" id=53]
-[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_stage3_loot.tres" type="Resource" id=54]
-[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_stage4_loot.tres" type="Resource" id=55]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_ranger_loot6.tres" type="Resource" id=51]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_ranger_loot7.tres" type="Resource" id=52]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_ranger_loot2.tres" type="Resource" id=53]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_ranger_loot4.tres" type="Resource" id=54]
+[ext_resource path="res://mods/Infinite_Dungeon/characters/stage2_rangers.tres" type="Resource" id=55]
 [ext_resource path="res://music/release/battle_captain_instr.ogg" type="AudioStream" id=56]
 [ext_resource path="res://music/release/battle_captain_vox.ogg" type="AudioStream" id=57]
 [ext_resource path="res://music/release/battle_fusion_instr.ogg" type="AudioStream" id=58]
@@ -60,6 +62,13 @@
 [ext_resource path="res://music/demo/battle_archangel_vox.ogg" type="AudioStream" id=60]
 [ext_resource path="res://music/release/battle_fusion_vox.ogg" type="AudioStream" id=61]
 [ext_resource path="res://mods/Infinite_Dungeon/CustomAI/CustomWeightedAI.tscn" type="PackedScene" id=62]
+[ext_resource path="res://mods/Infinite_Dungeon/characters/stage3_rangers.tres" type="Resource" id=63]
+[ext_resource path="res://mods/Infinite_Dungeon/characters/stage4_rangers.tres" type="Resource" id=64]
+[ext_resource path="res://mods/Infinite_Dungeon/characters/stage5_rangers.tres" type="Resource" id=65]
+[ext_resource path="res://mods/Infinite_Dungeon/characters/stage6_rangers.tres" type="Resource" id=66]
+[ext_resource path="res://mods/Infinite_Dungeon/characters/stage7_rangers.tres" type="Resource" id=67]
+[ext_resource path="res://mods/Infinite_Dungeon/characters/stage1_rangers.tres" type="Resource" id=68]
+[ext_resource path="res://mods/Infinite_Dungeon/NewEncounter.gd" type="Script" id=69]
 
 [sub_resource type="SpatialMaterial" id=17]
 flags_unshaded = true
@@ -357,12 +366,6 @@ __meta__ = {
 trigger_on_sight = true
 on_defeat = 1
 on_defeat_face_direction = "down"
-stage1_max = 30
-stage2_min = 30
-stage2_max = 45
-stage3_min = 45
-stage3_max = 1000000
-time_trial_chance = 0.6
 
 [node name="Succeeder" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior"]
 script = ExtResource( 35 )
@@ -388,9 +391,116 @@ script = ExtResource( 31 )
 [node name="Selector" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene"]
 script = ExtResource( 23 )
 
+[node name="StageSelect7" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
+script = ExtResource( 50 )
+selected_encounter = 6
+
+[node name="IsUndefeatedAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect7"]
+script = ExtResource( 24 )
+encounter_name_override = "DoubleOrbs"
+
+[node name="MainDialogue" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect7/IsUndefeatedAction"]
+script = ExtResource( 32 )
+title = "{pawn}"
+style = 2
+
+[node name="BattleAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect7/IsUndefeatedAction"]
+script = ExtResource( 47 )
+encounter_name_override = "DoubleOrbs"
+disable_fleeing = true
+
+[node name="StageSelect6" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
+script = ExtResource( 50 )
+selected_encounter = 5
+
+[node name="IsUndefeatedAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect6"]
+script = ExtResource( 24 )
+encounter_name_override = "OrbFusionStage"
+
+[node name="MainDialogue" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect6/IsUndefeatedAction"]
+script = ExtResource( 32 )
+title = "{pawn}"
+style = 2
+
+[node name="BattleAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect6/IsUndefeatedAction"]
+script = ExtResource( 47 )
+encounter_name_override = "OrbFusionStage"
+disable_fleeing = true
+
+[node name="StageSelect5" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
+script = ExtResource( 50 )
+selected_encounter = 4
+
+[node name="IsUndefeatedAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect5"]
+script = ExtResource( 24 )
+encounter_name_override = "DoubleFusion"
+
+[node name="MainDialogue" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect5/IsUndefeatedAction"]
+script = ExtResource( 32 )
+title = "{pawn}"
+style = 2
+
+[node name="BattleAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect5/IsUndefeatedAction"]
+script = ExtResource( 47 )
+encounter_name_override = "DoubleFusion"
+disable_fleeing = true
+
+[node name="StageSelect4" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
+script = ExtResource( 50 )
+selected_encounter = 3
+
+[node name="IsUndefeatedAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect4"]
+script = ExtResource( 24 )
+encounter_name_override = "FusionStage"
+
+[node name="MainDialogue" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect4/IsUndefeatedAction"]
+script = ExtResource( 32 )
+title = "{pawn}"
+style = 2
+
+[node name="BattleAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect4/IsUndefeatedAction"]
+script = ExtResource( 47 )
+encounter_name_override = "FusionStage"
+disable_fleeing = true
+
+[node name="StageSelect3" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
+script = ExtResource( 50 )
+selected_encounter = 2
+
+[node name="IsUndefeatedAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect3"]
+script = ExtResource( 24 )
+encounter_name_override = "QuadBattle"
+
+[node name="MainDialogue" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect3/IsUndefeatedAction"]
+script = ExtResource( 32 )
+title = "{pawn}"
+style = 2
+
+[node name="BattleAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect3/IsUndefeatedAction"]
+script = ExtResource( 47 )
+encounter_name_override = "QuadBattle"
+disable_fleeing = true
+
+[node name="StageSelect2" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
+script = ExtResource( 50 )
+selected_encounter = 1
+
+[node name="IsUndefeatedAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect2"]
+script = ExtResource( 24 )
+encounter_name_override = "TripleThreat"
+
+[node name="MainDialogue" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect2/IsUndefeatedAction"]
+script = ExtResource( 32 )
+title = "{pawn}"
+style = 2
+
+[node name="BattleAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect2/IsUndefeatedAction"]
+script = ExtResource( 47 )
+encounter_name_override = "TripleThreat"
+disable_fleeing = true
+
 [node name="StageSelect" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
 script = ExtResource( 50 )
-encounter_range_max = 15
 
 [node name="IsUndefeatedAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect"]
 script = ExtResource( 24 )
@@ -403,64 +513,6 @@ style = 2
 [node name="BattleAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect/IsUndefeatedAction"]
 script = ExtResource( 47 )
 disable_fleeing = true
-railway_shards = ExtResource( 30 )
-
-[node name="StageSelect2" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
-script = ExtResource( 50 )
-encounter_range_min = 15
-encounter_range_max = 30
-
-[node name="IsUndefeatedAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect2"]
-script = ExtResource( 24 )
-
-[node name="MainDialogue" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect2/IsUndefeatedAction"]
-script = ExtResource( 32 )
-title = "{pawn}"
-style = 2
-
-[node name="BattleAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect2/IsUndefeatedAction"]
-script = ExtResource( 47 )
-encounter_name_override = "TripleThreat"
-disable_fleeing = true
-railway_shards = ExtResource( 30 )
-
-[node name="StageSelect3" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
-script = ExtResource( 50 )
-encounter_range_min = 30
-encounter_range_max = 45
-
-[node name="IsUndefeatedAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect3"]
-script = ExtResource( 24 )
-
-[node name="MainDialogue" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect3/IsUndefeatedAction"]
-script = ExtResource( 32 )
-title = "{pawn}"
-style = 2
-
-[node name="BattleAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect3/IsUndefeatedAction"]
-script = ExtResource( 47 )
-encounter_name_override = "FusionStage"
-disable_fleeing = true
-railway_shards = ExtResource( 30 )
-
-[node name="StageSelect4" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
-script = ExtResource( 50 )
-encounter_range_min = 45
-encounter_range_max = 1000000
-
-[node name="IsUndefeatedAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect4"]
-script = ExtResource( 24 )
-
-[node name="MainDialogue" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect4/IsUndefeatedAction"]
-script = ExtResource( 32 )
-title = "{pawn}"
-style = 2
-
-[node name="BattleAction" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector/StageSelect4/IsUndefeatedAction"]
-script = ExtResource( 47 )
-encounter_name_override = "OrbFusionStage"
-disable_fleeing = true
-railway_shards = ExtResource( 30 )
 
 [node name="Sequence" type="Node" parent="SpawnFighter/MerLine_Attendant/InteractionBehavior/Cutscene/Selector"]
 script = ExtResource( 36 )
@@ -545,7 +597,7 @@ stat_value = 1
 mode = 1
 
 [node name="EncounterConfig" type="Node" parent="SpawnFighter/MerLine_Attendant"]
-script = ExtResource( 2 )
+script = ExtResource( 69 )
 unique_id = "infinite_railway_attendant"
 can_flee = false
 enable_ai_fusion = true
@@ -559,6 +611,7 @@ pronouns = 0
 level_override = 75
 levels_per_defeat = 1
 level_scale_override_key = "monster_miniboss_smart"
+base_character = ExtResource( 68 )
 character_kind = 1
 human_colors = {
 "body_color_1": -1,
@@ -616,6 +669,7 @@ character_name = "Mer-Line Attendant"
 level_override = 75
 levels_per_defeat = 1
 level_scale_override_key = "monster_miniboss_smart"
+base_character = ExtResource( 68 )
 character_kind = 1
 human_colors = {
 "body_color_1": -1,
@@ -677,35 +731,109 @@ enable_ai_fusion = true
 loot_table_override = ExtResource( 54 )
 transition = 4
 
-[node name="Boss" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage"]
-script = ExtResource( 20 )
-character_name = "Mer-Line Attendant"
-level_override = 75
-levels_per_defeat = 1
-level_scale_override_key = "monster_miniboss_smart"
-character_kind = 1
-randomize_human_sprite = true
-ai = ExtResource( 62 )
-title = "Fusion Battle"
-subtitle = "Mer-Line's Blessing"
-complete_encounter_on_defeat = false
-
-[node name="Bootleg" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/Boss"]
-script = ExtResource( 5 )
-bootleg_rate = 0.02
-spawn_profile = ExtResource( 7 )
-
-[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/Boss"]
-script = ExtResource( 5 )
-spawn_profile = ExtResource( 7 )
-
-[node name="CharacterConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage"]
+[node name="Ranger" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage"]
 script = ExtResource( 4 )
 character_name = "Mer-Line Attendant"
 pronouns = 0
 level_override = 75
 levels_per_defeat = 1
 level_scale_override_key = "monster_miniboss_smart"
+base_character = ExtResource( 64 )
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+randomize_human_sprite = true
+ai = ExtResource( 62 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/Ranger"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="TapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/Ranger"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="Fusion" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage"]
+script = ExtResource( 30 )
+character_name = "Mer-Line Attendant"
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss"
+base_character = ExtResource( 64 )
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+randomize_human_sprite = true
+ai = ExtResource( 62 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="Bootleg" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/Fusion"]
+script = ExtResource( 5 )
+bootleg_rate = 0.02
+spawn_profile = ExtResource( 7 )
+
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/Fusion"]
+script = ExtResource( 5 )
+spawn_profile = ExtResource( 7 )
+
+[node name="Ranger2" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage"]
+script = ExtResource( 4 )
+character_name = "Mer-Line Attendant"
+pronouns = 0
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+base_character = ExtResource( 64 )
 character_kind = 1
 human_colors = {
 "body_color_1": -1,
@@ -739,29 +867,113 @@ human_colors/legs_color = -1
 human_colors/shoe_color = -1
 human_colors/skin_color = -1
 
-[node name="TapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/CharacterConfig"]
+[node name="TapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/Ranger2"]
 script = ExtResource( 5 )
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
 
-[node name="TapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/CharacterConfig"]
+[node name="TapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/Ranger2"]
 script = ExtResource( 5 )
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
 
-[node name="TapeConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/CharacterConfig"]
-script = ExtResource( 5 )
-bootleg_rate = 0.1
-spawn_profile = ExtResource( 7 )
-profile_evolution_rate = 0.5
+[node name="DoubleFusion" type="Node" parent="SpawnFighter/MerLine_Attendant"]
+script = ExtResource( 2 )
+unique_id = "infinite_railway_attendant"
+music_override = ExtResource( 58 )
+music_vox_override = ExtResource( 61 )
+can_flee = false
+enable_ai_fusion = true
+loot_table_override = ExtResource( 20 )
+transition = 4
 
-[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/CharacterConfig"]
+[node name="Fusion" type="Node" parent="SpawnFighter/MerLine_Attendant/DoubleFusion"]
+script = ExtResource( 30 )
+character_name = "Mer-Line Attendant"
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss"
+base_character = ExtResource( 65 )
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+randomize_human_sprite = true
+ai = ExtResource( 62 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="Bootleg" type="Node" parent="SpawnFighter/MerLine_Attendant/DoubleFusion/Fusion"]
 script = ExtResource( 5 )
-bootleg_rate = 0.05
+bootleg_rate = 0.02
 spawn_profile = ExtResource( 7 )
-profile_evolution_rate = 0.5
+
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/DoubleFusion/Fusion"]
+script = ExtResource( 5 )
+spawn_profile = ExtResource( 7 )
+
+[node name="Fusion2" type="Node" parent="SpawnFighter/MerLine_Attendant/DoubleFusion"]
+script = ExtResource( 30 )
+character_name = "Mer-Line Attendant"
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss"
+base_character = ExtResource( 65 )
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+randomize_human_sprite = true
+ai = ExtResource( 62 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="Bootleg" type="Node" parent="SpawnFighter/MerLine_Attendant/DoubleFusion/Fusion2"]
+script = ExtResource( 5 )
+bootleg_rate = 0.02
+rare_sticker_rate = 0.4
+random_sticker_rate = 0.3
+spawn_profile = ExtResource( 7 )
+
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/DoubleFusion/Fusion2"]
+script = ExtResource( 5 )
+spawn_profile = ExtResource( 7 )
 
 [node name="OrbFusionStage" type="Node" parent="SpawnFighter/MerLine_Attendant"]
 script = ExtResource( 2 )
@@ -770,40 +982,16 @@ music_override = ExtResource( 59 )
 music_vox_override = ExtResource( 60 )
 can_flee = false
 enable_ai_fusion = true
-loot_table_override = ExtResource( 55 )
+loot_table_override = ExtResource( 51 )
 transition = 4
 
-[node name="Boss" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage"]
-script = ExtResource( 20 )
+[node name="Orb" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage"]
+script = ExtResource( 30 )
 character_name = "Mer-Line Attendant"
 level_override = 75
 levels_per_defeat = 1
-level_scale_override_key = "monster_miniboss_smart"
-character_kind = 1
-randomize_human_sprite = true
-ai = ExtResource( 27 )
-title = "Mer-Line Attendant"
-subtitle = "Crossing Lines"
-banner_scene = ExtResource( 52 )
-stat_key = "orb"
-complete_encounter_on_defeat = false
-
-[node name="Bootleg" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/Boss"]
-script = ExtResource( 5 )
-bootleg_rate = 0.02
-spawn_profile = ExtResource( 7 )
-
-[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/Boss"]
-script = ExtResource( 5 )
-spawn_profile = ExtResource( 7 )
-
-[node name="CharacterConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage"]
-script = ExtResource( 4 )
-character_name = "Mer-Line Attendant"
-pronouns = 0
-level_override = 75
-levels_per_defeat = 1
-level_scale_override_key = "monster_miniboss_smart"
+level_scale_override_key = "monster_miniboss"
+base_character = ExtResource( 66 )
 character_kind = 1
 human_colors = {
 "body_color_1": -1,
@@ -817,14 +1005,49 @@ human_colors = {
 "shoe_color": -1,
 "skin_color": -1
 }
-human_part_names = {
-"arms": "",
-"body": "",
-"hair": "",
-"head": "",
-"legs": ""
+randomize_human_sprite = true
+ai = ExtResource( 27 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="Bootleg" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/Orb"]
+script = ExtResource( 5 )
+bootleg_rate = 0.02
+spawn_profile = ExtResource( 7 )
+
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/Orb"]
+script = ExtResource( 5 )
+spawn_profile = ExtResource( 7 )
+
+[node name="Fusion" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage"]
+script = ExtResource( 30 )
+character_name = "Mer-Line Attendant"
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss"
+base_character = ExtResource( 66 )
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
 }
-copy_human_sprite = NodePath("../..")
+randomize_human_sprite = true
 ai = ExtResource( 62 )
 human_colors/body_color_1 = -1
 human_colors/body_color_2 = -1
@@ -837,29 +1060,108 @@ human_colors/legs_color = -1
 human_colors/shoe_color = -1
 human_colors/skin_color = -1
 
-[node name="TapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/CharacterConfig"]
+[node name="Bootleg" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/Fusion"]
 script = ExtResource( 5 )
-bootleg_rate = 0.1
+bootleg_rate = 0.02
 spawn_profile = ExtResource( 7 )
-profile_evolution_rate = 0.5
 
-[node name="TapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/CharacterConfig"]
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/Fusion"]
 script = ExtResource( 5 )
-bootleg_rate = 0.1
 spawn_profile = ExtResource( 7 )
-profile_evolution_rate = 0.5
 
-[node name="TapeConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/CharacterConfig"]
-script = ExtResource( 5 )
-bootleg_rate = 0.1
-spawn_profile = ExtResource( 7 )
-profile_evolution_rate = 0.5
+[node name="DoubleOrbs" type="Node" parent="SpawnFighter/MerLine_Attendant"]
+script = ExtResource( 2 )
+unique_id = "infinite_railway_attendant"
+music_override = ExtResource( 59 )
+music_vox_override = ExtResource( 60 )
+can_flee = false
+enable_ai_fusion = true
+loot_table_override = ExtResource( 52 )
+transition = 4
 
-[node name="TapeConfig4" type="Node" parent="SpawnFighter/MerLine_Attendant/OrbFusionStage/CharacterConfig"]
+[node name="Orb" type="Node" parent="SpawnFighter/MerLine_Attendant/DoubleOrbs"]
+script = ExtResource( 30 )
+character_name = "Mer-Line Attendant"
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss"
+base_character = ExtResource( 67 )
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+randomize_human_sprite = true
+ai = ExtResource( 27 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="Bootleg" type="Node" parent="SpawnFighter/MerLine_Attendant/DoubleOrbs/Orb"]
 script = ExtResource( 5 )
-bootleg_rate = 0.1
+bootleg_rate = 0.02
 spawn_profile = ExtResource( 7 )
-profile_evolution_rate = 0.5
+
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/DoubleOrbs/Orb"]
+script = ExtResource( 5 )
+spawn_profile = ExtResource( 7 )
+
+[node name="Orb2" type="Node" parent="SpawnFighter/MerLine_Attendant/DoubleOrbs"]
+script = ExtResource( 30 )
+character_name = "Mer-Line Attendant"
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss"
+base_character = ExtResource( 67 )
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+randomize_human_sprite = true
+ai = ExtResource( 27 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="Bootleg" type="Node" parent="SpawnFighter/MerLine_Attendant/DoubleOrbs/Orb2"]
+script = ExtResource( 5 )
+bootleg_rate = 0.02
+spawn_profile = ExtResource( 7 )
+
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/DoubleOrbs/Orb2"]
+script = ExtResource( 5 )
+spawn_profile = ExtResource( 7 )
 
 [node name="TripleThreat" type="Node" parent="SpawnFighter/MerLine_Attendant"]
 script = ExtResource( 2 )
@@ -878,6 +1180,7 @@ pronouns = 0
 level_override = 75
 levels_per_defeat = 1
 level_scale_override_key = "monster_miniboss_smart"
+base_character = ExtResource( 55 )
 character_kind = 1
 human_colors = {
 "body_color_1": -1,
@@ -923,18 +1226,13 @@ bootleg_rate = 0.1
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
 
-[node name="TapeConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat/CharacterConfig"]
-script = ExtResource( 5 )
-bootleg_rate = 0.1
-spawn_profile = ExtResource( 7 )
-profile_evolution_rate = 0.5
-
 [node name="CharacterConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat"]
 script = ExtResource( 4 )
 character_name = "Mer-Line Attendant"
 level_override = 75
 levels_per_defeat = 1
 level_scale_override_key = "monster_miniboss_smart"
+base_character = ExtResource( 55 )
 character_kind = 1
 human_colors = {
 "body_color_1": -1,
@@ -980,18 +1278,13 @@ bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
 
-[node name="RandomTapeConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat/CharacterConfig2"]
-script = ExtResource( 5 )
-bootleg_rate = 0.05
-spawn_profile = ExtResource( 7 )
-profile_evolution_rate = 0.5
-
 [node name="CharacterConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat"]
 script = ExtResource( 4 )
 character_name = "Mer-Line Attendant"
 level_override = 75
 levels_per_defeat = 1
 level_scale_override_key = "monster_miniboss_smart"
+base_character = ExtResource( 55 )
 character_kind = 1
 human_colors = {
 "body_color_1": -1,
@@ -1037,7 +1330,220 @@ bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
 
-[node name="RandomTapeConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat/CharacterConfig3"]
+[node name="QuadBattle" type="Node" parent="SpawnFighter/MerLine_Attendant"]
+script = ExtResource( 2 )
+unique_id = "infinite_railway_attendant"
+music_override = ExtResource( 56 )
+music_vox_override = ExtResource( 57 )
+can_flee = false
+enable_ai_fusion = true
+loot_table_override = ExtResource( 49 )
+transition = 4
+
+[node name="CharacterConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle"]
+script = ExtResource( 4 )
+character_name = "Mer-Line Attendant"
+pronouns = 0
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+base_character = ExtResource( 63 )
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+copy_human_sprite = NodePath("../..")
+ai = ExtResource( 62 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="TapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle/CharacterConfig"]
+script = ExtResource( 5 )
+bootleg_rate = 0.1
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="CharacterConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle"]
+script = ExtResource( 4 )
+character_name = "Mer-Line Attendant"
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+base_character = ExtResource( 63 )
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+randomize_human_sprite = true
+ai = ExtResource( 62 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle/CharacterConfig2"]
+script = ExtResource( 5 )
+bootleg_rate = 0.05
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="RandomTapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle/CharacterConfig2"]
+script = ExtResource( 5 )
+bootleg_rate = 0.05
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="CharacterConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle"]
+script = ExtResource( 4 )
+character_name = "Mer-Line Attendant"
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+base_character = ExtResource( 63 )
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+randomize_human_sprite = true
+ai = ExtResource( 62 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle/CharacterConfig3"]
+script = ExtResource( 5 )
+bootleg_rate = 0.05
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="RandomTapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle/CharacterConfig3"]
+script = ExtResource( 5 )
+bootleg_rate = 0.05
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="CharacterConfig4" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle"]
+script = ExtResource( 4 )
+character_name = "Mer-Line Attendant"
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss_smart"
+base_character = ExtResource( 63 )
+character_kind = 1
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+randomize_human_sprite = true
+ai = ExtResource( 62 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle/CharacterConfig4"]
+script = ExtResource( 5 )
+bootleg_rate = 0.05
+spawn_profile = ExtResource( 7 )
+profile_evolution_rate = 0.5
+
+[node name="RandomTapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle/CharacterConfig4"]
 script = ExtResource( 5 )
 bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
@@ -1062,3 +1568,10 @@ spot_angle = 70.0
 [connection signal="open_vault" from="SpawnFighter/MerLine_Attendant/InteractionBehavior" to="WarpN" method="open_vault"]
 [connection signal="time_trial" from="SpawnFighter/MerLine_Attendant/InteractionBehavior" to="WarpS" method="open_trial"]
 [connection signal="time_trial" from="SpawnFighter/MerLine_Attendant/InteractionBehavior" to="WarpN" method="open_trial"]
+[connection signal="defeated" from="SpawnFighter/MerLine_Attendant/EncounterConfig" to="SpawnFighter/MerLine_Attendant/InteractionBehavior" method="_on_defeated"]
+[connection signal="defeated" from="SpawnFighter/MerLine_Attendant/FusionStage" to="SpawnFighter/MerLine_Attendant/InteractionBehavior" method="_on_defeated"]
+[connection signal="defeated" from="SpawnFighter/MerLine_Attendant/DoubleFusion" to="SpawnFighter/MerLine_Attendant/InteractionBehavior" method="_on_defeated"]
+[connection signal="defeated" from="SpawnFighter/MerLine_Attendant/OrbFusionStage" to="SpawnFighter/MerLine_Attendant/InteractionBehavior" method="_on_defeated"]
+[connection signal="defeated" from="SpawnFighter/MerLine_Attendant/DoubleOrbs" to="SpawnFighter/MerLine_Attendant/InteractionBehavior" method="_on_defeated"]
+[connection signal="defeated" from="SpawnFighter/MerLine_Attendant/TripleThreat" to="SpawnFighter/MerLine_Attendant/InteractionBehavior" method="_on_defeated"]
+[connection signal="defeated" from="SpawnFighter/MerLine_Attendant/QuadBattle" to="SpawnFighter/MerLine_Attendant/InteractionBehavior" method="_on_defeated"]

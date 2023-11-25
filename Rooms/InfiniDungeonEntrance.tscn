@@ -890,7 +890,7 @@ script = ExtResource( 100 )
 script = ExtResource( 92 )
 portrait = ExtResource( 105 )
 title = "MAGIKRAB_NAME"
-messages = [ "Hello again, friend!", "Would you like to an astral projection to practice with?" ]
+messages = [ "RAILWAY_MAGIKRAB1", "RAILWAY_MAGIKRAB2" ]
 wait_for_confirm = false
 close_after = false
 style = 3
@@ -905,7 +905,7 @@ stop_on_failure = true
 
 [node name="MenuDialogAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater"]
 script = ExtResource( 94 )
-menu_options = [ "Practice Dummy", "AA_ALEPH_NULL_NAME", "AA_ALEPH_NAME", "AA_MORGANTE_NAME", "AA_PUPPET_NAME", "AA_CUBE_NAME", "AA_LAMENTO_MORI_NAME", "AA_ALICE_NAME", "AA_HELIA_NAME", "LENNA_NAME", "AA_MAMMON_NAME", "AA_MONARCH_NAME", "AA_ROBIN_NAME", "AA_TOWER_NAME", "AA_SERPENT_NAME", "Nevermind" ]
+menu_options = [ "RAILWAY_PRACTICE_DUMMY", "AA_ALEPH_NULL_NAME", "AA_ALEPH_NAME", "AA_MORGANTE_NAME", "AA_PUPPET_NAME", "AA_CUBE_NAME", "AA_LAMENTO_MORI_NAME", "AA_ALICE_NAME", "AA_HELIA_NAME", "LENNA_NAME", "AA_MAMMON_NAME", "AA_MONARCH_NAME", "AA_ROBIN_NAME", "AA_TOWER_NAME", "AA_SERPENT_NAME", "RAILWAY_CANCEL" ]
 default_option = 15
 
 [node name="Succeeder15" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
@@ -1914,7 +1914,7 @@ initialize = true
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior"]
 script = ExtResource( 92 )
-messages = [ "It appears to be a regular wooden plaque. [pause] There's a list written on it's surface. " ]
+messages = [ "RAILWAY_WOODEN_PLAQUE1" ]
 wait_for_confirm = false
 close_after = false
 style = 3
@@ -1925,7 +1925,7 @@ stop_on_failure = true
 
 [node name="MenuDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater"]
 script = ExtResource( 94 )
-menu_options = [ "Trial Chambers.", "Overspill Damage.", "Ignore it." ]
+menu_options = [ "RAILWAY_WOODEN_PLAQUE_OPTION1", "RAILWAY_WOODEN_PLAQUE_OPTION2", "RAILWAY_WOODEN_PLAQUE_OPTION3" ]
 default_option = 2
 
 [node name="Succeeder" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction"]
@@ -1933,14 +1933,14 @@ script = ExtResource( 38 )
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder"]
 script = ExtResource( 92 )
-messages = [ "The words on the plaque have mysteriously shifted. [pause] It's almost as though it were an interactive menu..." ]
+messages = [ "RAILWAY_WOODEN_PLAQUE2" ]
 wait_for_confirm = false
 close_after = false
 style = 3
 
 [node name="MenuDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder"]
 script = ExtResource( 94 )
-menu_options = [ "Disable Trial Chambers", "Enable Trial Chambers" ]
+menu_options = [ "RAILWAY_DISABLE_TRIALS", "RAILWAY_ENABLE_TRIALS" ]
 
 [node name="Succeeder" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -1951,7 +1951,7 @@ property_name = "TrialChambers"
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder/MenuDialogAction/Succeeder"]
 script = ExtResource( 92 )
-messages = [ "You hear the sound of something shifting in the distance. It feels as though something has been removed.", "The words on the plaque have rearranged themselves again." ]
+messages = [ "RAILWAY_TRIALS_REMOVED", "RAILWAY_WOODEN_PLAQUE3" ]
 wait_for_confirm = false
 close_after = false
 style = 3
@@ -1966,7 +1966,7 @@ property_value = true
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder/MenuDialogAction/Succeeder2"]
 script = ExtResource( 92 )
-messages = [ "You hear the sound of something shifting in the distance. It feels as though something has been added. ", "The words on the plaque have rearranged themselves again." ]
+messages = [ "RAILWAY_TRIALS_ADDED", "RAILWAY_WOODEN_PLAQUE3" ]
 wait_for_confirm = false
 close_after = false
 style = 3
@@ -1976,14 +1976,14 @@ script = ExtResource( 38 )
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2"]
 script = ExtResource( 92 )
-messages = [ "The words on the plaque have mysteriously shifted.[pause] It's almost as though it were an interactive menu..." ]
+messages = [ "RAILWAY_WOODEN_PLAQUE2" ]
 wait_for_confirm = false
 close_after = false
 style = 3
 
 [node name="MenuDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2"]
 script = ExtResource( 94 )
-menu_options = [ "Disable overspill damage for everyone.", "Enable overspill damage for everyone." ]
+menu_options = [ "RAILWAY_OVERSPILL_OPTION1", "RAILWAY_OVERSPILL_OPTION2" ]
 
 [node name="Succeeder" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -1994,7 +1994,7 @@ property_name = "Overspill"
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2/MenuDialogAction/Succeeder"]
 script = ExtResource( 92 )
-messages = [ "Your body tenses up. [pause]You feel as though your human form plays no part in this game anymore. It is less vulnerable now.", "The words on the plaque have rearranged themselves again." ]
+messages = [ "RAILWAY_OVERSPILL_DISABLED", "RAILWAY_WOODEN_PLAQUE3" ]
 wait_for_confirm = false
 close_after = false
 style = 3
@@ -2009,7 +2009,7 @@ property_value = true
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2/MenuDialogAction/Succeeder2"]
 script = ExtResource( 92 )
-messages = [ "You feel a cold sweat across your face. Your body feels squishy[pause], unbearably squishy. Somehow you feel more vulnerable than before.", "The words on the plaque have rearranged themselves again." ]
+messages = [ "RAILWAY_OVERSPILL_ENABLED", "RAILWAY_WOODEN_PLAQUE3" ]
 wait_for_confirm = false
 close_after = false
 style = 3
@@ -2019,7 +2019,7 @@ script = ExtResource( 121 )
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Failer"]
 script = ExtResource( 92 )
-messages = [ "You ignore the plaque. What good would messing with it do anyway." ]
+messages = [ "RAILWAY_PLAQUE_EXIT" ]
 style = 3
 
 [connection signal="arrived" from="Campsite" to="Campsite/Camping" method="_on_Campsite_arrived"]

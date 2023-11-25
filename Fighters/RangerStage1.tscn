@@ -43,21 +43,18 @@ human_colors/skin_color = -1
 
 [node name="TapeConfig" type="Node" parent="."]
 script = ExtResource( 3 )
-seeded = false
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 4 )
 profile_evolution_rate = 0.5
 
 [node name="TapeConfig2" type="Node" parent="."]
 script = ExtResource( 3 )
-seeded = false
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 4 )
 profile_evolution_rate = 0.5
 
 [node name="TapeConfig3" type="Node" parent="."]
 script = ExtResource( 3 )
-seeded = false
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 4 )
 profile_evolution_rate = 0.5

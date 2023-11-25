@@ -593,7 +593,6 @@ light_energy = 3.321
 [node name="SpawnMirrorMatch" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.56516 )
 script = ExtResource( 40 )
-spawn_chance = 0.01
 mirrormatch = ExtResource( 7 )
 
 [connection signal="open_gate" from="station_clock_1" to="StationGate/Wire" method="_input_state_changed" binds= [ true ]]

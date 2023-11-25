@@ -51,7 +51,7 @@ reset_idle_override = true
 [node name="MessageDialogAction2" type="Node" parent="."]
 script = ExtResource( 7 )
 title = "LENNA_NAME"
-messages = [ "Show me what you've learned!" ]
+messages = [ "RAILWAY_LENNA1" ]
 
 [node name="ShowBossTitleBannerAction" type="Node" parent="."]
 script = ExtResource( 8 )

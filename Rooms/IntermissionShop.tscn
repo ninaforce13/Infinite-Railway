@@ -2334,7 +2334,7 @@ script = ExtResource( 29 )
 
 [node name="MessageDialogAction" type="Node" parent="PlayerDetector/Cutscene"]
 script = ExtResource( 33 )
-messages = [ "You should talk to Amber if you want to leave. " ]
+messages = [ "RAILWAY_AMBER_LODGE_EXIT" ]
 
 [node name="WalkAction" type="Node" parent="PlayerDetector/Cutscene"]
 script = ExtResource( 26 )
@@ -2476,7 +2476,7 @@ script = ExtResource( 33 )
 portrait = ExtResource( 38 )
 audio = ExtResource( 101 )
 title = "AMBER_NAME"
-messages = [ "What can I do for you, sugar?" ]
+messages = [ "RAILWAY_AMBER_DIALOG1" ]
 wait_for_confirm = false
 close_after = false
 
@@ -2490,7 +2490,7 @@ stop_on_failure = true
 
 [node name="MenuDialogAction" type="Node" parent="Amber/InteractionBehavior/Selector/Sequence/Succeeder/Repeater"]
 script = ExtResource( 58 )
-menu_options = [ "Continue on the Infinite Railway.", "I'm done, please send us home.", "How does this work?", "How am I doing so far?", "INTERMISSION_PART3_AMBER6_OPTION4" ]
+menu_options = [ "RAILWAY_AMBER_MENU1", "RAILWAY_AMBER_MENU2", "RAILWAY_AMBER_MENU3", "RAILWAY_AMBER_MENU4", "INTERMISSION_PART3_AMBER6_OPTION4" ]
 default_option = 4
 
 [node name="Succeeder" type="Node" parent="Amber/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
@@ -2501,13 +2501,13 @@ script = ExtResource( 33 )
 portrait = ExtResource( 38 )
 audio = ExtResource( 87 )
 title = "AMBER_NAME"
-messages = [ "The Mer-Line will make encounters harder if you keep going. If you die down there, you'll lose any Railway Shards you have on you.", "Are you sure you want to get back on the Infinite Railway? " ]
+messages = [ "RAILWAY_AMBER_CONFIRM_CONTINUE1", "RAILWAY_AMBER_CONFIRM_CONTINUE2" ]
 wait_for_confirm = false
 close_after = false
 
 [node name="MenuDialogAction2" type="Node" parent="Amber/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder"]
 script = ExtResource( 58 )
-menu_options = [ "Let's do this!", "Actually, nevermind." ]
+menu_options = [ "RAILWAY_AMBER_CONTINUE_OPTION1", "RAILWAY_AMBER_CANCEL" ]
 default_option = 1
 
 [node name="Succeeder" type="Node" parent="Amber/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder/MenuDialogAction2"]
@@ -2518,7 +2518,7 @@ script = ExtResource( 33 )
 portrait = ExtResource( 38 )
 audio = ExtResource( 54 )
 title = "AMBER_NAME"
-messages = [ "See ya soon, sweetie." ]
+messages = [ "RAILWAY_AMBER_DEPARTURE" ]
 
 [node name="WarpAction" type="Node" parent="Amber/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder/MenuDialogAction2/Succeeder"]
 script = ExtResource( 57 )
@@ -2531,7 +2531,7 @@ script = ExtResource( 33 )
 portrait = ExtResource( 38 )
 audio = ExtResource( 49 )
 title = "AMBER_NAME"
-messages = [ "Just relax, there's no need to rush." ]
+messages = [ "RAILWAY_AMBER_CANCEL_LOOP" ]
 
 [node name="Succeeder2" type="Node" parent="Amber/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 55 )
@@ -2548,7 +2548,7 @@ railway_shards = ExtResource( 66 )
 
 [node name="MenuDialogAction2" type="Node" parent="Amber/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder2"]
 script = ExtResource( 58 )
-menu_options = [ "Yup, get me off this crazy ride!", "Actually, nevermind." ]
+menu_options = [ "RAILWAY_AMBER_LEAVE_RAILWAY_CONFIRMED", "RAILWAY_AMBER_CANCEL" ]
 default_option = 1
 
 [node name="Succeeder" type="Node" parent="Amber/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder2/MenuDialogAction2"]
@@ -2559,7 +2559,7 @@ script = ExtResource( 33 )
 portrait = ExtResource( 81 )
 audio = ExtResource( 86 )
 title = "AMBER_NAME"
-messages = [ "Off you go then, take care!" ]
+messages = [ "RAILWAY_AMBER_DEPARTURE2" ]
 
 [node name="Remove_Railway_Shards" type="Node" parent="Amber/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder2/MenuDialogAction2/Succeeder"]
 script = ExtResource( 63 )
@@ -2580,14 +2580,14 @@ script = ExtResource( 33 )
 portrait = ExtResource( 38 )
 audio = ExtResource( 49 )
 title = "AMBER_NAME"
-messages = [ "Just relax, there's no need to rush." ]
+messages = [ "RAILWAY_AMBER_CANCEL_LOOP" ]
 
 [node name="MessageDialogAction3" type="Node" parent="Amber/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 33 )
 portrait = ExtResource( 19 )
 audio = ExtResource( 102 )
 title = "AMBER_NAME"
-messages = [ "The Mer-Line is testing you once more.", "Those tracks I picked you up from are called the Infinite Railway. The Mer-Line's little \"playground\".", "The longer you're on it, the more difficult the challenges it will throw at you.", "I'll try to pick you up from time to time, but the only way out for sure is for me to send you back to New Wirral from here in the Lodge.", "If you get back on the Infinite Railway, you'll have to survive long enough for me to pick you up again. " ]
+messages = [ "RAILWAY_AMBER_EXPLAIN1", "RAILWAY_AMBER_EXPLAIN2", "RAILWAY_AMBER_EXPLAIN3", "RAILWAY_AMBER_EXPLAIN4", "RAILWAY_AMBER_EXPLAIN5" ]
 
 [node name="Succeeder3" type="Node" parent="Amber/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 55 )
@@ -2597,7 +2597,7 @@ script = ExtResource( 80 )
 portrait = ExtResource( 81 )
 audio = ExtResource( 51 )
 title = "AMBER_NAME"
-messages = [ "I've been keepin' an eye on you.", "Placeholder", "Placeholder", "Placeholder" ]
+messages = [ "RAILWAY_AMBER_STATS1", "Placeholder", "Placeholder", "Placeholder" ]
 railway_shards = ExtResource( 66 )
 
 [node name="MessageDialogAction2" type="Node" parent="Amber/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder3"]
@@ -2605,7 +2605,7 @@ script = ExtResource( 33 )
 portrait = ExtResource( 38 )
 audio = ExtResource( 49 )
 title = "AMBER_NAME"
-messages = [ "Just relax, there's no need to rush." ]
+messages = [ "RAILWAY_AMBER_CANCEL_LOOP" ]
 
 [node name="Cutscene" type="Node" parent="."]
 script = ExtResource( 29 )
@@ -2631,7 +2631,7 @@ close_after = false
 script = ExtResource( 33 )
 portrait = ExtResource( 19 )
 title = "AMBER_NAME"
-messages = [ "Please take a moment to rest and buy supplies.", "I picked up the most fascinating individual the other day! You'll find them to your left." ]
+messages = [ "RAILWAY_AMBER_INTRO1", "RAILWAY_AMBER_INTRO2" ]
 
 [node name="Clientele" type="Spatial" parent="."]
 script = ExtResource( 35 )
@@ -3214,7 +3214,7 @@ script = ExtResource( 59 )
 [node name="MessageDialogAction4" type="Node" parent="TravelingMerchant/InteractionBehavior/Cutscene/Selector/Sequence/Selector"]
 script = ExtResource( 33 )
 title = "{pawn}"
-messages = [ "Bet you didn't expect to find me here!", "Wherever \"here\" is...", "TRAVELING_MERCHANT_PRE_TRADE" ]
+messages = [ "RAILWAY_MERCHANT1", "RAILWAY_MERCHANT2", "TRAVELING_MERCHANT_PRE_TRADE" ]
 wait_for_confirm = false
 close_after = false
 
@@ -3224,7 +3224,7 @@ stop_on_failure = true
 
 [node name="MenuDialogAction" type="Node" parent="TravelingMerchant/InteractionBehavior/Cutscene/Selector/Sequence/NormalDialogue_Repeater"]
 script = ExtResource( 58 )
-menu_options = [ "Show me your wares", "Goodbye!" ]
+menu_options = [ "RAILWAY_MERCHANT_MENU1", "RAILWAY_MERCHANT_MENU2" ]
 default_option = 1
 
 [node name="MenuSequence" type="Node" parent="TravelingMerchant/InteractionBehavior/Cutscene/Selector/Sequence/NormalDialogue_Repeater/MenuDialogAction"]
@@ -3246,7 +3246,7 @@ form = ExtResource( 127 )
 [node name="MessageDialogAction5" type="Node" parent="TravelingMerchant/InteractionBehavior/Cutscene/Selector/Sequence/NormalDialogue_Repeater/MenuDialogAction/MenuSequence"]
 script = ExtResource( 33 )
 title = "{pawn}"
-messages = [ "I have no idea what these shards do, but they sure do feel powerful!", "TRAVELING_MERCHANT_POST_TRADE2" ]
+messages = [ "RAILWAY_MERCHANT3", "TRAVELING_MERCHANT_POST_TRADE2" ]
 
 [node name="Failer" type="Node" parent="TravelingMerchant/InteractionBehavior/Cutscene/Selector/Sequence/NormalDialogue_Repeater/MenuDialogAction/MenuSequence"]
 script = ExtResource( 68 )
@@ -3257,17 +3257,10 @@ script = ExtResource( 56 )
 [node name="MessageDialogAction5" type="Node" parent="TravelingMerchant/InteractionBehavior/Cutscene/Selector/Sequence/NormalDialogue_Repeater/MenuDialogAction/ByeSequence"]
 script = ExtResource( 33 )
 title = "{pawn}"
-messages = [ "Alrighty then, lemme know if ya change your mind!", "TRAVELING_MERCHANT_POST_TRADE2" ]
+messages = [ "RAILWAY_MERCHANT_CANCEL", "TRAVELING_MERCHANT_POST_TRADE2" ]
 
 [node name="Failer" type="Node" parent="TravelingMerchant/InteractionBehavior/Cutscene/Selector/Sequence/NormalDialogue_Repeater/MenuDialogAction/ByeSequence"]
 script = ExtResource( 68 )
-
-[node name="MessageDialogAction4" type="Node" parent="TravelingMerchant/InteractionBehavior/Cutscene/Selector/Sequence/NormalDialogue_Repeater"]
-script = ExtResource( 33 )
-title = "{pawn}"
-messages = [ "Test" ]
-wait_for_confirm = false
-close_after = false
 
 [node name="MicStand" type="Spatial" parent="."]
 transform = Transform( 0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, 0, 4, -7 )
@@ -3300,7 +3293,7 @@ script = ExtResource( 59 )
 [node name="MessageDialogAction4" type="Node" parent="MicStand/InteractionBehavior/Cutscene/Selector/Sequence/Selector"]
 script = ExtResource( 33 )
 title = "Shelby"
-messages = [ "Hey there, stranger! Got a song you wanna hear? " ]
+messages = [ "RAILWAY_SHELBY_INTRO1" ]
 wait_for_confirm = false
 close_after = false
 
@@ -3310,7 +3303,7 @@ stop_on_failure = true
 
 [node name="MenuDialogAction" type="Node" parent="MicStand/InteractionBehavior/Cutscene/Selector/Sequence/NormalDialogue_Repeater"]
 script = ExtResource( 58 )
-menu_options = [ "I wanna listen to...", "Nevermind." ]
+menu_options = [ "RAILWAY_SHELBY_MENU1", "RAILWAY_CANCEL" ]
 default_option = 1
 
 [node name="MenuSequence" type="Node" parent="MicStand/InteractionBehavior/Cutscene/Selector/Sequence/NormalDialogue_Repeater/MenuDialogAction"]
@@ -3325,7 +3318,7 @@ script = ExtResource( 67 )
 [node name="MessageDialogAction" type="Node" parent="MicStand/InteractionBehavior/Cutscene/Selector/Sequence/NormalDialogue_Repeater/MenuDialogAction/MenuSequence/Cutscene"]
 script = ExtResource( 33 )
 title = "Shelby"
-messages = [ "Enjoy the performance!", "Good luck out there!" ]
+messages = [ "RAILWAY_SHELBY_CONFIRMED", "RAILWAY_SHELBY_EXIT" ]
 
 [node name="Failer" type="Node" parent="MicStand/InteractionBehavior/Cutscene/Selector/Sequence/NormalDialogue_Repeater/MenuDialogAction/MenuSequence"]
 script = ExtResource( 68 )
@@ -3813,7 +3806,7 @@ script = ExtResource( 25 )
 [node name="MessageDialogAction" type="Node" parent="Joel/InteractionBehavior"]
 script = ExtResource( 33 )
 title = "Joel"
-messages = [ "Enjoy the show!" ]
+messages = [ "RAILWAY_JOEL" ]
 
 [node name="Shelby" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.267677, 4.04408, -8.00579 )
@@ -3935,7 +3928,7 @@ initialize = true
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior"]
 script = ExtResource( 33 )
-messages = [ "It appears to be a regular wooden plaque. [pause] There's a list written on it's surface. " ]
+messages = [ "RAILWAY_WOODEN_PLAQUE1" ]
 wait_for_confirm = false
 close_after = false
 style = 3
@@ -3946,7 +3939,7 @@ stop_on_failure = true
 
 [node name="MenuDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater"]
 script = ExtResource( 58 )
-menu_options = [ "Trial Chambers.", "Overspill Damage.", "Ignore it." ]
+menu_options = [ "RAILWAY_WOODEN_PLAQUE_OPTION1", "RAILWAY_WOODEN_PLAQUE_OPTION2", "RAILWAY_WOODEN_PLAQUE_OPTION3" ]
 default_option = 2
 
 [node name="Succeeder" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction"]
@@ -3954,14 +3947,14 @@ script = ExtResource( 55 )
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder"]
 script = ExtResource( 33 )
-messages = [ "The words on the plaque have mysteriously shifted. [pause] It's almost as though it were an interactive menu..." ]
+messages = [ "RAILWAY_WOODEN_PLAQUE2" ]
 wait_for_confirm = false
 close_after = false
 style = 3
 
 [node name="MenuDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder"]
 script = ExtResource( 58 )
-menu_options = [ "Disable Trial Chambers", "Enable Trial Chambers" ]
+menu_options = [ "RAILWAY_DISABLE_TRIALS", "RAILWAY_ENABLE_TRIALS" ]
 
 [node name="Succeeder" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder/MenuDialogAction"]
 script = ExtResource( 55 )
@@ -3972,7 +3965,7 @@ property_name = "TrialChambers"
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder/MenuDialogAction/Succeeder"]
 script = ExtResource( 33 )
-messages = [ "You hear the sound of something shifting in the distance. It feels as though something has been removed.", "The words on the plaque have rearranged themselves again." ]
+messages = [ "RAILWAY_TRIALS_REMOVED", "RAILWAY_WOODEN_PLAQUE3" ]
 wait_for_confirm = false
 close_after = false
 style = 3
@@ -3987,7 +3980,7 @@ property_value = true
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder/MenuDialogAction/Succeeder2"]
 script = ExtResource( 33 )
-messages = [ "You hear the sound of something shifting in the distance. It feels as though something has been added. ", "The words on the plaque have rearranged themselves again." ]
+messages = [ "RAILWAY_TRIALS_ADDED", "RAILWAY_WOODEN_PLAQUE3" ]
 wait_for_confirm = false
 close_after = false
 style = 3
@@ -3997,14 +3990,14 @@ script = ExtResource( 55 )
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2"]
 script = ExtResource( 33 )
-messages = [ "The words on the plaque have mysteriously shifted.[pause] It's almost as though it were an interactive menu..." ]
+messages = [ "RAILWAY_WOODEN_PLAQUE2" ]
 wait_for_confirm = false
 close_after = false
 style = 3
 
 [node name="MenuDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2"]
 script = ExtResource( 58 )
-menu_options = [ "Disable overspill damage for everyone.", "Enable overspill damage for everyone." ]
+menu_options = [ "RAILWAY_OVERSPILL_OPTION1", "RAILWAY_OVERSPILL_OPTION2" ]
 
 [node name="Succeeder" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2/MenuDialogAction"]
 script = ExtResource( 55 )
@@ -4015,7 +4008,7 @@ property_name = "Overspill"
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2/MenuDialogAction/Succeeder"]
 script = ExtResource( 33 )
-messages = [ "Your body tenses up. [pause]You feel as though your human form plays no part in this game anymore. It is less vulnerable now.", "The words on the plaque have rearranged themselves again." ]
+messages = [ "RAILWAY_OVERSPILL_DISABLED", "RAILWAY_WOODEN_PLAQUE3" ]
 wait_for_confirm = false
 close_after = false
 style = 3
@@ -4030,7 +4023,7 @@ property_value = true
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Succeeder2/MenuDialogAction/Succeeder2"]
 script = ExtResource( 33 )
-messages = [ "You feel a cold sweat across your face. Your body feels squishy[pause], unbearably squishy. Somehow you feel more vulnerable than before.", "The words on the plaque have rearranged themselves again." ]
+messages = [ "RAILWAY_OVERSPILL_ENABLED", "RAILWAY_WOODEN_PLAQUE3" ]
 wait_for_confirm = false
 close_after = false
 style = 3
@@ -4040,7 +4033,7 @@ script = ExtResource( 68 )
 
 [node name="MessageDialogAction" type="Node" parent="WoodenPlaque1/InteractionBehavior/Repeater/MenuDialogAction/Failer"]
 script = ExtResource( 33 )
-messages = [ "You ignore the plaque. What good would messing with it do anyway." ]
+messages = [ "RAILWAY_PLAQUE_EXIT" ]
 style = 3
 
 [connection signal="screen_entered" from="Amber/VisibilityNotifier" to="Amber" method="set_paused" binds= [ false ]]

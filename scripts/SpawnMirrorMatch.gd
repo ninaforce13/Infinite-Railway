@@ -1,7 +1,7 @@
 extends Node
 
-export(float) var spawn_chance:float = 0.1
 export(Resource) var mirrormatch
+var RailwaySettings = preload("res://mods/Infinite_Dungeon/resources/RailwaySettings.tres")
 func _ready():
-	if randf() < spawn_chance:
+	if randf() < RailwaySettings.mirror_match_rate:
 		self.add_child(mirrormatch.instance())

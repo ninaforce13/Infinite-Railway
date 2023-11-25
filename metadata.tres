@@ -1,17 +1,18 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://mods/Infinite_Dungeon/scripts/mod_load.gd" type="Script" id=1]
+[ext_resource path="res://mods/Infinite_Dungeon/translations/mod_strings.en.translation" type="Translation" id=2]
 
 [resource]
 script = ExtResource( 1 )
 id = "infinite_dungeon"
 name = "Infinite Railway"
 version_code = 0
-version_string = "1.6.0"
+version_string = "1.7.0"
 author = "NCrafters"
 save_file_format_tag = ""
 save_file_format_tag_version = 0
 network_protocol_tag = ""
-modified_files = [  ]
+modified_files = [ "res://world/core/QuestLocationLayer.gd" ]
 modified_dirs = [  ]
-translations = [  ]
+translations = [ ExtResource( 2 ) ]

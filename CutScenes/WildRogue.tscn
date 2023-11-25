@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://nodes/actions/battle/BattleStartCutscene.gd" type="Script" id=1]
+[ext_resource path="res://nodes/actions/MessageDialogAction.gd" type="Script" id=2]
+[ext_resource path="res://nodes/actions/PlayAudioAction.gd" type="Script" id=4]
+[ext_resource path="res://nodes/actions/battle/MoveBattleSlotAction.gd" type="Script" id=5]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/RandomTapeConfig_mod.gd" type="Script" id=6]
+[ext_resource path="res://nodes/encounter_config/FusedCharacterConfig.gd" type="Script" id=7]
+[ext_resource path="res://sfx/fusion/fusion_fist.wav" type="AudioStream" id=8]
+[ext_resource path="res://mods/Infinite_Dungeon/CustomAI/CustomWeightedAI.tscn" type="PackedScene" id=10]
+[ext_resource path="res://mods/Infinite_Dungeon/Spawn Profile/all_mobs.tres" type="Resource" id=13]
+
+[node name="WildRogue" type="Node"]
+script = ExtResource( 1 )
+
+[node name="MoveBattleSlotAction" type="Node" parent="."]
+script = ExtResource( 5 )
+fighter_team = 1
+fighter_index = 1
+relative_position = true
+position = Vector3( 50, 0, 0 )
+
+[node name="PlayAudioAction2" type="Node" parent="."]
+script = ExtResource( 4 )
+stream = ExtResource( 8 )
+mute_music = true
+
+[node name="MessageDialogAction" type="Node" parent="."]
+script = ExtResource( 2 )
+messages = [ "RAILWAY_ROGUE_ENCOUNTER" ]
+
+[node name="MoveBattleSlotAction2" type="Node" parent="."]
+script = ExtResource( 5 )
+fighter_team = 1
+fighter_index = 1
+relative_position = true
+duration = 0.7
+tween = true
+tween_trans_type = 0
+
+[node name="Fusion" type="Node" parent="."]
+script = ExtResource( 7 )
+level_override = 75
+levels_per_defeat = 1
+level_scale_override_key = "monster_miniboss"
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+ai = ExtResource( 10 )
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="Bootleg" type="Node" parent="Fusion"]
+script = ExtResource( 6 )
+bootleg_rate = 0.2
+rare_sticker_rate = 1.0
+random_sticker_rate = 0.4
+spawn_profile = ExtResource( 13 )
+profile_evolution_rate = 1.0
+
+[node name="TapeConfig" type="Node" parent="Fusion"]
+script = ExtResource( 6 )
+bootleg_rate = 0.05
+rare_sticker_rate = 1.0
+random_sticker_rate = 0.6
+spawn_profile = ExtResource( 13 )
+profile_evolution_rate = 0.5

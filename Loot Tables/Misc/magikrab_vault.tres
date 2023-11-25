@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=20 format=2]
+[gd_resource type="Resource" load_steps=21 format=2]
 
 [ext_resource path="res://data/LootTable.gd" type="Script" id=1]
 [ext_resource path="res://data/items/tape_basic.tres" type="Resource" id=2]
@@ -19,10 +19,11 @@
 [ext_resource path="res://data/items/tape_astral.tres" type="Resource" id=17]
 [ext_resource path="res://data/items/tape_ice.tres" type="Resource" id=18]
 [ext_resource path="res://data/items/old_book.tres" type="Resource" id=19]
+[ext_resource path="res://data/items/wheat.tres" type="Resource" id=20]
 
 [resource]
 script = ExtResource( 1 )
-items = [ ExtResource( 19 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ) ]
+items = [ ExtResource( 19 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 20 ) ]
 guaranteed_items = [  ]
 guaranteed_item_amounts = [  ]
 rare_items = [ ExtResource( 14 ), ExtResource( 17 ), ExtResource( 2 ), ExtResource( 9 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 7 ), ExtResource( 18 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 16 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 10 ) ]

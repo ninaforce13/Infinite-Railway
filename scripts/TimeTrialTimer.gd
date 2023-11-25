@@ -56,7 +56,7 @@ func remove_button(ButtonNodeName:String):
 	var parent = get_parent()
 	var button = parent.get_node(ButtonNodeName)
 	if button:
-		parent.remove_child(button)  	
+		button.disabled = true
 
 func reset_timer():
 	timer_label.text = "00:00:00"

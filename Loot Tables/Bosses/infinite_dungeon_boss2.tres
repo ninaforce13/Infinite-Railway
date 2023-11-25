@@ -1,17 +1,21 @@
-[gd_resource type="Resource" load_steps=7 format=2]
+[gd_resource type="Resource" load_steps=11 format=2]
 
 [ext_resource path="res://data/LootTable.gd" type="Script" id=1]
 [ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=2]
 [ext_resource path="res://data/items/fused_material.tres" type="Resource" id=3]
+[ext_resource path="res://data/items/pulp.tres" type="Resource" id=4]
 [ext_resource path="res://data/items/metal.tres" type="Resource" id=5]
+[ext_resource path="res://data/items/wood.tres" type="Resource" id=6]
+[ext_resource path="res://data/items/plastic.tres" type="Resource" id=7]
 [ext_resource path="res://data/items/upgrape.tres" type="Resource" id=8]
+[ext_resource path="res://data/items/wheat.tres" type="Resource" id=9]
 [ext_resource path="res://data/items/bootleg_ritual_candle.tres" type="Resource" id=10]
 
 [resource]
 script = ExtResource( 1 )
-items = [ ExtResource( 5 ) ]
+items = [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 4 ) ]
 guaranteed_items = [ ExtResource( 2 ), ExtResource( 3 ) ]
-guaranteed_item_amounts = [ 8, 5 ]
+guaranteed_item_amounts = [ 6, 1 ]
 rare_items = [ ExtResource( 8 ), ExtResource( 10 ) ]
 rare_item_chance = 0.11
 max_stickers = 0

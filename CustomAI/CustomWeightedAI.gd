@@ -50,18 +50,17 @@ export (float) var multiplier_duplicate_status:float = 0.1
 export (float) var multiplier_weak_wall:float = 0.1
 export (int) var threshold_max_self_damage_power:int = 0
 export (float) var parry_stance_caution:float = 0.95
-
+var RailwaySettings = preload("res://mods/Infinite_Dungeon/resources/RailwaySettings.tres")
 var cooldowns:Dictionary
 var has_fair_fight:bool = false
 var parry_stancers:Dictionary
 
 func _ready():
 	cooldowns = {}
-	if randf() <= 0.02:
+	if randf() <= RailwaySettings.ghostly_rate:
 		set_ghost()
 
 func set_ghost():
-	print("Ghostly set")
 	var effect_node = StatusEffectNode.new()
 	effect_node.effect = preload("res://data/status_effects/ghostly.tres")
 	effect_node.amount = 4

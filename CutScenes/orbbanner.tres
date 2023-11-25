@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://menus/boss_title/TitleBannerConfig.gd" type="Script" id=1]
+[ext_resource path="res://menus/boss_title/ArchangelTitleBanner.tscn" type="PackedScene" id=2]
+
+[resource]
+script = ExtResource( 1 )
+banner_scene = ExtResource( 2 )
+title = "Mer-Line Attendant"
+subtitle = "Crossing Lines"
+title_subs = {
+}
+tutorial = ""
+title_is_monster_name = false

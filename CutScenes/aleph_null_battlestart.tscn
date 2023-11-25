@@ -132,7 +132,7 @@ portrait = ExtResource( 32 )
 portrait_position = 2
 audio = ExtResource( 31 )
 title = "AA_ALEPH_NAME"
-messages = [ "There's no end to this, you know.", "You could have returned home, but instead you chose to be here. ", "Endlessly fighting a pointless battle. ", "Why do you think that is?" ]
+messages = [ "RAILWAY_ALEPHNULL1", "RAILWAY_ALEPHNULL2", "RAILWAY_ALEPHNULL3", "RAILWAY_ALEPHNULL4" ]
 style = 2
 
 [node name="End_Part8_SpawnArchangels" type="Node" parent="."]
@@ -166,7 +166,7 @@ portrait = ExtResource( 32 )
 portrait_position = 2
 audio = ExtResource( 33 )
 title = "AA_ALEPH_NAME"
-messages = [ "Let's try this again, shall we?" ]
+messages = [ "RAILWAY_ALEPHNULL5" ]
 style = 2
 
 [node name="FuseTeamAction" type="Node" parent="MuteMusicAction/End_Part8_SummonArchangels"]
@@ -186,7 +186,7 @@ script = ExtResource( 21 )
 portrait_position = 2
 type_sounds = ExtResource( 13 )
 title = "AA_ALEPH_NULL_NAME"
-messages = [ "The Witch won't be joining us this time..." ]
+messages = [ "RAILWAY_ALEPHNULL6" ]
 style = 1
 
 [node name="WaitAction" type="Node" parent="MuteMusicAction"]

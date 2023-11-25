@@ -128,8 +128,9 @@ func _on_Preview_pressed():
 				track = SceneManager.current_scene.region_settings.music_day
 				track_path = ""
 		MusicSystem.play_now(track)
-		if SaveState.other_data.has("GramophoneModProperties"):
-			SaveState.other_data.GramophoneModProperties["previous_track"] = track_path
+		if SaveState.other_data.has("GramophonePlayerData"):
+			if SaveState.other_data.GramophonePlayerData.has("OverworldData"):
+				SaveState.other_data.GramophonePlayerData.OverworldData["previous_path"] = track_path
 
 func get_track_data()->Dictionary:
 	var focus_owner = get_focus_owner()

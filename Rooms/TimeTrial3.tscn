@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://nodes/actions/WarpAction.gd" type="Script" id=1]
 [ext_resource path="res://world/objects/wired/floor_button/floorbutton_switch_1.mesh" type="ArrayMesh" id=2]
@@ -31,7 +31,7 @@
 [ext_resource path="res://world/maps/StationMeshlib.meshlib" type="MeshLibrary" id=29]
 [ext_resource path="res://mods/Infinite_Dungeon/regions/dash_trial.tres" type="Resource" id=30]
 [ext_resource path="res://nodes/actions/CameraShakeAction.gd" type="Script" id=31]
-[ext_resource path="res://nodes/actions/GiveLootAction.gd" type="Script" id=32]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_ranger_loot.tres" type="Resource" id=32]
 [ext_resource path="res://mods/Infinite_Dungeon/scripts/WiredGridMap.gd" type="Script" id=33]
 [ext_resource path="res://nodes/actions/PlayAudioAction.gd" type="Script" id=34]
 [ext_resource path="res://sfx/world/wired/success_chime.wav" type="AudioStream" id=35]
@@ -44,16 +44,13 @@
 [ext_resource path="res://nodes/actions/SetNPCStateAction.gd" type="Script" id=42]
 [ext_resource path="res://nodes/actions/values/GetPlayer.gd" type="Script" id=43]
 [ext_resource path="res://mods/Infinite_Dungeon/Objects/CollapsingRockBridgeCustom.tscn" type="PackedScene" id=44]
-[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage3/timetrial_loot_3.tres" type="Resource" id=45]
-[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage4/timetrial_loot_2.tres" type="Resource" id=46]
-[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage3/timetrial_loot_2.tres" type="Resource" id=47]
-[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage4/timetrial_loot_1.tres" type="Resource" id=48]
-[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage3/timetrial_loot_1.tres" type="Resource" id=49]
-[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage4/timetrial_loot_3.tres" type="Resource" id=50]
-[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage2/timetrial_loot_2.tres" type="Resource" id=51]
-[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage2/timetrial_loot_3.tres" type="Resource" id=52]
-[ext_resource path="res://mods/Infinite_Dungeon/Actions/StageSelect.gd" type="Script" id=53]
-[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Time Trial Loot Tables/Stage2/timetrial_loot_1.tres" type="Resource" id=54]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_ranger_loot5.tres" type="Resource" id=45]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_ranger_loot3.tres" type="Resource" id=46]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_ranger_loot6.tres" type="Resource" id=47]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_ranger_loot7.tres" type="Resource" id=48]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_ranger_loot2.tres" type="Resource" id=49]
+[ext_resource path="res://mods/Infinite_Dungeon/Loot Tables/Rangers/infinite_ranger_loot4.tres" type="Resource" id=50]
+[ext_resource path="res://mods/Infinite_Dungeon/Actions/GiveLootActionStages.gd" type="Script" id=51]
 
 [sub_resource type="PanoramaSky" id=18]
 panorama = ExtResource( 21 )
@@ -350,7 +347,7 @@ always_succeed = true
 
 [node name="MessageDialogAction" type="Node" parent="IntroSequence"]
 script = ExtResource( 28 )
-messages = [ "You feel an immense pressure.", "Only your ability to Climb remains.", "Find the Release Button as quickly as possible." ]
+messages = [ "RAILWAY_TRIAL_INTRO1", "RAILWAY_TRIAL_INTRO_CLIMB", "RAILWAY_TRIAL_INTRO3" ]
 style = 3
 
 [node name="BringDownWalls" type="Node" parent="IntroSequence"]
@@ -385,691 +382,167 @@ script = ExtResource( 9 )
 script = ExtResource( 27 )
 always_succeed = true
 
-[node name="Selector" type="Node" parent="EndingSequence"]
+[node name="Selector2" type="Node" parent="EndingSequence"]
 script = ExtResource( 16 )
 
-[node name="StageSelect1" type="Node" parent="EndingSequence/Selector"]
-script = ExtResource( 53 )
-encounter_range_max = 15
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect1"]
-script = ExtResource( 16 )
-
-[node name="CheckTime" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector"]
+[node name="CheckTime" type="Node" parent="EndingSequence/Selector2"]
 script = ExtResource( 14 )
 stat_name = "ClimbTrial"
 operator = 2
 threshold_value = 30.0
 
-[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime"]
-script = ExtResource( 32 )
-loot_table = ExtResource( 37 )
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector2/CheckTime"]
+script = ExtResource( 51 )
+loot_table = [ ExtResource( 32 ), ExtResource( 49 ), ExtResource( 46 ), ExtResource( 50 ), ExtResource( 45 ), ExtResource( 47 ), ExtResource( 48 ) ]
+extra_loot_table = ExtResource( 39 )
 
-[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime"]
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector2/CheckTime"]
 script = ExtResource( 12 )
 
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime"]
+[node name="Selector" type="Node" parent="EndingSequence/Selector2/CheckTime"]
 script = ExtResource( 16 )
 
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime/Selector"]
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector2/CheckTime/Selector"]
 script = ExtResource( 11 )
 operator = 3
 threshold_value = 5.0
 
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime/Selector/CheckRoomWarp"]
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector2/CheckTime/Selector/CheckRoomWarp"]
 script = ExtResource( 1 )
 warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
 warp_target_name = "WarpS"
 transition_kind = 4
 disable_scene_preservation = true
 
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime/Selector"]
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector2/CheckTime/Selector"]
 script = ExtResource( 11 )
 threshold_value = 5.0
 
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime/Selector/CheckRoomWarp2"]
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector2/CheckTime/Selector/CheckRoomWarp2"]
 script = ExtResource( 1 )
 warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
 warp_target_name = "WarpS"
 transition_kind = 4
 disable_scene_preservation = true
 
-[node name="CheckTime2" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector"]
+[node name="CheckTime2" type="Node" parent="EndingSequence/Selector2"]
 script = ExtResource( 14 )
 stat_name = "ClimbTrial"
 operator = 2
 threshold_value = 45.0
 
-[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2"]
-script = ExtResource( 32 )
-loot_table = ExtResource( 38 )
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector2/CheckTime2"]
+script = ExtResource( 51 )
+loot_table = [ ExtResource( 32 ), ExtResource( 49 ), ExtResource( 46 ), ExtResource( 50 ), ExtResource( 45 ), ExtResource( 47 ), ExtResource( 48 ) ]
+extra_loot_table = ExtResource( 38 )
 
-[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2"]
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector2/CheckTime2"]
 script = ExtResource( 12 )
 
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2"]
+[node name="Selector" type="Node" parent="EndingSequence/Selector2/CheckTime2"]
 script = ExtResource( 16 )
 
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2/Selector"]
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector2/CheckTime2/Selector"]
 script = ExtResource( 11 )
 operator = 3
 threshold_value = 5.0
 
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2/Selector/CheckRoomWarp"]
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector2/CheckTime2/Selector/CheckRoomWarp"]
 script = ExtResource( 1 )
 warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
 warp_target_name = "WarpS"
 transition_kind = 4
 disable_scene_preservation = true
 
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2/Selector"]
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector2/CheckTime2/Selector"]
 script = ExtResource( 11 )
 threshold_value = 5.0
 
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime2/Selector/CheckRoomWarp2"]
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector2/CheckTime2/Selector/CheckRoomWarp2"]
 script = ExtResource( 1 )
 warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
 warp_target_name = "WarpS"
 transition_kind = 4
 disable_scene_preservation = true
 
-[node name="CheckTime3" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector"]
+[node name="CheckTime3" type="Node" parent="EndingSequence/Selector2"]
 script = ExtResource( 14 )
 stat_name = "ClimbTrial"
 operator = 2
 threshold_value = 60.0
 
-[node name="ChangeMusicAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3"]
-script = ExtResource( 20 )
-revert_on_exit = false
+[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector2/CheckTime3"]
+script = ExtResource( 51 )
+loot_table = [ ExtResource( 32 ), ExtResource( 49 ), ExtResource( 46 ), ExtResource( 50 ), ExtResource( 45 ), ExtResource( 47 ), ExtResource( 48 ) ]
+extra_loot_table = ExtResource( 37 )
 
-[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3"]
-script = ExtResource( 32 )
-loot_table = ExtResource( 39 )
-
-[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3"]
+[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector2/CheckTime3"]
 script = ExtResource( 12 )
 
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3"]
+[node name="Selector" type="Node" parent="EndingSequence/Selector2/CheckTime3"]
 script = ExtResource( 16 )
 
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3/Selector"]
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector2/CheckTime3/Selector"]
 script = ExtResource( 11 )
 operator = 3
 threshold_value = 5.0
 
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3/Selector/CheckRoomWarp"]
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector2/CheckTime3/Selector/CheckRoomWarp"]
 script = ExtResource( 1 )
 warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
 warp_target_name = "WarpS"
 transition_kind = 4
 disable_scene_preservation = true
 
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3/Selector"]
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector2/CheckTime3/Selector"]
 script = ExtResource( 11 )
 threshold_value = 5.0
 
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/CheckTime3/Selector/CheckRoomWarp2"]
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector2/CheckTime3/Selector/CheckRoomWarp2"]
 script = ExtResource( 1 )
 warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
 warp_target_name = "WarpS"
 transition_kind = 4
 disable_scene_preservation = true
 
-[node name="Failed" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector"]
+[node name="Failed" type="Node" parent="EndingSequence/Selector2"]
 script = ExtResource( 14 )
 stat_name = "ClimbTrial"
 operator = 1
 threshold_value = 60.0
 
-[node name="SetNPCStateAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed"]
+[node name="SetNPCStateAction" type="Node" parent="EndingSequence/Selector2/Failed"]
 script = ExtResource( 42 )
 state = "Defeated"
 
-[node name="GetPlayer" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed/SetNPCStateAction"]
+[node name="GetPlayer" type="Node" parent="EndingSequence/Selector2/Failed/SetNPCStateAction"]
 script = ExtResource( 43 )
 which = 1
 
-[node name="MessageDialogAction" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed"]
+[node name="MessageDialogAction" type="Node" parent="EndingSequence/Selector2/Failed"]
 script = ExtResource( 28 )
-messages = [ "The pressure in this chamber was too much. ", "You passed out." ]
+messages = [ "RAILWAY_TRIAL_FAIL1", "RAILWAY_TRIAL_FAIL2" ]
 style = 3
 
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed"]
+[node name="Selector" type="Node" parent="EndingSequence/Selector2/Failed"]
 script = ExtResource( 16 )
 
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed/Selector"]
+[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector2/Failed/Selector"]
 script = ExtResource( 11 )
 operator = 3
 threshold_value = 5.0
 
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed/Selector/CheckRoomWarp"]
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector2/Failed/Selector/CheckRoomWarp"]
 script = ExtResource( 1 )
 warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
 warp_target_name = "WarpS"
 transition_kind = 5
 
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed/Selector"]
+[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector2/Failed/Selector"]
 script = ExtResource( 11 )
 threshold_value = 5.0
 
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect1/Selector/Failed/Selector/CheckRoomWarp2"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 5
-
-[node name="StageSelect2" type="Node" parent="EndingSequence/Selector"]
-script = ExtResource( 53 )
-encounter_range_min = 15
-encounter_range_max = 30
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect2"]
-script = ExtResource( 16 )
-
-[node name="CheckTime" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector"]
-script = ExtResource( 14 )
-stat_name = "ClimbTrial"
-operator = 2
-threshold_value = 30.0
-
-[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime"]
-script = ExtResource( 32 )
-loot_table = ExtResource( 52 )
-
-[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime"]
-script = ExtResource( 12 )
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime"]
-script = ExtResource( 16 )
-
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime/Selector"]
-script = ExtResource( 11 )
-operator = 3
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime/Selector/CheckRoomWarp"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime/Selector"]
-script = ExtResource( 11 )
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime/Selector/CheckRoomWarp2"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="CheckTime2" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector"]
-script = ExtResource( 14 )
-stat_name = "ClimbTrial"
-operator = 2
-threshold_value = 45.0
-
-[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2"]
-script = ExtResource( 32 )
-loot_table = ExtResource( 51 )
-
-[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2"]
-script = ExtResource( 12 )
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2"]
-script = ExtResource( 16 )
-
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2/Selector"]
-script = ExtResource( 11 )
-operator = 3
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2/Selector/CheckRoomWarp"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2/Selector"]
-script = ExtResource( 11 )
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime2/Selector/CheckRoomWarp2"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="CheckTime3" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector"]
-script = ExtResource( 14 )
-stat_name = "ClimbTrial"
-operator = 2
-threshold_value = 60.0
-
-[node name="ChangeMusicAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3"]
-script = ExtResource( 20 )
-revert_on_exit = false
-
-[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3"]
-script = ExtResource( 32 )
-loot_table = ExtResource( 54 )
-
-[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3"]
-script = ExtResource( 12 )
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3"]
-script = ExtResource( 16 )
-
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3/Selector"]
-script = ExtResource( 11 )
-operator = 3
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3/Selector/CheckRoomWarp"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3/Selector"]
-script = ExtResource( 11 )
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/CheckTime3/Selector/CheckRoomWarp2"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="Failed" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector"]
-script = ExtResource( 14 )
-stat_name = "ClimbTrial"
-operator = 1
-threshold_value = 60.0
-
-[node name="SetNPCStateAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed"]
-script = ExtResource( 42 )
-state = "Defeated"
-
-[node name="GetPlayer" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed/SetNPCStateAction"]
-script = ExtResource( 43 )
-which = 1
-
-[node name="MessageDialogAction" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed"]
-script = ExtResource( 28 )
-messages = [ "The pressure in this chamber was too much. ", "You passed out." ]
-style = 3
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed"]
-script = ExtResource( 16 )
-
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed/Selector"]
-script = ExtResource( 11 )
-operator = 3
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed/Selector/CheckRoomWarp"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 5
-
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed/Selector"]
-script = ExtResource( 11 )
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect2/Selector/Failed/Selector/CheckRoomWarp2"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 5
-
-[node name="StageSelect3" type="Node" parent="EndingSequence/Selector"]
-script = ExtResource( 53 )
-encounter_range_min = 30
-encounter_range_max = 45
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect3"]
-script = ExtResource( 16 )
-
-[node name="CheckTime" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector"]
-script = ExtResource( 14 )
-stat_name = "ClimbTrial"
-operator = 2
-threshold_value = 30.0
-
-[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime"]
-script = ExtResource( 32 )
-loot_table = ExtResource( 45 )
-
-[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime"]
-script = ExtResource( 12 )
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime"]
-script = ExtResource( 16 )
-
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime/Selector"]
-script = ExtResource( 11 )
-operator = 3
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime/Selector/CheckRoomWarp"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime/Selector"]
-script = ExtResource( 11 )
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime/Selector/CheckRoomWarp2"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="CheckTime2" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector"]
-script = ExtResource( 14 )
-stat_name = "ClimbTrial"
-operator = 2
-threshold_value = 45.0
-
-[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2"]
-script = ExtResource( 32 )
-loot_table = ExtResource( 47 )
-
-[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2"]
-script = ExtResource( 12 )
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2"]
-script = ExtResource( 16 )
-
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2/Selector"]
-script = ExtResource( 11 )
-operator = 3
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2/Selector/CheckRoomWarp"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2/Selector"]
-script = ExtResource( 11 )
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime2/Selector/CheckRoomWarp2"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="CheckTime3" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector"]
-script = ExtResource( 14 )
-stat_name = "ClimbTrial"
-operator = 2
-threshold_value = 60.0
-
-[node name="ChangeMusicAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3"]
-script = ExtResource( 20 )
-revert_on_exit = false
-
-[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3"]
-script = ExtResource( 32 )
-loot_table = ExtResource( 49 )
-
-[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3"]
-script = ExtResource( 12 )
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3"]
-script = ExtResource( 16 )
-
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3/Selector"]
-script = ExtResource( 11 )
-operator = 3
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3/Selector/CheckRoomWarp"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3/Selector"]
-script = ExtResource( 11 )
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/CheckTime3/Selector/CheckRoomWarp2"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="Failed" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector"]
-script = ExtResource( 14 )
-stat_name = "ClimbTrial"
-operator = 1
-threshold_value = 60.0
-
-[node name="SetNPCStateAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed"]
-script = ExtResource( 42 )
-state = "Defeated"
-
-[node name="GetPlayer" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed/SetNPCStateAction"]
-script = ExtResource( 43 )
-which = 1
-
-[node name="MessageDialogAction" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed"]
-script = ExtResource( 28 )
-messages = [ "The pressure in this chamber was too much. ", "You passed out." ]
-style = 3
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed"]
-script = ExtResource( 16 )
-
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed/Selector"]
-script = ExtResource( 11 )
-operator = 3
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed/Selector/CheckRoomWarp"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 5
-
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed/Selector"]
-script = ExtResource( 11 )
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect3/Selector/Failed/Selector/CheckRoomWarp2"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 5
-
-[node name="StageSelect4" type="Node" parent="EndingSequence/Selector"]
-script = ExtResource( 53 )
-encounter_range_min = 45
-encounter_range_max = 1000000
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect4"]
-script = ExtResource( 16 )
-
-[node name="CheckTime" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector"]
-script = ExtResource( 14 )
-stat_name = "ClimbTrial"
-operator = 2
-threshold_value = 30.0
-
-[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime"]
-script = ExtResource( 32 )
-loot_table = ExtResource( 50 )
-
-[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime"]
-script = ExtResource( 12 )
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime"]
-script = ExtResource( 16 )
-
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime/Selector"]
-script = ExtResource( 11 )
-operator = 3
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime/Selector/CheckRoomWarp"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime/Selector"]
-script = ExtResource( 11 )
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime/Selector/CheckRoomWarp2"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="CheckTime2" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector"]
-script = ExtResource( 14 )
-stat_name = "ClimbTrial"
-operator = 2
-threshold_value = 45.0
-
-[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2"]
-script = ExtResource( 32 )
-loot_table = ExtResource( 46 )
-
-[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2"]
-script = ExtResource( 12 )
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2"]
-script = ExtResource( 16 )
-
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2/Selector"]
-script = ExtResource( 11 )
-operator = 3
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2/Selector/CheckRoomWarp"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2/Selector"]
-script = ExtResource( 11 )
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime2/Selector/CheckRoomWarp2"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="CheckTime3" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector"]
-script = ExtResource( 14 )
-stat_name = "ClimbTrial"
-operator = 2
-threshold_value = 60.0
-
-[node name="ChangeMusicAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3"]
-script = ExtResource( 20 )
-revert_on_exit = false
-
-[node name="GiveLootAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3"]
-script = ExtResource( 32 )
-loot_table = ExtResource( 48 )
-
-[node name="IncreaseDungeonCount" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3"]
-script = ExtResource( 12 )
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3"]
-script = ExtResource( 16 )
-
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3/Selector"]
-script = ExtResource( 11 )
-operator = 3
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3/Selector/CheckRoomWarp"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3/Selector"]
-script = ExtResource( 11 )
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/CheckTime3/Selector/CheckRoomWarp2"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 4
-disable_scene_preservation = true
-
-[node name="Failed" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector"]
-script = ExtResource( 14 )
-stat_name = "ClimbTrial"
-operator = 1
-threshold_value = 60.0
-
-[node name="SetNPCStateAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed"]
-script = ExtResource( 42 )
-state = "Defeated"
-
-[node name="GetPlayer" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed/SetNPCStateAction"]
-script = ExtResource( 43 )
-which = 1
-
-[node name="MessageDialogAction" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed"]
-script = ExtResource( 28 )
-messages = [ "The pressure in this chamber was too much. ", "You passed out." ]
-style = 3
-
-[node name="Selector" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed"]
-script = ExtResource( 16 )
-
-[node name="CheckRoomWarp" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed/Selector"]
-script = ExtResource( 11 )
-operator = 3
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed/Selector/CheckRoomWarp"]
-script = ExtResource( 1 )
-warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/RangerBattleRoom.tscn"
-warp_target_name = "WarpS"
-transition_kind = 5
-
-[node name="CheckRoomWarp2" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed/Selector"]
-script = ExtResource( 11 )
-threshold_value = 5.0
-
-[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector/StageSelect4/Selector/Failed/Selector/CheckRoomWarp2"]
+[node name="WarpToBattleRoom" type="Node" parent="EndingSequence/Selector2/Failed/Selector/CheckRoomWarp2"]
 script = ExtResource( 1 )
 warp_target_scene = "res://mods/Infinite_Dungeon/Rooms/PreBossRoom.tscn"
 warp_target_name = "WarpS"

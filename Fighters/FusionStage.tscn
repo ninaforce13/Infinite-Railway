@@ -1,27 +1,43 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://nodes/encounter_config/RogueFusionCharacterConfig.gd" type="Script" id=3]
-[ext_resource path="res://nodes/encounter_config/RandomTapeConfig.gd" type="Script" id=4]
+[ext_resource path="res://mods/Infinite_Dungeon/Spawn Profile/all_mobs.tres" type="Resource" id=1]
+[ext_resource path="res://mods/Infinite_Dungeon/scripts/RandomTapeConfig_mod.gd" type="Script" id=2]
+[ext_resource path="res://nodes/encounter_config/FusedCharacterConfig.gd" type="Script" id=3]
 
 [node name="Boss" type="Node"]
 script = ExtResource( 3 )
-character_name = "Mer-Line Attendant"
 level_override = 75
 levels_per_defeat = 1
-level_scale_override_key = "monster_miniboss_smart"
-title = "Fusion Battle"
-subtitle = "Mer-Line's Blessing"
-complete_encounter_on_defeat = false
+level_scale_override_key = "monster_miniboss"
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+randomize_human_sprite = true
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
 
 [node name="Bootleg" type="Node" parent="."]
-script = ExtResource( 4 )
-seeded = false
-seed_key = "fusion_part1"
+script = ExtResource( 2 )
 bootleg_rate = 0.02
-profile_evolution_rate = 0.5
+spawn_profile = ExtResource( 1 )
 
 [node name="RandomTapeConfig" type="Node" parent="."]
-script = ExtResource( 4 )
-seeded = false
-seed_key = "fusion_part2"
-profile_evolution_rate = 0.5
+script = ExtResource( 2 )
+spawn_profile = ExtResource( 1 )

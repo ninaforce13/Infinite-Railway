@@ -7,7 +7,7 @@
 script = ExtResource( 1 )
 items = [  ]
 guaranteed_items = [ ExtResource( 2 ) ]
-guaranteed_item_amounts = [ 3 ]
+guaranteed_item_amounts = [ 2 ]
 rare_items = [  ]
 rare_item_chance = 0.1
 max_stickers = 0
