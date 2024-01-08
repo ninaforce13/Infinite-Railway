@@ -1,4 +1,4 @@
-[gd_scene load_steps=244 format=2]
+[gd_scene load_steps=243 format=2]
 
 [ext_resource path="res://world/maps/CaveMeshlib.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://world/maps/StationMeshlib.meshlib" type="MeshLibrary" id=2]
@@ -76,7 +76,6 @@
 [ext_resource path="res://world/npc/EmotePlayer.tscn" type="PackedScene" id=74]
 [ext_resource path="res://world/core/Interaction.tscn" type="PackedScene" id=75]
 [ext_resource path="res://nodes/actions/FaceTowardsAction.gd" type="Script" id=76]
-[ext_resource path="res://mods/Infinite_Dungeon/Items/railway_shard.tres" type="Resource" id=77]
 [ext_resource path="res://mods/Infinite_Dungeon/monsters/aleph_null_infdung_form.tres" type="Resource" id=78]
 [ext_resource path="res://world/npc/HumanStateMachine.tscn" type="PackedScene" id=79]
 [ext_resource path="res://data/battle_moves/phase_shift.tres" type="Resource" id=80]
@@ -914,7 +913,6 @@ script = ExtResource( 38 )
 [node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder15"]
 script = ExtResource( 220 )
 encounter_name_override = "Dummy"
-railway_shards = ExtResource( 77 )
 
 [node name="Succeeder" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -922,7 +920,6 @@ script = ExtResource( 38 )
 [node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder"]
 script = ExtResource( 220 )
 encounter_name_override = "Aleph_Null"
-railway_shards = ExtResource( 77 )
 
 [node name="Succeeder2" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -930,7 +927,6 @@ script = ExtResource( 38 )
 [node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder2"]
 script = ExtResource( 220 )
 encounter_name_override = "Aleph"
-railway_shards = ExtResource( 77 )
 
 [node name="Succeeder3" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -938,7 +934,6 @@ script = ExtResource( 38 )
 [node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder3"]
 script = ExtResource( 220 )
 encounter_name_override = "Morgante"
-railway_shards = ExtResource( 77 )
 
 [node name="Succeeder4" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -946,7 +941,6 @@ script = ExtResource( 38 )
 [node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder4"]
 script = ExtResource( 220 )
 encounter_name_override = "Puppet"
-railway_shards = ExtResource( 77 )
 
 [node name="Succeeder5" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -954,7 +948,6 @@ script = ExtResource( 38 )
 [node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder5"]
 script = ExtResource( 220 )
 encounter_name_override = "Cube"
-railway_shards = ExtResource( 77 )
 
 [node name="Succeeder6" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -962,7 +955,6 @@ script = ExtResource( 38 )
 [node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder6"]
 script = ExtResource( 220 )
 encounter_name_override = "Lamentomori"
-railway_shards = ExtResource( 77 )
 
 [node name="Succeeder7" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -970,7 +962,6 @@ script = ExtResource( 38 )
 [node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder7"]
 script = ExtResource( 220 )
 encounter_name_override = "Alice"
-railway_shards = ExtResource( 77 )
 
 [node name="Succeeder8" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -978,7 +969,6 @@ script = ExtResource( 38 )
 [node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder8"]
 script = ExtResource( 220 )
 encounter_name_override = "Helia"
-railway_shards = ExtResource( 77 )
 
 [node name="Succeeder9" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -986,7 +976,6 @@ script = ExtResource( 38 )
 [node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder9"]
 script = ExtResource( 220 )
 encounter_name_override = "Lenna"
-railway_shards = ExtResource( 77 )
 
 [node name="Succeeder10" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -994,7 +983,6 @@ script = ExtResource( 38 )
 [node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder10"]
 script = ExtResource( 220 )
 encounter_name_override = "Mammon"
-railway_shards = ExtResource( 77 )
 
 [node name="Succeeder11" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -1002,7 +990,6 @@ script = ExtResource( 38 )
 [node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder11"]
 script = ExtResource( 220 )
 encounter_name_override = "Monarch"
-railway_shards = ExtResource( 77 )
 
 [node name="Succeeder12" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -1010,7 +997,6 @@ script = ExtResource( 38 )
 [node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder12"]
 script = ExtResource( 220 )
 encounter_name_override = "Robin"
-railway_shards = ExtResource( 77 )
 
 [node name="Succeeder13" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -1018,7 +1004,6 @@ script = ExtResource( 38 )
 [node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder13"]
 script = ExtResource( 220 )
 encounter_name_override = "Tower"
-railway_shards = ExtResource( 77 )
 
 [node name="Succeeder14" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction"]
 script = ExtResource( 38 )
@@ -1026,7 +1011,6 @@ script = ExtResource( 38 )
 [node name="BattleAction" type="Node" parent="FlagVisibility/Magikrab/InteractionBehavior/Selector/Sequence/Succeeder/Repeater/MenuDialogAction/Succeeder14"]
 script = ExtResource( 220 )
 encounter_name_override = "Mourningstar"
-railway_shards = ExtResource( 77 )
 
 [node name="Lenna" type="Node" parent="FlagVisibility/Magikrab"]
 script = ExtResource( 66 )
