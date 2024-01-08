@@ -4180,6 +4180,7 @@ script = ExtResource( 12 )
 direction = "down"
 billboard_depth_hack = true
 wave_t_frequency = 5.0
+aabb = AABB( -2, 0, -2, 4, 3.4641, 2 )
 
 [node name="Sprite" parent="Magikrab/Sprite" instance=ExtResource( 41 )]
 
@@ -4323,6 +4324,7 @@ human_colors/skin_color = -1
 [node name="TapeConfig" type="Node" parent="Magikrab/EncounterConfig/CharacterConfig"]
 script = ExtResource( 43 )
 spawn_profile = ExtResource( 44 )
+non_profile_rate = 1.0
 
 [node name="CharacterConfig2" type="Node" parent="Magikrab/EncounterConfig"]
 script = ExtResource( 38 )
@@ -4364,6 +4366,7 @@ script = ExtResource( 43 )
 bootleg_rate = 1.0
 spawn_profile = ExtResource( 44 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="EncounterRefresh" type="Node" parent="Magikrab"]
 script = ExtResource( 8 )

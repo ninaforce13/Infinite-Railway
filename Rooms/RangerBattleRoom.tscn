@@ -345,8 +345,6 @@ sprite_part_names = {
 "legs": "generic",
 "wings": "generic"
 }
-sprite_body = null
-character = null
 human_colors/body_color_1 = 5
 human_colors/body_color_2 = 6
 human_colors/eye_color = 4
@@ -650,18 +648,21 @@ script = ExtResource( 5 )
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="TapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/EncounterConfig/CharacterConfig"]
 script = ExtResource( 5 )
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="TapeConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/EncounterConfig/CharacterConfig"]
 script = ExtResource( 5 )
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="CharacterConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/EncounterConfig"]
 script = ExtResource( 4 )
@@ -708,18 +709,21 @@ script = ExtResource( 5 )
 bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="RandomTapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/EncounterConfig/CharacterConfig2"]
 script = ExtResource( 5 )
 bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="RandomTapeConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/EncounterConfig/CharacterConfig2"]
 script = ExtResource( 5 )
 bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="FusionStage" type="Node" parent="SpawnFighter/MerLine_Attendant"]
 script = ExtResource( 2 )
@@ -777,12 +781,14 @@ script = ExtResource( 5 )
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="TapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/Ranger"]
 script = ExtResource( 5 )
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="Fusion" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage"]
 script = ExtResource( 30 )
@@ -825,6 +831,7 @@ spawn_profile = ExtResource( 7 )
 [node name="RandomTapeConfig" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/Fusion"]
 script = ExtResource( 5 )
 spawn_profile = ExtResource( 7 )
+non_profile_rate = 1.0
 
 [node name="Ranger2" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage"]
 script = ExtResource( 4 )
@@ -872,12 +879,14 @@ script = ExtResource( 5 )
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="TapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/FusionStage/Ranger2"]
 script = ExtResource( 5 )
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="DoubleFusion" type="Node" parent="SpawnFighter/MerLine_Attendant"]
 script = ExtResource( 2 )
@@ -1219,12 +1228,14 @@ script = ExtResource( 5 )
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="TapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat/CharacterConfig"]
 script = ExtResource( 5 )
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="CharacterConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat"]
 script = ExtResource( 4 )
@@ -1271,12 +1282,14 @@ script = ExtResource( 5 )
 bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="RandomTapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat/CharacterConfig2"]
 script = ExtResource( 5 )
 bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="CharacterConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat"]
 script = ExtResource( 4 )
@@ -1323,12 +1336,14 @@ script = ExtResource( 5 )
 bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="RandomTapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/TripleThreat/CharacterConfig3"]
 script = ExtResource( 5 )
 bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="QuadBattle" type="Node" parent="SpawnFighter/MerLine_Attendant"]
 script = ExtResource( 2 )
@@ -1386,12 +1401,14 @@ script = ExtResource( 5 )
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="TapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle/CharacterConfig"]
 script = ExtResource( 5 )
 bootleg_rate = 0.1
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="CharacterConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle"]
 script = ExtResource( 4 )
@@ -1438,12 +1455,14 @@ script = ExtResource( 5 )
 bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="RandomTapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle/CharacterConfig2"]
 script = ExtResource( 5 )
 bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="CharacterConfig3" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle"]
 script = ExtResource( 4 )
@@ -1490,12 +1509,14 @@ script = ExtResource( 5 )
 bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="RandomTapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle/CharacterConfig3"]
 script = ExtResource( 5 )
 bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="CharacterConfig4" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle"]
 script = ExtResource( 4 )
@@ -1542,12 +1563,14 @@ script = ExtResource( 5 )
 bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="RandomTapeConfig2" type="Node" parent="SpawnFighter/MerLine_Attendant/QuadBattle/CharacterConfig4"]
 script = ExtResource( 5 )
 bootleg_rate = 0.05
 spawn_profile = ExtResource( 7 )
 profile_evolution_rate = 0.5
+non_profile_rate = 1.0
 
 [node name="DustParticles" parent="." instance=ExtResource( 8 )]
 transform = Transform( -3.99646, 0, -1.55628e-06, 0, 2.02177, 0, 1.2586e-06, 0, -3.23204, 0.415584, 7.87545, 0.0147104 )

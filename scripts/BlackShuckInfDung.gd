@@ -41,8 +41,8 @@ func _ready():
 	char1.human_colors = sprite.colors.duplicate()
 	char1.character_name = "Mirror " + SaveState.party.player.name
 	char1.level_override = SaveState.party.player.level
-	
-	if SaveState.party.partner.partner_id == "dog":	
+
+	if SaveState.party.partner.partner_id == "dog":
 		monster2.sprite_body = dog_sprite.instance().sprite_body
 		monster2.sprite_colors = dog_sprite.instance().sprite_colors
 		monster2.sprite_part_names = dog_sprite.instance().sprite_part_names
@@ -55,7 +55,7 @@ func _ready():
 #
 	char2.level_override = SaveState.party.partner.level
 	char2.character_name = "Mirror " + tr(SaveState.party.partner.name)
-	
+
 	if SaveState.party.partner.partner_id == "kayleigh":
 		char2.base_character = kayleigh
 		char2.character_sfx = kayleigh_sfx
@@ -78,8 +78,8 @@ func _ready():
 		char2.custom_battle_sprite = eugene.battle_sprite
 	if SaveState.party.partner.partner_id == "viola":
 		char2.base_character = viola
-		char2.character_sfx = viola_sfx		
-		char2.custom_battle_sprite = viola.battle_sprite								
+		char2.character_sfx = viola_sfx
+		char2.custom_battle_sprite = viola.battle_sprite
 	setup_tapes()
 
 func setup_tapes():
@@ -102,21 +102,21 @@ func _create_tape_config(tape:MonsterTape)->TapeConfig:
 
 	return node
 
-func _on_PlayerDetector_detected(_detection):	
+func _on_PlayerDetector_detected(_detection):
 	if detected:
-		return 
+		return
 	detected = true
-	
+
 	yield (Co.next_frame(), "completed")
-	
+
 	if WorldSystem.is_player_control_enabled() and (randf() < chase_chance):
-		
+
 		setup_tapes()
-		
+
 		yield (cutscene.run(), "completed")
-		
+
 		chase_behavior.run()
-		
+
 	else :
 		chase_behavior.get_parent().remove_child(chase_behavior)
 		chase_behavior.queue_free()

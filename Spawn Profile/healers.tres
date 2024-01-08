@@ -13,6 +13,7 @@ habitat_endless = true
 min_team_size = 1
 max_team_size = 2
 disable_fleeing = false
+level_scale_override_key = ""
 num_species = 1
 species_0/monster_form = ExtResource( 2 )
 species_0/weight = 1.0
